@@ -280,6 +280,11 @@ And is a reproduction code of Jiayi-Pan/TinyZero.</p>
 <span class="sig-name descname"><span class="pre">sync_weight</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#trinity.trainer.trainer.Trainer.sync_weight" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="trinity.trainer.trainer.Trainer.flush_log">
+<span class="sig-name descname"><span class="pre">flush_log</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#trinity.trainer.trainer.Trainer.flush_log" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 <dl class="py class">
@@ -339,7 +344,7 @@ And is a reproduction code of Jiayi-Pan/TinyZero.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="trinity.trainer.trainer.get_trainer_wrapper">
-<span class="sig-prename descclassname"><span class="pre">trinity.trainer.trainer.</span></span><span class="sig-name descname"><span class="pre">get_trainer_wrapper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="trinity.common.html#trinity.common.config.TrainerConfig" title="trinity.common.config.TrainerConfig"><span class="pre">TrainerConfig</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="trinity.manager.html#trinity.manager.TrainEngineWrapper" title="trinity.trainer.trainer.TrainEngineWrapper"><span class="pre">TrainEngineWrapper</span></a></span></span><a class="reference internal" href="../_modules/trinity/trainer/trainer.html#get_trainer_wrapper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trinity.trainer.trainer.get_trainer_wrapper" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">trinity.trainer.trainer.</span></span><span class="sig-name descname"><span class="pre">get_trainer_wrapper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="trinity.common.html#trinity.common.config.Config" title="trinity.common.config.Config"><span class="pre">Config</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="trinity.manager.html#trinity.manager.TrainEngineWrapper" title="trinity.trainer.trainer.TrainEngineWrapper"><span class="pre">TrainEngineWrapper</span></a></span></span><a class="reference internal" href="../_modules/trinity/trainer/trainer.html#get_trainer_wrapper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trinity.trainer.trainer.get_trainer_wrapper" title="Link to this definition"></a></dt>
 <dd><p>Get a trainer wrapper.</p>
 </dd></dl>
 
@@ -350,12 +355,12 @@ And is a reproduction code of Jiayi-Pan/TinyZero.</p>
 <p>Modified from verl/trainer/ppo/ray_trainer.py</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="trinity.trainer.verl_trainer.VerlPPOTrainerWrapper">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">trinity.trainer.verl_trainer.</span></span><span class="sig-name descname"><span class="pre">VerlPPOTrainerWrapper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">train_config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="trinity.common.html#trinity.common.config.TrainerConfig" title="trinity.common.config.TrainerConfig"><span class="pre">TrainerConfig</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trinity/trainer/verl_trainer.html#VerlPPOTrainerWrapper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trinity.trainer.verl_trainer.VerlPPOTrainerWrapper" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">trinity.trainer.verl_trainer.</span></span><span class="sig-name descname"><span class="pre">VerlPPOTrainerWrapper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">global_config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="trinity.common.html#trinity.common.config.Config" title="trinity.common.config.Config"><span class="pre">Config</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trinity/trainer/verl_trainer.html#VerlPPOTrainerWrapper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trinity.trainer.verl_trainer.VerlPPOTrainerWrapper" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="trinity.trainer.verl.html#trinity.trainer.verl.ray_trainer.RayPPOTrainer" title="trinity.trainer.verl.ray_trainer.RayPPOTrainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">RayPPOTrainer</span></code></a>, <a class="reference internal" href="trinity.manager.html#trinity.manager.TrainEngineWrapper" title="trinity.trainer.trainer.TrainEngineWrapper"><code class="xref py py-class docutils literal notranslate"><span class="pre">TrainEngineWrapper</span></code></a></p>
 <p>A wrapper for verl.trainer.ppo.RayPPOTrainer.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="trinity.trainer.verl_trainer.VerlPPOTrainerWrapper.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">train_config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="trinity.common.html#trinity.common.config.TrainerConfig" title="trinity.common.config.TrainerConfig"><span class="pre">TrainerConfig</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trinity/trainer/verl_trainer.html#VerlPPOTrainerWrapper.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trinity.trainer.verl_trainer.VerlPPOTrainerWrapper.__init__" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">global_config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="trinity.common.html#trinity.common.config.Config" title="trinity.common.config.Config"><span class="pre">Config</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trinity/trainer/verl_trainer.html#VerlPPOTrainerWrapper.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trinity.trainer.verl_trainer.VerlPPOTrainerWrapper.__init__" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -456,6 +461,11 @@ And is a reproduction code of Jiayi-Pan/TinyZero.</p>
 <span class="sig-name descname"><span class="pre">sync_weight</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#trinity.trainer.Trainer.sync_weight" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="trinity.trainer.Trainer.flush_log">
+<span class="sig-name descname"><span class="pre">flush_log</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#trinity.trainer.Trainer.flush_log" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 <dl class="py class">
@@ -515,7 +525,7 @@ And is a reproduction code of Jiayi-Pan/TinyZero.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="trinity.trainer.get_trainer_wrapper">
-<span class="sig-prename descclassname"><span class="pre">trinity.trainer.</span></span><span class="sig-name descname"><span class="pre">get_trainer_wrapper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="trinity.common.html#trinity.common.config.TrainerConfig" title="trinity.common.config.TrainerConfig"><span class="pre">TrainerConfig</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="trinity.manager.html#trinity.manager.TrainEngineWrapper" title="trinity.trainer.trainer.TrainEngineWrapper"><span class="pre">TrainEngineWrapper</span></a></span></span><a class="reference internal" href="../_modules/trinity/trainer/trainer.html#get_trainer_wrapper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trinity.trainer.get_trainer_wrapper" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">trinity.trainer.</span></span><span class="sig-name descname"><span class="pre">get_trainer_wrapper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="trinity.common.html#trinity.common.config.Config" title="trinity.common.config.Config"><span class="pre">Config</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="trinity.manager.html#trinity.manager.TrainEngineWrapper" title="trinity.trainer.trainer.TrainEngineWrapper"><span class="pre">TrainEngineWrapper</span></a></span></span><a class="reference internal" href="../_modules/trinity/trainer/trainer.html#get_trainer_wrapper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trinity.trainer.get_trainer_wrapper" title="Link to this definition"></a></dt>
 <dd><p>Get a trainer wrapper.</p>
 </dd></dl>
 
