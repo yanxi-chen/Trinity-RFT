@@ -19,7 +19,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Example: off-policy / asynchronous RFT mode" href="example_reasoning_advanced.html" />
+    <link rel="next" title="Example: off-policy RFT mode" href="example_reasoning_advanced.html" />
     <link rel="prev" title="Welcome to Trinity-RFT’s documentation!" href="../index.html" /> 
 </head>
 
@@ -55,7 +55,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#optional-rft-with-sft-warmup">Optional: RFT with SFT Warmup</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="example_reasoning_advanced.html">Example: off-policy / asynchronous RFT mode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example_reasoning_advanced.html">Example: off-policy RFT mode</a></li>
 <li class="toctree-l1"><a class="reference internal" href="example_multi_turn.html">Example: Multi-Turn RFT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="example_dpo.html">Example: Run DPO on Human-Like-DPO-Dataset</a></li>
 <li class="toctree-l1"><a class="reference internal" href="example_data_functionalities.html">Data processing functionalities</a></li>
@@ -129,7 +129,7 @@ huggingface-cli<span class="w"> </span>download<span class="w"> </span>openai/gs
 <p>We run the experiment in a synchronous mode where the Explorer and Trainer operate in turn. To enable this mode, we config <code class="docutils literal notranslate"><span class="pre">mode</span></code> to <code class="docutils literal notranslate"><span class="pre">both</span></code> (default) and set <code class="docutils literal notranslate"><span class="pre">sync_iteration_interval</span></code> properly. A smaller value of <code class="docutils literal notranslate"><span class="pre">sync_iteration_interval</span></code> makes the training closer to an on-policy setup.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">both</span>
 <span class="nt">synchronizer</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">sync_method</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;online&#39;</span>
+<span class="w">  </span><span class="nt">sync_method</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;nccl&#39;</span>
 <span class="w">  </span><span class="nt">sync_iteration_interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
 </pre></div>
 </div>
@@ -188,7 +188,7 @@ huggingface-cli<span class="w"> </span>download<span class="w"> </span>openai/gs
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../index.html" class="btn btn-neutral float-left" title="Welcome to Trinity-RFT’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="example_reasoning_advanced.html" class="btn btn-neutral float-right" title="Example: off-policy / asynchronous RFT mode" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="example_reasoning_advanced.html" class="btn btn-neutral float-right" title="Example: off-policy RFT mode" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
