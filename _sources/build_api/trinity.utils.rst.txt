@@ -43,10 +43,26 @@ trinity.utils.monitor module
    :undoc-members:
    :show-inheritance:
 
+trinity.utils.plugin\_loader module
+-----------------------------------
+
+.. automodule:: trinity.utils.plugin_loader
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 trinity.utils.registry module
 -----------------------------
 
 .. automodule:: trinity.utils.registry
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+trinity.utils.timer module
+--------------------------
+
+.. automodule:: trinity.utils.timer
    :members:
    :undoc-members:
    :show-inheritance:

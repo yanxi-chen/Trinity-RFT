@@ -45,6 +45,14 @@ trinity.buffer.queue module
    :undoc-members:
    :show-inheritance:
 
+trinity.buffer.ray\_wrapper module
+----------------------------------
+
+.. automodule:: trinity.buffer.ray_wrapper
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 trinity.buffer.utils module
 ---------------------------
 

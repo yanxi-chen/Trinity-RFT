@@ -5,14 +5,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>trinity.utils.registry &mdash; Trinity-RFT 0.1.0 documentation</title>
+  <title>trinity.utils.registry &mdash; Trinity-RFT 0.2.0.dev0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
 
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../../../_static/documentation_options.js?v=130a53a1"></script>
       <script src="../../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -39,22 +39,27 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Tutorial</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Examples</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../tutorial/example_reasoning_basic.html">Quick Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../tutorial/example_reasoning_advanced.html">Off-Policy RFT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../tutorial/example_async_mode.html">Asynchronous RFT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../tutorial/example_multi_turn.html">Multi-Turn RFT</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../tutorial/example_dpo.html">Offline DPO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorial/example_dpo.html">Offline DPO and SFT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../tutorial/example_data_functionalities.html">Data Processing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../tutorial/trinity_configs.html">Configuration Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Guidelines</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../tutorial/trinity_programming_guide.html">Developer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorial/trinity_configs.html">Configuration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorial/example_mix_algo.html">Algorithm Development</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../build_api/trinity.buffer.html">trinity.buffer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../build_api/trinity.explorer.html">trinity.explorer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../build_api/trinity.trainer.html">trinity.trainer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../build_api/trinity.algorithm.html">trinity.algorithm</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../build_api/trinity.manager.html">trinity.manager</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../build_api/trinity.common.html">trinity.common</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../build_api/trinity.utils.html">trinity.utils</a></li>
@@ -85,69 +90,54 @@
            <div itemprop="articleBody">
              
   <h1>Source code for trinity.utils.registry</h1><div class="highlight"><pre>
-<span></span><span class="c1"># Copyright (c) Alibaba, Inc. and its affiliates.</span>
-<span class="c1">#</span>
-<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
-<span class="c1"># you may not use this file except in compliance with the License.</span>
-<span class="c1"># You may obtain a copy of the License at</span>
-<span class="c1">#</span>
-<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
-<span class="c1">#</span>
-<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
-<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
-<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
-<span class="c1"># See the License for the specific language governing permissions and</span>
-<span class="c1"># limitations under the License.</span>
-
-<span class="c1"># --------------------------------------------------------</span>
-<span class="c1"># Most of the code here has been modified from:</span>
-<span class="c1">#  https://github.com/modelscope/modelscope/blob/master/modelscope/utils/registry.py</span>
-<span class="c1"># --------------------------------------------------------</span>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Type</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">trinity.utils.log</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_logger</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">get_logger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 
+<span class="c1"># TODO: support lazy load</span>
+<span class="c1"># e.g. @MODULES.register_module(&quot;name&quot;, lazy=True)</span>
 <div class="viewcode-block" id="Registry">
 <a class="viewcode-back" href="../../../build_api/trinity.utils.html#trinity.utils.registry.Registry">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Registry</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;This class is used to register some modules to registry by a repo</span>
-<span class="sd">    name.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A class for registry.&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="Registry.__init__">
 <a class="viewcode-back" href="../../../build_api/trinity.utils.html#trinity.utils.registry.Registry.__init__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Initialization method.</span>
-
-<span class="sd">        :param name: a registry repo name</span>
+<span class="sd">        Args:</span>
+<span class="sd">            name (`str`): The name of the registry.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_modules</span> <span class="o">=</span> <span class="p">{}</span></div>
 
 
     <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get name of current registry.</span>
 
-<span class="sd">        :return: name of current registry.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            `str`: The name of current registry.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">modules</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">modules</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get all modules in current registry.</span>
 
-<span class="sd">        :return: a dict storing modules in current registry.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            `dict`: A dict storing modules in current registry.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_modules</span>
 
 <div class="viewcode-block" id="Registry.list">
 <a class="viewcode-back" href="../../../build_api/trinity.utils.html#trinity.utils.registry.Registry.list">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Logging the list of module in current registry.&quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_modules</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="si">}</span><span class="se">\t</span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
@@ -155,13 +145,16 @@
 
 <div class="viewcode-block" id="Registry.get">
 <a class="viewcode-back" href="../../../build_api/trinity.utils.html#trinity.utils.registry.Registry.get">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">module_key</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">module_key</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get module named module_key from in current registry. If not found,</span>
 <span class="sd">        return None.</span>
 
-<span class="sd">        :param module_key: specified module name</span>
-<span class="sd">        :return: module named module_key</span>
+<span class="sd">        Args:</span>
+<span class="sd">            module_key (`str`): specified module name</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            `Any`: the module object</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_modules</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">module_key</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span></div>
 
@@ -169,11 +162,6 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">_register_module</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">module_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">module_cls</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Register module to registry.</span>
-
-<span class="sd">        :param module_name: module name</span>
-<span class="sd">        :param module_cls: module class object</span>
-<span class="sd">        :param force: Whether to override an existing class with the</span>
-<span class="sd">            same name. Default: False.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="n">module_name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -187,25 +175,35 @@
 
 <div class="viewcode-block" id="Registry.register_module">
 <a class="viewcode-back" href="../../../build_api/trinity.utils.html#trinity.utils.registry.Registry.register_module">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">register_module</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">module_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">module_cls</span><span class="p">:</span> <span class="nb">type</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">register_module</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">module_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">module_cls</span><span class="p">:</span> <span class="n">Type</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">lazy</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Register module class object to registry with the specified modulename.</span>
+<span class="sd">        Register module class object to registry with the specified module name.</span>
 
-<span class="sd">        :param module_name: module name</span>
-<span class="sd">        :param module_cls: module class object</span>
-<span class="sd">        :param force: Whether to override an existing class with</span>
-<span class="sd">                the same name. Default: False.</span>
+<span class="sd">        Args:</span>
+<span class="sd">            module_name (`str`): The module name.</span>
+<span class="sd">            module_cls (`Type`): module class object</span>
+<span class="sd">            force (`bool`): Whether to override an existing class with</span>
+<span class="sd">                    the same name. Default: False.</span>
+<span class="sd">            lazy (`bool`): Whether to register the module class object lazily.</span>
+<span class="sd">                    Default: False.</span>
 
 <span class="sd">        Example:</span>
-<span class="sd">            &gt;&gt;&gt; registry = Registry()</span>
-<span class="sd">            &gt;&gt;&gt; @registry.register_module()</span>
-<span class="sd">            &gt;&gt;&gt; class TextFormatter:</span>
-<span class="sd">            &gt;&gt;&gt;     pass</span>
 
-<span class="sd">            &gt;&gt;&gt; class TextFormatter2:</span>
-<span class="sd">            &gt;&gt;&gt;     pass</span>
-<span class="sd">            &gt;&gt;&gt; registry.register_module( module_name=&#39;text_formatter2&#39;,</span>
-<span class="sd">                                        module_cls=TextFormatter2)</span>
+<span class="sd">            .. code-block:: python</span>
+<span class="sd">                WORKFLOWS = Registry(&quot;workflows&quot;)</span>
+
+<span class="sd">                # register a module using decorator</span>
+<span class="sd">                @WORKFLOWS.register_module(name=&quot;workflow_name&quot;)</span>
+<span class="sd">                class MyWorkflow(Workflow):</span>
+<span class="sd">                    pass</span>
+
+<span class="sd">                # or register a module directly</span>
+<span class="sd">                WORKFLOWS.register_module(</span>
+<span class="sd">                    name=&quot;workflow_name&quot;,</span>
+<span class="sd">                    module_cls=MyWorkflow,</span>
+<span class="sd">                    force=True,</span>
+<span class="sd">                )</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">module_name</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">module_name</span><span class="p">,</span> <span class="nb">str</span><span class="p">)):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;module_name must be either of None, str,&quot;</span> <span class="sa">f</span><span class="s2">&quot;got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">module_name</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -218,8 +216,10 @@
 <span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            Register module class object to registry.</span>
 
-<span class="sd">            :param module_cls: module class object</span>
-<span class="sd">            :return: module class object.</span>
+<span class="sd">            Args:</span>
+<span class="sd">                module_cls (`Type`): module class object</span>
+<span class="sd">            Returns:</span>
+<span class="sd">                `Type`: Decorated module class object.</span>
 <span class="sd">            &quot;&quot;&quot;</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_register_module</span><span class="p">(</span><span class="n">module_name</span><span class="o">=</span><span class="n">module_name</span><span class="p">,</span> <span class="n">module_cls</span><span class="o">=</span><span class="n">module_cls</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="n">force</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">module_cls</span>
