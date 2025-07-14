@@ -26,7 +26,7 @@
 ## News
 
 * [2025-07] We update the [technical report](https://arxiv.org/abs/2505.17826) (arXiv v2) with new features, examples, and experiments.
-* [2025-06] Trinity-RFT v0.2.0 is released.
+* [2025-06] Trinity-RFT v0.1.1 is released.
 * [2025-05] We release Trinity-RFT v0.1.0 and a technical report.
 * [2025-04] The initial codebase of Trinity-RFT is open.
 
@@ -60,7 +60,7 @@ rich graphical user interfaces for low-code usage.
 
 <p align="center">
   <img src="https://img.alicdn.com/imgextra/i2/O1CN01H3UbpF1yP7E1OCLbi_!!6000000006570-2-tps-1334-638.png" alt="Trinity-RFT">
-  <em>The high-level design of Trinity-RFT</em>
+  <em>Fig: The high-level design of Trinity-RFT</em>
 </p>
 
 
@@ -148,7 +148,7 @@ pip install -e .\[flash_attn\]
 Installation using pip:
 
 ```shell
-pip install trinity-rft==0.1.1
+pip install trinity-rft==0.2.0
 ```
 
 Installation from docker:
@@ -263,16 +263,30 @@ trinity run --config examples/grpo_gsm8k/gsm8k.yaml
 For studio users, just click the "Run" button in the web page.
 
 
-## Further examples
+## Further tutorials
 
-For more detailed examples about how to use Trinity-RFT, please refer to the following tutorials:
+
+Tutorials for running different RFT modes:
+
 + [A quick example with GRPO and GSM8k](./docs/sphinx_doc/source/tutorial/example_reasoning_basic.md)
 + [Off-policy mode of RFT](./docs/sphinx_doc/source/tutorial/example_reasoning_advanced.md)
 + [Fully asynchronous mode of RFT](./docs/sphinx_doc/source/tutorial/example_async_mode.md)
-+ [Multi-turn tasks](./docs/sphinx_doc/source/tutorial/example_multi_turn.md)
 + [Offline learning by DPO or SFT](./docs/sphinx_doc/source/tutorial/example_dpo.md)
+
+
+Tutorials for adapting Trinity-RFT to a new multi-turn agentic scenario:
+
++ [Multi-turn tasks](./docs/sphinx_doc/source/tutorial/example_multi_turn.md)
+
+
+Tutorials for data-related functionalities:
+
 + [Advanced data processing / human-in-the-loop](./docs/sphinx_doc/source/tutorial/example_data_functionalities.md)
-+ [RL Algorithm development with Trinity-RFT](./docs/sphinx_doc/source/tutorial/example_mix_algo.md)
+
+
+Tutorials for RL algorithm development/research with Trinity-RFT:
+
++ [RL algorithm development with Trinity-RFT](./docs/sphinx_doc/source/tutorial/example_mix_algo.md)
 
 
 For some frequently asked questions, see [FAQ](./docs/sphinx_doc/source/tutorial/faq.md).
@@ -301,11 +315,12 @@ Please refer to [this document](./docs/sphinx_doc/source/tutorial/trinity_progra
 
 ### Details: design and implementations
 
-
+<!--
+**The architecture of RFT-core** is shown below, demonstrating the interplay between the explorer, buffer and trainer:  -->
 
 <p align="center">
   <img src="https://img.alicdn.com/imgextra/i1/O1CN01BFCZRV1zS9T1PoH49_!!6000000006712-2-tps-922-544.png" alt="Trinity-RFT-core-architecture">
-  <em>The architecture of RFT-core</em>
+  <em>Fig: The architecture of RFT-core</em>
 </p>
 
 <!-- ![](./docs/sphinx_doc/assets/trinity-architecture.png) -->
@@ -313,7 +328,7 @@ Please refer to [this document](./docs/sphinx_doc/source/tutorial/trinity_progra
 
 <p align="center">
   <img src="https://img.alicdn.com/imgextra/i3/O1CN01E7NskS1FFoTI9jlaQ_!!6000000000458-2-tps-1458-682.png" alt="Trinity-RFT-modes">
-  <em>Some RFT modes supported by Trinity-RFT</em>
+  <em>Fig: Some RFT modes supported by Trinity-RFT</em>
 </p>
 
 <!-- ![](./docs/sphinx_doc/assets/trinity-mode.png) -->
@@ -322,7 +337,7 @@ Please refer to [this document](./docs/sphinx_doc/source/tutorial/trinity_progra
 
 <p align="center">
   <img src="https://img.alicdn.com/imgextra/i3/O1CN01hR1LCh25kpJMKmYR4_!!6000000007565-2-tps-1474-740.png" alt="Trinity-RFT-data-pipeline-buffer">
-  <em>The architecture of data processors</em>
+  <em>Fig: The architecture of data processors</em>
 </p>
 
 <!-- ![](./docs/sphinx_doc/assets/trinity-data-pipeline-buffer.png) -->
@@ -330,7 +345,7 @@ Please refer to [this document](./docs/sphinx_doc/source/tutorial/trinity_progra
 
 <p align="center">
   <img src="https://img.alicdn.com/imgextra/i4/O1CN01UvyfcZ1WoTv5t3pCp_!!6000000002835-2-tps-1166-274.png" alt="Trinity-RFT-data-pipelines">
-  <em>The high-level design of data pipelines in Trinity-RFT</em>
+  <em>Fig: The high-level design of data pipelines in Trinity-RFT</em>
 </p>
 
 
