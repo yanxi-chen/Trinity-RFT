@@ -18,6 +18,26 @@
 </div>
 
 
+- [News](#news)
+- [What is Trinity-RFT, and why?](#what-is-trinity-rft-and-why)
+  - [Key Features](#key-features)
+  - [What can I use Trinity-RFT for?](#what-can-i-use-trinity-rft-for)
+- [Getting started](#getting-started)
+  - [Step 1: preparations](#step-1-preparations)
+  - [Step 2: prepare dataset and model](#step-2-prepare-dataset-and-model)
+  - [Step 3: configurations](#step-3-configurations)
+  - [Step 4: run the RFT process](#step-4-run-the-rft-process)
+- [Further examples](#further-examples)
+- [Advanced usage and full configurations](#advanced-usage-and-full-configurations)
+- [Programming guide for developers](#programming-guide-for-developers)
+- [Details: design and implementations](#details-design-and-implementations)
+- [Upcoming features](#upcoming-features)
+- [Contribution guide](#contribution-guide)
+- [Acknowledgements](#acknowledgements)
+- [Citation](#citation)
+
+
+
 
 ## News
 
@@ -34,18 +54,6 @@
 
 Trinity-RFT is a general-purpose, flexible and easy-to-use framework for reinforcement fine-tuning (RFT) of large language models (LLM).
 It can be easily adapted for diverse application scenarios, and serve as a unified platform for exploring advanced RL paradigms in the [era of experience](https://storage.googleapis.com/deepmind-media/Era-of-Experience%20/The%20Era%20of%20Experience%20Paper.pdf).
-
-<p align="center">
-  <img src="https://img.alicdn.com/imgextra/i2/O1CN01H3UbpF1yP7E1OCLbi_!!6000000006570-2-tps-1334-638.png" alt="Trinity-RFT">
-  <em>The high-level design of Trinity-RFT</em>
-</p>
-
-
-<p align="center">
-  <img src="https://img.alicdn.com/imgextra/i4/O1CN01UvyfcZ1WoTv5t3pCp_!!6000000002835-2-tps-1166-274.png" alt="Trinity-RFT-data-pipelines">
-  <em>The high-level design of data pipelines in Trinity-RFT</em>
-</p>
-
 
 
 
@@ -64,6 +72,16 @@ regards rollout tasks and experiences as dynamic assets to be actively managed (
 * **User-friendliness as a top priority:**
 modular and decoupled design for easy adoption and development;
 rich graphical user interfaces for low-code usage.
+
+
+
+<p align="center">
+  <img src="https://img.alicdn.com/imgextra/i2/O1CN01H3UbpF1yP7E1OCLbi_!!6000000006570-2-tps-1334-638.png" alt="Trinity-RFT">
+  <em>The high-level design of Trinity-RFT</em>
+</p>
+
+
+
 
 
 
@@ -247,7 +265,7 @@ trinity run --config <config_path>
 For studio users, just click the "Run" button in the web page.
 
 
-### Further examples
+## Further examples
 
 For more detailed examples about how to use Trinity-RFT, please refer to the following tutorials:
 + [A quick example with GRPO and GSM8k](./docs/sphinx_doc/source/tutorial/example_reasoning_basic.md)
@@ -279,7 +297,7 @@ Please refer to [this document](./docs/sphinx_doc/source/tutorial/trinity_progra
 
 
 
-## Further details: design and implementations
+## Details: design and implementations
 
 
 
@@ -308,12 +326,18 @@ Please refer to [this document](./docs/sphinx_doc/source/tutorial/trinity_progra
 <!-- ![](./docs/sphinx_doc/assets/trinity-data-pipeline-buffer.png) -->
 
 
+<p align="center">
+  <img src="https://img.alicdn.com/imgextra/i4/O1CN01UvyfcZ1WoTv5t3pCp_!!6000000002835-2-tps-1166-274.png" alt="Trinity-RFT-data-pipelines">
+  <em>The high-level design of data pipelines in Trinity-RFT</em>
+</p>
+
+
 
 
 
 ## Upcoming features
 
-A tentative roadmap: https://github.com/modelscope/Trinity-RFT/issues/51
+A tentative roadmap: [#51](https://github.com/modelscope/Trinity-RFT/issues/51)
 
 
 
