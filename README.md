@@ -8,6 +8,10 @@
 
 &nbsp;
 
+
+<h2 align="center">Trinity-RFT: A General-Purpose and Unified Framework for Reinforcement Fine-Tuning of Large Language Models</h2>
+
+
 <div align="center">
 
 [![paper](http://img.shields.io/badge/cs.LG-2505.17826-B31B1B?logo=arxiv&logoColor=red)](https://arxiv.org/abs/2505.17826)
@@ -18,34 +22,13 @@
 </div>
 
 
-- [News](#news)
-- [What is Trinity-RFT, and why?](#what-is-trinity-rft-and-why)
-  - [Key Features](#key-features)
-  - [What can I use Trinity-RFT for?](#what-can-i-use-trinity-rft-for)
-- [Getting started](#getting-started)
-  - [Step 1: preparations](#step-1-preparations)
-  - [Step 2: prepare dataset and model](#step-2-prepare-dataset-and-model)
-  - [Step 3: configurations](#step-3-configurations)
-  - [Step 4: run the RFT process](#step-4-run-the-rft-process)
-- [Further examples](#further-examples)
-- [Advanced usage and full configurations](#advanced-usage-and-full-configurations)
-- [Programming guide for developers](#programming-guide-for-developers)
-- [Details: design and implementations](#details-design-and-implementations)
-- [Upcoming features](#upcoming-features)
-- [Contribution guide](#contribution-guide)
-- [Acknowledgements](#acknowledgements)
-- [Citation](#citation)
-
-
-
 
 ## News
 
-* 2025/7: arXiv v2 technical report is released
-* 2025/6: v0.2.0 is released
-* 2025/5: arXiv v1 technical report is released
-* 2025/5: v0.1.0 is released
-* 2025/4: The initial codebase of Trinity-RFT is open
+* [2025-07] We update the [technical report](https://arxiv.org/abs/2505.17826) (arXiv v2) with new features, examples, and experiments.
+* [2025-06] Trinity-RFT v0.2.0 is released.
+* [2025-05] We release Trinity-RFT v0.1.0 and a technical report.
+* [2025-04] The initial codebase of Trinity-RFT is open.
 
 
 ## What is Trinity-RFT, and why?
@@ -61,7 +44,7 @@ It can be easily adapted for diverse application scenarios, and serve as a unifi
 
 * **An RFT-core that unifies and generalizes diverse RL modes:**
 supports synchronous/asynchronous, on-policy/off-policy, and online/offline training;
-allows rollout and training to run separately and scale up independently on separate GPUs.
+allows rollout and training to run separately and scale up independently on different devices.
 
 * **Agent-environment interaction as a first-class citizen:**
 gracefully handles challenges like lagged environmental feedback, long-tailed latencies, and environment/agent failures.
@@ -82,10 +65,6 @@ rich graphical user interfaces for low-code usage.
 
 
 
-
-
-
-
 ### What can I use Trinity-RFT for?
 
 
@@ -98,6 +77,25 @@ rich graphical user interfaces for low-code usage.
 
 
 * Use the rich set of graphical user interfaces for low-code usage or development, with easy monitoring and tracking of the learning process
+
+
+## Table of contents
+
+- [Getting started](#getting-started)
+  - [Step 1: preparations](#step-1-preparations)
+  - [Step 2: prepare dataset and model](#step-2-prepare-dataset-and-model)
+  - [Step 3: configurations](#step-3-configurations)
+  - [Step 4: run the RFT process](#step-4-run-the-rft-process)
+- [Further examples](#further-examples)
+- [Documentation](#documentation)
+  - [Advanced usage and full configurations](#advanced-usage-and-full-configurations)
+  - [Programming guide for developers](#programming-guide-for-developers)
+  - [Details: design and implementations](#details-design-and-implementations)
+- [Upcoming features](#upcoming-features)
+- [Contribution guide](#contribution-guide)
+- [Acknowledgements](#acknowledgements)
+- [Citation](#citation)
+
 
 
 
@@ -257,10 +255,10 @@ Then, for command-line users, run the RFT process with the following command:
 trinity run --config <config_path>
 ```
 
-> For example, below is the command for fine-tuning Qwen2.5-1.5B-Instruct on GSM8k dataset using GRPO algorithm:
-> ```shell
-> trinity run --config examples/grpo_gsm8k/gsm8k.yaml
-> ```
+For example, below is the command for fine-tuning Qwen2.5-1.5B-Instruct on GSM8k dataset using GRPO algorithm:
+```shell
+trinity run --config examples/grpo_gsm8k/gsm8k.yaml
+```
 
 For studio users, just click the "Run" button in the web page.
 
@@ -280,7 +278,11 @@ For more detailed examples about how to use Trinity-RFT, please refer to the fol
 For some frequently asked questions, see [FAQ](./docs/sphinx_doc/source/tutorial/faq.md).
 
 
-## Advanced usage and full configurations
+
+## Documentation
+
+
+### Advanced usage and full configurations
 
 
 Please refer to [this document](./docs/sphinx_doc/source/tutorial/trinity_configs.md).
@@ -289,7 +291,7 @@ Please refer to [this document](./docs/sphinx_doc/source/tutorial/trinity_config
 
 
 
-## Programming guide for developers
+### Programming guide for developers
 
 
 Please refer to [this document](./docs/sphinx_doc/source/tutorial/trinity_programming_guide.md).
@@ -297,7 +299,7 @@ Please refer to [this document](./docs/sphinx_doc/source/tutorial/trinity_progra
 
 
 
-## Details: design and implementations
+### Details: design and implementations
 
 
 
@@ -319,7 +321,7 @@ Please refer to [this document](./docs/sphinx_doc/source/tutorial/trinity_progra
 
 
 <p align="center">
-  <img src="https://img.alicdn.com/imgextra/i2/O1CN01CXL3z31qBonf8XW8S_!!6000000005458-2-tps-1542-782.png" alt="Trinity-RFT-data-pipeline-buffer">
+  <img src="https://img.alicdn.com/imgextra/i3/O1CN01hR1LCh25kpJMKmYR4_!!6000000007565-2-tps-1474-740.png" alt="Trinity-RFT-data-pipeline-buffer">
   <em>The architecture of data processors</em>
 </p>
 
@@ -376,11 +378,9 @@ This project is built upon many excellent open-source projects, including:
 + we have also drawn inspirations from RL frameworks like [OpenRLHF](https://github.com/OpenRLHF/OpenRLHF), [TRL](https://github.com/huggingface/trl) and [ChatLearn](https://github.com/alibaba/ChatLearn);
 + ......
 
-
-
-
-
 ## Citation
+
+
 ```plain
 @misc{trinity-rft,
       title={Trinity-RFT: A General-Purpose and Unified Framework for Reinforcement Fine-Tuning of Large Language Models},
