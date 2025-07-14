@@ -33,16 +33,18 @@
 
 
 Trinity-RFT is a general-purpose, flexible and easy-to-use framework for reinforcement fine-tuning (RFT) of large language models (LLM).
-It can be easily adapted for diverse application scenarios, and serve as a unified platform for exploring advanced RL paradigms in the ["era of experience"](https://storage.googleapis.com/deepmind-media/Era-of-Experience%20/The%20Era%20of%20Experience%20Paper.pdf).
+It can be easily adapted for diverse application scenarios, and serve as a unified platform for exploring advanced RL paradigms in the [era of experience](https://storage.googleapis.com/deepmind-media/Era-of-Experience%20/The%20Era%20of%20Experience%20Paper.pdf).
 
-<div align="center">
+<p align="center">
   <img src="https://img.alicdn.com/imgextra/i2/O1CN01H3UbpF1yP7E1OCLbi_!!6000000006570-2-tps-1334-638.png" alt="Trinity-RFT">
-</div>
+  <em>The high-level design of Trinity-RFT</em>
+</p>
 
 
-<div align="center">
+<p align="center">
   <img src="https://img.alicdn.com/imgextra/i4/O1CN01UvyfcZ1WoTv5t3pCp_!!6000000002835-2-tps-1166-274.png" alt="Trinity-RFT-data-pipelines">
-</div>
+  <em>The high-level design of data pipelines in Trinity-RFT</em>
+</p>
 
 
 
@@ -245,6 +247,8 @@ trinity run --config <config_path>
 For studio users, just click the "Run" button in the web page.
 
 
+### Further examples
+
 For more detailed examples about how to use Trinity-RFT, please refer to the following tutorials:
 + [A quick example with GRPO and GSM8k](./docs/sphinx_doc/source/tutorial/example_reasoning_basic.md)
 + [Off-policy mode of RFT](./docs/sphinx_doc/source/tutorial/example_reasoning_advanced.md)
@@ -279,29 +283,27 @@ Please refer to [this document](./docs/sphinx_doc/source/tutorial/trinity_progra
 
 
 
-architecture of RFT-core:
-
-<div align="center">
+<p align="center">
   <img src="https://img.alicdn.com/imgextra/i1/O1CN01BFCZRV1zS9T1PoH49_!!6000000006712-2-tps-922-544.png" alt="Trinity-RFT-core-architecture">
-</div>
+  <em>The architecture of RFT-core</em>
+</p>
 
 <!-- ![](./docs/sphinx_doc/assets/trinity-architecture.png) -->
 
 
-diverse RL modes:
-
-<div align="center">
+<p align="center">
   <img src="https://img.alicdn.com/imgextra/i3/O1CN01E7NskS1FFoTI9jlaQ_!!6000000000458-2-tps-1458-682.png" alt="Trinity-RFT-modes">
-</div>
+  <em>Some RFT modes supported by Trinity-RFT</em>
+</p>
 
 <!-- ![](./docs/sphinx_doc/assets/trinity-mode.png) -->
 
 
-data processors:
 
-<div align="center">
+<p align="center">
   <img src="https://img.alicdn.com/imgextra/i2/O1CN01CXL3z31qBonf8XW8S_!!6000000005458-2-tps-1542-782.png" alt="Trinity-RFT-data-pipeline-buffer">
-</div>
+  <em>The architecture of data processors</em>
+</p>
 
 <!-- ![](./docs/sphinx_doc/assets/trinity-data-pipeline-buffer.png) -->
 
