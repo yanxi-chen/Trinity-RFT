@@ -1,11 +1,9 @@
 
-<div align="center">
-  <img src="../assets/trinity-title.png" alt="Trinity-RFT" style="height: 120px;">
-</div>
+![Trinity-RFT](../assets/trinity-title.png)
 
 
 
-<h2 align="center">Trinity-RFT: A General-Purpose and Unified Framework for Reinforcement Fine-Tuning of Large Language Models</h2>
+# Trinity-RFT: A General-Purpose and Unified Framework for Reinforcement Fine-Tuning of Large Language Models
 
 
 
@@ -46,19 +44,18 @@ It is designed to support diverse application scenarios and serve as a unified p
   Modular and decoupled architecture for easy adoption and development, plus rich graphical user interfaces for low-code usage.
 
 
+![Trinity-RFT-design](../assets/trinity-design.png)
+
 <p align="center">
-  <img src="../assets/trinity-design.png" alt="Trinity-RFT">
   <em>Figure: The high-level design of Trinity-RFT</em>
 </p>
+
 
 
 <details>
 <summary>Figure: The architecture of RFT-core</summary>
 
-
-<p align="center">
-  <img src="../assets/trinity-architecture.png" alt="Trinity-RFT-core-architecture">
-</p>
+![Trinity-RFT-core-architecture](../assets/trinity-architecture.png)
 
 </details>
 
@@ -66,10 +63,7 @@ It is designed to support diverse application scenarios and serve as a unified p
 <details>
 <summary>Figure: Some RFT modes supported by Trinity-RFT</summary>
 
-<p align="center">
-  <img src="../assets/trinity-mode.png" alt="Trinity-RFT-modes">
-</p>
-
+![Trinity-RFT-modes](../assets/trinity-mode.png)
 
 </details>
 
@@ -77,9 +71,7 @@ It is designed to support diverse application scenarios and serve as a unified p
 <details>
 <summary>Figure: The architecture of data processors</summary>
 
-<p align="center">
-  <img src="../assets/trinity-data-pipeline-buffer.png" alt="Trinity-RFT-data-pipeline-buffer">
-</p>
+![Trinity-RFT-data-pipeline-buffer](../assets/trinity-data-pipeline-buffer.png)
 
 </details>
 
@@ -87,9 +79,7 @@ It is designed to support diverse application scenarios and serve as a unified p
 <details>
 <summary>Figure: The high-level design of data pipelines in Trinity-RFT</summary>
 
-<p align="center">
-  <img src="../assets/trinity-data-pipelines.png" alt="Trinity-RFT-data-pipelines">
-</p>
+![Trinity-RFT-data-pipelines](../assets/trinity-data-pipelines.png)
 
 </details>
 
