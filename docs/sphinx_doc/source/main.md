@@ -134,9 +134,9 @@ It is designed to support diverse application scenarios and serve as a unified p
 ## Getting started
 
 
-> [!NOTE]
-> This project is currently under active development. Comments and suggestions are welcome!
-
+```{note}
+Note: This project is currently under active development. Comments and suggestions are welcome!
+```
 
 ### Step 1: installation
 
@@ -241,9 +241,9 @@ For more details about dataset downloading, see [Huggingface](https://huggingfac
 
 Trinity-RFT provides a web interface for configuring your RFT process.
 
-> [!NOTE]
-> This is an experimental feature, and we will continue to improve it.
-
+```{note}
+Note: This is an experimental feature, and we will continue to improve it.
+```
 
 To enable minimal features (mainly for trainer), you can run
 
