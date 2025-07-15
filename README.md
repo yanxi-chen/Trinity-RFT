@@ -120,7 +120,7 @@ It is designed to support diverse application scenarios and serve as a unified p
 
 * **Low-Code Usage:**
 
-  Use graphical interfaces for easy monitoring and tracking of the learning process. 
+  Use graphical interfaces for easy monitoring and tracking of the learning process.
 
 
 ---
