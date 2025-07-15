@@ -6,7 +6,7 @@
   <img src="https://img.alicdn.com/imgextra/i1/O1CN01lvLpfw25Pl4ohGZnU_!!6000000007519-2-tps-1628-490.png" alt="Trinity-RFT" style="height: 120px;">
 </div>
 
-&nbsp;
+<!-- &nbsp; -->
 
 
 <h2 align="center">Trinity-RFT: A General-Purpose and Unified Framework for Reinforcement Fine-Tuning of Large Language Models</h2>
@@ -23,39 +23,41 @@
 
 
 
-## News
+## 🚀 News
 
+* [2025-07] Trinity-RFT v0.2.0 is released.
 * [2025-07] We update the [technical report](https://arxiv.org/abs/2505.17826) (arXiv v2) with new features, examples, and experiments.
 * [2025-06] Trinity-RFT v0.1.1 is released.
 * [2025-05] We release Trinity-RFT v0.1.0 and a technical report.
 * [2025-04] The initial codebase of Trinity-RFT is open.
 
 
-## What is Trinity-RFT, and why?
+## 💡 What is Trinity-RFT?
 
 
 
 Trinity-RFT is a general-purpose, flexible and easy-to-use framework for reinforcement fine-tuning (RFT) of large language models (LLM).
-It can be easily adapted for diverse application scenarios, and serve as a unified platform for exploring advanced RL paradigms in the [era of experience](https://storage.googleapis.com/deepmind-media/Era-of-Experience%20/The%20Era%20of%20Experience%20Paper.pdf).
+It is designed to support diverse application scenarios and serve as a unified platform for exploring advanced RL paradigms in the [era of experience](https://storage.googleapis.com/deepmind-media/Era-of-Experience%20/The%20Era%20of%20Experience%20Paper.pdf).
 
 
 
-### Key Features
+## ✨ Key Features
 
-* **An RFT-core that unifies and generalizes diverse RL modes:**
-supports synchronous/asynchronous, on-policy/off-policy, and online/offline training;
-allows rollout and training to run separately and scale up independently on different devices.
+* **Unified RFT Core:**
 
-* **Agent-environment interaction as a first-class citizen:**
-gracefully handles challenges like lagged environmental feedback, long-tailed latencies, and environment/agent failures.
+  Supports *synchronous/asynchronous*, *on-policy/off-policy*, and *online/offline* training. Rollout and training can run separately and scale independently on different devices.
 
-* **Systematic data pipelines optimized for RFT:**
-regards rollout tasks and experiences as dynamic assets to be actively managed (e.g., prioritization, cleaning, augmentation) throughout the RFT lifecycle.
+* **First-Class Agent-Environment Interaction:**
 
-* **User-friendliness as a top priority:**
-modular and decoupled design for easy adoption and development;
-rich graphical user interfaces for low-code usage.
+  Handles lagged feedback, long-tailed latencies, and agent/env failures gracefully. Supports multi-turn agent-env interaction.
 
+* **Optimized Data Pipelines:**
+
+  Treats rollout tasks and experiences as dynamic assets, enabling active management (prioritization, cleaning, augmentation) throughout the RFT lifecycle.
+
+* **User-Friendly Design:**
+
+  Modular and decoupled architecture for easy adoption and development, plus rich graphical user interfaces for low-code usage.
 
 
 <p align="center">
@@ -65,19 +67,27 @@ rich graphical user interfaces for low-code usage.
 
 
 
-### What can I use Trinity-RFT for?
+## 🛠️ What can I use Trinity-RFT for?
 
 
 
 
-* Adapt Trinity-RFT to a new application domain, by implementing the logic of agent-environment interaction in a single `Workflow` or `MultiTurnWorkflow` class ([Example](./docs/sphinx_doc/source/tutorial/example_multi_turn.md))
+* **Adaptation to New Scenarios:**
+
+  Implement agent-environment interaction logic in a single `Workflow` or `MultiTurnWorkflow` class.  ([Example](./docs/sphinx_doc/source/tutorial/example_multi_turn.md))
 
 
-* Develop your own RL algorithms (e.g., loss design, sampling strategies, data processing) in a few compact plug-and-play classes, with minimal code duplication or intrusive changes to the codebase ([Example](./docs/sphinx_doc/source/tutorial/example_mix_algo.md))
+* **RL Algorithm Development:**
+
+  Develop custom RL algorithms (loss design, sampling, data processing) in compact, plug-and-play classes.  ([Example](./docs/sphinx_doc/source/tutorial/example_mix_algo.md))
 
 
-* Use the rich set of graphical user interfaces for low-code usage or development, with easy monitoring and tracking of the learning process
+* **Low-Code Usage:**
 
+  Use graphical interfaces for easy monitoring and tracking of the learning process.
+
+
+---
 
 ## Table of contents
 
@@ -106,11 +116,7 @@ rich graphical user interfaces for low-code usage.
 > This project is currently under active development. Comments and suggestions are welcome!
 
 
-
-
 ### Step 1: preparations
-
-
 
 
 Installation from source (recommended):
@@ -227,6 +233,18 @@ Advanced users can also configure the RFT process by editing the config file dir
 We provide a set of example config files in [`examples`](examples/).
 
 To enable *complete* visualization features, please refer to the monorepo for [Trinity-Studio](https://github.com/modelscope/Trinity-Studio).
+
+
+<details>
+
+<summary> Example: config manager GUI </summary>
+
+![](./docs/sphinx_doc/assets/config-manager.png)
+
+
+</details>
+
+
 
 
 ### Step 4: run the RFT process
