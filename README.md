@@ -1,12 +1,8 @@
 
-
-<!-- ![trinity-rft](./docs/sphinx_doc/assets/trinity-title.png) -->
-
 <div align="center">
   <img src="https://img.alicdn.com/imgextra/i1/O1CN01lvLpfw25Pl4ohGZnU_!!6000000007519-2-tps-1628-490.png" alt="Trinity-RFT" style="height: 120px;">
 </div>
 
-<!-- &nbsp; -->
 
 
 <h2 align="center">Trinity-RFT: A General-Purpose and Unified Framework for Reinforcement Fine-Tuning of Large Language Models</h2>
@@ -109,12 +105,7 @@ It is designed to support diverse application scenarios and serve as a unified p
 
 
 
-
-
-
 ## 🛠️ What can I use Trinity-RFT for?
-
-
 
 
 * **Adaptation to New Scenarios:**
@@ -165,7 +156,7 @@ It is designed to support diverse application scenarios and serve as a unified p
 ### Step 1: preparations
 
 
-**Installation from source (recommended):**
+Installation from source **(recommended)**:
 
 ```shell
 # Pull the source code from GitHub
@@ -197,13 +188,13 @@ pip install -e .\[flash_attn\]
 # pip install flash-attn -v --no-build-isolation
 ```
 
-**Installation using pip:**
+Installation using pip:
 
 ```shell
 pip install trinity-rft==0.2.0
 ```
 
-**Installation from docker:**
+Installation from docker:
 we have provided a dockerfile for Trinity-RFT (trinity)
 
 ```shell
@@ -269,7 +260,7 @@ Trinity-RFT provides a web interface for configuring your RFT process.
 > This is an experimental feature, and we will continue to improve it.
 
 
-To enable *minimal* features (mainly for trainer), you can run
+To enable minimal features (mainly for trainer), you can run
 
 ```bash
 trinity studio --port 8080
@@ -280,14 +271,14 @@ Then you can configure your RFT process in the web page and generate a config fi
 Advanced users can also edit the config file directly.
 We provide example config files in [`examples`](examples/).
 
-For *complete* GUI features, please refer to the monorepo for [Trinity-Studio](https://github.com/modelscope/Trinity-Studio).
+For complete GUI features, please refer to the monorepo for [Trinity-Studio](https://github.com/modelscope/Trinity-Studio).
 
 
 <details>
 
 <summary> Example: config manager GUI </summary>
 
-![](./docs/sphinx_doc/assets/config-manager.png)
+![config-manager](https://img.alicdn.com/imgextra/i1/O1CN01yhYrV01lGKchtywSH_!!6000000004791-2-tps-1480-844.png)
 
 
 </details>
@@ -348,7 +339,7 @@ Tutorials for adapting Trinity-RFT to a new multi-turn agentic scenario:
 
 Tutorials for data-related functionalities:
 
-+ [Advanced data processing / human-in-the-loop](./docs/sphinx_doc/source/tutorial/example_data_functionalities.md)
++ [Advanced data processing & human-in-the-loop](./docs/sphinx_doc/source/tutorial/example_data_functionalities.md)
 
 
 Tutorials for RL algorithm development/research with Trinity-RFT:
