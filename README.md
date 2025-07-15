@@ -129,20 +129,15 @@ It is designed to support diverse application scenarios and serve as a unified p
 
 
 - [Getting started](#getting-started)
-  - [Step 1: preparations](#step-1-preparations)
+  - [Step 1: installation](#step-1-installation)
   - [Step 2: prepare dataset and model](#step-2-prepare-dataset-and-model)
   - [Step 3: configurations](#step-3-configurations)
   - [Step 4: run the RFT process](#step-4-run-the-rft-process)
 - [Further tutorials](#further-tutorials)
-- [Documentation](#documentation)
-  - [Advanced usage and full configurations](#advanced-usage-and-full-configurations)
-  - [Programming guide for developers](#programming-guide-for-developers)
 - [Upcoming features](#upcoming-features)
 - [Contribution guide](#contribution-guide)
 - [Acknowledgements](#acknowledgements)
 - [Citation](#citation)
-
-
 
 
 
@@ -153,7 +148,7 @@ It is designed to support diverse application scenarios and serve as a unified p
 > This project is currently under active development. Comments and suggestions are welcome!
 
 
-### Step 1: preparations
+### Step 1: installation
 
 
 Installation from source **(recommended)**:
@@ -347,64 +342,18 @@ Tutorials for RL algorithm development/research with Trinity-RFT:
 + [RL algorithm development with Trinity-RFT](./docs/sphinx_doc/source/tutorial/example_mix_algo.md)
 
 
+Guidelines for full configurations: see [this document](./docs/sphinx_doc/source/tutorial/trinity_configs.md)
+
+
+Guidelines for developers and researchers:
+
++ [Build new RL scenarios](./docs/sphinx_doc/source/tutorial/trinity_programming_guide.md#workflows-for-rl-environment-developers)
++ [Implement new RL algorithms](./docs/sphinx_doc/source/tutorial/trinity_programming_guide.md#algorithms-for-rl-algorithm-developers)
+
+
+
+
 For some frequently asked questions, see [FAQ](./docs/sphinx_doc/source/tutorial/faq.md).
-
-
-
-## Documentation
-
-
-### Advanced usage and full configurations
-
-
-Please refer to [this document](./docs/sphinx_doc/source/tutorial/trinity_configs.md).
-
-
-
-### Programming guide for developers
-
-
-Please refer to [this document](./docs/sphinx_doc/source/tutorial/trinity_programming_guide.md).
-
-
-
-
-<!-- ### Details: design and implementations -->
-
-<!--
-[TBC]
-**The architecture of RFT-core** is shown below, demonstrating the interplay between the explorer, buffer and trainer:  -->
-
-<!-- <p align="center">
-  <img src="https://img.alicdn.com/imgextra/i1/O1CN01BFCZRV1zS9T1PoH49_!!6000000006712-2-tps-922-544.png" alt="Trinity-RFT-core-architecture">
-  <em>Fig: The architecture of RFT-core</em>
-</p> -->
-
-<!-- ![](./docs/sphinx_doc/assets/trinity-architecture.png) -->
-
-
-<!-- <p align="center">
-  <img src="https://img.alicdn.com/imgextra/i3/O1CN01E7NskS1FFoTI9jlaQ_!!6000000000458-2-tps-1458-682.png" alt="Trinity-RFT-modes">
-  <em>Fig: Some RFT modes supported by Trinity-RFT</em>
-</p> -->
-
-<!-- ![](./docs/sphinx_doc/assets/trinity-mode.png) -->
-
-
-
-<!-- <p align="center">
-  <img src="https://img.alicdn.com/imgextra/i3/O1CN01hR1LCh25kpJMKmYR4_!!6000000007565-2-tps-1474-740.png" alt="Trinity-RFT-data-pipeline-buffer">
-  <em>Fig: The architecture of data processors</em>
-</p> -->
-
-<!-- ![](./docs/sphinx_doc/assets/trinity-data-pipeline-buffer.png) -->
-
-
-<!-- <p align="center">
-  <img src="https://img.alicdn.com/imgextra/i4/O1CN01UvyfcZ1WoTv5t3pCp_!!6000000002835-2-tps-1166-274.png" alt="Trinity-RFT-data-pipelines">
-  <em>Fig: The high-level design of data pipelines in Trinity-RFT</em>
-</p> -->
-
 
 
 
