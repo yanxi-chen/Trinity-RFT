@@ -18,6 +18,29 @@ from trinity.utils.registry import Registry
 FILE_READERS = Registry("file_readers")
 
 
+class MockProgressBar:
+    def __init__(
+        self,
+        enable_progress_bar: Optional[bool] = True,
+        total_samples: Optional[int] = None,
+        desc: Optional[str] = None,
+    ):
+        self.enable_progress_bar = enable_progress_bar
+        self.progress_bar = None
+        if self.enable_progress_bar:
+            from ray.experimental.tqdm_ray import tqdm
+
+            self.progress_bar = tqdm(total=total_samples, desc=desc)
+
+    def update(self, num: int):
+        if self.enable_progress_bar:
+            self.progress_bar.update(num)
+
+    def close(self):
+        if self.enable_progress_bar:
+            self.progress_bar.close()
+
+
 class _HFBatchReader:
     def __init__(
         self,
@@ -28,14 +51,13 @@ class _HFBatchReader:
         offset: int = 0,
         drop_last: bool = True,
         total_steps: Optional[int] = None,
-        enable_progress_bar: Optional[bool] = False,
+        enable_progress_bar: Optional[bool] = True,
     ):
         self.dataset = dataset
         self.dataset_size = len(dataset)
         self.name = name
         self.current_batch_size = None
         self.drop_last = drop_last
-        self.enable_progress_bar = enable_progress_bar
 
         self.current_offset = offset
         self.iter = iter(self.dataset)
@@ -49,20 +71,16 @@ class _HFBatchReader:
         else:
             self.total_samples = self.dataset_size * total_epochs
 
-        self.progress_bar = None
-        if self.enable_progress_bar:
-            from ray.experimental.tqdm_ray import tqdm
-
-            self.progress_bar = tqdm(
-                total=self.total_samples,
-                desc=f"Dataset [{self.name}] Progressing",
-            )
-            self.progress_bar.update(self.current_offset)
+        self.progress_bar = MockProgressBar(
+            enable_progress_bar=enable_progress_bar,
+            total_samples=self.total_samples,
+            desc=f"Dataset [{self.name}] Progressing",
+        )
+        self.progress_bar.update(self.current_offset)
 
     def read_batch(self, batch_size: int) -> List:
         if self.current_offset >= self.total_samples:
-            if self.enable_progress_bar:
-                self.progress_bar.close()
+            self.progress_bar.close()
             raise StopIteration
         batch = []
 
@@ -76,17 +94,14 @@ class _HFBatchReader:
                     # No more data to read
                     if not self.drop_last and len(batch) > 0:
                         # return last batch
-                        if self.enable_progress_bar:
-                            self.progress_bar.update(len(batch))
+                        self.progress_bar.update(len(batch))
                         return batch
                     else:
-                        if self.enable_progress_bar:
-                            self.progress_bar.close()
+                        self.progress_bar.close()
                         raise StopIteration
                 # Step to the next epoch
                 self.iter = iter(self.dataset)
-        if self.enable_progress_bar:
-            self.progress_bar.update(batch_size)
+        self.progress_bar.update(batch_size)
         return batch
 
 
