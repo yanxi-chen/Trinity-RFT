@@ -18,27 +18,15 @@ from trinity.utils.registry import Registry
 FILE_READERS = Registry("file_readers")
 
 
-class MockProgressBar:
-    def __init__(
-        self,
-        enable_progress_bar: Optional[bool] = True,
-        total_samples: Optional[int] = None,
-        desc: Optional[str] = None,
-    ):
-        self.enable_progress_bar = enable_progress_bar
-        self.progress_bar = None
-        if self.enable_progress_bar:
-            from ray.experimental.tqdm_ray import tqdm
-
-            self.progress_bar = tqdm(total=total_samples, desc=desc)
+class DummyProgressBar:
+    def __init__(self):
+        pass
 
     def update(self, num: int):
-        if self.enable_progress_bar:
-            self.progress_bar.update(num)
+        pass
 
     def close(self):
-        if self.enable_progress_bar:
-            self.progress_bar.close()
+        pass
 
 
 class _HFBatchReader:
@@ -71,11 +59,16 @@ class _HFBatchReader:
         else:
             self.total_samples = self.dataset_size * total_epochs
 
-        self.progress_bar = MockProgressBar(
-            enable_progress_bar=enable_progress_bar,
-            total_samples=self.total_samples,
-            desc=f"Dataset [{self.name}] Progressing",
-        )
+        if enable_progress_bar:
+            from ray.experimental.tqdm_ray import tqdm
+
+            self.progress_bar = tqdm(
+                total=self.total_samples,
+                desc=f"Dataset [{self.name}] Progressing",
+            )
+        else:
+            self.progress_bar = DummyProgressBar()
+
         self.progress_bar.update(self.current_offset)
 
     def read_batch(self, batch_size: int) -> List:
