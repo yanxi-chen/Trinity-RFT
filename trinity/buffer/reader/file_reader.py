@@ -52,6 +52,7 @@ class _HFBatchReader:
         self.progress_bar = None
         if self.enable_progress_bar:
             from ray.experimental.tqdm_ray import tqdm
+
             self.progress_bar = tqdm(
                 total=self.total_samples,
                 desc=f"Dataset [{self.name}] Progressing",
