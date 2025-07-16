@@ -5,14 +5,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>trinity.trainer.trainer &mdash; Trinity-RFT 0.2.0.dev0 documentation</title>
+  <title>trinity.trainer.trainer &mdash; Trinity-RFT 0.2.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
 
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=130a53a1"></script>
+      <script src="../../../_static/documentation_options.js?v=938c9ccc"></script>
       <script src="../../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -53,6 +53,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../tutorial/trinity_programming_guide.html">Developer Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../tutorial/trinity_configs.html">Configuration Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../tutorial/example_mix_algo.html">Algorithm Development</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">FAQ</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorial/faq.html">FAQ</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul>
@@ -178,17 +182,11 @@
             <span class="k">if</span> <span class="n">explorer_status</span> <span class="o">==</span> <span class="n">RunningStatus</span><span class="o">.</span><span class="n">STOPPED</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Explorer has already stopped. Skipping sync weight.&quot;</span><span class="p">)</span>
                 <span class="k">return</span>
+            <span class="n">ray</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">explorer_ref</span><span class="o">.</span><span class="n">ready_to_sync</span><span class="o">.</span><span class="n">remote</span><span class="p">())</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">sync_weight</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
                 <span class="sa">f</span><span class="s2">&quot;Trainer synchronizing weights at step </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">train_step_num</span><span class="si">}</span><span class="s2"> end.&quot;</span>
-            <span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">sync_weight</span><span class="p">()</span></div>
-
-
-<div class="viewcode-block" id="Trainer.flush_log">
-<a class="viewcode-back" href="../../../build_api/trinity.trainer.html#trinity.manager.Trainer.flush_log">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">flush_log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">step</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Flush the log of the current step.&quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">monitor</span><span class="o">.</span><span class="n">log</span><span class="p">({},</span> <span class="n">step</span><span class="o">=</span><span class="n">step</span><span class="p">,</span> <span class="n">commit</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+            <span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Trainer.shutdown">

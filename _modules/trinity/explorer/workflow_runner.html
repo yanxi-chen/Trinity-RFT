@@ -5,14 +5,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>trinity.explorer.workflow_runner &mdash; Trinity-RFT 0.2.0.dev0 documentation</title>
+  <title>trinity.explorer.workflow_runner &mdash; Trinity-RFT 0.2.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
 
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=130a53a1"></script>
+      <script src="../../../_static/documentation_options.js?v=938c9ccc"></script>
       <script src="../../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -53,6 +53,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../tutorial/trinity_programming_guide.html">Developer Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../tutorial/trinity_configs.html">Configuration Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../tutorial/example_mix_algo.html">Algorithm Development</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">FAQ</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorial/faq.html">FAQ</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul>
@@ -131,6 +135,7 @@
         <span class="n">config</span><span class="p">:</span> <span class="n">Config</span><span class="p">,</span>
         <span class="n">model</span><span class="p">:</span> <span class="n">InferenceModel</span><span class="p">,</span>
         <span class="n">auxiliary_models</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">InferenceModel</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">runner_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">config</span> <span class="o">=</span> <span class="n">config</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">experience_buffer</span> <span class="o">=</span> <span class="n">get_buffer_writer</span><span class="p">(</span>
@@ -151,7 +156,8 @@
                 <span class="p">)</span><span class="o">.</span><span class="n">get_openai_client</span><span class="p">()</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">auxiliary_models</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">api_client</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="n">get_logger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">workflow_instance</span> <span class="o">=</span> <span class="kc">None</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">workflow_instance</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">runner_id</span> <span class="o">=</span> <span class="n">runner_id</span></div>
 
 
 <div class="viewcode-block" id="WorkflowRunner.is_alive">
@@ -183,14 +189,17 @@
             <span class="n">exps</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_run_task</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
             <span class="k">assert</span> <span class="n">exps</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">exps</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;An empty experience is generated&quot;</span>
             <span class="n">metrics</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
-            <span class="c1"># add run_id</span>
-            <span class="n">run_id</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">())</span>
-            <span class="k">for</span> <span class="n">exp</span> <span class="ow">in</span> <span class="n">exps</span><span class="p">:</span>
-                <span class="nb">setattr</span><span class="p">(</span><span class="n">exp</span><span class="p">,</span> <span class="s2">&quot;run_id&quot;</span><span class="p">,</span> <span class="n">run_id</span><span class="p">)</span>
+            <span class="c1"># set group id</span>
+            <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">exp</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">exps</span><span class="p">):</span>
+                <span class="nb">setattr</span><span class="p">(</span><span class="n">exp</span><span class="p">,</span> <span class="s2">&quot;group_id&quot;</span><span class="p">,</span> <span class="n">task</span><span class="o">.</span><span class="n">group_id</span><span class="p">)</span>
+                <span class="nb">setattr</span><span class="p">(</span>
+                    <span class="n">exp</span><span class="p">,</span> <span class="s2">&quot;unique_id&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">task</span><span class="o">.</span><span class="n">group_id</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">runner_id</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">())[:</span><span class="mi">6</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="p">)</span>
 
                 <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">exp</span><span class="p">,</span> <span class="s2">&quot;info&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">exp</span><span class="o">.</span><span class="n">info</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                     <span class="n">exp</span><span class="o">.</span><span class="n">info</span> <span class="o">=</span> <span class="p">{}</span>
                 <span class="n">exp</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s2">&quot;model_version&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_wrapper</span><span class="o">.</span><span class="n">model_version</span>
+                <span class="n">exp</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s2">&quot;use_count&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
 
                 <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">exp</span><span class="p">,</span> <span class="s2">&quot;metrics&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">exp</span><span class="o">.</span><span class="n">metrics</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                     <span class="n">exp</span><span class="o">.</span><span class="n">metrics</span> <span class="o">=</span> <span class="p">{}</span>

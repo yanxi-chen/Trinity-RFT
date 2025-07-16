@@ -5,14 +5,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>trinity.manager.config_registry.explorer_config_manager &mdash; Trinity-RFT 0.2.0.dev0 documentation</title>
+  <title>trinity.manager.config_registry.explorer_config_manager &mdash; Trinity-RFT 0.2.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
 
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../../_static/documentation_options.js?v=130a53a1"></script>
+      <script src="../../../../_static/documentation_options.js?v=938c9ccc"></script>
       <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../../_static/js/theme.js"></script>
@@ -53,6 +53,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../../tutorial/trinity_programming_guide.html">Developer Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../tutorial/trinity_configs.html">Configuration Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../tutorial/example_mix_algo.html">Algorithm Development</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">FAQ</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tutorial/faq.html">FAQ</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul>
@@ -104,9 +108,9 @@
 
 
 
-<span class="nd">@CONFIG_GENERATORS</span><span class="o">.</span><span class="n">register_config</span><span class="p">(</span><span class="n">default_value</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">visible</span><span class="o">=</span><span class="n">explorer_visible</span><span class="p">)</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">set_runner_num</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="n">st</span><span class="o">.</span><span class="n">number_input</span><span class="p">(</span><span class="s2">&quot;Runner Num&quot;</span><span class="p">,</span> <span class="n">min_value</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="nd">@CONFIG_GENERATORS</span><span class="o">.</span><span class="n">register_config</span><span class="p">(</span><span class="n">default_value</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">visible</span><span class="o">=</span><span class="n">explorer_visible</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">set_runner_per_model</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">st</span><span class="o">.</span><span class="n">number_input</span><span class="p">(</span><span class="s2">&quot;Runner per Model&quot;</span><span class="p">,</span> <span class="n">min_value</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
 
 <span class="nd">@CONFIG_GENERATORS</span><span class="o">.</span><span class="n">register_config</span><span class="p">(</span><span class="n">default_value</span><span class="o">=</span><span class="mi">900</span><span class="p">,</span> <span class="n">visible</span><span class="o">=</span><span class="n">explorer_visible</span><span class="p">)</span>
@@ -125,7 +129,7 @@
 
 
 <span class="nd">@CONFIG_GENERATORS</span><span class="o">.</span><span class="n">register_config</span><span class="p">(</span><span class="n">default_value</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">visible</span><span class="o">=</span><span class="n">explorer_visible</span><span class="p">)</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">set_eval_on_latest_checkpoint</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">set_bench_on_latest_checkpoint</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="n">st</span><span class="o">.</span><span class="n">checkbox</span><span class="p">(</span><span class="s2">&quot;Eval on Latest Checkpoint&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
 

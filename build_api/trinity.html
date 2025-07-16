@@ -6,14 +6,14 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>trinity &mdash; Trinity-RFT 0.2.0.dev0 documentation</title>
+  <title>trinity &mdash; Trinity-RFT 0.2.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=130a53a1"></script>
+      <script src="../_static/documentation_options.js?v=938c9ccc"></script>
       <script src="../_static/doctools.js?v=9bcbadda"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
@@ -54,6 +54,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/trinity_programming_guide.html">Developer Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/trinity_configs.html">Configuration Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/example_mix_algo.html">Algorithm Development</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">FAQ</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/faq.html">FAQ</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul>
@@ -329,8 +333,24 @@
 <li class="toctree-l2"><a class="reference internal" href="trinity.buffer.html#module-trinity.buffer.buffer_writer">trinity.buffer.buffer_writer module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="trinity.buffer.html#trinity.buffer.buffer_writer.BufferWriter"><code class="docutils literal notranslate"><span class="pre">BufferWriter</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="trinity.buffer.html#trinity.buffer.buffer_writer.BufferWriter.write"><code class="docutils literal notranslate"><span class="pre">BufferWriter.write()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.buffer.html#trinity.buffer.buffer_writer.BufferWriter.write_async"><code class="docutils literal notranslate"><span class="pre">BufferWriter.write_async()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.buffer.html#trinity.buffer.buffer_writer.BufferWriter.acquire"><code class="docutils literal notranslate"><span class="pre">BufferWriter.acquire()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.buffer.html#trinity.buffer.buffer_writer.BufferWriter.release"><code class="docutils literal notranslate"><span class="pre">BufferWriter.release()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="trinity.buffer.html#module-trinity.buffer.priority_queue">trinity.buffer.priority_queue module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="trinity.buffer.html#trinity.buffer.priority_queue.linear_decay_priority"><code class="docutils literal notranslate"><span class="pre">linear_decay_priority()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trinity.buffer.html#trinity.buffer.priority_queue.AsyncPriorityQueue"><code class="docutils literal notranslate"><span class="pre">AsyncPriorityQueue</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="trinity.buffer.html#trinity.buffer.priority_queue.AsyncPriorityQueue.capacity"><code class="docutils literal notranslate"><span class="pre">AsyncPriorityQueue.capacity</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.buffer.html#trinity.buffer.priority_queue.AsyncPriorityQueue.priority_groups"><code class="docutils literal notranslate"><span class="pre">AsyncPriorityQueue.priority_groups</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.buffer.html#trinity.buffer.priority_queue.AsyncPriorityQueue.priority_fn"><code class="docutils literal notranslate"><span class="pre">AsyncPriorityQueue.priority_fn</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.buffer.html#trinity.buffer.priority_queue.AsyncPriorityQueue.reuse_cooldown_time"><code class="docutils literal notranslate"><span class="pre">AsyncPriorityQueue.reuse_cooldown_time</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.buffer.html#trinity.buffer.priority_queue.AsyncPriorityQueue.__init__"><code class="docutils literal notranslate"><span class="pre">AsyncPriorityQueue.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.buffer.html#trinity.buffer.priority_queue.AsyncPriorityQueue.put"><code class="docutils literal notranslate"><span class="pre">AsyncPriorityQueue.put()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.buffer.html#trinity.buffer.priority_queue.AsyncPriorityQueue.get"><code class="docutils literal notranslate"><span class="pre">AsyncPriorityQueue.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.buffer.html#trinity.buffer.priority_queue.AsyncPriorityQueue.size"><code class="docutils literal notranslate"><span class="pre">AsyncPriorityQueue.size()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -401,18 +421,20 @@
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.rewards.html#submodules">Submodules</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.rewards.html#module-trinity.common.rewards.accuracy_reward">trinity.common.rewards.accuracy_reward module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.rewards.html#module-trinity.common.rewards.agents_reward">trinity.common.rewards.agents_reward module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="trinity.common.rewards.html#module-trinity.common.rewards.base">trinity.common.rewards.base module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="trinity.common.rewards.html#module-trinity.common.rewards.composite_reward">trinity.common.rewards.composite_reward module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.rewards.html#module-trinity.common.rewards.countdown_reward">trinity.common.rewards.countdown_reward module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.rewards.html#module-trinity.common.rewards.format_reward">trinity.common.rewards.format_reward module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.rewards.html#module-trinity.common.rewards.human_reward">trinity.common.rewards.human_reward module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.rewards.html#module-trinity.common.rewards.math_reward">trinity.common.rewards.math_reward module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.rewards.html#module-trinity.common.rewards.reward_fn">trinity.common.rewards.reward_fn module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.rewards.html#module-trinity.common.rewards.tool_reward">trinity.common.rewards.tool_reward module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.rewards.html#module-trinity.common.rewards.utils">trinity.common.rewards.utils module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.rewards.html#module-trinity.common.rewards">Module contents</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.common.workflows.html">trinity.common.workflows</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.workflows.html#submodules">Submodules</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.workflows.html#module-trinity.common.workflows.customized_math_workflows">trinity.common.workflows.customized_math_workflows module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.workflows.html#module-trinity.common.workflows.math_rm_workflow">trinity.common.workflows.math_rm_workflow module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.workflows.html#module-trinity.common.workflows.workflow">trinity.common.workflows.workflow module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.workflows.html#module-trinity.common.workflows">Module contents</a></li>
 </ul>
@@ -460,13 +482,18 @@
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.html#trinity.common.config.StorageConfig.wrap_in_ray"><code class="docutils literal notranslate"><span class="pre">StorageConfig.wrap_in_ray</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.html#trinity.common.config.StorageConfig.capacity"><code class="docutils literal notranslate"><span class="pre">StorageConfig.capacity</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.html#trinity.common.config.StorageConfig.max_read_timeout"><code class="docutils literal notranslate"><span class="pre">StorageConfig.max_read_timeout</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.html#trinity.common.config.StorageConfig.use_priority_queue"><code class="docutils literal notranslate"><span class="pre">StorageConfig.use_priority_queue</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.html#trinity.common.config.StorageConfig.reuse_cooldown_time"><code class="docutils literal notranslate"><span class="pre">StorageConfig.reuse_cooldown_time</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.html#trinity.common.config.StorageConfig.replay_buffer_kwargs"><code class="docutils literal notranslate"><span class="pre">StorageConfig.replay_buffer_kwargs</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.html#trinity.common.config.StorageConfig.default_workflow_type"><code class="docutils literal notranslate"><span class="pre">StorageConfig.default_workflow_type</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.html#trinity.common.config.StorageConfig.default_reward_fn_type"><code class="docutils literal notranslate"><span class="pre">StorageConfig.default_reward_fn_type</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.html#trinity.common.config.StorageConfig.rollout_args"><code class="docutils literal notranslate"><span class="pre">StorageConfig.rollout_args</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.html#trinity.common.config.StorageConfig.workflow_args"><code class="docutils literal notranslate"><span class="pre">StorageConfig.workflow_args</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.html#trinity.common.config.StorageConfig.reward_fn_args"><code class="docutils literal notranslate"><span class="pre">StorageConfig.reward_fn_args</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.html#trinity.common.config.StorageConfig.ray_namespace"><code class="docutils literal notranslate"><span class="pre">StorageConfig.ray_namespace</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.html#trinity.common.config.StorageConfig.algorithm_type"><code class="docutils literal notranslate"><span class="pre">StorageConfig.algorithm_type</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.html#trinity.common.config.StorageConfig.total_epochs"><code class="docutils literal notranslate"><span class="pre">StorageConfig.total_epochs</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.html#trinity.common.config.StorageConfig.total_steps"><code class="docutils literal notranslate"><span class="pre">StorageConfig.total_steps</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.html#trinity.common.config.StorageConfig.task_type"><code class="docutils literal notranslate"><span class="pre">StorageConfig.task_type</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.html#trinity.common.config.StorageConfig.__init__"><code class="docutils literal notranslate"><span class="pre">StorageConfig.__init__()</span></code></a></li>
 </ul>
@@ -485,7 +512,6 @@
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.html#trinity.common.config.DataPipelineConfig.dj_config_path"><code class="docutils literal notranslate"><span class="pre">DataPipelineConfig.dj_config_path</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.html#trinity.common.config.DataPipelineConfig.dj_process_desc"><code class="docutils literal notranslate"><span class="pre">DataPipelineConfig.dj_process_desc</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.html#trinity.common.config.DataPipelineConfig.agent_model_name"><code class="docutils literal notranslate"><span class="pre">DataPipelineConfig.agent_model_name</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="trinity.common.html#trinity.common.config.DataPipelineConfig.agent_model_config"><code class="docutils literal notranslate"><span class="pre">DataPipelineConfig.agent_model_config</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.html#trinity.common.config.DataPipelineConfig.clean_strategy"><code class="docutils literal notranslate"><span class="pre">DataPipelineConfig.clean_strategy</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.html#trinity.common.config.DataPipelineConfig.min_size_ratio"><code class="docutils literal notranslate"><span class="pre">DataPipelineConfig.min_size_ratio</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.html#trinity.common.config.DataPipelineConfig.min_priority_score"><code class="docutils literal notranslate"><span class="pre">DataPipelineConfig.min_priority_score</span></code></a></li>
@@ -577,6 +603,7 @@
 <li class="toctree-l3"><a class="reference internal" href="trinity.common.html#trinity.common.config.BufferConfig"><code class="docutils literal notranslate"><span class="pre">BufferConfig</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.html#trinity.common.config.BufferConfig.batch_size"><code class="docutils literal notranslate"><span class="pre">BufferConfig.batch_size</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.html#trinity.common.config.BufferConfig.total_epochs"><code class="docutils literal notranslate"><span class="pre">BufferConfig.total_epochs</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.html#trinity.common.config.BufferConfig.total_steps"><code class="docutils literal notranslate"><span class="pre">BufferConfig.total_steps</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.html#trinity.common.config.BufferConfig.explorer_input"><code class="docutils literal notranslate"><span class="pre">BufferConfig.explorer_input</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.html#trinity.common.config.BufferConfig.explorer_output"><code class="docutils literal notranslate"><span class="pre">BufferConfig.explorer_output</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.html#trinity.common.config.BufferConfig.trainer_input"><code class="docutils literal notranslate"><span class="pre">BufferConfig.trainer_input</span></code></a></li>
@@ -591,14 +618,17 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.common.html#trinity.common.config.ExplorerConfig"><code class="docutils literal notranslate"><span class="pre">ExplorerConfig</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.html#trinity.common.config.ExplorerConfig.name"><code class="docutils literal notranslate"><span class="pre">ExplorerConfig.name</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="trinity.common.html#trinity.common.config.ExplorerConfig.runner_num"><code class="docutils literal notranslate"><span class="pre">ExplorerConfig.runner_num</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.html#trinity.common.config.ExplorerConfig.runner_per_model"><code class="docutils literal notranslate"><span class="pre">ExplorerConfig.runner_per_model</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.html#trinity.common.config.ExplorerConfig.max_timeout"><code class="docutils literal notranslate"><span class="pre">ExplorerConfig.max_timeout</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.html#trinity.common.config.ExplorerConfig.max_retry_times"><code class="docutils literal notranslate"><span class="pre">ExplorerConfig.max_retry_times</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.html#trinity.common.config.ExplorerConfig.env_vars"><code class="docutils literal notranslate"><span class="pre">ExplorerConfig.env_vars</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.html#trinity.common.config.ExplorerConfig.max_repeat_times_per_runner"><code class="docutils literal notranslate"><span class="pre">ExplorerConfig.max_repeat_times_per_runner</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.html#trinity.common.config.ExplorerConfig.runner_num"><code class="docutils literal notranslate"><span class="pre">ExplorerConfig.runner_num</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.html#trinity.common.config.ExplorerConfig.rollout_model"><code class="docutils literal notranslate"><span class="pre">ExplorerConfig.rollout_model</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.html#trinity.common.config.ExplorerConfig.auxiliary_models"><code class="docutils literal notranslate"><span class="pre">ExplorerConfig.auxiliary_models</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.html#trinity.common.config.ExplorerConfig.eval_interval"><code class="docutils literal notranslate"><span class="pre">ExplorerConfig.eval_interval</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="trinity.common.html#trinity.common.config.ExplorerConfig.eval_on_latest_checkpoint"><code class="docutils literal notranslate"><span class="pre">ExplorerConfig.eval_on_latest_checkpoint</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.html#trinity.common.config.ExplorerConfig.eval_on_startup"><code class="docutils literal notranslate"><span class="pre">ExplorerConfig.eval_on_startup</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.html#trinity.common.config.ExplorerConfig.bench_on_latest_checkpoint"><code class="docutils literal notranslate"><span class="pre">ExplorerConfig.bench_on_latest_checkpoint</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.html#trinity.common.config.ExplorerConfig.__init__"><code class="docutils literal notranslate"><span class="pre">ExplorerConfig.__init__()</span></code></a></li>
 </ul>
 </li>
@@ -728,7 +758,8 @@
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.html#trinity.common.experience.Experience.rejected"><code class="docutils literal notranslate"><span class="pre">Experience.rejected</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.html#trinity.common.experience.Experience.info"><code class="docutils literal notranslate"><span class="pre">Experience.info</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.html#trinity.common.experience.Experience.metrics"><code class="docutils literal notranslate"><span class="pre">Experience.metrics</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="trinity.common.html#trinity.common.experience.Experience.run_id"><code class="docutils literal notranslate"><span class="pre">Experience.run_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.html#trinity.common.experience.Experience.group_id"><code class="docutils literal notranslate"><span class="pre">Experience.group_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.html#trinity.common.experience.Experience.unique_id"><code class="docutils literal notranslate"><span class="pre">Experience.unique_id</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.html#trinity.common.experience.Experience.serialize"><code class="docutils literal notranslate"><span class="pre">Experience.serialize()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.html#trinity.common.experience.Experience.deserialize"><code class="docutils literal notranslate"><span class="pre">Experience.deserialize()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.html#trinity.common.experience.Experience.to_dict"><code class="docutils literal notranslate"><span class="pre">Experience.to_dict()</span></code></a></li>
@@ -742,7 +773,8 @@
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.html#trinity.common.experience.Experiences.action_masks"><code class="docutils literal notranslate"><span class="pre">Experiences.action_masks</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.html#trinity.common.experience.Experiences.prompt_length"><code class="docutils literal notranslate"><span class="pre">Experiences.prompt_length</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.html#trinity.common.experience.Experiences.logprobs"><code class="docutils literal notranslate"><span class="pre">Experiences.logprobs</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="trinity.common.html#trinity.common.experience.Experiences.run_ids"><code class="docutils literal notranslate"><span class="pre">Experiences.run_ids</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.html#trinity.common.experience.Experiences.group_ids"><code class="docutils literal notranslate"><span class="pre">Experiences.group_ids</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.html#trinity.common.experience.Experiences.unique_ids"><code class="docutils literal notranslate"><span class="pre">Experiences.unique_ids</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.html#trinity.common.experience.Experiences.batch_size"><code class="docutils literal notranslate"><span class="pre">Experiences.batch_size</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.html#trinity.common.experience.Experiences.gather_experiences"><code class="docutils literal notranslate"><span class="pre">Experiences.gather_experiences()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.html#trinity.common.experience.Experiences.gather_dpo_experiences"><code class="docutils literal notranslate"><span class="pre">Experiences.gather_dpo_experiences()</span></code></a></li>
@@ -979,31 +1011,47 @@
 <li class="toctree-l3"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.explorer.Explorer"><code class="docutils literal notranslate"><span class="pre">Explorer</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.explorer.Explorer.__init__"><code class="docutils literal notranslate"><span class="pre">Explorer.__init__()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.explorer.Explorer.setup_weight_sync_group"><code class="docutils literal notranslate"><span class="pre">Explorer.setup_weight_sync_group()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.explorer.Explorer.ready_to_sync"><code class="docutils literal notranslate"><span class="pre">Explorer.ready_to_sync()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.explorer.Explorer.prepare"><code class="docutils literal notranslate"><span class="pre">Explorer.prepare()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.explorer.Explorer.get_weight"><code class="docutils literal notranslate"><span class="pre">Explorer.get_weight()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.explorer.Explorer.explore"><code class="docutils literal notranslate"><span class="pre">Explorer.explore()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.explorer.Explorer.explore_step"><code class="docutils literal notranslate"><span class="pre">Explorer.explore_step()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.explorer.Explorer.need_sync"><code class="docutils literal notranslate"><span class="pre">Explorer.need_sync()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.explorer.Explorer.need_eval"><code class="docutils literal notranslate"><span class="pre">Explorer.need_eval()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.explorer.Explorer.eval"><code class="docutils literal notranslate"><span class="pre">Explorer.eval()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.explorer.Explorer.benchmark"><code class="docutils literal notranslate"><span class="pre">Explorer.benchmark()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.explorer.Explorer.wait_for_workflow_done"><code class="docutils literal notranslate"><span class="pre">Explorer.wait_for_workflow_done()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.explorer.Explorer.save_checkpoint"><code class="docutils literal notranslate"><span class="pre">Explorer.save_checkpoint()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.explorer.Explorer.sync_weight"><code class="docutils literal notranslate"><span class="pre">Explorer.sync_weight()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.explorer.Explorer.running_status"><code class="docutils literal notranslate"><span class="pre">Explorer.running_status()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.explorer.Explorer.flush_log"><code class="docutils literal notranslate"><span class="pre">Explorer.flush_log()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.explorer.Explorer.shutdown"><code class="docutils literal notranslate"><span class="pre">Explorer.shutdown()</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="trinity.explorer.html#module-trinity.explorer.runner_pool">trinity.explorer.runner_pool module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.runner_pool.RunnerPool"><code class="docutils literal notranslate"><span class="pre">RunnerPool</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.runner_pool.RunnerPool.__init__"><code class="docutils literal notranslate"><span class="pre">RunnerPool.__init__()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.runner_pool.RunnerPool.run_tasks"><code class="docutils literal notranslate"><span class="pre">RunnerPool.run_tasks()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.runner_pool.RunnerPool.has_next"><code class="docutils literal notranslate"><span class="pre">RunnerPool.has_next()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.runner_pool.RunnerPool.get_next_unorder"><code class="docutils literal notranslate"><span class="pre">RunnerPool.get_next_unorder()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.runner_pool.RunnerPool.get_next"><code class="docutils literal notranslate"><span class="pre">RunnerPool.get_next()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.runner_pool.RunnerPool.has_free"><code class="docutils literal notranslate"><span class="pre">RunnerPool.has_free()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.runner_pool.RunnerPool.pop_idle"><code class="docutils literal notranslate"><span class="pre">RunnerPool.pop_idle()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="trinity.explorer.html#module-trinity.explorer.scheduler">trinity.explorer.scheduler module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.scheduler.TaskWrapper"><code class="docutils literal notranslate"><span class="pre">TaskWrapper</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.scheduler.TaskWrapper.task"><code class="docutils literal notranslate"><span class="pre">TaskWrapper.task</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.scheduler.TaskWrapper.batch_id"><code class="docutils literal notranslate"><span class="pre">TaskWrapper.batch_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.scheduler.TaskWrapper.repeat_times"><code class="docutils literal notranslate"><span class="pre">TaskWrapper.repeat_times</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.scheduler.TaskWrapper.__init__"><code class="docutils literal notranslate"><span class="pre">TaskWrapper.__init__()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.scheduler.RunnerWrapper"><code class="docutils literal notranslate"><span class="pre">RunnerWrapper</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.scheduler.RunnerWrapper.__init__"><code class="docutils literal notranslate"><span class="pre">RunnerWrapper.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.scheduler.RunnerWrapper.run_with_retry"><code class="docutils literal notranslate"><span class="pre">RunnerWrapper.run_with_retry()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.scheduler.RunnerWrapper.restart_runner"><code class="docutils literal notranslate"><span class="pre">RunnerWrapper.restart_runner()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.scheduler.sort_batch_id"><code class="docutils literal notranslate"><span class="pre">sort_batch_id()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.scheduler.Scheduler"><code class="docutils literal notranslate"><span class="pre">Scheduler</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.scheduler.Scheduler.__init__"><code class="docutils literal notranslate"><span class="pre">Scheduler.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.scheduler.Scheduler.task_done_callback"><code class="docutils literal notranslate"><span class="pre">Scheduler.task_done_callback()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.scheduler.Scheduler.start"><code class="docutils literal notranslate"><span class="pre">Scheduler.start()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.scheduler.Scheduler.stop"><code class="docutils literal notranslate"><span class="pre">Scheduler.stop()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.scheduler.Scheduler.schedule"><code class="docutils literal notranslate"><span class="pre">Scheduler.schedule()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.scheduler.Scheduler.get_results"><code class="docutils literal notranslate"><span class="pre">Scheduler.get_results()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.scheduler.Scheduler.has_step"><code class="docutils literal notranslate"><span class="pre">Scheduler.has_step()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.scheduler.Scheduler.wait_all"><code class="docutils literal notranslate"><span class="pre">Scheduler.wait_all()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -1028,28 +1076,19 @@
 <li class="toctree-l3"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.Explorer"><code class="docutils literal notranslate"><span class="pre">Explorer</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.Explorer.__init__"><code class="docutils literal notranslate"><span class="pre">Explorer.__init__()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.Explorer.setup_weight_sync_group"><code class="docutils literal notranslate"><span class="pre">Explorer.setup_weight_sync_group()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.Explorer.ready_to_sync"><code class="docutils literal notranslate"><span class="pre">Explorer.ready_to_sync()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.Explorer.prepare"><code class="docutils literal notranslate"><span class="pre">Explorer.prepare()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.Explorer.get_weight"><code class="docutils literal notranslate"><span class="pre">Explorer.get_weight()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.Explorer.explore"><code class="docutils literal notranslate"><span class="pre">Explorer.explore()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.Explorer.explore_step"><code class="docutils literal notranslate"><span class="pre">Explorer.explore_step()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.Explorer.need_sync"><code class="docutils literal notranslate"><span class="pre">Explorer.need_sync()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.Explorer.need_eval"><code class="docutils literal notranslate"><span class="pre">Explorer.need_eval()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.Explorer.eval"><code class="docutils literal notranslate"><span class="pre">Explorer.eval()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.Explorer.benchmark"><code class="docutils literal notranslate"><span class="pre">Explorer.benchmark()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.Explorer.wait_for_workflow_done"><code class="docutils literal notranslate"><span class="pre">Explorer.wait_for_workflow_done()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.Explorer.save_checkpoint"><code class="docutils literal notranslate"><span class="pre">Explorer.save_checkpoint()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.Explorer.sync_weight"><code class="docutils literal notranslate"><span class="pre">Explorer.sync_weight()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.Explorer.running_status"><code class="docutils literal notranslate"><span class="pre">Explorer.running_status()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.Explorer.flush_log"><code class="docutils literal notranslate"><span class="pre">Explorer.flush_log()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.Explorer.shutdown"><code class="docutils literal notranslate"><span class="pre">Explorer.shutdown()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.RunnerPool"><code class="docutils literal notranslate"><span class="pre">RunnerPool</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.RunnerPool.__init__"><code class="docutils literal notranslate"><span class="pre">RunnerPool.__init__()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.RunnerPool.run_tasks"><code class="docutils literal notranslate"><span class="pre">RunnerPool.run_tasks()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.RunnerPool.has_next"><code class="docutils literal notranslate"><span class="pre">RunnerPool.has_next()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.RunnerPool.get_next_unorder"><code class="docutils literal notranslate"><span class="pre">RunnerPool.get_next_unorder()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.RunnerPool.get_next"><code class="docutils literal notranslate"><span class="pre">RunnerPool.get_next()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.RunnerPool.has_free"><code class="docutils literal notranslate"><span class="pre">RunnerPool.has_free()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="trinity.explorer.html#trinity.explorer.RunnerPool.pop_idle"><code class="docutils literal notranslate"><span class="pre">RunnerPool.pop_idle()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -1105,7 +1144,6 @@
 <li class="toctree-l4"><a class="reference internal" href="trinity.manager.html#trinity.manager.Trainer.train_step"><code class="docutils literal notranslate"><span class="pre">Trainer.train_step()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.manager.html#trinity.manager.Trainer.need_sync"><code class="docutils literal notranslate"><span class="pre">Trainer.need_sync()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.manager.html#trinity.manager.Trainer.sync_weight"><code class="docutils literal notranslate"><span class="pre">Trainer.sync_weight()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="trinity.manager.html#trinity.manager.Trainer.flush_log"><code class="docutils literal notranslate"><span class="pre">Trainer.flush_log()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.manager.html#trinity.manager.Trainer.shutdown"><code class="docutils literal notranslate"><span class="pre">Trainer.shutdown()</span></code></a></li>
 </ul>
 </li>
@@ -1147,7 +1185,6 @@
 <li class="toctree-l4"><a class="reference internal" href="trinity.trainer.html#trinity.trainer.trainer.Trainer.train_step"><code class="docutils literal notranslate"><span class="pre">Trainer.train_step()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.trainer.html#trinity.trainer.trainer.Trainer.need_sync"><code class="docutils literal notranslate"><span class="pre">Trainer.need_sync()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.trainer.html#trinity.trainer.trainer.Trainer.sync_weight"><code class="docutils literal notranslate"><span class="pre">Trainer.sync_weight()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="trinity.trainer.html#trinity.trainer.trainer.Trainer.flush_log"><code class="docutils literal notranslate"><span class="pre">Trainer.flush_log()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.trainer.html#trinity.trainer.trainer.Trainer.shutdown"><code class="docutils literal notranslate"><span class="pre">Trainer.shutdown()</span></code></a></li>
 </ul>
 </li>
@@ -1187,7 +1224,6 @@
 <li class="toctree-l4"><a class="reference internal" href="trinity.trainer.html#trinity.trainer.Trainer.train_step"><code class="docutils literal notranslate"><span class="pre">Trainer.train_step()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.trainer.html#trinity.trainer.Trainer.need_sync"><code class="docutils literal notranslate"><span class="pre">Trainer.need_sync()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.trainer.html#trinity.trainer.Trainer.sync_weight"><code class="docutils literal notranslate"><span class="pre">Trainer.sync_weight()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="trinity.trainer.html#trinity.trainer.Trainer.flush_log"><code class="docutils literal notranslate"><span class="pre">Trainer.flush_log()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.trainer.html#trinity.trainer.Trainer.shutdown"><code class="docutils literal notranslate"><span class="pre">Trainer.shutdown()</span></code></a></li>
 </ul>
 </li>
@@ -1255,6 +1291,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="trinity.utils.html#module-trinity.utils.monitor">trinity.utils.monitor module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="trinity.utils.html#trinity.utils.monitor.gather_metrics"><code class="docutils literal notranslate"><span class="pre">gather_metrics()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.utils.html#trinity.utils.monitor.Monitor"><code class="docutils literal notranslate"><span class="pre">Monitor</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="trinity.utils.html#trinity.utils.monitor.Monitor.__init__"><code class="docutils literal notranslate"><span class="pre">Monitor.__init__()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.utils.html#trinity.utils.monitor.Monitor.log_table"><code class="docutils literal notranslate"><span class="pre">Monitor.log_table()</span></code></a></li>

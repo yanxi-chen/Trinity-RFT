@@ -5,14 +5,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>trinity.algorithm.sample_strategy.utils &mdash; Trinity-RFT 0.2.0.dev0 documentation</title>
+  <title>trinity.algorithm.sample_strategy.utils &mdash; Trinity-RFT 0.2.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
 
   
       <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../../_static/documentation_options.js?v=130a53a1"></script>
+      <script src="../../../../_static/documentation_options.js?v=938c9ccc"></script>
       <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../../_static/js/theme.js"></script>
@@ -53,6 +53,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../../tutorial/trinity_programming_guide.html">Developer Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../tutorial/trinity_configs.html">Configuration Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../tutorial/example_mix_algo.html">Algorithm Development</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">FAQ</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tutorial/faq.html">FAQ</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul>
@@ -107,7 +111,8 @@
     <span class="n">cumsum</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">attention_mask</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">position_ids</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">cumsum</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span><span class="o">.</span><span class="n">long</span><span class="p">()</span>
     <span class="n">batch_dict</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s2">&quot;uid&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">experiences</span><span class="o">.</span><span class="n">run_ids</span><span class="p">),</span>
+        <span class="s2">&quot;uid&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">experiences</span><span class="o">.</span><span class="n">group_ids</span><span class="p">),</span>
+        <span class="s2">&quot;unique_ids&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">experiences</span><span class="o">.</span><span class="n">unique_ids</span><span class="p">),</span>
         <span class="s2">&quot;position_ids&quot;</span><span class="p">:</span> <span class="n">position_ids</span><span class="p">,</span>
         <span class="s2">&quot;input_ids&quot;</span><span class="p">:</span> <span class="n">experiences</span><span class="o">.</span><span class="n">tokens</span><span class="o">.</span><span class="n">long</span><span class="p">(),</span>
         <span class="s2">&quot;responses&quot;</span><span class="p">:</span> <span class="n">experiences</span><span class="o">.</span><span class="n">tokens</span><span class="p">[:,</span> <span class="n">experiences</span><span class="o">.</span><span class="n">prompt_length</span> <span class="p">:]</span><span class="o">.</span><span class="n">long</span><span class="p">(),</span>
