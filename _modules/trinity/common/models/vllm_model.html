@@ -60,13 +60,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../../build_api/trinity.buffer.html">trinity.buffer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../build_api/trinity.explorer.html">trinity.explorer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../build_api/trinity.trainer.html">trinity.trainer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../build_api/trinity.algorithm.html">trinity.algorithm</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../build_api/trinity.manager.html">trinity.manager</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../build_api/trinity.common.html">trinity.common</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../build_api/trinity.utils.html">trinity.utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api_reference.html">API Reference</a></li>
 </ul>
 
         </div>
@@ -100,7 +94,7 @@
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">,</span> <span class="n">Union</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">aiohttp</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">ray</span>
@@ -261,11 +255,6 @@
                 <span class="p">),</span>
                 <span class="n">logprobs</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span>
                     <span class="p">(</span>
-                        <span class="n">torch</span><span class="o">.</span><span class="n">full</span><span class="p">(</span>
-                            <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">prompt_token_ids</span><span class="p">),),</span>
-                            <span class="mf">0.0</span><span class="p">,</span>
-                            <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span>
-                        <span class="p">),</span>
                         <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span>
                             <span class="p">[</span>
                                 <span class="nb">list</span><span class="p">(</span><span class="n">logprob_dict</span><span class="o">.</span><span class="n">values</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">logprob</span>
@@ -287,7 +276,14 @@
 <div class="viewcode-block" id="vLLMRolloutModel.logprobs">
 <a class="viewcode-back" href="../../../../build_api/trinity.common.models.html#trinity.common.models.vllm_model.vLLMRolloutModel.logprobs">[docs]</a>
     <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">logprobs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">token_ids</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the logprobs of the given tokens in async.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the logprobs of the given tokens in async.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            token_ids (List[int]): The input token ids (seq_length).</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A tensor of logprobs (seq_length - 1).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">output</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_generate_internal</span><span class="p">(</span>
             <span class="n">prompt</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;prompt_token_ids&quot;</span><span class="p">:</span> <span class="n">token_ids</span><span class="p">},</span>
             <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
@@ -295,11 +291,7 @@
             <span class="n">prompt_logprobs</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>  <span class="c1"># vLLM return `prompt_logprobs + 1` logrpobs for each token</span>
         <span class="p">)</span>
         <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span>
-            <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-            <span class="o">+</span> <span class="p">[</span>
-                <span class="nb">list</span><span class="p">(</span><span class="n">logprob_dict</span><span class="o">.</span><span class="n">values</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">logprob</span>
-                <span class="k">for</span> <span class="n">logprob_dict</span> <span class="ow">in</span> <span class="n">output</span><span class="o">.</span><span class="n">prompt_logprobs</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
-            <span class="p">],</span>
+            <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">logprob_dict</span><span class="o">.</span><span class="n">values</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">logprob</span> <span class="k">for</span> <span class="n">logprob_dict</span> <span class="ow">in</span> <span class="n">output</span><span class="o">.</span><span class="n">prompt_logprobs</span><span class="p">[</span><span class="mi">1</span><span class="p">:]],</span>
             <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span>
         <span class="p">)</span></div>
 
@@ -330,14 +322,15 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">tokenizer</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">async_llm</span><span class="o">.</span><span class="n">get_tokenizer</span><span class="p">()</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">chat_template</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">chat_template</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">get_chat_template</span><span class="p">()</span>
-        <span class="n">token_ids</span><span class="p">,</span> <span class="n">action_mask</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">action_mask_method</span><span class="p">(</span>
+        <span class="n">token_ids</span><span class="p">,</span> <span class="n">action_mask</span><span class="p">,</span> <span class="n">prompt_length</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">action_mask_method</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">tokenizer</span><span class="p">,</span> <span class="n">messages</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">chat_template</span>
         <span class="p">)</span>
         <span class="n">logprobs</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">logprobs</span><span class="p">(</span><span class="n">token_ids</span><span class="o">=</span><span class="n">token_ids</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
         <span class="k">return</span> <span class="n">Experience</span><span class="p">(</span>
             <span class="n">tokens</span><span class="o">=</span><span class="n">token_ids</span><span class="p">,</span>
             <span class="n">logprobs</span><span class="o">=</span><span class="n">logprobs</span><span class="p">,</span>
-            <span class="n">action_mask</span><span class="o">=</span><span class="n">action_mask</span><span class="p">,</span>
+            <span class="n">prompt_length</span><span class="o">=</span><span class="n">prompt_length</span><span class="p">,</span>
+            <span class="n">action_mask</span><span class="o">=</span><span class="n">action_mask</span><span class="p">[</span><span class="n">prompt_length</span><span class="p">:],</span>  <span class="c1"># Exclude the prompt tokens</span>
         <span class="p">)</span></div>
 
 
@@ -380,12 +373,8 @@
 
 <div class="viewcode-block" id="vLLMRolloutModel.sync_model">
 <a class="viewcode-back" href="../../../../build_api/trinity.common.models.html#trinity.common.models.vllm_model.vLLMRolloutModel.sync_model">[docs]</a>
-    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">sync_model</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">model_version</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">update_weight_args_list</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">sync_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_version</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Sync model weights to vLLM.&quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">update_weight_args_list</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_collective_rpc</span><span class="p">(</span><span class="s2">&quot;set_state_dict_meta&quot;</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">update_weight_args_list</span><span class="p">,))</span>
         <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_collective_rpc</span><span class="p">(</span><span class="s2">&quot;update_weight&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Sync model weights to vLLM successfully.&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">model_version</span> <span class="o">=</span> <span class="n">model_version</span>
@@ -404,7 +393,6 @@
         <span class="n">explorer_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">backend</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;nccl&quot;</span><span class="p">,</span>
         <span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1200</span><span class="p">,</span>
-        <span class="n">update_with_checkpoint</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
         <span class="n">state_dict_meta</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_collective_rpc</span><span class="p">(</span>
@@ -417,7 +405,6 @@
                 <span class="n">group_name</span><span class="p">,</span>
                 <span class="n">backend</span><span class="p">,</span>
                 <span class="n">timeout</span><span class="p">,</span>
-                <span class="n">update_with_checkpoint</span><span class="p">,</span>
                 <span class="n">state_dict_meta</span><span class="p">,</span>
                 <span class="n">explorer_name</span><span class="p">,</span>
                 <span class="n">ray</span><span class="o">.</span><span class="n">get_runtime_context</span><span class="p">()</span><span class="o">.</span><span class="n">namespace</span><span class="p">,</span>

@@ -61,76 +61,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/faq.html">FAQ</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="trinity.buffer.html">trinity.buffer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="trinity.explorer.html">trinity.explorer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="trinity.trainer.html">trinity.trainer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="trinity.algorithm.html">trinity.algorithm</a></li>
-<li class="toctree-l1"><a class="reference internal" href="trinity.manager.html">trinity.manager</a></li>
-<li class="toctree-l1"><a class="reference internal" href="trinity.common.html">trinity.common</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">trinity.utils</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-trinity.utils.distributed">trinity.utils.distributed module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#trinity.utils.distributed.is_ipv6_address"><code class="docutils literal notranslate"><span class="pre">is_ipv6_address()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#trinity.utils.distributed.init_process_group"><code class="docutils literal notranslate"><span class="pre">init_process_group()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#module-trinity.utils.dlc_utils">trinity.utils.dlc_utils module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#trinity.utils.dlc_utils.ClusterStatus"><code class="docutils literal notranslate"><span class="pre">ClusterStatus</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#trinity.utils.dlc_utils.get_dlc_env_vars"><code class="docutils literal notranslate"><span class="pre">get_dlc_env_vars()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#trinity.utils.dlc_utils.is_running"><code class="docutils literal notranslate"><span class="pre">is_running()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#trinity.utils.dlc_utils.wait_for_ray_setup"><code class="docutils literal notranslate"><span class="pre">wait_for_ray_setup()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#trinity.utils.dlc_utils.wait_for_ray_worker_nodes"><code class="docutils literal notranslate"><span class="pre">wait_for_ray_worker_nodes()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#trinity.utils.dlc_utils.setup_ray_cluster"><code class="docutils literal notranslate"><span class="pre">setup_ray_cluster()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#trinity.utils.dlc_utils.stop_ray_cluster"><code class="docutils literal notranslate"><span class="pre">stop_ray_cluster()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#module-trinity.utils.eval_utils">trinity.utils.eval_utils module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#trinity.utils.eval_utils.simple_answer_parser"><code class="docutils literal notranslate"><span class="pre">simple_answer_parser()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#trinity.utils.eval_utils.find_boxed_answer"><code class="docutils literal notranslate"><span class="pre">find_boxed_answer()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#trinity.utils.eval_utils.extract_solution"><code class="docutils literal notranslate"><span class="pre">extract_solution()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#trinity.utils.eval_utils.validate_equation"><code class="docutils literal notranslate"><span class="pre">validate_equation()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#trinity.utils.eval_utils.evaluate_equation"><code class="docutils literal notranslate"><span class="pre">evaluate_equation()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#trinity.utils.eval_utils.validate_think_pattern"><code class="docutils literal notranslate"><span class="pre">validate_think_pattern()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#trinity.utils.eval_utils.compute_score"><code class="docutils literal notranslate"><span class="pre">compute_score()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#trinity.utils.eval_utils.is_equiv"><code class="docutils literal notranslate"><span class="pre">is_equiv()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#trinity.utils.eval_utils.remove_boxed"><code class="docutils literal notranslate"><span class="pre">remove_boxed()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#trinity.utils.eval_utils.last_boxed_only_string"><code class="docutils literal notranslate"><span class="pre">last_boxed_only_string()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#trinity.utils.eval_utils.fix_fracs"><code class="docutils literal notranslate"><span class="pre">fix_fracs()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#trinity.utils.eval_utils.fix_a_slash_b"><code class="docutils literal notranslate"><span class="pre">fix_a_slash_b()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#trinity.utils.eval_utils.remove_right_units"><code class="docutils literal notranslate"><span class="pre">remove_right_units()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#trinity.utils.eval_utils.fix_sqrt"><code class="docutils literal notranslate"><span class="pre">fix_sqrt()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#trinity.utils.eval_utils.strip_string"><code class="docutils literal notranslate"><span class="pre">strip_string()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#module-trinity.utils.log">trinity.utils.log module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#trinity.utils.log.NewLineFormatter"><code class="docutils literal notranslate"><span class="pre">NewLineFormatter</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#trinity.utils.log.get_logger"><code class="docutils literal notranslate"><span class="pre">get_logger()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#module-trinity.utils.monitor">trinity.utils.monitor module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#trinity.utils.monitor.gather_metrics"><code class="docutils literal notranslate"><span class="pre">gather_metrics()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#trinity.utils.monitor.Monitor"><code class="docutils literal notranslate"><span class="pre">Monitor</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#trinity.utils.monitor.TensorboardMonitor"><code class="docutils literal notranslate"><span class="pre">TensorboardMonitor</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#trinity.utils.monitor.WandbMonitor"><code class="docutils literal notranslate"><span class="pre">WandbMonitor</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#module-trinity.utils.plugin_loader">trinity.utils.plugin_loader module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#trinity.utils.plugin_loader.load_plugins"><code class="docutils literal notranslate"><span class="pre">load_plugins()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#trinity.utils.plugin_loader.load_from_file"><code class="docutils literal notranslate"><span class="pre">load_from_file()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#module-trinity.utils.registry">trinity.utils.registry module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#trinity.utils.registry.Registry"><code class="docutils literal notranslate"><span class="pre">Registry</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#module-trinity.utils.timer">trinity.utils.timer module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#trinity.utils.timer.Timer"><code class="docutils literal notranslate"><span class="pre">Timer</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#module-trinity.utils">Module contents</a></li>
-</ul>
-</li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api_reference.html">API Reference</a></li>
 </ul>
 
         </div>
@@ -147,6 +79,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../api_reference.html">API Reference</a></li>
       <li class="breadcrumb-item active">trinity.utils</li>
       <li class="wy-breadcrumbs-aside">
               <a href="https://github.com/modelscope/Trinity-RFT/blob/main/docs/sphinx_doc/source/build_api/trinity.utils.rst" class="fa fa-github"> Edit on GitHub</a>
@@ -304,28 +237,8 @@
 <dd></dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="trinity.utils.eval_utils.fix_fracs">
-<span class="sig-prename descclassname"><span class="pre">trinity.utils.eval_utils.</span></span><span class="sig-name descname"><span class="pre">fix_fracs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trinity/utils/eval_utils.html#fix_fracs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trinity.utils.eval_utils.fix_fracs" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="trinity.utils.eval_utils.fix_a_slash_b">
-<span class="sig-prename descclassname"><span class="pre">trinity.utils.eval_utils.</span></span><span class="sig-name descname"><span class="pre">fix_a_slash_b</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trinity/utils/eval_utils.html#fix_a_slash_b"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trinity.utils.eval_utils.fix_a_slash_b" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
 <dt class="sig sig-object py" id="trinity.utils.eval_utils.remove_right_units">
 <span class="sig-prename descclassname"><span class="pre">trinity.utils.eval_utils.</span></span><span class="sig-name descname"><span class="pre">remove_right_units</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trinity/utils/eval_utils.html#remove_right_units"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trinity.utils.eval_utils.remove_right_units" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="trinity.utils.eval_utils.fix_sqrt">
-<span class="sig-prename descclassname"><span class="pre">trinity.utils.eval_utils.</span></span><span class="sig-name descname"><span class="pre">fix_sqrt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trinity/utils/eval_utils.html#fix_sqrt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trinity.utils.eval_utils.fix_sqrt" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="trinity.utils.eval_utils.strip_string">
-<span class="sig-prename descclassname"><span class="pre">trinity.utils.eval_utils.</span></span><span class="sig-name descname"><span class="pre">strip_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trinity/utils/eval_utils.html#strip_string"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trinity.utils.eval_utils.strip_string" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 </section>
@@ -390,6 +303,78 @@ it is formatted using formatException() and appended to the message.</p>
 </dd></dl>
 
 </section>
+<section id="module-trinity.utils.math_eval_utils">
+<span id="trinity-utils-math-eval-utils-module"></span><h2>trinity.utils.math_eval_utils module<a class="headerlink" href="#module-trinity.utils.math_eval_utils" title="Link to this heading"></a></h2>
+<p>Utility functions for strictly parsing and evaluating mathematical answers.</p>
+<p>This module is a modified and simplified version of the official evaluation code
+for Qwen2.5-Math, designed for easier standalone use.</p>
+<p>Original source: <a class="reference external" href="https://github.com/QwenLM/Qwen2.5-Math">https://github.com/QwenLM/Qwen2.5-Math</a></p>
+<p>Key modifications include:
+1.  Retained only the core parsing logic for the common <cite>qwen_boxed</cite> prompt format.
+2.  Consolidated essential parsing and evaluation functions from multiple files</p>
+<blockquote>
+<div><p>into this single module.</p>
+</div></blockquote>
+<ol class="arabic simple" start="3">
+<li><p>Simplified benchmark handling and conditional logic for broader applicability.</p></li>
+<li><p>Simplified or removed calls to external tools like TIR.</p></li>
+</ol>
+<dl class="py function">
+<dt class="sig sig-object py" id="trinity.utils.math_eval_utils.verify_math_answer">
+<span class="sig-prename descclassname"><span class="pre">trinity.utils.math_eval_utils.</span></span><span class="sig-name descname"><span class="pre">verify_math_answer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response_text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ground_truth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/trinity/utils/math_eval_utils.html#verify_math_answer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trinity.utils.math_eval_utils.verify_math_answer" title="Link to this definition"></a></dt>
+<dd><p>Strictly compare the equality of response and groundtruth.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="trinity.utils.math_eval_utils.extract_answer">
+<span class="sig-prename descclassname"><span class="pre">trinity.utils.math_eval_utils.</span></span><span class="sig-name descname"><span class="pre">extract_answer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response_text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/trinity/utils/math_eval_utils.html#extract_answer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trinity.utils.math_eval_utils.extract_answer" title="Link to this definition"></a></dt>
+<dd><p>Extract the equation from the string.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="trinity.utils.math_eval_utils.strip_string">
+<span class="sig-prename descclassname"><span class="pre">trinity.utils.math_eval_utils.</span></span><span class="sig-name descname"><span class="pre">strip_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_str</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/trinity/utils/math_eval_utils.html#strip_string"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trinity.utils.math_eval_utils.strip_string" title="Link to this definition"></a></dt>
+<dd><p>Clean and normalize math answer strings.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="trinity.utils.math_eval_utils.fix_fracs">
+<span class="sig-prename descclassname"><span class="pre">trinity.utils.math_eval_utils.</span></span><span class="sig-name descname"><span class="pre">fix_fracs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trinity/utils/math_eval_utils.html#fix_fracs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trinity.utils.math_eval_utils.fix_fracs" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="trinity.utils.math_eval_utils.fix_a_slash_b">
+<span class="sig-prename descclassname"><span class="pre">trinity.utils.math_eval_utils.</span></span><span class="sig-name descname"><span class="pre">fix_a_slash_b</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trinity/utils/math_eval_utils.html#fix_a_slash_b"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trinity.utils.math_eval_utils.fix_a_slash_b" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="trinity.utils.math_eval_utils.fix_sqrt">
+<span class="sig-prename descclassname"><span class="pre">trinity.utils.math_eval_utils.</span></span><span class="sig-name descname"><span class="pre">fix_sqrt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trinity/utils/math_eval_utils.html#fix_sqrt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trinity.utils.math_eval_utils.fix_sqrt" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="trinity.utils.math_eval_utils.convert_word_number">
+<span class="sig-prename descclassname"><span class="pre">trinity.utils.math_eval_utils.</span></span><span class="sig-name descname"><span class="pre">convert_word_number</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/trinity/utils/math_eval_utils.html#convert_word_number"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trinity.utils.math_eval_utils.convert_word_number" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="trinity.utils.math_eval_utils.math_equal">
+<span class="sig-prename descclassname"><span class="pre">trinity.utils.math_eval_utils.</span></span><span class="sig-name descname"><span class="pre">math_equal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prediction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../_modules/trinity/utils/math_eval_utils.html#math_equal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trinity.utils.math_eval_utils.math_equal" title="Link to this definition"></a></dt>
+<dd><p>Checks the mathematical equality of two strings by trying different methods.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="trinity.utils.math_eval_utils.numeric_equal">
+<span class="sig-prename descclassname"><span class="pre">trinity.utils.math_eval_utils.</span></span><span class="sig-name descname"><span class="pre">numeric_equal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prediction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../_modules/trinity/utils/math_eval_utils.html#numeric_equal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trinity.utils.math_eval_utils.numeric_equal" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="trinity.utils.math_eval_utils.symbolic_equal">
+<span class="sig-prename descclassname"><span class="pre">trinity.utils.math_eval_utils.</span></span><span class="sig-name descname"><span class="pre">symbolic_equal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../_modules/trinity/utils/math_eval_utils.html#symbolic_equal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trinity.utils.math_eval_utils.symbolic_equal" title="Link to this definition"></a></dt>
+<dd><p>Compares two strings for symbolic equivalence using sympy.</p>
+</dd></dl>
+
+</section>
 <section id="module-trinity.utils.monitor">
 <span id="trinity-utils-monitor-module"></span><h2>trinity.utils.monitor module<a class="headerlink" href="#module-trinity.utils.monitor" title="Link to this heading"></a></h2>
 <p>Monitor</p>
@@ -434,11 +419,11 @@ it is formatted using formatException() and appended to the message.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="trinity.utils.monitor.TensorboardMonitor">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">trinity.utils.monitor.</span></span><span class="sig-name descname"><span class="pre">TensorboardMonitor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">role</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="trinity.common.html#trinity.common.config.Config" title="trinity.common.config.Config"><span class="pre">Config</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trinity/utils/monitor.html#TensorboardMonitor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trinity.utils.monitor.TensorboardMonitor" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">trinity.utils.monitor.</span></span><span class="sig-name descname"><span class="pre">TensorboardMonitor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">role</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="trinity.common.html#trinity.common.config.Config" title="trinity.common.config.Config"><span class="pre">Config</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trinity/utils/monitor.html#TensorboardMonitor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trinity.utils.monitor.TensorboardMonitor" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#trinity.utils.monitor.Monitor" title="trinity.utils.monitor.Monitor"><code class="xref py py-class docutils literal notranslate"><span class="pre">Monitor</span></code></a></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="trinity.utils.monitor.TensorboardMonitor.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">role</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="trinity.common.html#trinity.common.config.Config" title="trinity.common.config.Config"><span class="pre">Config</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/trinity/utils/monitor.html#TensorboardMonitor.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trinity.utils.monitor.TensorboardMonitor.__init__" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">role</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="trinity.common.html#trinity.common.config.Config" title="trinity.common.config.Config"><span class="pre">Config</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/trinity/utils/monitor.html#TensorboardMonitor.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trinity.utils.monitor.TensorboardMonitor.__init__" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -463,11 +448,11 @@ it is formatted using formatException() and appended to the message.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="trinity.utils.monitor.WandbMonitor">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">trinity.utils.monitor.</span></span><span class="sig-name descname"><span class="pre">WandbMonitor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">role</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="trinity.common.html#trinity.common.config.Config" title="trinity.common.config.Config"><span class="pre">Config</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trinity/utils/monitor.html#WandbMonitor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trinity.utils.monitor.WandbMonitor" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">trinity.utils.monitor.</span></span><span class="sig-name descname"><span class="pre">WandbMonitor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">role</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="trinity.common.html#trinity.common.config.Config" title="trinity.common.config.Config"><span class="pre">Config</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trinity/utils/monitor.html#WandbMonitor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trinity.utils.monitor.WandbMonitor" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#trinity.utils.monitor.Monitor" title="trinity.utils.monitor.Monitor"><code class="xref py py-class docutils literal notranslate"><span class="pre">Monitor</span></code></a></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="trinity.utils.monitor.WandbMonitor.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">role</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="trinity.common.html#trinity.common.config.Config" title="trinity.common.config.Config"><span class="pre">Config</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/trinity/utils/monitor.html#WandbMonitor.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trinity.utils.monitor.WandbMonitor.__init__" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">role</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="trinity.common.html#trinity.common.config.Config" title="trinity.common.config.Config"><span class="pre">Config</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/trinity/utils/monitor.html#WandbMonitor.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trinity.utils.monitor.WandbMonitor.__init__" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
