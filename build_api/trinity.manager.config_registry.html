@@ -47,7 +47,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/example_reasoning_basic.html">Quick Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/example_reasoning_advanced.html">Off-Policy RFT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/example_async_mode.html">Asynchronous RFT</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../tutorial/example_multi_turn.html">Multi-Turn RFT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/example_multi_turn.html">Concatenated Multi-Turn RFT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/example_step_wise.html">General Multi-Step RFT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/example_react.html">Multi-Step ReAct</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/example_dpo.html">Offline DPO and SFT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/example_data_functionalities.html">Data Processing</a></li>
 </ul>
@@ -56,6 +58,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/trinity_programming_guide.html">Developer Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/trinity_configs.html">Configuration Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/example_mix_algo.html">Algorithm Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/synchronizer.html">Synchronizer in Trinity-RFT</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">FAQ</span></p>
 <ul>
@@ -228,6 +231,11 @@
 <dd></dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="trinity.manager.config_registry.buffer_config_manager.set_explore_batch_size">
+<span class="sig-prename descclassname"><span class="pre">trinity.manager.config_registry.buffer_config_manager.</span></span><span class="sig-name descname"><span class="pre">set_explore_batch_size</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#trinity.manager.config_registry.buffer_config_manager.set_explore_batch_size" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="trinity.manager.config_registry.buffer_config_manager.set_train_batch_size">
 <span class="sig-prename descclassname"><span class="pre">trinity.manager.config_registry.buffer_config_manager.</span></span><span class="sig-name descname"><span class="pre">set_train_batch_size</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#trinity.manager.config_registry.buffer_config_manager.set_train_batch_size" title="Link to this definition"></a></dt>
 <dd></dd></dl>
@@ -270,6 +278,11 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="trinity.manager.config_registry.buffer_config_manager.set_default_workflow_type">
 <span class="sig-prename descclassname"><span class="pre">trinity.manager.config_registry.buffer_config_manager.</span></span><span class="sig-name descname"><span class="pre">set_default_workflow_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#trinity.manager.config_registry.buffer_config_manager.set_default_workflow_type" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="trinity.manager.config_registry.buffer_config_manager.set_default_eval_workflow_type">
+<span class="sig-prename descclassname"><span class="pre">trinity.manager.config_registry.buffer_config_manager.</span></span><span class="sig-name descname"><span class="pre">set_default_eval_workflow_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#trinity.manager.config_registry.buffer_config_manager.set_default_eval_workflow_type" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
