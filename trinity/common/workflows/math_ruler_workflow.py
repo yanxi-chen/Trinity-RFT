@@ -9,7 +9,6 @@ from trinity.common.experience import Experience
 from trinity.common.models.model import ModelWrapper
 from trinity.common.rewards.math_reward import MathRewardFn
 from trinity.common.workflows.workflow import WORKFLOWS, SimpleWorkflow, Task
-
 from trinity.utils.log import get_logger
 
 logger = get_logger(__name__)
@@ -18,7 +17,7 @@ logger = get_logger(__name__)
 @WORKFLOWS.register_module("math_ruler_workflow")
 class MathRULERWorkflow(SimpleWorkflow):
     """A workflow for math with RULER reward function.
-    
+
     Modified from `MathWorkflow`.
     """
 
@@ -52,10 +51,9 @@ class MathRULERWorkflow(SimpleWorkflow):
         # call the SimpleWorkflow.reset
         super().reset(task)
 
-
     def run(self) -> List[Experience]:
         """Modified from SimpleWorkflow.run"""
-    
+
         messages = self.format_messages()
 
         self.logger.debug("start chat")
@@ -78,8 +76,11 @@ class MathRULERWorkflow(SimpleWorkflow):
             self.logger.debug(
                 f"self.task_desc: {self.task_desc}, messages: {messages}, response: {response.response_text}, gold_reward: {gold_reward}"
             )
-        
+
         # === RULER scores as rewards ===
+        assert (
+            self.auxiliary_models is not None
+        ), "Current implementation of RULER requires that auxiliary_models is not None."
         ruler_scores = self.get_ruler_scores(responses=responses, judger=self.auxiliary_models[0])
         for i, response in enumerate(responses):
             response.reward = ruler_scores[i]
@@ -120,7 +121,7 @@ You may compare them against each other and think step by step before returning 
 Conclude your response with a list of scores, in the following format: [score for solution 1, score for solution 2, ..., score for solution {num_responses + 1}]
 """
 
-        # Step 2: invoke judger LLM     
+        # Step 2: invoke judger LLM
         messages = [
             {"role": "system", "content": ruler_system_prompt},
             {"role": "user", "content": ruler_user_prompt},
@@ -139,7 +140,7 @@ Conclude your response with a list of scores, in the following format: [score fo
         lst_as_str = judger_response[idx1 : (idx2 + 1)]
         try:
             scores = eval(lst_as_str)
-            scores = [max(0.0, min(1.0, score)) for score in scores] # clip to range [0, 1]
+            scores = [max(0.0, min(1.0, score)) for score in scores]  # clip to range [0, 1]
             return scores
         except Exception:
             logger.warning("Unable to parse the list in judger response, set scores to all zero.")
