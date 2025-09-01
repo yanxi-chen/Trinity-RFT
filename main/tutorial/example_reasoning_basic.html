@@ -61,6 +61,7 @@
 <li class="toctree-l1"><a class="reference internal" href="example_multi_turn.html">Concatenated Multi-Turn RFT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="example_step_wise.html">General Multi-Step RFT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="example_react.html">Multi-Step ReAct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example_search_email.html">Email Search Workflow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="example_dpo.html">Offline DPO and SFT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="example_data_functionalities.html">Data Processing</a></li>
 </ul>
@@ -266,7 +267,7 @@ huggingface-cli<span class="w"> </span>download<span class="w"> </span>openai/gs
 <span class="w">      </span><span class="nt">storage_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">file</span>
 <span class="w">      </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;$DATASET_PATH/{sft_data}&gt;</span>
 <span class="w">      </span><span class="nt">format</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">prompt_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;prompt_type&gt;</span><span class="w"> </span><span class="c1"># messages/plaintext/chatpair</span>
+<span class="w">        </span><span class="nt">prompt_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;prompt_type&gt;</span><span class="w"> </span><span class="c1"># messages/plaintext</span>
 <span class="w">        </span><span class="nt">prompt_key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;prompt_key&gt;</span>
 <span class="w">        </span><span class="nt">response_key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;response_key&gt;</span>
 <span class="w">    </span><span class="nt">sft_warmup_steps</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
@@ -307,13 +308,13 @@ huggingface-cli<span class="w"> </span>download<span class="w"> </span>openai/gs
 <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
   <span class="rst-current-version" data-toggle="rst-current-version">
     <span class="fa fa-book"> Other Versions</span>
-    v: main
+    <b>main</b>
     <span class="fa fa-caret-down"></span>
   </span>
   <div class="rst-other-versions">
     <dl>
       <dt>Branches</dt>
-      <dd><a href="example_reasoning_basic.html">main</a> <b>(latest)</b></dd>
+      <dd><b><a href="example_reasoning_basic.html">main</a> (latest)</b></dd>
     </dl>
   </div>
 </div><script>
