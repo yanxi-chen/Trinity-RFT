@@ -146,6 +146,11 @@ Conclude your response with a list of scores, in the following format: [score fo
         try:
             scores = ast.literal_eval(lst_as_str)
             scores = [max(0.0, min(1.0, score)) for score in scores]  # clip to range [0, 1]
+            if len(scores) != num_responses:
+                logger.warning(
+                    "The length of list in judger response does not match num_responses."
+                )
+                return False, [0.0 for _ in range(num_responses)]
             return True, scores
         except Exception:
             logger.warning("Unable to parse the list in judger response, set scores to all zero.")

@@ -3,8 +3,8 @@
 import ast
 from copy import deepcopy
 from typing import Any, List, Optional, Tuple
-import numpy as np
 
+import numpy as np
 import openai
 
 from trinity.common.experience import Experience
@@ -16,7 +16,8 @@ from trinity.utils.log import get_logger
 logger = get_logger(__name__)
 
 # the probability that the ground truth is assumed to be available for RL
-PROB_GROUND_TRUTH_AVAILABLE = 0.2
+PROBABILITY_GROUND_TRUTH_AVAILABLE = 0.2
+
 
 @WORKFLOWS.register_module("math_trainable_ruler_workflow")
 class MathTrainableRULERWorkflow(SimpleWorkflow):
@@ -71,23 +72,27 @@ class MathTrainableRULERWorkflow(SimpleWorkflow):
             gold_reward = sum(gold_reward_dict.values())
             response.metrics.update({"gold_reward": gold_reward})
 
-            response.eid.task = self.task.task_id  # task_id is set explicitly within workflow!
+            # set task_id explicitly within workflow!
+            response.eid.task = str(self.task.task_id)
             response.eid.run = i + self.run_id_base
 
             gold_rewards.append(gold_reward)
-            gold_scores_scaled.append((gold_reward + 0.1) / 1.2)  # scale from range [-0.1, 1.1] to [0, 1]
+            gold_scores_scaled.append(
+                (gold_reward + 0.1) / 1.2
+            )  # scale from range [-0.1, 1.1] to [0, 1]
 
         # Part 2: get and use RULER scores
         ruler_rollout_args = deepcopy(self.rollout_args)
-        ground_truth_is_available = np.random.rand() < PROB_GROUND_TRUTH_AVAILABLE
+        ground_truth_is_available = np.random.rand() < PROBABILITY_GROUND_TRUTH_AVAILABLE
 
         if ground_truth_is_available:
+            # Assuming that ground truth is accessible to RL:
             # - set exp's reward to gold reward
             # - generate RULER scores for repeat_times, construct ruler_responses
             # - return responses + ruler_responses
 
             judge_success_rate, ruler_responses, ruler_scores = self.get_ruler_responses(
-                responses=responses, 
+                responses=responses,
                 judger=self.model,  # use the policy model itself as judger!
                 ruler_rollout_args=ruler_rollout_args,
                 gold_scores=gold_scores_scaled,
@@ -95,30 +100,29 @@ class MathTrainableRULERWorkflow(SimpleWorkflow):
 
             for i, response in enumerate(responses):
                 response.reward = gold_rewards[i]
-                response.metrics.update({"judge_success": float(judge_success_rate)})
-            
+                response.metrics.update({"judge_success": judge_success_rate})
+
             for i, ruler_response in enumerate(ruler_responses):
-                if ruler_response.metrics is None:
-                    ruler_response.metrics = {}
-                ruler_response.metrics.update(
-                    {
-                        "judge_success": judge_success_rate,
-                        "reward_for_judger": ruler_response.reward,
-                    }
-                )
-                ruler_response.eid.task = -1 * self.task.task_id  # HACK to distinguish two types of experiences
+                # if ruler_response.metrics is None:
+                # ruler_response.metrics = {}
+                # ruler_response.metrics.update({"judge_success": judge_success_rate})
+                # ruler_response.metrics.update({"reward_for_judger": ruler_response.reward})
+
+                # set task_id explicitly, to distinguish two types of experiences!
+                ruler_response.eid.task = str(self.task.task_id) + "-ruler"
                 ruler_response.eid.run = i + self.run_id_base
 
             return responses + ruler_responses
 
         else:
+            # Assuming that ground truth is not accessible to RL:
             # - generate RULER scores only once
-            # - set exp's reward to RULER scores
+            # - set exp's reward to RULER score
             # - return responses
 
             ruler_rollout_args.n = 1
             judge_success_rate, ruler_responses, ruler_scores = self.get_ruler_responses(
-                responses=responses, 
+                responses=responses,
                 judger=self.model,  # use the policy model itself as judger!
                 ruler_rollout_args=ruler_rollout_args,
                 gold_scores=None,
@@ -126,19 +130,19 @@ class MathTrainableRULERWorkflow(SimpleWorkflow):
 
             for i, response in enumerate(responses):
                 response.reward = ruler_scores[i]
-                response.metrics.update({"judge_success": float(judge_success_rate)})
+                response.metrics.update({"judge_success": judge_success_rate})
 
             return responses
 
     def get_ruler_responses(
-        self, 
-        responses: List[Experience], 
+        self,
+        responses: List[Experience],
         judger: Any,
         ruler_rollout_args: Any,
         gold_scores: Optional[List[float]] = None,
-    ) -> Tuple[bool, List[float]]:
+    ) -> Tuple[float, List[Experience], List[float]]:
         """Get RULER scores
-        
+
         Returns:
             judge_success_rate: float
             ruler_responses: List[Experience]
@@ -194,6 +198,7 @@ Conclude your response with a list of scores, in the following format: [score fo
 
             if (idx1 == -1) or (idx2 == -1) or (idx1 > idx2):
                 logger.warning("Unable to extract a list from judger response.")
+                break
 
             lst_as_str = ruler_response_text[idx1 : (idx2 + 1)]
             try:
@@ -203,15 +208,23 @@ Conclude your response with a list of scores, in the following format: [score fo
                     judge_success_count += 1
                     ruler_scores = [ruler_scores[i] + scores[i] for i in range(len(ruler_scores))]
                     if gold_scores:
-                        mae_error = (np.array(ruler_scores) - np.array(gold_scores)).abs().mean()
+                        mae_error = (np.array(scores) - np.array(gold_scores)).abs().mean()
                         ruler_response.reward = 1.0 - mae_error
                 else:
-                    logger.warning("The length of list in judger response does not match num_responses.")
+                    logger.warning(
+                        "The length of list in judger response does not match num_responses."
+                    )
             except Exception:
                 logger.warning("Unable to parse the list in judger response.")
-            
+
         if judge_success_count > 0:
             ruler_scores = [score / judge_success_count for score in ruler_scores]
         judge_success_rate = 1.0 * judge_success_count / len(ruler_responses)
+
+        for ruler_response in ruler_responses:
+            if ruler_response.metrics is None:
+                ruler_response.metrics = {}
+            ruler_response.metrics.update({"judge_success": judge_success_rate})
+            ruler_response.metrics.update({"reward_for_judger": ruler_response.reward})
 
         return judge_success_rate, ruler_responses, ruler_scores
