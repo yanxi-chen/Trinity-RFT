@@ -1,10 +1,6 @@
-# 集成新算法
+# Algorithm 进阶开发
 
-```{note}
-本指南是开发者指南中 {ref}`算法模块 <Algorithms>` 部分的进阶版本。
-```
-
-本指南介绍了如何将新算法集成到 Trinity-RFT 中。
+本指南将会介绍如何将相对复杂的 RL 算法集成到 Trinity-RFT 中。
 作为示例，我们引入了由更高级别的 LLM 生成的一些“专家”数据，并提出了一种名为 MIX 的算法，该算法优化以下策略目标：
 
 $$
@@ -170,21 +166,23 @@ class MIXPolicyLossFn(PolicyLossFn):
         ngpus_trainer: int = 1,
         train_batch_size_usual: int = 1,
         train_batch_size_expert: int = 1,
-        use_token_level_loss_in_sft: bool = True,
+        sft_loss_agg_mode: str = "token-mean",
+        grpo_loss_agg_mode: str = "token-mean",
     ) -> None:
         super().__init__(backend=backend)
         self.mu = mu
         self.use_dynamic_bsz = use_dynamic_bsz
         self.experience_per_gpu = ppo_mini_batch_size // ngpus_trainer
         self.gradient_accumulation = ppo_mini_batch_size // ppo_micro_batch_size_per_gpu
-        self.train_batch_size_usual = train_batch_size_usual
-        self.train_batch_size_expert = train_batch_size_expert
+        self.train_batch_size_usual = train_batch_size_usual // ngpus_trainer
+        self.train_batch_size_expert = train_batch_size_expert // ngpus_trainer
         self.grpo_loss_fn = PPOPolicyLossFn(
             clip_range=clip_range,
             clip_range_low=clip_range_low,
             clip_range_high=clip_range_high,
+            loss_agg_mode=grpo_loss_agg_mode,
         )
-        self.sft_loss_fn = SFTLossFn(use_token_level_loss=use_token_level_loss_in_sft)
+        self.sft_loss_fn = SFTLossFn(loss_agg_mode=sft_loss_agg_mode)
 
     def __call__(  # type: ignore
         self,
@@ -247,7 +245,7 @@ class MIXPolicyLossFn(PolicyLossFn):
 
         metrics = {f"usual/{k}": v for k, v in grpo_metrics.items()}
         metrics.update({f"expert/{k}": v for k, v in sft_metrics.items()})
-        metrics.update({"loss": loss.item()})
+        metrics["loss"] = loss.item()
 
         return loss, metrics
 
@@ -273,8 +271,8 @@ algorithm:
   policy_loss_fn_args:
     mu: 0.1
     clip_range: 0.2
-    use_token_level_loss_in_sft: False
-    use_dynamic_bsz: False
+    sft_loss_agg_mode: "token-mean"
+    use_dynamic_bsz: True
     repeat_times: 8
     ppo_mini_batch_size: 256
     ppo_micro_batch_size_per_gpu: 4
