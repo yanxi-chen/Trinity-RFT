@@ -28,14 +28,14 @@ def is_json_file(path: str) -> bool:
 # Each priority_fn,
 #   Args: item, kwargs
 #   Returns: priority (float), put_into_queue (bool, decide whether to put item into queue)
-# Note that put_into_queue takes effect both for new item from the explorer 
+# Note that put_into_queue takes effect both for new item from the explorer
 # and for item sampled from the buffer.
 PRIORITY_FUNC = Registry("priority_fn")
 
 
 @PRIORITY_FUNC.register_module("linear_decay")
 def linear_decay_priority(
-    item: List[Experience], 
+    item: List[Experience],
     decay: float = 2.0,
 ) -> Tuple[float, bool]:
     priority = float(item[0].info["model_version"] - decay * item[0].info["use_count"])
@@ -45,7 +45,7 @@ def linear_decay_priority(
 
 @PRIORITY_FUNC.register_module("linear_decay_use_count_control")
 def linear_decay_use_count_control_priority(
-    item: List[Experience], 
+    item: List[Experience],
     decay: float = 2.0,
     use_count_limit: int = 3,
 ) -> Tuple[float, bool]:
@@ -163,7 +163,7 @@ class AsyncPriorityQueue(QueueBuffer):
             await asyncio.sleep(delay)
         if len(item) == 0:
             return
-        
+
         priority, put_into_queue = self.priority_fn(item=item)
         if not put_into_queue:
             return
