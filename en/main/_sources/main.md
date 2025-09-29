@@ -1,20 +1,21 @@
 ## 💡 What is Trinity-RFT?
 
-Trinity-RFT is a flexible, general-purpose framework for reinforcement fine-tuning (RFT) of large language models (LLMs). It provides three independent modules for users with different needs:
+Trinity-RFT is a flexible, general-purpose framework for reinforcement fine-tuning (RFT) of large language models (LLMs). It decouples the RFT process into three key components: **Explorer**, **Trainer**, and **Buffer**, and provides functionalities for users with different backgrounds and objectives:
 
-* 🤖 **Explorer**：For agent application developers. [[tutorial]](/tutorial/develop_workflow.md)
-  - Train an agent application to enhance its ability to complete tasks in a specified environment
+* 🤖 For agent application developers. [[tutorial]](/tutorial/develop_workflow.md)
+  - Train agent applications to improve their ability to complete tasks in specific environments.
   - Examples: [Multi-Turn Interaction](/tutorial/example_multi_turn.md), [ReAct Agent](/tutorial/example_react.md)
 
-* 🧠 **Trainer**: For RL algorithm researchers. [[tutorial]](/tutorial/develop_algorithm.md)
-  - Design and validate new RL algorithms in compact, plug-and-play classes
-  - Examples: [Mixture of RL Algorithms](/tutorial/example_mix_algo.md)
+* 🧠 For RL algorithm researchers. [[tutorial]](/tutorial/develop_algorithm.md)
+  - Design and validate new reinforcement learning algorithms using compact, plug-and-play modules.
+  - Example: [Mixture of SFT and GRPO](/tutorial/example_mix_algo.md)
 
-* 🗃️ **Buffer**: For data engineers. [[tutorial]](/tutorial/develop_operator.md)
-  - Design task-specific datasets and build data pipelines for cleaning, augmentation, and human-in-the-loop scenarios
-  - Examples: [Data Functionalities](/tutorial/example_data_functionalities.md)
+* 📊 For data engineers. [[tutorial]](/tutorial/develop_operator.md)
+  - Create task-specific datasets and build data pipelines for cleaning, augmentation, and human-in-the-loop scenarios.
+  - Example: [Data Processing](/tutorial/example_data_functionalities.md)
 
-Trinity-RFT unifies the above three modules and provides the following key features:
+
+## 🌟 Key Features
 
 * **Flexible RFT Modes:**
   - Supports synchronous/asynchronous, on-policy/off-policy, and online/offline training. Rollout and training can run separately and scale independently across devices.
@@ -44,7 +45,7 @@ This project is built upon many excellent open-source projects, including:
 + [verl](https://github.com/volcengine/verl) and [PyTorch's FSDP](https://pytorch.org/docs/stable/fsdp.html) for LLM training;
 + [vLLM](https://github.com/vllm-project/vllm) for LLM inference;
 + [Data-Juicer](https://github.com/modelscope/data-juicer?tab=readme-ov-file) for data processing pipelines;
-+ [AgentScope](https://github.com/modelscope/agentscope) for agentic workflow;
++ [AgentScope](https://github.com/agentscope-ai/agentscope) for agentic workflow;
 + [Ray](https://github.com/ray-project/ray) for distributed systems;
 + we have also drawn inspirations from RL frameworks like [OpenRLHF](https://github.com/OpenRLHF/OpenRLHF), [TRL](https://github.com/huggingface/trl) and [ChatLearn](https://github.com/alibaba/ChatLearn);
 + ......
