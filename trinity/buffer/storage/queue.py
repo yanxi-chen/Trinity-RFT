@@ -5,7 +5,7 @@ from abc import ABC, abstractmethod
 from collections import deque
 from copy import deepcopy
 from functools import partial
-from typing import List, Optional
+from typing import List, Optional, Tuple
 
 import ray
 from sortedcontainers import SortedDict
@@ -25,12 +25,33 @@ def is_json_file(path: str) -> bool:
     return path.endswith(".json") or path.endswith(".jsonl")
 
 
+# Each priority_fn,
+#   Args: item, kwargs
+#   Returns: priority (float), put_into_queue (bool, decide whether to put item into queue)
+# Note that put_into_queue takes effect both for new item from the explorer 
+# and for item sampled from the buffer.
 PRIORITY_FUNC = Registry("priority_fn")
 
 
 @PRIORITY_FUNC.register_module("linear_decay")
-def linear_decay_priority(item: List[Experience], decay: float = 0.1):
-    return item[0].info["model_version"] - decay * item[0].info["use_count"]  # type: ignore
+def linear_decay_priority(
+    item: List[Experience], 
+    decay: float = 2.0,
+) -> Tuple[float, bool]:
+    priority = float(item[0].info["model_version"] - decay * item[0].info["use_count"])
+    put_into_queue = True
+    return priority, put_into_queue
+
+
+@PRIORITY_FUNC.register_module("linear_decay_use_count_control")
+def linear_decay_use_count_control_priority(
+    item: List[Experience], 
+    decay: float = 2.0,
+    use_count_limit: int = 3,
+) -> Tuple[float, bool]:
+    priority = float(item[0].info["model_version"] - decay * item[0].info["use_count"])
+    put_into_queue = item[0].info["use_count"] < use_count_limit
+    return priority, put_into_queue
 
 
 class QueueBuffer(ABC):
@@ -142,7 +163,11 @@ class AsyncPriorityQueue(QueueBuffer):
             await asyncio.sleep(delay)
         if len(item) == 0:
             return
-        priority = self.priority_fn(item=item)
+        
+        priority, put_into_queue = self.priority_fn(item=item)
+        if not put_into_queue:
+            return
+
         async with self._condition:
             if len(self.priority_groups) == self.capacity:
                 # If full, only insert if new item has higher or equal priority than the lowest
