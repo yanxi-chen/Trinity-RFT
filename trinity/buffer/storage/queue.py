@@ -26,12 +26,17 @@ def is_json_file(path: str) -> bool:
     return path.endswith(".json") or path.endswith(".jsonl")
 
 
-# Each priority_fn,
-#   Args: item, kwargs
-#   Returns: priority (float), put_into_queue (bool, decide whether to put item into queue)
-# Note that put_into_queue takes effect both for new item from the explorer
-# and for item sampled from the buffer.
 PRIORITY_FUNC = Registry("priority_fn")
+"""
+Each priority_fn,
+    Args:
+        item: List[Experience], assume that all experiences in it have the same model_version and use_count
+        kwargs: storage_config.replay_buffer_kwargs (except priority_fn)
+    Returns:
+        priority: float
+        put_into_queue: bool, decide whether to put item into queue
+Note that put_into_queue takes effect both for new item from the explorer and for item sampled from the buffer.
+"""
 
 
 @PRIORITY_FUNC.register_module("linear_decay")
@@ -62,9 +67,8 @@ def linear_decay_use_count_control_priority(
     priority = float(item[0].info["model_version"] - decay * item[0].info["use_count"])
     if sigma > 0.0:
         priority += float(np.random.randn() * sigma)
-    put_into_queue = item[0].info["use_count"] < use_count_limit
+    put_into_queue = item[0].info["use_count"] < use_count_limit if use_count_limit > 0 else True
     return priority, put_into_queue
-
 
 
 class QueueBuffer(ABC):
