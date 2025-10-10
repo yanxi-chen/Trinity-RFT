@@ -7,6 +7,7 @@ from copy import deepcopy
 from functools import partial
 from typing import List, Optional, Tuple
 
+import numpy as np
 import ray
 from sortedcontainers import SortedDict
 
@@ -38,20 +39,32 @@ def linear_decay_priority(
     item: List[Experience],
     decay: float = 2.0,
 ) -> Tuple[float, bool]:
+    """Calculate priority by linear decay.
+
+    Priority is calculated as `model_version - decay * use_count. The item is always put back into the queue for reuse (as long as `reuse_cooldown_time` is not None).
+    """
     priority = float(item[0].info["model_version"] - decay * item[0].info["use_count"])
     put_into_queue = True
     return priority, put_into_queue
 
 
-@PRIORITY_FUNC.register_module("linear_decay_use_count_control")
+@PRIORITY_FUNC.register_module("linear_decay_use_count_control_randomization")
 def linear_decay_use_count_control_priority(
     item: List[Experience],
     decay: float = 2.0,
     use_count_limit: int = 3,
+    sigma: float = 0.0,
 ) -> Tuple[float, bool]:
+    """Calculate priority by linear decay, use count control, and randomization.
+
+    Priority is calculated as `model_version - decay * use_count`; if `sigma` is non-zero, priority is further perturbed by random Gaussian noise with standard deviation `sigma`.  The item will be put back into the queue only if use count does not exceed `use_count_limit`.
+    """
     priority = float(item[0].info["model_version"] - decay * item[0].info["use_count"])
+    if sigma > 0.0:
+        priority += float(np.random.randn() * sigma)
     put_into_queue = item[0].info["use_count"] < use_count_limit
     return priority, put_into_queue
+
 
 
 class QueueBuffer(ABC):
@@ -213,7 +226,7 @@ class AsyncPriorityQueue(QueueBuffer):
             exp.info["use_count"] += 1
         # Optionally resubmit the item after a cooldown
         if self.reuse_cooldown_time is not None:
-            asyncio.create_task(self._put(item, self.reuse_cooldown_time))
+            asyncio.create_task(self._put(item, delay=self.reuse_cooldown_time))
 
         return item
 
