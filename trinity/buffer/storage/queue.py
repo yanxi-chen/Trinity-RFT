@@ -99,7 +99,7 @@ class QueueBuffer(ABC):
         if storage_config.use_priority_queue:
             reuse_cooldown_time = storage_config.reuse_cooldown_time
             replay_buffer_kwargs = storage_config.replay_buffer_kwargs
-            capacity = min(storage_config.capacity, config.train_batch_size * 2)
+            capacity = storage_config.capacity
             logger.info(
                 f"Using AsyncPriorityQueue with capacity {capacity}, reuse_cooldown_time {reuse_cooldown_time}."
             )
@@ -162,6 +162,7 @@ class AsyncPriorityQueue(QueueBuffer):
             kwargs: Additional keyword arguments for the priority function.
         """
         self.capacity = capacity
+        self.item_count = 0
         self.priority_groups = SortedDict()  # Maps priority -> deque of items
         self.priority_fn = partial(PRIORITY_FUNC.get(priority_fn), **kwargs)
         self.reuse_cooldown_time = reuse_cooldown_time
@@ -186,13 +187,14 @@ class AsyncPriorityQueue(QueueBuffer):
             return
 
         async with self._condition:
-            if len(self.priority_groups) == self.capacity:
+            if self.item_count == self.capacity:
                 # If full, only insert if new item has higher or equal priority than the lowest
                 lowest_priority, item_queue = self.priority_groups.peekitem(index=0)
                 if lowest_priority > priority:
                     return  # Skip insertion if lower priority
                 # Remove the lowest priority item
                 item_queue.popleft()
+                self.item_count -= 1
                 if not item_queue:
                     self.priority_groups.popitem(index=0)
 
@@ -200,6 +202,7 @@ class AsyncPriorityQueue(QueueBuffer):
             if priority not in self.priority_groups:
                 self.priority_groups[priority] = deque()
             self.priority_groups[priority].append(item)
+            self.item_count += 1
             self._condition.notify()
 
     async def put(self, item: List[Experience]) -> None:
@@ -223,6 +226,7 @@ class AsyncPriorityQueue(QueueBuffer):
 
             _, item_queue = self.priority_groups.peekitem(index=-1)
             item = item_queue.popleft()
+            self.item_count -= 1
             if not item_queue:
                 self.priority_groups.popitem(index=-1)
 
@@ -235,7 +239,7 @@ class AsyncPriorityQueue(QueueBuffer):
         return item
 
     def qsize(self):
-        return len(self.priority_groups)
+        return self.item_count
 
     async def close(self) -> None:
         """
