@@ -40,6 +40,14 @@
     <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script src="../../../../_static/translations.js?v=beaddf03"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs"></script>
+    <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs";import elkLayouts from "https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs";mermaid.registerLayoutLoaders(elkLayouts);mermaid.initialize({startOnLoad:false});</script>
+    <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+    <script type="module">
+import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs";
+window.addEventListener("load", () => mermaid.run());
+</script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/trinity/common/models/vllm_model';</script>
     <link rel="index" title="索引" href="../../../../genindex.html" />
     <link rel="search" title="搜索" href="../../../../search.html" />
@@ -913,6 +921,7 @@ document.write(`
             <span class="n">messages</span><span class="o">=</span><span class="n">messages</span><span class="p">,</span>
             <span class="n">tools</span><span class="o">=</span><span class="n">tools</span><span class="p">,</span>
             <span class="n">chat_template</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">chat_template</span><span class="p">,</span>
+            <span class="n">enable_thinking</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">enable_thinking</span><span class="p">,</span>
         <span class="p">)</span>  <span class="c1"># (seq_length, ), (seq_length, )</span>
         <span class="n">logprobs</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">logprobs</span><span class="p">(</span><span class="n">token_ids</span><span class="o">=</span><span class="n">token_ids</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>  <span class="c1"># (seq_length - 1,)</span>
         <span class="k">return</span> <span class="n">Experience</span><span class="p">(</span>

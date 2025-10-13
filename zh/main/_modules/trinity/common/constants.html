@@ -40,6 +40,14 @@
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script src="../../../_static/translations.js?v=beaddf03"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs"></script>
+    <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs";import elkLayouts from "https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs";mermaid.registerLayoutLoaders(elkLayouts);mermaid.initialize({startOnLoad:false});</script>
+    <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+    <script type="module">
+import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs";
+window.addEventListener("load", () => mermaid.run());
+</script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/trinity/common/constants';</script>
     <link rel="index" title="索引" href="../../../genindex.html" />
     <link rel="search" title="搜索" href="../../../search.html" />
@@ -545,6 +553,7 @@ document.write(`
 <span class="n">TRAINER_NAME</span> <span class="o">=</span> <span class="s2">&quot;trainer&quot;</span>
 
 <span class="n">ROLLOUT_WEIGHT_SYNC_GROUP_NAME</span> <span class="o">=</span> <span class="s2">&quot;rollout_weight_sync&quot;</span>
+<span class="n">DEBUG_NAMESPACE</span> <span class="o">=</span> <span class="s2">&quot;TRINITY_DEBUG_NAMESPACE&quot;</span>
 
 <span class="c1"># trinity env var names</span>
 <span class="n">CHECKPOINT_ROOT_DIR_ENV_VAR</span> <span class="o">=</span> <span class="s2">&quot;TRINITY_CHECKPOINT_ROOT_DIR&quot;</span>
