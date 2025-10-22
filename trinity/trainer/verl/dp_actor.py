@@ -156,13 +156,13 @@ class DataParallelPPOActor(DPActor):
                     )
                     policy_loss = policy_loss + kl_loss
 
+                    # set loss scale for the microbatch
                     if self.config.use_dynamic_bsz:
-                        # relative to the dynamic bsz
-                        loss = policy_loss * (
-                            response_mask.shape[0] / self.config.ppo_mini_batch_size
-                        )
+                        loss_scale = response_mask.shape[0] / self.config.ppo_mini_batch_size
                     else:
-                        loss = policy_loss / self.gradient_accumulation
+                        loss_scale = 1.0 / self.gradient_accumulation
+
+                    loss = policy_loss * loss_scale                    
                     loss.backward()
 
                     append_to_dict(metrics, micro_batch_metrics)
