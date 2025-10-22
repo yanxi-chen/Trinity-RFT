@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>trinity.common.workflows.customized_toolcall_workflows module &#8212; Trinity-RFT 0.3.1.dev0 文档</title>
+    <title>trinity.common.workflows.customized_toolcall_workflows module &#8212; Trinity-RFT 0.4.0.dev0 文档</title>
   
   
   
@@ -36,7 +36,7 @@
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script src="../_static/documentation_options.js?v=855ea54a"></script>
+    <script src="../_static/documentation_options.js?v=09f53066"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
@@ -137,8 +137,8 @@
       
     
     
-    <img src="../_static/logo.svg" class="logo__image only-light" alt="Trinity-RFT 0.3.1.dev0 文档 - Home"/>
-    <script>document.write(`<img src="../_static/logo.svg" class="logo__image only-dark" alt="Trinity-RFT 0.3.1.dev0 文档 - Home"/>`);</script>
+    <img src="../_static/logo.svg" class="logo__image only-light" alt="Trinity-RFT 0.4.0.dev0 文档 - Home"/>
+    <script>document.write(`<img src="../_static/logo.svg" class="logo__image only-dark" alt="Trinity-RFT 0.4.0.dev0 文档 - Home"/>`);</script>
   
   
 </a></div>
@@ -364,6 +364,7 @@
 </details></li>
 <li class="toctree-l3 current active has-children"><a class="reference internal" href="trinity.common.workflows.html">trinity.common.workflows package</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.workflows.agentscope.html">trinity.common.workflows.agentscope package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.workflows.agentscope_workflow.html">trinity.common.workflows.agentscope_workflow module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.workflows.customized_math_workflows.html">trinity.common.workflows.customized_math_workflows module</a></li>
 <li class="toctree-l4 current active"><a class="current reference internal" href="#">trinity.common.workflows.customized_toolcall_workflows module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.workflows.eval_workflow.html">trinity.common.workflows.eval_workflow module</a></li>
@@ -589,8 +590,8 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.common.workflows.customized_toolcall_workflows.compute_score_v0"><code class="docutils literal notranslate"><span class="pre">compute_score_v0()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.common.workflows.customized_toolcall_workflows.compute_toolcall_reward"><code class="docutils literal notranslate"><span class="pre">compute_toolcall_reward()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.common.workflows.customized_toolcall_workflows.ToolCallWorkflow"><code class="docutils literal notranslate"><span class="pre">ToolCallWorkflow</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.common.workflows.customized_toolcall_workflows.ToolCallWorkflow.is_async"><code class="docutils literal notranslate"><span class="pre">ToolCallWorkflow.is_async</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.common.workflows.customized_toolcall_workflows.ToolCallWorkflow.reset"><code class="docutils literal notranslate"><span class="pre">ToolCallWorkflow.reset()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.common.workflows.customized_toolcall_workflows.ToolCallWorkflow.asynchronous"><code class="docutils literal notranslate"><span class="pre">ToolCallWorkflow.asynchronous</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.common.workflows.customized_toolcall_workflows.ToolCallWorkflow.format_prompt"><code class="docutils literal notranslate"><span class="pre">ToolCallWorkflow.format_prompt()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.common.workflows.customized_toolcall_workflows.ToolCallWorkflow.run_async"><code class="docutils literal notranslate"><span class="pre">ToolCallWorkflow.run_async()</span></code></a></li>
 </ul>
@@ -648,16 +649,15 @@ Reference Paper <a class="reference external" href="https://arxiv.org/pdf/2505.0
 <p>A workflow for toolcall tasks.
 Prompt construction and reward function from <a class="github reference external" href="https://github.com/NVlabs/Tool-N1">NVlabs/Tool-N1</a></p>
 <p>Only support qwen model for now. You can change the prompt construction and reward calculation by yourself for other models.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trinity.common.workflows.customized_toolcall_workflows.ToolCallWorkflow.is_async">
+<span class="sig-name descname"><span class="pre">is_async</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#trinity.common.workflows.customized_toolcall_workflows.ToolCallWorkflow.is_async" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="trinity.common.workflows.customized_toolcall_workflows.ToolCallWorkflow.reset">
 <span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="trinity.common.workflows.workflow.html#trinity.common.workflows.workflow.Task" title="trinity.common.workflows.workflow.Task"><span class="pre">Task</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trinity/common/workflows/customized_toolcall_workflows.html#ToolCallWorkflow.reset"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#trinity.common.workflows.customized_toolcall_workflows.ToolCallWorkflow.reset" title="Link to this definition">#</a></dt>
 <dd><p>Reset the workflow.</p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="trinity.common.workflows.customized_toolcall_workflows.ToolCallWorkflow.asynchronous">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">asynchronous</span></span><a class="headerlink" href="#trinity.common.workflows.customized_toolcall_workflows.ToolCallWorkflow.asynchronous" title="Link to this definition">#</a></dt>
-<dd><p>Whether the workflow runs in async mode.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -727,8 +727,8 @@ Prompt construction and reward function from <a class="github reference external
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.common.workflows.customized_toolcall_workflows.compute_score_v0"><code class="docutils literal notranslate"><span class="pre">compute_score_v0()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.common.workflows.customized_toolcall_workflows.compute_toolcall_reward"><code class="docutils literal notranslate"><span class="pre">compute_toolcall_reward()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.common.workflows.customized_toolcall_workflows.ToolCallWorkflow"><code class="docutils literal notranslate"><span class="pre">ToolCallWorkflow</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.common.workflows.customized_toolcall_workflows.ToolCallWorkflow.is_async"><code class="docutils literal notranslate"><span class="pre">ToolCallWorkflow.is_async</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.common.workflows.customized_toolcall_workflows.ToolCallWorkflow.reset"><code class="docutils literal notranslate"><span class="pre">ToolCallWorkflow.reset()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.common.workflows.customized_toolcall_workflows.ToolCallWorkflow.asynchronous"><code class="docutils literal notranslate"><span class="pre">ToolCallWorkflow.asynchronous</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.common.workflows.customized_toolcall_workflows.ToolCallWorkflow.format_prompt"><code class="docutils literal notranslate"><span class="pre">ToolCallWorkflow.format_prompt()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.common.workflows.customized_toolcall_workflows.ToolCallWorkflow.run_async"><code class="docutils literal notranslate"><span class="pre">ToolCallWorkflow.run_async()</span></code></a></li>
 </ul>

@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>trinity.common.workflows.envs.email_searcher.workflow &#8212; Trinity-RFT 0.3.1.dev0 文档</title>
+    <title>trinity.common.workflows.envs.email_searcher.workflow &#8212; Trinity-RFT 0.4.0.dev0 文档</title>
   
   
   
@@ -35,7 +35,7 @@
 <link rel="preload" as="script" href="../../../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../../../../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script src="../../../../../../_static/documentation_options.js?v=855ea54a"></script>
+    <script src="../../../../../../_static/documentation_options.js?v=09f53066"></script>
     <script src="../../../../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
@@ -144,8 +144,8 @@ window.addEventListener("load", () => mermaid.run());
       
     
     
-    <img src="../../../../../../_static/logo.svg" class="logo__image only-light" alt="Trinity-RFT 0.3.1.dev0 文档 - Home"/>
-    <script>document.write(`<img src="../../../../../../_static/logo.svg" class="logo__image only-dark" alt="Trinity-RFT 0.3.1.dev0 文档 - Home"/>`);</script>
+    <img src="../../../../../../_static/logo.svg" class="logo__image only-light" alt="Trinity-RFT 0.4.0.dev0 文档 - Home"/>
+    <script>document.write(`<img src="../../../../../../_static/logo.svg" class="logo__image only-dark" alt="Trinity-RFT 0.4.0.dev0 文档 - Home"/>`);</script>
   
   
 </a></div>
@@ -371,6 +371,7 @@ window.addEventListener("load", () => mermaid.run());
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../../../../../../build_api/trinity.common.workflows.html">trinity.common.workflows package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="../../../../../../build_api/trinity.common.workflows.agentscope.html">trinity.common.workflows.agentscope package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../../../build_api/trinity.common.workflows.agentscope_workflow.html">trinity.common.workflows.agentscope_workflow module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../../../../build_api/trinity.common.workflows.customized_math_workflows.html">trinity.common.workflows.customized_math_workflows module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../../../../build_api/trinity.common.workflows.customized_toolcall_workflows.html">trinity.common.workflows.customized_toolcall_workflows module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../../../../build_api/trinity.common.workflows.eval_workflow.html">trinity.common.workflows.eval_workflow module</a></li>
@@ -575,6 +576,9 @@ document.write(`
 <span class="sd">    Multi-turn Email Search workflow (ReAct-style tool use).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
+    <span class="n">can_reset</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">is_async</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+
 <div class="viewcode-block" id="EmailSearchWorkflow.__init__">
 <a class="viewcode-back" href="../../../../../../build_api/trinity.common.workflows.html#trinity.common.workflows.EmailSearchWorkflow.__init__">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
@@ -595,18 +599,6 @@ document.write(`
 
         <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">(</span><span class="n">task</span><span class="p">)</span></div>
 
-
-    <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">repeatable</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-        <span class="k">return</span> <span class="kc">False</span>
-
-    <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">resettable</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="kc">True</span>
-
-    <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">asynchronous</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="kc">True</span>
 
 <div class="viewcode-block" id="EmailSearchWorkflow.reset">
 <a class="viewcode-back" href="../../../../../../build_api/trinity.common.workflows.html#trinity.common.workflows.EmailSearchWorkflow.reset">[文档]</a>
@@ -640,8 +632,8 @@ document.write(`
             <span class="n">openai_client</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">openai_client</span><span class="p">,</span>
             <span class="n">system_prompt</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">system_prompt</span><span class="p">,</span>
             <span class="n">generate_kwargs</span><span class="o">=</span><span class="p">{</span>
-                <span class="s2">&quot;temperature&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">rollout_args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;temperature&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span>
-                <span class="s2">&quot;max_tokens&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">rollout_args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;max_tokens&quot;</span><span class="p">,</span> <span class="mi">4096</span><span class="p">),</span>
+                <span class="s2">&quot;temperature&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">task</span><span class="o">.</span><span class="n">rollout_args</span><span class="o">.</span><span class="n">temperature</span><span class="p">,</span>
+                <span class="s2">&quot;max_tokens&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">task</span><span class="o">.</span><span class="n">rollout_args</span><span class="o">.</span><span class="n">max_tokens</span> <span class="ow">or</span> <span class="mi">4096</span><span class="p">,</span>
             <span class="p">},</span>
             <span class="n">response_structure</span><span class="o">=</span><span class="n">AnswerModel</span><span class="p">,</span>
         <span class="p">)</span></div>

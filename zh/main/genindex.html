@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>索引 &#8212; Trinity-RFT 0.3.1.dev0 文档</title>
+    <title>索引 &#8212; Trinity-RFT 0.4.0.dev0 文档</title>
   
   
   
@@ -35,7 +35,7 @@
 <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script src="_static/documentation_options.js?v=855ea54a"></script>
+    <script src="_static/documentation_options.js?v=09f53066"></script>
     <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
@@ -144,8 +144,8 @@ window.addEventListener("load", () => mermaid.run());
       
     
     
-    <img src="_static/logo.svg" class="logo__image only-light" alt="Trinity-RFT 0.3.1.dev0 文档 - Home"/>
-    <script>document.write(`<img src="_static/logo.svg" class="logo__image only-dark" alt="Trinity-RFT 0.3.1.dev0 文档 - Home"/>`);</script>
+    <img src="_static/logo.svg" class="logo__image only-light" alt="Trinity-RFT 0.4.0.dev0 文档 - Home"/>
+    <script>document.write(`<img src="_static/logo.svg" class="logo__image only-dark" alt="Trinity-RFT 0.4.0.dev0 文档 - Home"/>`);</script>
   
   
 </a></div>
@@ -371,6 +371,7 @@ window.addEventListener("load", () => mermaid.run());
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="build_api/trinity.common.workflows.html">trinity.common.workflows package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="build_api/trinity.common.workflows.agentscope.html">trinity.common.workflows.agentscope package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="build_api/trinity.common.workflows.agentscope_workflow.html">trinity.common.workflows.agentscope_workflow module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="build_api/trinity.common.workflows.customized_math_workflows.html">trinity.common.workflows.customized_math_workflows module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="build_api/trinity.common.workflows.customized_toolcall_workflows.html">trinity.common.workflows.customized_toolcall_workflows module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="build_api/trinity.common.workflows.eval_workflow.html">trinity.common.workflows.eval_workflow module</a></li>
@@ -806,6 +807,8 @@ document.write(`
 </li>
       <li><a href="build_api/trinity.common.config.html#trinity.common.config.OperatorConfig.__init__">__init__() （trinity.common.config.OperatorConfig 方法）</a>
 </li>
+      <li><a href="build_api/trinity.common.config.html#trinity.common.config.OptimizerConfig.__init__">__init__() （trinity.common.config.OptimizerConfig 方法）</a>
+</li>
       <li><a href="build_api/trinity.common.config.html#trinity.common.config.ServiceConfig.__init__">__init__() （trinity.common.config.ServiceConfig 方法）</a>
 </li>
       <li><a href="build_api/trinity.common.config.html#trinity.common.config.StageConfig.__init__">__init__() （trinity.common.config.StageConfig 方法）</a>
@@ -914,6 +917,8 @@ document.write(`
 </li>
       <li><a href="build_api/trinity.common.workflows.agentscope.react.templates.html#trinity.common.workflows.agentscope.react.templates.Template.__init__">__init__() （trinity.common.workflows.agentscope.react.templates.Template 方法）</a>
 </li>
+      <li><a href="build_api/trinity.common.workflows.agentscope_workflow.html#trinity.common.workflows.agentscope_workflow.AgentScopeWorkflowAdapter.__init__">__init__() （trinity.common.workflows.agentscope_workflow.AgentScopeWorkflowAdapter 方法）</a>
+</li>
       <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.AgentScopeReactMathWorkflow.__init__">__init__() （trinity.common.workflows.AgentScopeReactMathWorkflow 方法）</a>
 </li>
       <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.AgentScopeReActWorkflow.__init__">__init__() （trinity.common.workflows.AgentScopeReActWorkflow 方法）</a>
@@ -921,6 +926,8 @@ document.write(`
       <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.AgentScopeV0ReactMathWorkflow.__init__">__init__() （trinity.common.workflows.AgentScopeV0ReactMathWorkflow 方法）</a>
 </li>
       <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.AgentScopeV1ReactSearchWorkflow.__init__">__init__() （trinity.common.workflows.AgentScopeV1ReactSearchWorkflow 方法）</a>
+</li>
+      <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.AgentScopeWorkflowAdapter.__init__">__init__() （trinity.common.workflows.AgentScopeWorkflowAdapter 方法）</a>
 </li>
       <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.AlfworldWorkflow.__init__">__init__() （trinity.common.workflows.AlfworldWorkflow 方法）</a>
 </li>
@@ -1086,8 +1093,6 @@ document.write(`
 </li>
       <li><a href="build_api/trinity.common.experience.html#trinity.common.experience.Experience.action_mask">action_mask（trinity.common.experience.Experience 属性）</a>
 </li>
-      <li><a href="build_api/trinity.common.config.html#trinity.common.config.TrainerConfig.actor_grad_clip">actor_grad_clip（trinity.common.config.TrainerConfig 属性）</a>
-</li>
       <li><a href="build_api/trinity.common.verl_config.html#trinity.common.verl_config.veRLConfig.actor_rollout_ref">actor_rollout_ref（trinity.common.verl_config.veRLConfig 属性）</a>
 </li>
       <li><a href="build_api/trinity.common.verl_config.html#trinity.common.verl_config.ActorModel">ActorModel（trinity.common.verl_config 中的类）</a>
@@ -1132,6 +1137,10 @@ document.write(`
 </li>
       <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.AgentScopeV1ReactSearchWorkflow">AgentScopeV1ReactSearchWorkflow（trinity.common.workflows 中的类）</a>
 </li>
+      <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.AgentScopeWorkflowAdapter">AgentScopeWorkflowAdapter（trinity.common.workflows 中的类）</a>
+</li>
+      <li><a href="build_api/trinity.common.workflows.agentscope_workflow.html#trinity.common.workflows.agentscope_workflow.AgentScopeWorkflowAdapter">AgentScopeWorkflowAdapter（trinity.common.workflows.agentscope_workflow 中的类）</a>
+</li>
       <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.AlfworldWorkflow">AlfworldWorkflow（trinity.common.workflows 中的类）</a>
 </li>
       <li><a href="build_api/trinity.common.config.html#trinity.common.config.AlgorithmConfig.algorithm_type">algorithm_type（trinity.common.config.AlgorithmConfig 属性）</a>
@@ -1140,6 +1149,8 @@ document.write(`
 </li>
       <li><a href="build_api/trinity.algorithm.html#trinity.algorithm.AlgorithmType">AlgorithmType（trinity.algorithm 中的类）</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="build_api/trinity.algorithm.algorithm.html#trinity.algorithm.algorithm.AlgorithmType">AlgorithmType（trinity.algorithm.algorithm 中的类）</a>
 </li>
       <li><a href="build_api/trinity.common.config.html#trinity.common.config.Config.algorithm">algorithm（trinity.common.config.Config 属性）</a>
@@ -1166,8 +1177,6 @@ document.write(`
 </li>
       <li><a href="build_api/trinity.algorithm.advantage_fn.html#trinity.algorithm.advantage_fn.ASYMREAdvantageFn">ASYMREAdvantageFn（trinity.algorithm.advantage_fn 中的类）</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="build_api/trinity.algorithm.advantage_fn.asymre_advantage.html#trinity.algorithm.advantage_fn.asymre_advantage.ASYMREAdvantageFn">ASYMREAdvantageFn（trinity.algorithm.advantage_fn.asymre_advantage 中的类）</a>
 </li>
       <li><a href="build_api/trinity.algorithm.algorithm.html#trinity.algorithm.algorithm.AsymREAlgorithm">AsymREAlgorithm（trinity.algorithm.algorithm 中的类）</a>
@@ -1176,57 +1185,7 @@ document.write(`
 </li>
       <li><a href="build_api/trinity.common.verl_config.html#trinity.common.verl_config.Checkpoint.async_save">async_save（trinity.common.verl_config.Checkpoint 属性）</a>
 </li>
-      <li><a href="build_api/trinity.common.workflows.agentscope.react.react_workflow.html#trinity.common.workflows.agentscope.react.react_workflow.AgentScopeReActWorkflow.asynchronous">asynchronous（trinity.common.workflows.agentscope.react.react_workflow.AgentScopeReActWorkflow 属性）</a>
-</li>
-      <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.AgentScopeReactMathWorkflow.asynchronous">asynchronous（trinity.common.workflows.AgentScopeReactMathWorkflow 属性）</a>
-</li>
-      <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.AgentScopeReActWorkflow.asynchronous">asynchronous（trinity.common.workflows.AgentScopeReActWorkflow 属性）</a>
-</li>
-      <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.AgentScopeV1ReactSearchWorkflow.asynchronous">asynchronous（trinity.common.workflows.AgentScopeV1ReactSearchWorkflow 属性）</a>
-</li>
-      <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.AlfworldWorkflow.asynchronous">asynchronous（trinity.common.workflows.AlfworldWorkflow 属性）</a>
-</li>
-      <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.AsyncMathBoxedWorkflow.asynchronous">asynchronous（trinity.common.workflows.AsyncMathBoxedWorkflow 属性）</a>
-</li>
-      <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.AsyncMathEvalWorkflow.asynchronous">asynchronous（trinity.common.workflows.AsyncMathEvalWorkflow 属性）</a>
-</li>
-      <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.AsyncMathRMWorkflow.asynchronous">asynchronous（trinity.common.workflows.AsyncMathRMWorkflow 属性）</a>
-</li>
-      <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.AsyncMathRULERWorkflow.asynchronous">asynchronous（trinity.common.workflows.AsyncMathRULERWorkflow 属性）</a>
-</li>
-      <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.AsyncSimpleMMWorkflow.asynchronous">asynchronous（trinity.common.workflows.AsyncSimpleMMWorkflow 属性）</a>
-</li>
-      <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.AsyncSimpleWorkflow.asynchronous">asynchronous（trinity.common.workflows.AsyncSimpleWorkflow 属性）</a>
-</li>
-      <li><a href="build_api/trinity.common.workflows.customized_math_workflows.html#trinity.common.workflows.customized_math_workflows.AsyncMathBoxedWorkflow.asynchronous">asynchronous（trinity.common.workflows.customized_math_workflows.AsyncMathBoxedWorkflow 属性）</a>
-</li>
-      <li><a href="build_api/trinity.common.workflows.customized_toolcall_workflows.html#trinity.common.workflows.customized_toolcall_workflows.ToolCallWorkflow.asynchronous">asynchronous（trinity.common.workflows.customized_toolcall_workflows.ToolCallWorkflow 属性）</a>
-</li>
-      <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.EmailSearchWorkflow.asynchronous">asynchronous（trinity.common.workflows.EmailSearchWorkflow 属性）</a>
-</li>
-      <li><a href="build_api/trinity.common.workflows.eval_workflow.html#trinity.common.workflows.eval_workflow.AsyncMathEvalWorkflow.asynchronous">asynchronous（trinity.common.workflows.eval_workflow.AsyncMathEvalWorkflow 属性）</a>
-</li>
-      <li><a href="build_api/trinity.common.workflows.math_rm_workflow.html#trinity.common.workflows.math_rm_workflow.AsyncMathRMWorkflow.asynchronous">asynchronous（trinity.common.workflows.math_rm_workflow.AsyncMathRMWorkflow 属性）</a>
-</li>
-      <li><a href="build_api/trinity.common.workflows.math_ruler_workflow.html#trinity.common.workflows.math_ruler_workflow.AsyncMathRULERWorkflow.asynchronous">asynchronous（trinity.common.workflows.math_ruler_workflow.AsyncMathRULERWorkflow 属性）</a>
-</li>
-      <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.RAFTAlfworldWorkflow.asynchronous">asynchronous（trinity.common.workflows.RAFTAlfworldWorkflow 属性）</a>
-</li>
-      <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.RAFTReflectAlfworldWorkflow.asynchronous">asynchronous（trinity.common.workflows.RAFTReflectAlfworldWorkflow 属性）</a>
-</li>
-      <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.SciWorldWorkflow.asynchronous">asynchronous（trinity.common.workflows.SciWorldWorkflow 属性）</a>
-</li>
-      <li><a href="build_api/trinity.common.workflows.simple_mm_workflow.html#trinity.common.workflows.simple_mm_workflow.AsyncSimpleMMWorkflow.asynchronous">asynchronous（trinity.common.workflows.simple_mm_workflow.AsyncSimpleMMWorkflow 属性）</a>
-</li>
-      <li><a href="build_api/trinity.common.workflows.step_wise_workflow.html#trinity.common.workflows.step_wise_workflow.AsyncRewardPropagationWorkflow.asynchronous">asynchronous（trinity.common.workflows.step_wise_workflow.AsyncRewardPropagationWorkflow 属性）</a>
-</li>
-      <li><a href="build_api/trinity.common.workflows.step_wise_workflow.html#trinity.common.workflows.step_wise_workflow.AsyncStepWiseRewardWorkflow.asynchronous">asynchronous（trinity.common.workflows.step_wise_workflow.AsyncStepWiseRewardWorkflow 属性）</a>
-</li>
-      <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.ToolCallWorkflow.asynchronous">asynchronous（trinity.common.workflows.ToolCallWorkflow 属性）</a>
-</li>
       <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.Workflow.asynchronous">asynchronous（trinity.common.workflows.Workflow 属性）</a>
-</li>
-      <li><a href="build_api/trinity.common.workflows.workflow.html#trinity.common.workflows.workflow.AsyncSimpleWorkflow.asynchronous">asynchronous（trinity.common.workflows.workflow.AsyncSimpleWorkflow 属性）</a>
 </li>
       <li><a href="build_api/trinity.common.workflows.workflow.html#trinity.common.workflows.workflow.Workflow.asynchronous">asynchronous（trinity.common.workflows.workflow.Workflow 属性）</a>
 </li>
@@ -1308,6 +1267,8 @@ document.write(`
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="build_api/trinity.common.config.html#trinity.common.config.OptimizerConfig.betas">betas（trinity.common.config.OptimizerConfig 属性）</a>
+</li>
       <li><a href="build_api/trinity.common.verl_config.html#trinity.common.verl_config.Optim.betas">betas（trinity.common.verl_config.Optim 属性）</a>
 </li>
       <li><a href="build_api/trinity.algorithm.advantage_fn.multi_step_grpo_advantage.html#trinity.algorithm.advantage_fn.multi_step_grpo_advantage.StepWiseGRPOAdvantageFn.broadcast_advantages">broadcast_advantages() （trinity.algorithm.advantage_fn.multi_step_grpo_advantage.StepWiseGRPOAdvantageFn 方法）</a>
@@ -1327,8 +1288,6 @@ document.write(`
       <li><a href="build_api/trinity.common.config.html#trinity.common.config.Config.buffer">buffer（trinity.common.config.Config 属性）</a>
 </li>
       <li><a href="build_api/trinity.common.config.html#trinity.common.config.StageConfig.buffer">buffer（trinity.common.config.StageConfig 属性）</a>
-</li>
-      <li><a href="build_api/trinity.common.verl_config.html#trinity.common.verl_config.veRLConfig.buffer">buffer（trinity.common.verl_config.veRLConfig 属性）</a>
 </li>
       <li><a href="build_api/trinity.common.models.mm_utils.html#trinity.common.models.mm_utils.build_multi_modal_inputs">build_multi_modal_inputs()（在 trinity.common.models.mm_utils 模块中）</a>
 </li>
@@ -1416,6 +1375,8 @@ document.write(`
 </li>
       <li><a href="build_api/trinity.algorithm.algorithm.html#trinity.algorithm.algorithm.MIXCHORDAlgorithm.can_balance_batch">can_balance_batch（trinity.algorithm.algorithm.MIXCHORDAlgorithm 属性）</a>
 </li>
+      <li><a href="build_api/trinity.algorithm.algorithm.html#trinity.algorithm.algorithm.MultiStepGRPOAlgorithm.can_balance_batch">can_balance_batch（trinity.algorithm.algorithm.MultiStepGRPOAlgorithm 属性）</a>
+</li>
       <li><a href="build_api/trinity.algorithm.algorithm.html#trinity.algorithm.algorithm.OPMDAlgorithm.can_balance_batch">can_balance_batch（trinity.algorithm.algorithm.OPMDAlgorithm 属性）</a>
 </li>
       <li><a href="build_api/trinity.algorithm.algorithm.html#trinity.algorithm.algorithm.PPOAlgorithm.can_balance_batch">can_balance_batch（trinity.algorithm.algorithm.PPOAlgorithm 属性）</a>
@@ -1431,6 +1392,38 @@ document.write(`
       <li><a href="build_api/trinity.algorithm.algorithm.html#trinity.algorithm.algorithm.TOPRAlgorithm.can_balance_batch">can_balance_batch（trinity.algorithm.algorithm.TOPRAlgorithm 属性）</a>
 </li>
       <li><a href="build_api/trinity.algorithm.html#trinity.algorithm.AlgorithmType.can_balance_batch">can_balance_batch（trinity.algorithm.AlgorithmType 属性）</a>
+</li>
+      <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.RAFTAlfworldWorkflow.can_repeat">can_repeat（trinity.common.workflows.RAFTAlfworldWorkflow 属性）</a>
+</li>
+      <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.SimpleWorkflow.can_repeat">can_repeat（trinity.common.workflows.SimpleWorkflow 属性）</a>
+</li>
+      <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.Workflow.can_repeat">can_repeat（trinity.common.workflows.Workflow 属性）</a>
+</li>
+      <li><a href="build_api/trinity.common.workflows.workflow.html#trinity.common.workflows.workflow.MultiTurnWorkflow.can_repeat">can_repeat（trinity.common.workflows.workflow.MultiTurnWorkflow 属性）</a>
+</li>
+      <li><a href="build_api/trinity.common.workflows.workflow.html#trinity.common.workflows.workflow.SimpleWorkflow.can_repeat">can_repeat（trinity.common.workflows.workflow.SimpleWorkflow 属性）</a>
+</li>
+      <li><a href="build_api/trinity.common.workflows.workflow.html#trinity.common.workflows.workflow.Workflow.can_repeat">can_repeat（trinity.common.workflows.workflow.Workflow 属性）</a>
+</li>
+      <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.AgentScopeReactMathWorkflow.can_reset">can_reset（trinity.common.workflows.AgentScopeReactMathWorkflow 属性）</a>
+</li>
+      <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.AgentScopeV0ReactMathWorkflow.can_reset">can_reset（trinity.common.workflows.AgentScopeV0ReactMathWorkflow 属性）</a>
+</li>
+      <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.AgentScopeV1ReactSearchWorkflow.can_reset">can_reset（trinity.common.workflows.AgentScopeV1ReactSearchWorkflow 属性）</a>
+</li>
+      <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.EmailSearchWorkflow.can_reset">can_reset（trinity.common.workflows.EmailSearchWorkflow 属性）</a>
+</li>
+      <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.RAFTAlfworldWorkflow.can_reset">can_reset（trinity.common.workflows.RAFTAlfworldWorkflow 属性）</a>
+</li>
+      <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.SimpleWorkflow.can_reset">can_reset（trinity.common.workflows.SimpleWorkflow 属性）</a>
+</li>
+      <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.WebShopWorkflow.can_reset">can_reset（trinity.common.workflows.WebShopWorkflow 属性）</a>
+</li>
+      <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.Workflow.can_reset">can_reset（trinity.common.workflows.Workflow 属性）</a>
+</li>
+      <li><a href="build_api/trinity.common.workflows.workflow.html#trinity.common.workflows.workflow.SimpleWorkflow.can_reset">can_reset（trinity.common.workflows.workflow.SimpleWorkflow 属性）</a>
+</li>
+      <li><a href="build_api/trinity.common.workflows.workflow.html#trinity.common.workflows.workflow.Workflow.can_reset">can_reset（trinity.common.workflows.workflow.Workflow 属性）</a>
 </li>
       <li><a href="build_api/trinity.buffer.storage.queue.html#trinity.buffer.storage.queue.AsyncPriorityQueue.capacity">capacity（trinity.buffer.storage.queue.AsyncPriorityQueue 属性）</a>
 </li>
@@ -1455,6 +1448,8 @@ document.write(`
       <li><a href="build_api/trinity.common.models.vllm_model.html#trinity.common.models.vllm_model.vLLMRolloutModel.chat_mm">chat_mm() （trinity.common.models.vllm_model.vLLMRolloutModel 方法）</a>
 </li>
       <li><a href="build_api/trinity.common.models.model.html#trinity.common.models.model.ModelWrapper.chat_mm_async">chat_mm_async() （trinity.common.models.model.ModelWrapper 方法）</a>
+</li>
+      <li><a href="build_api/trinity.common.workflows.agentscope_workflow.html#trinity.common.workflows.agentscope_workflow.AgentScopeWorkflowAdapter.chat_model">chat_model（trinity.common.workflows.agentscope_workflow.AgentScopeWorkflowAdapter 属性）</a>
 </li>
       <li><a href="build_api/trinity.common.config.html#trinity.common.config.FormatConfig.chat_template">chat_template（trinity.common.config.FormatConfig 属性）</a>
 </li>
@@ -1518,6 +1513,8 @@ document.write(`
 </li>
       <li><a href="build_api/trinity.common.experience.html#trinity.common.experience.Experience.chosen">chosen（trinity.common.experience.Experience 属性）</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="build_api/trinity.algorithm.algorithm.html#trinity.algorithm.algorithm.CISPOAlgorithm">CISPOAlgorithm（trinity.algorithm.algorithm 中的类）</a>
 </li>
       <li><a href="build_api/trinity.algorithm.policy_loss_fn.html#trinity.algorithm.policy_loss_fn.CISPOPolicyLossFn">CISPOPolicyLossFn（trinity.algorithm.policy_loss_fn 中的类）</a>
@@ -1534,8 +1531,6 @@ document.write(`
 </li>
       <li><a href="build_api/trinity.common.verl_config.html#trinity.common.verl_config.Actor.clip_ratio_low">clip_ratio_low（trinity.common.verl_config.Actor 属性）</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="build_api/trinity.common.verl_config.html#trinity.common.verl_config.Actor.clip_ratio">clip_ratio（trinity.common.verl_config.Actor 属性）</a>
 </li>
       <li><a href="build_api/trinity.common.verl_config.html#trinity.common.verl_config.Critic.cliprange_value">cliprange_value（trinity.common.verl_config.Critic 属性）</a>
@@ -1598,6 +1593,8 @@ document.write(`
 </li>
       <li><a href="build_api/trinity.algorithm.algorithm.html#trinity.algorithm.algorithm.MIXCHORDAlgorithm.compute_advantage_in_trainer">compute_advantage_in_trainer（trinity.algorithm.algorithm.MIXCHORDAlgorithm 属性）</a>
 </li>
+      <li><a href="build_api/trinity.algorithm.algorithm.html#trinity.algorithm.algorithm.MultiStepGRPOAlgorithm.compute_advantage_in_trainer">compute_advantage_in_trainer（trinity.algorithm.algorithm.MultiStepGRPOAlgorithm 属性）</a>
+</li>
       <li><a href="build_api/trinity.algorithm.algorithm.html#trinity.algorithm.algorithm.OPMDAlgorithm.compute_advantage_in_trainer">compute_advantage_in_trainer（trinity.algorithm.algorithm.OPMDAlgorithm 属性）</a>
 </li>
       <li><a href="build_api/trinity.algorithm.algorithm.html#trinity.algorithm.algorithm.PPOAlgorithm.compute_advantage_in_trainer">compute_advantage_in_trainer（trinity.algorithm.algorithm.PPOAlgorithm 属性）</a>
@@ -1658,7 +1655,11 @@ document.write(`
 </li>
       <li><a href="build_api/trinity.common.workflows.agentscope.react.react_workflow.html#trinity.common.workflows.agentscope.react.react_workflow.AgentScopeReActWorkflow.construct_experiences">construct_experiences() （trinity.common.workflows.agentscope.react.react_workflow.AgentScopeReActWorkflow 方法）</a>
 </li>
+      <li><a href="build_api/trinity.common.workflows.agentscope_workflow.html#trinity.common.workflows.agentscope_workflow.AgentScopeWorkflowAdapter.construct_experiences">construct_experiences() （trinity.common.workflows.agentscope_workflow.AgentScopeWorkflowAdapter 方法）</a>
+</li>
       <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.AgentScopeReActWorkflow.construct_experiences">construct_experiences() （trinity.common.workflows.AgentScopeReActWorkflow 方法）</a>
+</li>
+      <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.AgentScopeWorkflowAdapter.construct_experiences">construct_experiences() （trinity.common.workflows.AgentScopeWorkflowAdapter 方法）</a>
 </li>
       <li><a href="build_api/trinity.common.workflows.customized_toolcall_workflows.html#trinity.common.workflows.customized_toolcall_workflows.construct_prompt">construct_prompt()（在 trinity.common.workflows.customized_toolcall_workflows 模块中）</a>
 </li>
@@ -1876,10 +1877,10 @@ document.write(`
 </li>
       <li><a href="build_api/trinity.algorithm.policy_loss_fn.ppo_policy_loss.html#trinity.algorithm.policy_loss_fn.ppo_policy_loss.PPOPolicyLossFn.default_args">default_args()（trinity.algorithm.policy_loss_fn.ppo_policy_loss.PPOPolicyLossFn 类方法）</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="build_api/trinity.algorithm.policy_loss_fn.html#trinity.algorithm.policy_loss_fn.PPOPolicyLossFn.default_args">default_args()（trinity.algorithm.policy_loss_fn.PPOPolicyLossFn 类方法）</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="build_api/trinity.algorithm.policy_loss_fn.rec_policy_loss.html#trinity.algorithm.policy_loss_fn.rec_policy_loss.RECPolicyLossFn.default_args">default_args()（trinity.algorithm.policy_loss_fn.rec_policy_loss.RECPolicyLossFn 类方法）</a>
 </li>
       <li><a href="build_api/trinity.algorithm.policy_loss_fn.html#trinity.algorithm.policy_loss_fn.RECPolicyLossFn.default_args">default_args()（trinity.algorithm.policy_loss_fn.RECPolicyLossFn 类方法）</a>
@@ -1935,6 +1936,8 @@ document.write(`
       <li><a href="build_api/trinity.algorithm.algorithm.html#trinity.algorithm.algorithm.MIXAlgorithm.default_config">default_config()（trinity.algorithm.algorithm.MIXAlgorithm 类方法）</a>
 </li>
       <li><a href="build_api/trinity.algorithm.algorithm.html#trinity.algorithm.algorithm.MIXCHORDAlgorithm.default_config">default_config()（trinity.algorithm.algorithm.MIXCHORDAlgorithm 类方法）</a>
+</li>
+      <li><a href="build_api/trinity.algorithm.algorithm.html#trinity.algorithm.algorithm.MultiStepGRPOAlgorithm.default_config">default_config()（trinity.algorithm.algorithm.MultiStepGRPOAlgorithm 类方法）</a>
 </li>
       <li><a href="build_api/trinity.algorithm.algorithm.html#trinity.algorithm.algorithm.OPMDAlgorithm.default_config">default_config()（trinity.algorithm.algorithm.OPMDAlgorithm 类方法）</a>
 </li>
@@ -2450,10 +2453,10 @@ document.write(`
 </li>
       <li><a href="build_api/trinity.common.models.model.html#trinity.common.models.model.InferenceModel.get_model_path">get_model_path() （trinity.common.models.model.InferenceModel 方法）</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="build_api/trinity.common.models.vllm_model.html#trinity.common.models.vllm_model.vLLMRolloutModel.get_model_path">get_model_path() （trinity.common.models.vllm_model.vLLMRolloutModel 方法）</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.AlfworldWorkflow.get_model_response">get_model_response() （trinity.common.workflows.AlfworldWorkflow 方法）</a>
 </li>
       <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.SciWorldWorkflow.get_model_response">get_model_response() （trinity.common.workflows.SciWorldWorkflow 方法）</a>
@@ -2525,6 +2528,8 @@ document.write(`
       <li><a href="build_api/trinity.common.config.html#trinity.common.config.InferenceModelConfig.gpu_memory_utilization">gpu_memory_utilization（trinity.common.config.InferenceModelConfig 属性）</a>
 </li>
       <li><a href="build_api/trinity.common.config.html#trinity.common.config.ClusterConfig.gpu_per_node">gpu_per_node（trinity.common.config.ClusterConfig 属性）</a>
+</li>
+      <li><a href="build_api/trinity.common.config.html#trinity.common.config.TrainerConfig.grad_clip">grad_clip（trinity.common.config.TrainerConfig 属性）</a>
 </li>
       <li><a href="build_api/trinity.common.verl_config.html#trinity.common.verl_config.Actor.grad_clip">grad_clip（trinity.common.verl_config.Actor 属性）</a>
 </li>
@@ -2650,8 +2655,6 @@ document.write(`
 </li>
       <li><a href="build_api/trinity.explorer.explorer_client.html#trinity.explorer.explorer_client.ExplorerClient.init_session">init_session() （trinity.explorer.explorer_client.ExplorerClient 方法）</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="build_api/trinity.trainer.verl_trainer.html#trinity.trainer.verl_trainer.VerlPPOTrainerWrapper.init_workers">init_workers() （trinity.trainer.verl_trainer.VerlPPOTrainerWrapper 方法）</a>
 </li>
       <li><a href="build_api/trinity.service.data_juicer.client.html#trinity.service.data_juicer.client.DataJuicerClient.initialize">initialize() （trinity.service.data_juicer.client.DataJuicerClient 方法）</a>
@@ -2673,6 +2676,66 @@ document.write(`
       <li><a href="build_api/trinity.trainer.html#trinity.trainer.Trainer.is_alive">is_alive() （trinity.trainer.Trainer 方法）</a>
 </li>
       <li><a href="build_api/trinity.trainer.trainer.html#trinity.trainer.trainer.Trainer.is_alive">is_alive() （trinity.trainer.trainer.Trainer 方法）</a>
+</li>
+      <li><a href="build_api/trinity.common.workflows.agentscope.react.react_workflow.html#trinity.common.workflows.agentscope.react.react_workflow.AgentScopeReActWorkflow.is_async">is_async（trinity.common.workflows.agentscope.react.react_workflow.AgentScopeReActWorkflow 属性）</a>
+</li>
+      <li><a href="build_api/trinity.common.workflows.agentscope_workflow.html#trinity.common.workflows.agentscope_workflow.AgentScopeWorkflowAdapter.is_async">is_async（trinity.common.workflows.agentscope_workflow.AgentScopeWorkflowAdapter 属性）</a>
+</li>
+      <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.AgentScopeReactMathWorkflow.is_async">is_async（trinity.common.workflows.AgentScopeReactMathWorkflow 属性）</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.AgentScopeReActWorkflow.is_async">is_async（trinity.common.workflows.AgentScopeReActWorkflow 属性）</a>
+</li>
+      <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.AgentScopeV1ReactSearchWorkflow.is_async">is_async（trinity.common.workflows.AgentScopeV1ReactSearchWorkflow 属性）</a>
+</li>
+      <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.AgentScopeWorkflowAdapter.is_async">is_async（trinity.common.workflows.AgentScopeWorkflowAdapter 属性）</a>
+</li>
+      <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.AlfworldWorkflow.is_async">is_async（trinity.common.workflows.AlfworldWorkflow 属性）</a>
+</li>
+      <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.AsyncMathBoxedWorkflow.is_async">is_async（trinity.common.workflows.AsyncMathBoxedWorkflow 属性）</a>
+</li>
+      <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.AsyncMathEvalWorkflow.is_async">is_async（trinity.common.workflows.AsyncMathEvalWorkflow 属性）</a>
+</li>
+      <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.AsyncMathRMWorkflow.is_async">is_async（trinity.common.workflows.AsyncMathRMWorkflow 属性）</a>
+</li>
+      <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.AsyncMathRULERWorkflow.is_async">is_async（trinity.common.workflows.AsyncMathRULERWorkflow 属性）</a>
+</li>
+      <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.AsyncSimpleMMWorkflow.is_async">is_async（trinity.common.workflows.AsyncSimpleMMWorkflow 属性）</a>
+</li>
+      <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.AsyncSimpleWorkflow.is_async">is_async（trinity.common.workflows.AsyncSimpleWorkflow 属性）</a>
+</li>
+      <li><a href="build_api/trinity.common.workflows.customized_math_workflows.html#trinity.common.workflows.customized_math_workflows.AsyncMathBoxedWorkflow.is_async">is_async（trinity.common.workflows.customized_math_workflows.AsyncMathBoxedWorkflow 属性）</a>
+</li>
+      <li><a href="build_api/trinity.common.workflows.customized_toolcall_workflows.html#trinity.common.workflows.customized_toolcall_workflows.ToolCallWorkflow.is_async">is_async（trinity.common.workflows.customized_toolcall_workflows.ToolCallWorkflow 属性）</a>
+</li>
+      <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.EmailSearchWorkflow.is_async">is_async（trinity.common.workflows.EmailSearchWorkflow 属性）</a>
+</li>
+      <li><a href="build_api/trinity.common.workflows.eval_workflow.html#trinity.common.workflows.eval_workflow.AsyncMathEvalWorkflow.is_async">is_async（trinity.common.workflows.eval_workflow.AsyncMathEvalWorkflow 属性）</a>
+</li>
+      <li><a href="build_api/trinity.common.workflows.math_rm_workflow.html#trinity.common.workflows.math_rm_workflow.AsyncMathRMWorkflow.is_async">is_async（trinity.common.workflows.math_rm_workflow.AsyncMathRMWorkflow 属性）</a>
+</li>
+      <li><a href="build_api/trinity.common.workflows.math_ruler_workflow.html#trinity.common.workflows.math_ruler_workflow.AsyncMathRULERWorkflow.is_async">is_async（trinity.common.workflows.math_ruler_workflow.AsyncMathRULERWorkflow 属性）</a>
+</li>
+      <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.RAFTAlfworldWorkflow.is_async">is_async（trinity.common.workflows.RAFTAlfworldWorkflow 属性）</a>
+</li>
+      <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.SciWorldWorkflow.is_async">is_async（trinity.common.workflows.SciWorldWorkflow 属性）</a>
+</li>
+      <li><a href="build_api/trinity.common.workflows.simple_mm_workflow.html#trinity.common.workflows.simple_mm_workflow.AsyncSimpleMMWorkflow.is_async">is_async（trinity.common.workflows.simple_mm_workflow.AsyncSimpleMMWorkflow 属性）</a>
+</li>
+      <li><a href="build_api/trinity.common.workflows.step_wise_workflow.html#trinity.common.workflows.step_wise_workflow.AsyncRewardPropagationWorkflow.is_async">is_async（trinity.common.workflows.step_wise_workflow.AsyncRewardPropagationWorkflow 属性）</a>
+</li>
+      <li><a href="build_api/trinity.common.workflows.step_wise_workflow.html#trinity.common.workflows.step_wise_workflow.AsyncStepWiseRewardWorkflow.is_async">is_async（trinity.common.workflows.step_wise_workflow.AsyncStepWiseRewardWorkflow 属性）</a>
+</li>
+      <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.ToolCallWorkflow.is_async">is_async（trinity.common.workflows.ToolCallWorkflow 属性）</a>
+</li>
+      <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.WebShopWorkflow.is_async">is_async（trinity.common.workflows.WebShopWorkflow 属性）</a>
+</li>
+      <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.Workflow.is_async">is_async（trinity.common.workflows.Workflow 属性）</a>
+</li>
+      <li><a href="build_api/trinity.common.workflows.workflow.html#trinity.common.workflows.workflow.AsyncSimpleWorkflow.is_async">is_async（trinity.common.workflows.workflow.AsyncSimpleWorkflow 属性）</a>
+</li>
+      <li><a href="build_api/trinity.common.workflows.workflow.html#trinity.common.workflows.workflow.Workflow.is_async">is_async（trinity.common.workflows.workflow.Workflow 属性）</a>
 </li>
       <li><a href="build_api/trinity.buffer.storage.queue.html#trinity.buffer.storage.queue.is_database_url">is_database_url()（在 trinity.buffer.storage.queue 模块中）</a>
 </li>
@@ -2828,12 +2891,12 @@ document.write(`
 </li>
       <li><a href="build_api/trinity.common.verl_config.html#trinity.common.verl_config.Rollout.log_prob_max_token_len_per_gpu">log_prob_max_token_len_per_gpu（trinity.common.verl_config.Rollout 属性）</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="build_api/trinity.common.verl_config.html#trinity.common.verl_config.Ref.log_prob_micro_batch_size_per_gpu">log_prob_micro_batch_size_per_gpu（trinity.common.verl_config.Ref 属性）</a>
 </li>
       <li><a href="build_api/trinity.common.verl_config.html#trinity.common.verl_config.Rollout.log_prob_micro_batch_size_per_gpu">log_prob_micro_batch_size_per_gpu（trinity.common.verl_config.Rollout 属性）</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="build_api/trinity.common.verl_config.html#trinity.common.verl_config.Ref.log_prob_micro_batch_size">log_prob_micro_batch_size（trinity.common.verl_config.Ref 属性）</a>
 </li>
       <li><a href="build_api/trinity.common.verl_config.html#trinity.common.verl_config.Rollout.log_prob_micro_batch_size">log_prob_micro_batch_size（trinity.common.verl_config.Rollout 属性）</a>
@@ -2898,13 +2961,19 @@ document.write(`
 </li>
       <li><a href="build_api/trinity.common.verl_config.html#trinity.common.verl_config.Optim.lr_warmup_init">lr_warmup_init（trinity.common.verl_config.Optim 属性）</a>
 </li>
+      <li><a href="build_api/trinity.common.config.html#trinity.common.config.OptimizerConfig.lr_warmup_steps_ratio">lr_warmup_steps_ratio（trinity.common.config.OptimizerConfig 属性）</a>
+</li>
       <li><a href="build_api/trinity.common.verl_config.html#trinity.common.verl_config.Optim.lr_warmup_steps_ratio">lr_warmup_steps_ratio（trinity.common.verl_config.Optim 属性）</a>
+</li>
+      <li><a href="build_api/trinity.common.config.html#trinity.common.config.OptimizerConfig.lr_warmup_steps">lr_warmup_steps（trinity.common.config.OptimizerConfig 属性）</a>
 </li>
       <li><a href="build_api/trinity.common.verl_config.html#trinity.common.verl_config.Optim.lr_warmup_steps">lr_warmup_steps（trinity.common.verl_config.Optim 属性）</a>
 </li>
       <li><a href="build_api/trinity.common.verl_config.html#trinity.common.verl_config.Optim.lr_wsd_decay_steps">lr_wsd_decay_steps（trinity.common.verl_config.Optim 属性）</a>
 </li>
       <li><a href="build_api/trinity.common.verl_config.html#trinity.common.verl_config.Optim.lr_wsd_decay_style">lr_wsd_decay_style（trinity.common.verl_config.Optim 属性）</a>
+</li>
+      <li><a href="build_api/trinity.common.config.html#trinity.common.config.OptimizerConfig.lr">lr（trinity.common.config.OptimizerConfig 属性）</a>
 </li>
       <li><a href="build_api/trinity.common.verl_config.html#trinity.common.verl_config.Optim.lr">lr（trinity.common.verl_config.Optim 属性）</a>
 </li>
@@ -3035,6 +3104,8 @@ document.write(`
       <li><a href="build_api/trinity.explorer.workflow_runner.html#trinity.explorer.workflow_runner.Status.metric">metric（trinity.explorer.workflow_runner.Status 属性）</a>
 </li>
       <li><a href="build_api/trinity.common.verl_config.html#trinity.common.verl_config.RewardModel.micro_batch_size_per_gpu">micro_batch_size_per_gpu（trinity.common.verl_config.RewardModel 属性）</a>
+</li>
+      <li><a href="build_api/trinity.common.config.html#trinity.common.config.OptimizerConfig.min_lr_ratio">min_lr_ratio（trinity.common.config.OptimizerConfig 属性）</a>
 </li>
       <li><a href="build_api/trinity.common.verl_config.html#trinity.common.verl_config.Optim.min_lr_ratio">min_lr_ratio（trinity.common.verl_config.Optim 属性）</a>
 </li>
@@ -3304,6 +3375,8 @@ document.write(`
 </li>
         <li><a href="build_api/trinity.common.workflows.agentscope.react.templates.html#module-trinity.common.workflows.agentscope.react.templates">trinity.common.workflows.agentscope.react.templates</a>
 </li>
+        <li><a href="build_api/trinity.common.workflows.agentscope_workflow.html#module-trinity.common.workflows.agentscope_workflow">trinity.common.workflows.agentscope_workflow</a>
+</li>
         <li><a href="build_api/trinity.common.workflows.customized_math_workflows.html#module-trinity.common.workflows.customized_math_workflows">trinity.common.workflows.customized_math_workflows</a>
 </li>
         <li><a href="build_api/trinity.common.workflows.customized_toolcall_workflows.html#module-trinity.common.workflows.customized_toolcall_workflows">trinity.common.workflows.customized_toolcall_workflows</a>
@@ -3437,6 +3510,8 @@ document.write(`
 </li>
       <li><a href="build_api/trinity.common.verl_config.html#trinity.common.verl_config.Rollout.multi_turn">multi_turn（trinity.common.verl_config.Rollout 属性）</a>
 </li>
+      <li><a href="build_api/trinity.algorithm.algorithm.html#trinity.algorithm.algorithm.MultiStepGRPOAlgorithm">MultiStepGRPOAlgorithm（trinity.algorithm.algorithm 中的类）</a>
+</li>
       <li><a href="build_api/trinity.common.workflows.workflow.html#trinity.common.workflows.workflow.MultiTurnWorkflow">MultiTurnWorkflow（trinity.common.workflows.workflow 中的类）</a>
 </li>
       <li><a href="build_api/trinity.common.constants.html#trinity.common.constants.OpType.MUL">MUL（trinity.common.constants.OpType 属性）</a>
@@ -3541,9 +3616,15 @@ document.write(`
 </li>
       <li><a href="build_api/trinity.common.verl_config.html#trinity.common.verl_config.FSDPConfig.optimizer_offload">optimizer_offload（trinity.common.verl_config.FSDPConfig 属性）</a>
 </li>
+      <li><a href="build_api/trinity.common.verl_config.html#trinity.common.verl_config.MegatronConfig.optimizer_offload">optimizer_offload（trinity.common.verl_config.MegatronConfig 属性）</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="build_api/trinity.common.verl_config.html#trinity.common.verl_config.MegatronConfig.optimizer_offload">optimizer_offload（trinity.common.verl_config.MegatronConfig 属性）</a>
+      <li><a href="build_api/trinity.common.config.html#trinity.common.config.OptimizerConfig.optimizer_type">optimizer_type（trinity.common.config.OptimizerConfig 属性）</a>
+</li>
+      <li><a href="build_api/trinity.common.config.html#trinity.common.config.OptimizerConfig">OptimizerConfig（trinity.common.config 中的类）</a>
+</li>
+      <li><a href="build_api/trinity.common.config.html#trinity.common.config.AlgorithmConfig.optimizer">optimizer（trinity.common.config.AlgorithmConfig 属性）</a>
 </li>
       <li><a href="build_api/trinity.common.verl_config.html#trinity.common.verl_config.Optim.optimizer">optimizer（trinity.common.verl_config.Optim 属性）</a>
 </li>
@@ -3619,6 +3700,8 @@ document.write(`
 </li>
       <li><a href="build_api/trinity.common.verl_config.html#trinity.common.verl_config.Critic.ppo_epochs">ppo_epochs（trinity.common.verl_config.Critic 属性）</a>
 </li>
+      <li><a href="build_api/trinity.common.config.html#trinity.common.config.TrainerConfig.ppo_max_token_len_per_gpu">ppo_max_token_len_per_gpu（trinity.common.config.TrainerConfig 属性）</a>
+</li>
       <li><a href="build_api/trinity.common.verl_config.html#trinity.common.verl_config.Actor.ppo_max_token_len_per_gpu">ppo_max_token_len_per_gpu（trinity.common.verl_config.Actor 属性）</a>
 </li>
       <li><a href="build_api/trinity.common.verl_config.html#trinity.common.verl_config.Critic.ppo_max_token_len_per_gpu">ppo_max_token_len_per_gpu（trinity.common.verl_config.Critic 属性）</a>
@@ -3667,10 +3750,10 @@ document.write(`
 </li>
       <li><a href="build_api/trinity.trainer.trainer.html#trinity.trainer.trainer.TrainEngineWrapper.prepare">prepare() （trinity.trainer.trainer.TrainEngineWrapper 方法）</a>
 </li>
-      <li><a href="build_api/trinity.trainer.trainer.html#trinity.trainer.trainer.Trainer.prepare">prepare() （trinity.trainer.trainer.Trainer 方法）</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="build_api/trinity.trainer.trainer.html#trinity.trainer.trainer.Trainer.prepare">prepare() （trinity.trainer.trainer.Trainer 方法）</a>
+</li>
       <li><a href="build_api/trinity.trainer.verl_trainer.html#trinity.trainer.verl_trainer.VerlPPOTrainerWrapper.prepare">prepare() （trinity.trainer.verl_trainer.VerlPPOTrainerWrapper 方法）</a>
 </li>
       <li><a href="build_api/trinity.buffer.storage.queue.html#trinity.buffer.storage.queue.AsyncPriorityQueue.priority_fn">priority_fn（trinity.buffer.storage.queue.AsyncPriorityQueue 属性）</a>
@@ -3805,6 +3888,8 @@ document.write(`
 </li>
       <li><a href="build_api/trinity.common.workflows.workflow.html#trinity.common.workflows.workflow.Task.raw_task">raw_task（trinity.common.workflows.workflow.Task 属性）</a>
 </li>
+      <li><a href="build_api/trinity.common.config.html#trinity.common.config.ClusterConfig.ray_address">ray_address（trinity.common.config.ClusterConfig 属性）</a>
+</li>
       <li><a href="build_api/trinity.common.config.html#trinity.common.config.Config.ray_namespace">ray_namespace（trinity.common.config.Config 属性）</a>
 </li>
       <li><a href="build_api/trinity.common.config.html#trinity.common.config.StorageConfig.ray_namespace">ray_namespace（trinity.common.config.StorageConfig 属性）</a>
@@ -3937,35 +4022,7 @@ document.write(`
 </li>
       <li><a href="build_api/trinity.explorer.scheduler.html#trinity.explorer.scheduler.TaskWrapper.repeat_times">repeat_times（trinity.explorer.scheduler.TaskWrapper 属性）</a>
 </li>
-      <li><a href="build_api/trinity.common.workflows.agentscope.react.react_workflow.html#trinity.common.workflows.agentscope.react.react_workflow.AgentScopeReActWorkflow.repeatable">repeatable（trinity.common.workflows.agentscope.react.react_workflow.AgentScopeReActWorkflow 属性）</a>
-</li>
-      <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.AgentScopeReactMathWorkflow.repeatable">repeatable（trinity.common.workflows.AgentScopeReactMathWorkflow 属性）</a>
-</li>
-      <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.AgentScopeReActWorkflow.repeatable">repeatable（trinity.common.workflows.AgentScopeReActWorkflow 属性）</a>
-</li>
-      <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.AgentScopeV0ReactMathWorkflow.repeatable">repeatable（trinity.common.workflows.AgentScopeV0ReactMathWorkflow 属性）</a>
-</li>
-      <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.AgentScopeV1ReactSearchWorkflow.repeatable">repeatable（trinity.common.workflows.AgentScopeV1ReactSearchWorkflow 属性）</a>
-</li>
-      <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.EmailSearchWorkflow.repeatable">repeatable（trinity.common.workflows.EmailSearchWorkflow 属性）</a>
-</li>
-      <li><a href="build_api/trinity.common.workflows.eval_workflow.html#trinity.common.workflows.eval_workflow.MathEvalWorkflow.repeatable">repeatable（trinity.common.workflows.eval_workflow.MathEvalWorkflow 属性）</a>
-</li>
-      <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.MathEvalWorkflow.repeatable">repeatable（trinity.common.workflows.MathEvalWorkflow 属性）</a>
-</li>
-      <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.RAFTAlfworldWorkflow.repeatable">repeatable（trinity.common.workflows.RAFTAlfworldWorkflow 属性）</a>
-</li>
-      <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.SimpleWorkflow.repeatable">repeatable（trinity.common.workflows.SimpleWorkflow 属性）</a>
-</li>
-      <li><a href="build_api/trinity.common.workflows.step_wise_workflow.html#trinity.common.workflows.step_wise_workflow.RewardPropagationWorkflow.repeatable">repeatable（trinity.common.workflows.step_wise_workflow.RewardPropagationWorkflow 属性）</a>
-</li>
-      <li><a href="build_api/trinity.common.workflows.step_wise_workflow.html#trinity.common.workflows.step_wise_workflow.StepWiseRewardWorkflow.repeatable">repeatable（trinity.common.workflows.step_wise_workflow.StepWiseRewardWorkflow 属性）</a>
-</li>
       <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.Workflow.repeatable">repeatable（trinity.common.workflows.Workflow 属性）</a>
-</li>
-      <li><a href="build_api/trinity.common.workflows.workflow.html#trinity.common.workflows.workflow.MultiTurnWorkflow.repeatable">repeatable（trinity.common.workflows.workflow.MultiTurnWorkflow 属性）</a>
-</li>
-      <li><a href="build_api/trinity.common.workflows.workflow.html#trinity.common.workflows.workflow.SimpleWorkflow.repeatable">repeatable（trinity.common.workflows.workflow.SimpleWorkflow 属性）</a>
 </li>
       <li><a href="build_api/trinity.common.workflows.workflow.html#trinity.common.workflows.workflow.Workflow.repeatable">repeatable（trinity.common.workflows.workflow.Workflow 属性）</a>
 </li>
@@ -4031,29 +4088,7 @@ document.write(`
 </li>
       <li><a href="build_api/trinity.manager.config_manager.html#trinity.manager.config_manager.ConfigManager.reset_session_state">reset_session_state() （trinity.manager.config_manager.ConfigManager 方法）</a>
 </li>
-      <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.RAFTAlfworldWorkflow.resettable">resettable() （trinity.common.workflows.RAFTAlfworldWorkflow 方法）</a>
-</li>
-      <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.AgentScopeReactMathWorkflow.resettable">resettable（trinity.common.workflows.AgentScopeReactMathWorkflow 属性）</a>
-</li>
-      <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.AgentScopeV0ReactMathWorkflow.resettable">resettable（trinity.common.workflows.AgentScopeV0ReactMathWorkflow 属性）</a>
-</li>
-      <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.AgentScopeV1ReactSearchWorkflow.resettable">resettable（trinity.common.workflows.AgentScopeV1ReactSearchWorkflow 属性）</a>
-</li>
-      <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.EmailSearchWorkflow.resettable">resettable（trinity.common.workflows.EmailSearchWorkflow 属性）</a>
-</li>
-      <li><a href="build_api/trinity.common.workflows.eval_workflow.html#trinity.common.workflows.eval_workflow.MathEvalWorkflow.resettable">resettable（trinity.common.workflows.eval_workflow.MathEvalWorkflow 属性）</a>
-</li>
-      <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.MathEvalWorkflow.resettable">resettable（trinity.common.workflows.MathEvalWorkflow 属性）</a>
-</li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.SimpleWorkflow.resettable">resettable（trinity.common.workflows.SimpleWorkflow 属性）</a>
-</li>
-      <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.WebShopWorkflow.resettable">resettable（trinity.common.workflows.WebShopWorkflow 属性）</a>
-</li>
       <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.Workflow.resettable">resettable（trinity.common.workflows.Workflow 属性）</a>
-</li>
-      <li><a href="build_api/trinity.common.workflows.workflow.html#trinity.common.workflows.workflow.SimpleWorkflow.resettable">resettable（trinity.common.workflows.workflow.SimpleWorkflow 属性）</a>
 </li>
       <li><a href="build_api/trinity.common.workflows.workflow.html#trinity.common.workflows.workflow.Workflow.resettable">resettable（trinity.common.workflows.workflow.Workflow 属性）</a>
 </li>
@@ -4071,6 +4106,8 @@ document.write(`
 </li>
       <li><a href="build_api/trinity.common.workflows.agentscope.react.templates.html#trinity.common.workflows.agentscope.react.templates.GSM8KResponseStructure.result">result（trinity.common.workflows.agentscope.react.templates.GSM8KResponseStructure 属性）</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="build_api/trinity.common.verl_config.html#trinity.common.verl_config.Trainer.resume_from_path">resume_from_path（trinity.common.verl_config.Trainer 属性）</a>
 </li>
       <li><a href="build_api/trinity.common.verl_config.html#trinity.common.verl_config.Trainer.resume_mode">resume_mode（trinity.common.verl_config.Trainer 属性）</a>
@@ -4151,13 +4188,13 @@ document.write(`
 </li>
       <li><a href="build_api/trinity.common.config.html#trinity.common.config.StorageConfig.rollout_args">rollout_args（trinity.common.config.StorageConfig 属性）</a>
 </li>
+      <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.SimpleWorkflow.rollout_args">rollout_args（trinity.common.workflows.SimpleWorkflow 属性）</a>
+</li>
       <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.Task.rollout_args">rollout_args（trinity.common.workflows.Task 属性）</a>
 </li>
-      <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.Workflow.rollout_args">rollout_args（trinity.common.workflows.Workflow 属性）</a>
+      <li><a href="build_api/trinity.common.workflows.workflow.html#trinity.common.workflows.workflow.SimpleWorkflow.rollout_args">rollout_args（trinity.common.workflows.workflow.SimpleWorkflow 属性）</a>
 </li>
       <li><a href="build_api/trinity.common.workflows.workflow.html#trinity.common.workflows.workflow.Task.rollout_args">rollout_args（trinity.common.workflows.workflow.Task 属性）</a>
-</li>
-      <li><a href="build_api/trinity.common.workflows.workflow.html#trinity.common.workflows.workflow.Workflow.rollout_args">rollout_args（trinity.common.workflows.workflow.Workflow 属性）</a>
 </li>
       <li><a href="build_api/trinity.common.config.html#trinity.common.config.ExplorerConfig.rollout_model">rollout_model（trinity.common.config.ExplorerConfig 属性）</a>
 </li>
@@ -4221,11 +4258,15 @@ document.write(`
 </li>
       <li><a href="build_api/trinity.common.workflows.agentscope.react.react_workflow.html#trinity.common.workflows.agentscope.react.react_workflow.AgentScopeReActWorkflow.run_async">run_async() （trinity.common.workflows.agentscope.react.react_workflow.AgentScopeReActWorkflow 方法）</a>
 </li>
+      <li><a href="build_api/trinity.common.workflows.agentscope_workflow.html#trinity.common.workflows.agentscope_workflow.AgentScopeWorkflowAdapter.run_async">run_async() （trinity.common.workflows.agentscope_workflow.AgentScopeWorkflowAdapter 方法）</a>
+</li>
       <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.AgentScopeReactMathWorkflow.run_async">run_async() （trinity.common.workflows.AgentScopeReactMathWorkflow 方法）</a>
 </li>
       <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.AgentScopeReActWorkflow.run_async">run_async() （trinity.common.workflows.AgentScopeReActWorkflow 方法）</a>
 </li>
       <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.AgentScopeV1ReactSearchWorkflow.run_async">run_async() （trinity.common.workflows.AgentScopeV1ReactSearchWorkflow 方法）</a>
+</li>
+      <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.AgentScopeWorkflowAdapter.run_async">run_async() （trinity.common.workflows.AgentScopeWorkflowAdapter 方法）</a>
 </li>
       <li><a href="build_api/trinity.common.workflows.html#trinity.common.workflows.AlfworldWorkflow.run_async">run_async() （trinity.common.workflows.AlfworldWorkflow 方法）</a>
 </li>
@@ -4412,6 +4453,8 @@ document.write(`
       <li><a href="build_api/trinity.algorithm.algorithm.html#trinity.algorithm.algorithm.MIXAlgorithm.schema">schema（trinity.algorithm.algorithm.MIXAlgorithm 属性）</a>
 </li>
       <li><a href="build_api/trinity.algorithm.algorithm.html#trinity.algorithm.algorithm.MIXCHORDAlgorithm.schema">schema（trinity.algorithm.algorithm.MIXCHORDAlgorithm 属性）</a>
+</li>
+      <li><a href="build_api/trinity.algorithm.algorithm.html#trinity.algorithm.algorithm.MultiStepGRPOAlgorithm.schema">schema（trinity.algorithm.algorithm.MultiStepGRPOAlgorithm 属性）</a>
 </li>
       <li><a href="build_api/trinity.algorithm.algorithm.html#trinity.algorithm.algorithm.OPMDAlgorithm.schema">schema（trinity.algorithm.algorithm.OPMDAlgorithm 属性）</a>
 </li>
@@ -4687,10 +4730,10 @@ document.write(`
 </li>
       <li><a href="build_api/trinity.manager.config_registry.model_config_manager.html#trinity.manager.config_registry.model_config_manager.set_max_prompt_tokens">set_max_prompt_tokens()（在 trinity.manager.config_registry.model_config_manager 模块中）</a>
 </li>
-      <li><a href="build_api/trinity.manager.config_registry.model_config_manager.html#trinity.manager.config_registry.model_config_manager.set_max_response_tokens">set_max_response_tokens()（在 trinity.manager.config_registry.model_config_manager 模块中）</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="build_api/trinity.manager.config_registry.model_config_manager.html#trinity.manager.config_registry.model_config_manager.set_max_response_tokens">set_max_response_tokens()（在 trinity.manager.config_registry.model_config_manager 模块中）</a>
+</li>
       <li><a href="build_api/trinity.manager.config_registry.buffer_config_manager.html#trinity.manager.config_registry.buffer_config_manager.set_max_retry_interval">set_max_retry_interval()（在 trinity.manager.config_registry.buffer_config_manager 模块中）</a>
 </li>
       <li><a href="build_api/trinity.manager.config_registry.explorer_config_manager.html#trinity.manager.config_registry.explorer_config_manager.set_max_timeout">set_max_timeout()（在 trinity.manager.config_registry.explorer_config_manager 模块中）</a>
@@ -5631,8 +5674,6 @@ document.write(`
         <li><a href="build_api/trinity.buffer.pipelines.html#module-trinity.buffer.pipelines">module</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     trinity.buffer.pipelines.experience_pipeline
 
@@ -5640,6 +5681,8 @@ document.write(`
         <li><a href="build_api/trinity.buffer.pipelines.experience_pipeline.html#module-trinity.buffer.pipelines.experience_pipeline">module</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     trinity.buffer.pipelines.task_pipeline
 
@@ -5946,6 +5989,13 @@ document.write(`
 
       <ul>
         <li><a href="build_api/trinity.common.workflows.agentscope.react.templates.html#module-trinity.common.workflows.agentscope.react.templates">module</a>
+</li>
+      </ul></li>
+      <li>
+    trinity.common.workflows.agentscope_workflow
+
+      <ul>
+        <li><a href="build_api/trinity.common.workflows.agentscope_workflow.html#module-trinity.common.workflows.agentscope_workflow">module</a>
 </li>
       </ul></li>
       <li>
@@ -6340,6 +6390,8 @@ document.write(`
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="build_api/trinity.common.experience.html#trinity.common.experience.EID.uid">uid（trinity.common.experience.EID 属性）</a>
 </li>
+      <li><a href="build_api/trinity.common.config.html#trinity.common.config.TrainerConfig.ulysses_sequence_parallel_size">ulysses_sequence_parallel_size（trinity.common.config.TrainerConfig 属性）</a>
+</li>
       <li><a href="build_api/trinity.common.verl_config.html#trinity.common.verl_config.Actor.ulysses_sequence_parallel_size">ulysses_sequence_parallel_size（trinity.common.verl_config.Actor 属性）</a>
 </li>
       <li><a href="build_api/trinity.common.verl_config.html#trinity.common.verl_config.Critic.ulysses_sequence_parallel_size">ulysses_sequence_parallel_size（trinity.common.verl_config.Critic 属性）</a>
@@ -6398,6 +6450,8 @@ document.write(`
 </li>
       <li><a href="build_api/trinity.algorithm.algorithm.html#trinity.algorithm.algorithm.MIXCHORDAlgorithm.use_critic">use_critic（trinity.algorithm.algorithm.MIXCHORDAlgorithm 属性）</a>
 </li>
+      <li><a href="build_api/trinity.algorithm.algorithm.html#trinity.algorithm.algorithm.MultiStepGRPOAlgorithm.use_critic">use_critic（trinity.algorithm.algorithm.MultiStepGRPOAlgorithm 属性）</a>
+</li>
       <li><a href="build_api/trinity.algorithm.algorithm.html#trinity.algorithm.algorithm.OPMDAlgorithm.use_critic">use_critic（trinity.algorithm.algorithm.OPMDAlgorithm 属性）</a>
 </li>
       <li><a href="build_api/trinity.algorithm.algorithm.html#trinity.algorithm.algorithm.PPOAlgorithm.use_critic">use_critic（trinity.algorithm.algorithm.PPOAlgorithm 属性）</a>
@@ -6419,6 +6473,8 @@ document.write(`
       <li><a href="build_api/trinity.common.verl_config.html#trinity.common.verl_config.MegatronConfig.use_dist_checkpointing">use_dist_checkpointing（trinity.common.verl_config.MegatronConfig 属性）</a>
 </li>
       <li><a href="build_api/trinity.common.verl_config.html#trinity.common.verl_config.MegatronConfig.use_distributed_optimizer">use_distributed_optimizer（trinity.common.verl_config.MegatronConfig 属性）</a>
+</li>
+      <li><a href="build_api/trinity.common.config.html#trinity.common.config.TrainerConfig.use_dynamic_bsz">use_dynamic_bsz（trinity.common.config.TrainerConfig 属性）</a>
 </li>
       <li><a href="build_api/trinity.common.verl_config.html#trinity.common.verl_config.Actor.use_dynamic_bsz">use_dynamic_bsz（trinity.common.verl_config.Actor 属性）</a>
 </li>
@@ -6451,6 +6507,8 @@ document.write(`
       <li><a href="build_api/trinity.algorithm.algorithm.html#trinity.algorithm.algorithm.MIXAlgorithm.use_reference">use_reference（trinity.algorithm.algorithm.MIXAlgorithm 属性）</a>
 </li>
       <li><a href="build_api/trinity.algorithm.algorithm.html#trinity.algorithm.algorithm.MIXCHORDAlgorithm.use_reference">use_reference（trinity.algorithm.algorithm.MIXCHORDAlgorithm 属性）</a>
+</li>
+      <li><a href="build_api/trinity.algorithm.algorithm.html#trinity.algorithm.algorithm.MultiStepGRPOAlgorithm.use_reference">use_reference（trinity.algorithm.algorithm.MultiStepGRPOAlgorithm 属性）</a>
 </li>
       <li><a href="build_api/trinity.algorithm.algorithm.html#trinity.algorithm.algorithm.OPMDAlgorithm.use_reference">use_reference（trinity.algorithm.algorithm.OPMDAlgorithm 属性）</a>
 </li>
@@ -6546,6 +6604,8 @@ document.write(`
 </li>
       <li><a href="build_api/trinity.utils.monitor.html#trinity.utils.monitor.WandbMonitor">WandbMonitor（trinity.utils.monitor 中的类）</a>
 </li>
+      <li><a href="build_api/trinity.common.config.html#trinity.common.config.OptimizerConfig.warmup_style">warmup_style（trinity.common.config.OptimizerConfig 属性）</a>
+</li>
       <li><a href="build_api/trinity.common.verl_config.html#trinity.common.verl_config.Optim.warmup_style">warmup_style（trinity.common.verl_config.Optim 属性）</a>
 </li>
       <li><a href="build_api/trinity.algorithm.sample_strategy.html#trinity.algorithm.sample_strategy.WarmupSampleStrategy">WarmupSampleStrategy（trinity.algorithm.sample_strategy 中的类）</a>
@@ -6568,6 +6628,8 @@ document.write(`
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="build_api/trinity.common.workflows.agentscope_workflow.html#trinity.common.workflows.agentscope_workflow.AgentScopeWorkflowAdapter.workflow_func">workflow_func（trinity.common.workflows.agentscope_workflow.AgentScopeWorkflowAdapter 属性）</a>
+</li>
       <li><a href="build_api/trinity.common.config.html#trinity.common.config.FormatConfig.workflow_key">workflow_key（trinity.common.config.FormatConfig 属性）</a>
 </li>
       <li><a href="build_api/trinity.explorer.workflow_runner.html#trinity.explorer.workflow_runner.WorkflowRunner">WorkflowRunner（trinity.explorer.workflow_runner 中的类）</a>

@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>trinity.common.workflows.envs.agentscope.agentscopev0_react_workflow &#8212; Trinity-RFT 0.3.1.dev0 文档</title>
+    <title>trinity.common.workflows.envs.agentscope.agentscopev0_react_workflow &#8212; Trinity-RFT 0.4.0.dev0 文档</title>
   
   
   
@@ -35,7 +35,7 @@
 <link rel="preload" as="script" href="../../../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../../../../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script src="../../../../../../_static/documentation_options.js?v=855ea54a"></script>
+    <script src="../../../../../../_static/documentation_options.js?v=09f53066"></script>
     <script src="../../../../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
@@ -144,8 +144,8 @@ window.addEventListener("load", () => mermaid.run());
       
     
     
-    <img src="../../../../../../_static/logo.svg" class="logo__image only-light" alt="Trinity-RFT 0.3.1.dev0 文档 - Home"/>
-    <script>document.write(`<img src="../../../../../../_static/logo.svg" class="logo__image only-dark" alt="Trinity-RFT 0.3.1.dev0 文档 - Home"/>`);</script>
+    <img src="../../../../../../_static/logo.svg" class="logo__image only-light" alt="Trinity-RFT 0.4.0.dev0 文档 - Home"/>
+    <script>document.write(`<img src="../../../../../../_static/logo.svg" class="logo__image only-dark" alt="Trinity-RFT 0.4.0.dev0 文档 - Home"/>`);</script>
   
   
 </a></div>
@@ -371,6 +371,7 @@ window.addEventListener("load", () => mermaid.run());
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../../../../../../build_api/trinity.common.workflows.html">trinity.common.workflows package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="../../../../../../build_api/trinity.common.workflows.agentscope.html">trinity.common.workflows.agentscope package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../../../build_api/trinity.common.workflows.agentscope_workflow.html">trinity.common.workflows.agentscope_workflow module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../../../../build_api/trinity.common.workflows.customized_math_workflows.html">trinity.common.workflows.customized_math_workflows module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../../../../build_api/trinity.common.workflows.customized_toolcall_workflows.html">trinity.common.workflows.customized_toolcall_workflows module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../../../../build_api/trinity.common.workflows.eval_workflow.html">trinity.common.workflows.eval_workflow module</a></li>
@@ -567,6 +568,8 @@ document.write(`
 <span class="sd">    We use the AgentScope V0 version here. The code will be deprecated soon.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
+    <span class="n">can_reset</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+
 <div class="viewcode-block" id="AgentScopeV0ReactMathWorkflow.__init__">
 <a class="viewcode-back" href="../../../../../../build_api/trinity.common.workflows.html#trinity.common.workflows.AgentScopeV0ReactMathWorkflow.__init__">[文档]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
@@ -594,9 +597,6 @@ document.write(`
         <span class="bp">self</span><span class="o">.</span><span class="n">openai_client</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">get_openai_client</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">model_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">openai_client</span><span class="o">.</span><span class="n">model_path</span>
 
-        <span class="n">temperature</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rollout_args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;temperature&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
-        <span class="n">max_tokens</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rollout_args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;max_tokens&quot;</span><span class="p">,</span> <span class="mi">4096</span><span class="p">)</span>
-
         <span class="n">agentscope</span><span class="o">.</span><span class="n">init</span><span class="p">(</span>
             <span class="n">model_configs</span><span class="o">=</span><span class="p">[</span>
                 <span class="p">{</span>
@@ -605,8 +605,8 @@ document.write(`
                     <span class="s2">&quot;model_name&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_name</span><span class="p">,</span>
                     <span class="s2">&quot;api_key&quot;</span><span class="p">:</span> <span class="s2">&quot;EMPTY&quot;</span><span class="p">,</span>
                     <span class="s2">&quot;generate_args&quot;</span><span class="p">:</span> <span class="p">{</span>
-                        <span class="s2">&quot;temperature&quot;</span><span class="p">:</span> <span class="n">temperature</span><span class="p">,</span>
-                        <span class="s2">&quot;max_tokens&quot;</span><span class="p">:</span> <span class="n">max_tokens</span><span class="p">,</span>
+                        <span class="s2">&quot;temperature&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">task</span><span class="o">.</span><span class="n">rollout_args</span><span class="o">.</span><span class="n">temperature</span><span class="p">,</span>
+                        <span class="s2">&quot;max_tokens&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">task</span><span class="o">.</span><span class="n">rollout_args</span><span class="o">.</span><span class="n">max_tokens</span> <span class="ow">or</span> <span class="mi">4096</span><span class="p">,</span>
                     <span class="p">},</span>
                     <span class="s2">&quot;use_openai_formatter&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
                 <span class="p">}</span>
@@ -622,10 +622,6 @@ document.write(`
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">(</span><span class="n">task</span><span class="p">)</span></div>
 
-
-    <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">resettable</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="kc">True</span>
 
 <div class="viewcode-block" id="AgentScopeV0ReactMathWorkflow.reset">
 <a class="viewcode-back" href="../../../../../../build_api/trinity.common.workflows.html#trinity.common.workflows.AgentScopeV0ReactMathWorkflow.reset">[文档]</a>
@@ -668,10 +664,6 @@ document.write(`
         <span class="c1"># we use the boxed format to evaluate the answer</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">reward_fn</span> <span class="o">=</span> <span class="n">MathBoxedRewardFn</span><span class="p">()</span></div>
 
-
-    <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">repeatable</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="kc">False</span>
 
 <div class="viewcode-block" id="AgentScopeV0ReactMathWorkflow.run">
 <a class="viewcode-back" href="../../../../../../build_api/trinity.common.workflows.html#trinity.common.workflows.AgentScopeV0ReactMathWorkflow.run">[文档]</a>
