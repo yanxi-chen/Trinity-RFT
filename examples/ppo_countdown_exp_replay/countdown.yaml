@@ -36,7 +36,7 @@ buffer:
       replay_buffer:
         enable: true
         reuse_cooldown_time: 40
-        priority_fn: linear_decay_use_count_control_randomization
+        priority_fn: decay_limit_randomization
         # priority_fn_args: use default values
 explorer:
   eval_interval: 100

@@ -29,7 +29,7 @@ Important config parameters for experience replay include:
   * `priority_fn_args`: additional args for the priority function
 * `synchronizer.sync_style`: set to `dynamic_by_explorer`, which allows the trainer to run more training steps as long as the priority queue buffer is non-empty
 
-The priority function used in this example is named `linear_decay_use_count_control_randomization`.
+The priority function used in this example is named `decay_limit_randomization`.
 The logic behind it:
 * Priority score is calculated as `model_version - decay * use_count`, i.e., fresher and less used samples are prioritized;
 * If `sigma` is non-zero, priority score is further perturbed by random Gaussian noise with standard deviation `sigma`;
