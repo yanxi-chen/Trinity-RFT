@@ -1,7 +1,7 @@
-# Example: PPO on Countdown dataset with enhanced experience replay
+# Example: PPO on Countdown dataset with experience replay
 
 In this example, we follow the main settings in [`ppo_countdown`](../ppo_countdown/README.md),
-and demonstrate the **experience replay** mechanisms supported by Trinity-RFT.
+and demonstrate the **experience replay** mechanisms in Trinity-RFT.
 
 
 ### Motivations
@@ -11,8 +11,8 @@ Moreover, experience replay offers a straightforward method for filling pipeline
 
 ### Implementation and configuration
 
-The priority queue buffer in Trinity offers seamless support for experience replay. 
-Whenever a batch of highest-priority samples are retrieved from the buffer, 
+The priority queue buffer in Trinity offers seamless support for experience replay.
+Whenever a batch of highest-priority samples are retrieved from the buffer,
 a **priority function** updates their priority scores and decide which one should be put back into the buffer (after `reuse_cooldown_time` seconds have passed) for replay.
 Users of Trinity can implement and register their own customized priority functions,
 which can then be called by setting the `priority_fn` field in the yaml config.
@@ -29,9 +29,9 @@ Important config parameters for experience replay include:
   * `priority_fn_args`: additional args for the priority function
 * `synchronizer.sync_style`: set to `dynamic_by_explorer`, which allows the trainer to run more training steps as long as the priority queue buffer is non-empty
 
-The particular priority function used in this example is named `linear_decay_use_count_control_randomization`.
-The logic of this function is:
-* Priority score is calculated as `model_version - decay * use_count`, i.e., fresher and less frequently used samples are assigned higher priority;
+The priority function used in this example is named `linear_decay_use_count_control_randomization`.
+The logic behind it:
+* Priority score is calculated as `model_version - decay * use_count`, i.e., fresher and less used samples are prioritized;
 * If `sigma` is non-zero, priority score is further perturbed by random Gaussian noise with standard deviation `sigma`;
 * A retrieved sample will be put back into the buffer if and only if its use count has not exceeded `use_count_limit`.
 
@@ -39,8 +39,8 @@ The logic of this function is:
 ### Experimental results
 
 We conduct experiment for this config, and compare it with a baseline config that uses each rollout sample exactly once for training.
-The first and second figures below --- using rollout step or wall-clock time as the X-axis ---  confirms the benefits brought by experience replay.
-This is partly due to the larger number of training steps, as shown in the third figure (where X-axis represents rollout step).
+The first and second figures below --- using rollout step or wall-clock time as the X-axis ---  confirms the benefits brought by experience replay (with default hyperparameters).
+This is partly because more training steps can be taken, as shown in the third figure (where X-axis represents rollout step).
 
 
 
