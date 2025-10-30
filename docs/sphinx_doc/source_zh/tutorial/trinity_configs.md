@@ -214,9 +214,6 @@ buffer:
         ...
       buffer_2:
         ...
-
-  default_workflow_type: 'math_workflow'
-  default_reward_fn_type: 'countdown_reward'
 ```
 
 - `batch_size`: 每个训练步骤使用的任务数。*请勿手动将此值乘以 `algorithm.repeat_times`*。
@@ -231,6 +228,9 @@ buffer:
 ```yaml
 buffer:
   explorer_input:
+    default_workflow_type: 'math_workflow'
+    default_eval_workflow_type: 'math_workflow'
+    default_reward_fn_type: 'countdown_reward'
     taskset:
       name: countdown_train
       storage_type: file
@@ -256,27 +256,26 @@ buffer:
         response_key: 'answer'
       rollout_args:
         temperature: 0.1
-      default_workflow_type: 'math_workflow'
-      default_reward_fn_type: 'countdown_reward'
     ...
 ```
 
 - `buffer.explorer_input.taskset`: 用于训练探索策略的任务数据集。
-- `buffer.explorer_input.eval_taskset`: 用于评估的任务数据集列表。
+- `buffer.explorer_input.eval_tasksets`: 用于评测的任务数据集列表。
+- `buffer.explorer_input.default_workflow_type`: 若未在数据集级别指定，则为所有任务数据集设置默认的工作流类型。
+- `buffer.explorer_input.default_eval_workflow_type`: 若未在数据集级别指定，则为所有评测任务数据集设置默认的工作流类型。
+- `buffer.explorer_input.default_reward_fn_type`: 若未在数据集级别指定，则为所有任务数据集设置默认的奖励类型。
 
 每个任务数据集的配置定义如下：
 
 - `name`: 数据集名称。该名称将用作 Ray actor 的名称，因此必须唯一。
 - `storage_type`: 数据集的存储方式。选项：`file`、`queue`、`sql`。
   - `file`: 数据集存储在 `jsonl`/`parquet` 文件中。数据文件组织需符合 HuggingFace 标准。*建议大多数情况下使用此存储类型。*
-  - `queue`: 数据集存储在队列中。队列是一个简单的 FIFO 队列，用于存储任务数据集。*除非你明确了解其用途，否则不要为此类数据集使用此类型。*
   - `sql`: 数据集存储在 SQL 数据库中。*此类型尚不稳定，将在未来版本中优化。*
 - `path`: 任务数据集的路径。
   - 对于 `file` 类型，路径指向包含任务数据集文件的目录。
-  - 对于 `queue` 类型，路径为可选。可通过在此指定 sqlite 数据库路径来备份队列数据。
   - 对于 `sql` 类型，路径指向 sqlite 数据库文件。
-- `subset_name`: 任务数据集的子集名称。默认为 `None`。
-- `split`: 任务数据集的划分。默认为 `train`。
+- `subset_name`: 任务数据集的子集名称，对应 huggingface datasets `load_dataset` 函数中的 `name` 参数。默认为 `None`。
+- `split`: 任务数据集的划分。对应 huggingface datasets `load_dataset` 函数中的 `split` 参数。默认为 `train`。
 - `repeat_times`: 为一个任务生成的 rollout 数量。若未设置，则自动设为 `algorithm.repeat_times`（`taskset`）或 `1`（`eval_tasksets`）。
 - `rollout_args`: rollout 参数。
   - `temperature`: 采样温度。
@@ -320,7 +319,7 @@ buffer:
     - 对于 `queue` 类型，此字段可选。可在此指定 SQLite 数据库或 JSON 文件路径以备份队列数据。
     - 对于 `file` 类型，路径指向包含数据集文件的目录。
     - 对于 `sql` 类型，路径指向 SQLite 数据库文件。
-  - `format`: 定义数据集中 prompt 和 response 的键。
+  - `format`: 主要针对 SFT 和 DPO 算法的数据集，用于规范化提取的数据。
     - `prompt_type`: 指定数据集中 prompt 的类型。目前支持 `plaintext`、`messages`。
       - `plaintext`: prompt 为 string 格式。
       - `messages`: prompt 为消息列表。
@@ -335,8 +334,11 @@ buffer:
     - `enable_concatenated_multi_turn`: 启用拼接的多轮 SFT 数据预处理。仅适用于 `messages`，且仅在 SFT 算法中生效。
     - `chat_template`: 以字符串形式指定 chat template。若未提供，则使用 `model.custom_chat_template`。
   - `max_read_timeout`: 读取新 experience 数据的最大等待时间（秒）。若超时，则直接返回不完整批次。仅当 `storage_type` 为 `queue` 时生效。默认为 1800 秒（30 分钟）。
-  - `use_priority_queue`: 仅当 `storage_type` 为 `queue` 时生效。若设为 `True`，队列为优先级队列，允许优先处理某些 experience。默认为 `False`。
-  - `reuse_cooldown_time`: 仅当 `storage_type` 为 `queue` 且 `use_priority_queue` 为 `True` 时生效。若设置，指定 experience 重用的冷却时间（秒）。若未指定，默认为 `None`，表示 experience 不可被重复使用。
+  - `replay_buffer`: 仅当 `storage_type` 为 `queue` 时生效。用于配置 experience 重用的回放缓冲区。
+    - `enable`: 是否将 experience 放回缓冲区。默认为 `false`。
+    - `reuse_cooldown_time`: experience 重用的冷却时间（秒）。若未指定，默认为 `None`，表示 experience 不可被重复使用。
+    - `priority_fn`: experience 优先级函数，用于确定 experience 的重用顺序。目前支持 `linear_decay` 和 `linear_decay_use_count_control_randomization`。
+    - `priority_fn_args`: 传递给优先级函数的参数字典，具体参数取决于所选的优先级函数。
 - `auxiliary_buffers`: trainer 使用的可选缓冲区。为字典结构，每个键为 buffer 名称，值为 buffer 配置。每个 buffer 配置与 `experience_buffer` 类似。
 
 ---
@@ -413,7 +415,7 @@ trainer:
   save_strategy: "unrestricted"
   grad_clip: 1.0
   use_dynamic_bsz: true
-  ppo_max_token_len_per_gpu: 16384
+  max_token_len_per_gpu: 16384
   ulysses_sequence_parallel_size: 1
   trainer_config: null
 ```
@@ -429,7 +431,7 @@ trainer:
   - `unrestricted`：不限制保存操作，允许多个节点、进程或线程同时保存模型。
 - `grad_clip`: 梯度裁剪阈值。
 - `use_dynamic_bsz`: 是否使用动态批量大小。
-- `ppo_max_token_len_per_gpu`: 训练过程中，每个 GPU 最大 token 长度; 当 `use_dynamic_bsz=true` 时生效。
+- `max_token_len_per_gpu`: 训练过程中，每个 GPU 最大 token 长度; 当 `use_dynamic_bsz=true` 时生效。
 - `ulysses_sequence_parallel_size`: 序列并行的并行度，即用于分割单个序列的 GPU 数量。
 - `trainer_config`: 内联提供的 trainer 配置。
 

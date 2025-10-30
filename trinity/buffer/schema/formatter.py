@@ -38,10 +38,7 @@ class TaskFormatter:
 
     def __init__(self, config: StorageConfig):
         self.config = config
-        self.is_eval = config.is_eval
         self.default_workflow_cls = WORKFLOWS.get(config.default_workflow_type)  # type: ignore
-        if self.is_eval and config.default_eval_workflow_type:
-            self.default_workflow_cls = WORKFLOWS.get(config.default_eval_workflow_type)
         self.default_reward_fn_cls = REWARD_FUNCTIONS.get(config.default_reward_fn_type)  # type: ignore
         self.workflow_key = config.format.workflow_key
         self.reward_fn_key = config.format.reward_fn_key
@@ -67,7 +64,7 @@ class TaskFormatter:
             rollout_args=self.config.rollout_args,
             workflow_args=self.config.workflow_args,
             reward_fn_args=self.config.reward_fn_args,
-            is_eval=self.is_eval,
+            is_eval=self.config.is_eval,
             raw_task=sample,
         )
 

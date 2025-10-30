@@ -81,7 +81,7 @@ In general multi-step scenarios, each run may generate various number of experie
 
 - `buffer.train_batch_size`: The number of experiences to be sampled from the buffer for training, which can be different from the number of generated experiences in each explore step.
 
-- `buffer.trainer_input.use_priority_queue = true`: Using `PriorityQueue` allows the model to use the experiences with higher priority, which prefers newly-generated experiences by default.
+- `buffer.trainer_input.experience_buffer.replay_buffer`: Using `PriorityQueue` allows the model to use the experiences with higher priority, which prefers newly-generated experiences by default.
 
 - `synchronizer.sync_style = dynamic_by_explorer`: The explorer determines when to synchronize the model weights with the trainer.
 
@@ -121,15 +121,19 @@ buffer:
       workflow_args:
         max_env_steps: 30
       enable_progress_bar: false
-    default_workflow_type: 'step_wise_alfworld_workflow'
+      default_workflow_type: 'step_wise_alfworld_workflow'
   trainer_input:
     experience_buffer:
       name: alfworld_buffer
       storage_type: queue
-      use_priority_queue: true
+      replay_buffer:
+        enable: true
+        priority_fn: linear_decay
+        priority_fn_args:
+          decay: 0.1
 explorer:
   max_repeat_times_per_runner: 1
-  runner_num: 32
+  runner_per_model: 32
   max_timeout: 3600
   rollout_model:
     enable_history: true
@@ -152,7 +156,7 @@ trainer:
   save_interval: 50
   grad_clip: 1.0
   use_dynamic_bsz: true
-  ppo_max_token_len_per_gpu: 16384
+  max_token_len_per_gpu: 16384
   ulysses_sequence_parallel_size: 1
 ```
 

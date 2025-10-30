@@ -35,19 +35,18 @@ buffer:
       rollout_args:
         temperature: 1.0
         logprobs: 0
+      default_workflow_type: math_workflow
+      default_reward_fn_type: countdown_reward
     eval_tasksets: []
-    default_workflow_type: math_workflow
-    default_reward_fn_type: countdown_reward
-    system_prompt: null
-    reply_prefix: null
   trainer_input:
     experience_buffer:
       name: experience_buffer
       storage_type: queue
-      use_priority_queue: true
-      replay_buffer_kwargs:
+      replay_buffer:
+        enable: true
         priority_fn: linear_decay
-        decay: 0.1
+        priority_fn_args:
+          decay: 0.1
 explorer:
   runner_per_model: 8
   max_timeout: 900

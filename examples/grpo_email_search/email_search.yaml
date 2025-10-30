@@ -54,7 +54,8 @@ buffer:
     experience_buffer:
       name: experience_buffer
       storage_type: queue
-      use_priority_queue: true
+      replay_buffer:
+        enable: true
 explorer:
   eval_interval: 10
   max_repeat_times_per_runner: 1
@@ -90,5 +91,5 @@ trainer:
   save_interval: 100
   grad_clip: 1.0
   use_dynamic_bsz: true
-  ppo_max_token_len_per_gpu: 16384
+  max_token_len_per_gpu: 16384
   ulysses_sequence_parallel_size: 1
