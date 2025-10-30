@@ -118,7 +118,7 @@ class DataParallelPPOActor(DPActor):
                     # calculate the total number of response tokens in the minibatch
                     mini_batch_token_num = torch.sum(
                         mini_batch.batch["response_mask"].to(get_device_id())
-                    ).item()  # TODO: double check this calculation
+                    ).item()
 
                 self.actor_optimizer.zero_grad()
 
