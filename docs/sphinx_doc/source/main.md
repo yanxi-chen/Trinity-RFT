@@ -32,7 +32,7 @@ Trinity-RFT is a flexible, general-purpose framework for reinforcement fine-tuni
 
 * **Full-Lifecycle Data Pipelines:**
   - Enables pipeline processing of rollout tasks and experience samples.
-  - Supports active data management (e.g., prioritization, cleaning, augmentation) throughout the RFT lifecycle.
+  - Active data management (e.g., prioritization, cleaning, augmentation) throughout the RFT lifecycle.
   - Native support for multi-task joint learning.
 
   <img src="https://img.alicdn.com/imgextra/i2/O1CN01Gk9CRw28NsL09nbOj_!!6000000007921-2-tps-2530-660.png" alt="Data pipeline design" width="720" />
