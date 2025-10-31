@@ -182,7 +182,7 @@ class DataParallelPPOActor(DPActor):
                     else:
                         # EXPERIMENTAL: fix for token-mean loss aggregation
                         # scale microbatch loss according to the number of tokens (rather than sequences)
-                        loss_scale = torch.sum(response_mask).item() / mini_batch_token_num
+                        loss_scale = torch.sum(response_mask).item() / (mini_batch_token_num + 1e-6)
 
                     loss = policy_loss * loss_scale
                     loss.backward()
