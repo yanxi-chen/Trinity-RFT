@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Asynchronous RFT &#8212; Trinity-RFT 0.4.0.dev0 documentation</title>
+    <title>Asynchronous RFT &#8212; Trinity-RFT 0.3.2 documentation</title>
   
   
   
@@ -36,7 +36,7 @@
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script src="../_static/documentation_options.js?v=299b8a96"></script>
+    <script src="../_static/documentation_options.js?v=2f2e10e9"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
@@ -136,8 +136,8 @@
       
     
     
-    <img src="../_static/logo.svg" class="logo__image only-light" alt="Trinity-RFT 0.4.0.dev0 documentation - Home"/>
-    <script>document.write(`<img src="../_static/logo.svg" class="logo__image only-dark" alt="Trinity-RFT 0.4.0.dev0 documentation - Home"/>`);</script>
+    <img src="../_static/logo.svg" class="logo__image only-light" alt="Trinity-RFT 0.3.2 documentation - Home"/>
+    <script>document.write(`<img src="../_static/logo.svg" class="logo__image only-dark" alt="Trinity-RFT 0.3.2 documentation - Home"/>`);</script>
   
   
 </a></div>
@@ -619,7 +619,7 @@ The model weights of the explorer and trainer are synchronized once every <code 
 <span class="w">    </span><span class="nt">taskset</span><span class="p">:</span>
 <span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gsm8k</span>
 <span class="w">      </span><span class="nt">storage_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">file</span>
-<span class="w">      </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;openai/gsm8k&#39;</span>
+<span class="w">      </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${oc.env:TRINITY_TASKSET_PATH,openai/gsm8k}</span>
 <span class="w">      </span><span class="nt">subset_name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;main&#39;</span>
 <span class="w">      </span><span class="nt">split</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">train</span>
 <span class="w">      </span><span class="nt">format</span><span class="p">:</span>
@@ -665,7 +665,7 @@ The model weights of the explorer and trainer are synchronized once every <code 
 <span class="w">    </span><span class="nt">taskset</span><span class="p">:</span>
 <span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gsm8k</span>
 <span class="w">      </span><span class="nt">storage_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">file</span>
-<span class="w">      </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;openai/gsm8k&#39;</span>
+<span class="w">      </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${oc.env:TRINITY_TASKSET_PATH,openai/gsm8k}</span>
 <span class="w">      </span><span class="nt">subset_name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;main&#39;</span>
 <span class="w">      </span><span class="nt">format</span><span class="p">:</span>
 <span class="w">        </span><span class="nt">prompt_key</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;question&#39;</span>
@@ -724,7 +724,7 @@ We are continuously investigating other RL algorithms (e.g., <a class="reference
 <span class="w">    </span><span class="nt">taskset</span><span class="p">:</span><span class="w">  </span><span class="c1"># important</span>
 <span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gsm8k</span>
 <span class="w">      </span><span class="nt">storage_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">file</span>
-<span class="w">      </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;openai/gsm8k&#39;</span>
+<span class="w">      </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${oc.env:TRINITY_TASKSET_PATH,openai/gsm8k}</span>
 <span class="w">      </span><span class="nt">subset_name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;main&#39;</span>
 <span class="w">      </span><span class="nt">format</span><span class="p">:</span>
 <span class="w">        </span><span class="nt">prompt_key</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;question&#39;</span>
