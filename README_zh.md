@@ -34,7 +34,7 @@ Trinity-RFT 是一个灵活、通用的大语言模型（LLM）强化微调（RF
   - 设计针对任务定制的数据集，构建处理流水线以支持数据清洗、增强以及人类参与场景
   - 示例：[数据处理基础](https://modelscope.github.io/Trinity-RFT/zh/main/tutorial/example_data_functionalities.html)，[在线任务选择](https://github.com/modelscope/Trinity-RFT/tree/main/examples/bots)
 
-# 🌟 核心特性
+## 🌟 核心特性
 
 * **灵活的 RFT 模式：**
   - 支持同步/异步、on-policy/off-policy 以及在线/离线强化学习
