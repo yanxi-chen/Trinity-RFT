@@ -107,6 +107,34 @@ algorithm:
     std_normalize: false
 ```
 
+**REC-GSPO-NoIS:**
+
+```
+algorithm:
+  algorithm_type: rec
+  policy_loss_fn_args:
+    epsilon_low: 3e-4
+    epsilon_high: 4e-4
+    clip_mode: "gspo-one-side"
+    weight: "none"
+  advantage_fn_args:
+    std_normalize: false
+```
+
+**REC-GSPO-IS:**
+
+```
+algorithm:
+  algorithm_type: rec
+  policy_loss_fn_args:
+    epsilon_low: 3e-4
+    epsilon_high: 4e-4
+    clip_mode: "gspo-one-side"
+    weight: "gspo_importance_sampling"
+  advantage_fn_args:
+    std_normalize: false
+```
+
 **REC-TwoSide-IS:**
 
 ```
