@@ -35,7 +35,7 @@ class GSPOLossFn(PolicyLossFn):
             raise ValueError("Either clip_range or clip_range_high must be specified.")
         self.clip_range_high = _clip_range_high
 
-        if (loss_agg_mode is not None) and (loss_agg_mode != "seq-mean-token-mean"):
+        if loss_agg_mode != "seq-mean-token-mean":
             logger.warning("GSPO requires loss_agg_mode == 'seq-mean-token-mean'.")
             loss_agg_mode = "seq-mean-token-mean"
         self.loss_agg_mode = loss_agg_mode
