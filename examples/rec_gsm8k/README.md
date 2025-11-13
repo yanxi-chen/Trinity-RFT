@@ -83,11 +83,10 @@ algorithm:
     epsilon_high: 0.2
     clip_mode: "one-side"
     weight: "none"
-    temp: 1.0
-    regularizer: "none"
-    regularizer_coef: 0.0
   advantage_fn_args:
     std_normalize: false
+  kl_loss_fn_args:
+    kl_coef: 0.0
 ```
 
 **REC-OneSide-IS:**
@@ -100,11 +99,10 @@ algorithm:
     epsilon_high: 0.2
     clip_mode: "one-side"
     weight: "importance_sampling"
-    temp: 1.0
-    regularizer: "none"
-    regularizer_coef: 0.0
   advantage_fn_args:
     std_normalize: false
+  kl_loss_fn_args:
+    kl_coef: 0.0
 ```
 
 **REC-GSPO-NoIS:**
@@ -119,6 +117,8 @@ algorithm:
     weight: "none"
   advantage_fn_args:
     std_normalize: false
+  kl_loss_fn_args:
+    kl_coef: 0.0
 ```
 
 **REC-GSPO-IS:**
@@ -133,6 +133,8 @@ algorithm:
     weight: "gspo_importance_sampling"
   advantage_fn_args:
     std_normalize: false
+  kl_loss_fn_args:
+    kl_coef: 0.0
 ```
 
 **REC-TwoSide-IS:**
@@ -150,6 +152,8 @@ algorithm:
     regularizer_coef: 0.0
   advantage_fn_args:
     std_normalize: false
+  kl_loss_fn_args:
+    kl_coef: 0.0
 ```
 
 **REC-Ring-NoIS:**
@@ -169,6 +173,8 @@ algorithm:
     regularizer_coef: 0.0
   advantage_fn_args:
     std_normalize: false
+  kl_loss_fn_args:
+    kl_coef: 0.0
 ```
 
 ### REP family
@@ -187,6 +193,8 @@ algorithm:
     regularizer_coef: 0.1
   advantage_fn_args:
     std_normalize: false
+  kl_loss_fn_args:
+    kl_coef: 0.0
 ```
 
 
@@ -202,6 +210,8 @@ algorithm:
     regularizer_coef: 0.1
   advantage_fn_args:
     std_normalize: false
+  kl_loss_fn_args:
+    kl_coef: 0.0
 ```
 
 ### RED family
@@ -219,6 +229,8 @@ algorithm:
   advantage_fn_args:
     std_normalize: false
     drop: "balance"
+  kl_loss_fn_args:
+    kl_coef: 0.0
 ```
 
 
@@ -234,6 +246,8 @@ algorithm:
     temp: 1.0
   advantage_fn_args:
     std_normalize: false
+  kl_loss_fn_args:
+    kl_coef: 0.0
 ```
 
 ## Citation
