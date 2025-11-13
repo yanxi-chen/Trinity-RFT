@@ -302,7 +302,7 @@ class QueueStorage:
         self.logger = get_logger(f"queue_{config.name}", in_ray_actor=True)
         self.config = config
         self.capacity = config.capacity
-        self.staleness_limit = config.max_staleness  # Optional[int]
+        self.staleness_limit = config.staleness_limit  # Optional[int]
         self.max_model_version = 0  # max model version that queue has seen so far
         self.queue = QueueBuffer.get_queue(config)
         st_config = deepcopy(config)
