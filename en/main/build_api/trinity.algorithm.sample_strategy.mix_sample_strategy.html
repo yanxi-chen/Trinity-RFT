@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>trinity.algorithm.sample_strategy.mix_sample_strategy module &#8212; Trinity-RFT 0.3.2 documentation</title>
+    <title>trinity.algorithm.sample_strategy.mix_sample_strategy module &#8212; Trinity-RFT 0.3.3 documentation</title>
   
   
   
@@ -36,7 +36,7 @@
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script src="../_static/documentation_options.js?v=2f2e10e9"></script>
+    <script src="../_static/documentation_options.js?v=94d292f4"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
@@ -136,8 +136,8 @@
       
     
     
-    <img src="../_static/logo.svg" class="logo__image only-light" alt="Trinity-RFT 0.3.2 documentation - Home"/>
-    <script>document.write(`<img src="../_static/logo.svg" class="logo__image only-dark" alt="Trinity-RFT 0.3.2 documentation - Home"/>`);</script>
+    <img src="../_static/logo.svg" class="logo__image only-light" alt="Trinity-RFT 0.3.3 documentation - Home"/>
+    <script>document.write(`<img src="../_static/logo.svg" class="logo__image only-dark" alt="Trinity-RFT 0.3.3 documentation - Home"/>`);</script>
   
   
 </a></div>
@@ -223,6 +223,7 @@
 <li class="toctree-l3 has-children"><a class="reference internal" href="trinity.buffer.reader.html">trinity.buffer.reader package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="trinity.buffer.reader.file_reader.html">trinity.buffer.reader.file_reader module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.buffer.reader.queue_reader.html">trinity.buffer.reader.queue_reader module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.buffer.reader.reader.html">trinity.buffer.reader.reader module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.buffer.reader.sql_reader.html">trinity.buffer.reader.sql_reader module</a></li>
 </ul>
 </details></li>
@@ -348,6 +349,7 @@
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="trinity.common.html">trinity.common package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3 has-children"><a class="reference internal" href="trinity.common.models.html">trinity.common.models package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.models.vllm_patch.html">trinity.common.models.vllm_patch package</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.models.mm_utils.html">trinity.common.models.mm_utils module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.models.model.html">trinity.common.models.model module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.models.utils.html">trinity.common.models.utils module</a></li>
@@ -593,6 +595,8 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.algorithm.sample_strategy.mix_sample_strategy.MixSampleStrategy.__init__"><code class="docutils literal notranslate"><span class="pre">MixSampleStrategy.__init__()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.algorithm.sample_strategy.mix_sample_strategy.MixSampleStrategy.sample"><code class="docutils literal notranslate"><span class="pre">MixSampleStrategy.sample()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.algorithm.sample_strategy.mix_sample_strategy.MixSampleStrategy.default_args"><code class="docutils literal notranslate"><span class="pre">MixSampleStrategy.default_args()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.algorithm.sample_strategy.mix_sample_strategy.MixSampleStrategy.state_dict"><code class="docutils literal notranslate"><span class="pre">MixSampleStrategy.state_dict()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.algorithm.sample_strategy.mix_sample_strategy.MixSampleStrategy.load_state_dict"><code class="docutils literal notranslate"><span class="pre">MixSampleStrategy.load_state_dict()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -641,6 +645,18 @@ document.write(`
 <dt class="sig sig-object py" id="trinity.algorithm.sample_strategy.mix_sample_strategy.MixSampleStrategy.default_args">
 <em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">default_args</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span></span></span><a class="reference internal" href="../_modules/trinity/algorithm/sample_strategy/mix_sample_strategy.html#MixSampleStrategy.default_args"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trinity.algorithm.sample_strategy.mix_sample_strategy.MixSampleStrategy.default_args" title="Link to this definition">#</a></dt>
 <dd><p>Get the default arguments of the sample strategy.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="trinity.algorithm.sample_strategy.mix_sample_strategy.MixSampleStrategy.state_dict">
+<span class="sig-name descname"><span class="pre">state_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../_modules/trinity/algorithm/sample_strategy/mix_sample_strategy.html#MixSampleStrategy.state_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trinity.algorithm.sample_strategy.mix_sample_strategy.MixSampleStrategy.state_dict" title="Link to this definition">#</a></dt>
+<dd><p>Get the state dict of the sample strategy.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="trinity.algorithm.sample_strategy.mix_sample_strategy.MixSampleStrategy.load_state_dict">
+<span class="sig-name descname"><span class="pre">load_state_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/trinity/algorithm/sample_strategy/mix_sample_strategy.html#MixSampleStrategy.load_state_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trinity.algorithm.sample_strategy.mix_sample_strategy.MixSampleStrategy.load_state_dict" title="Link to this definition">#</a></dt>
+<dd><p>Load the state dict of the sample strategy.</p>
 </dd></dl>
 
 </dd></dl>
@@ -696,6 +712,8 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.algorithm.sample_strategy.mix_sample_strategy.MixSampleStrategy.__init__"><code class="docutils literal notranslate"><span class="pre">MixSampleStrategy.__init__()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.algorithm.sample_strategy.mix_sample_strategy.MixSampleStrategy.sample"><code class="docutils literal notranslate"><span class="pre">MixSampleStrategy.sample()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.algorithm.sample_strategy.mix_sample_strategy.MixSampleStrategy.default_args"><code class="docutils literal notranslate"><span class="pre">MixSampleStrategy.default_args()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.algorithm.sample_strategy.mix_sample_strategy.MixSampleStrategy.state_dict"><code class="docutils literal notranslate"><span class="pre">MixSampleStrategy.state_dict()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.algorithm.sample_strategy.mix_sample_strategy.MixSampleStrategy.load_state_dict"><code class="docutils literal notranslate"><span class="pre">MixSampleStrategy.load_state_dict()</span></code></a></li>
 </ul>
 </li>
 </ul>

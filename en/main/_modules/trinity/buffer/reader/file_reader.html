@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>trinity.buffer.reader.file_reader &#8212; Trinity-RFT 0.3.2 documentation</title>
+    <title>trinity.buffer.reader.file_reader &#8212; Trinity-RFT 0.3.3 documentation</title>
   
   
   
@@ -35,17 +35,374 @@
 <link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script src="../../../../_static/documentation_options.js?v=2f2e10e9"></script>
+    <script src="../../../../_static/documentation_options.js?v=94d292f4"></script>
     <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
-    <script type="module" src="https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs"></script>
-    <script type="module" src="https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs"></script>
-    <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs";import elkLayouts from "https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs";mermaid.registerLayoutLoaders(elkLayouts);mermaid.initialize({startOnLoad:false});</script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.2.0/dist/mermaid-layout-elk.esm.min.mjs"></script>
+    <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";import elkLayouts from "https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.2.0/dist/mermaid-layout-elk.esm.min.mjs";mermaid.registerLayoutLoaders(elkLayouts);mermaid.initialize({startOnLoad:false});</script>
     <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
-    <script type="module">
-import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs";
-window.addEventListener("load", () => mermaid.run());
+    <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";
+
+const defaultStyle = document.createElement('style');
+defaultStyle.textContent = `pre.mermaid {
+    /* Same as .mermaid-container > pre */
+    display: block;
+    width: 100%;
+}
+
+pre.mermaid > svg {
+    /* Same as .mermaid-container > pre > svg */
+    height: 500px;
+    width: 100%;
+    max-width: 100% !important;
+}
+`;
+document.head.appendChild(defaultStyle);
+
+const fullscreenStyle = document.createElement('style');
+fullscreenStyle.textContent = `.mermaid-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.mermaid-container > pre {
+    display: block;
+    width: 100%;
+}
+
+.mermaid-container > pre > svg {
+    height: 500px;
+    width: 100%;
+    max-width: 100% !important;
+}
+
+.mermaid-fullscreen-btn {
+    width: 28px;
+    height: 28px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    font-size: 14px;
+    line-height: 1;
+    padding: 0;
+    color: #333;
+}
+
+.mermaid-fullscreen-btn:hover {
+    opacity: 100% !important;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+    transform: scale(1.1);
+}
+
+.mermaid-fullscreen-btn.dark-theme {
+    background: rgba(50, 50, 50, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #e0e0e0;
+}
+
+.mermaid-fullscreen-btn.dark-theme:hover {
+    background: rgba(60, 60, 60, 1);
+    box-shadow: 0 3px 10px rgba(255, 255, 255, 0.2);
+}
+
+.mermaid-fullscreen-modal {
+    display: none;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 95vw;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.98);
+    z-index: 9999;
+    padding: 20px;
+    overflow: auto;
+}
+
+.mermaid-fullscreen-modal.dark-theme {
+    background: rgba(0, 0, 0, 0.98);
+}
+
+.mermaid-fullscreen-modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mermaid-container-fullscreen {
+    position: relative;
+    width: 95vw;
+    height: 90vh;
+    max-width: 95vw;
+    max-height: 90vh;
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    overflow: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mermaid-container-fullscreen.dark-theme {
+    background: #1a1a1a;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+}
+
+.mermaid-container-fullscreen pre.mermaid {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mermaid-container-fullscreen .mermaid svg {
+    height: 100% !important;
+    width: 100% !important;
+    cursor: grab;
+}
+
+.mermaid-fullscreen-close {
+    position: fixed !important;
+    top: 20px !important;
+    right: 20px !important;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: all 0.2s;
+    font-size: 24px;
+    line-height: 1;
+    color: #333;
+}
+
+.mermaid-fullscreen-close:hover {
+    background: white;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    transform: scale(1.1);
+}
+
+.mermaid-fullscreen-close.dark-theme {
+    background: rgba(50, 50, 50, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #e0e0e0;
+}
+
+.mermaid-fullscreen-close.dark-theme:hover {
+    background: rgba(60, 60, 60, 1);
+    box-shadow: 0 6px 16px rgba(255, 255, 255, 0.2);
+}
+
+.mermaid-fullscreen-modal .mermaid-fullscreen-btn {
+    display: none !important;
+}`;
+document.head.appendChild(fullscreenStyle);
+
+// Detect if page has dark background
+const isDarkTheme = () => {
+    const bgColor = window.getComputedStyle(document.body).backgroundColor;
+    const match = bgColor.match(/rgb\((\d+),\s*(\d+),\s*(\d+)/);
+    if (match) {
+        const r = parseInt(match[1]);
+        const g = parseInt(match[2]);
+        const b = parseInt(match[3]);
+        const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+        return brightness < 128;
+    }
+    return false;
+};
+
+const load = async () => {
+    await mermaid.run();
+
+    const all_mermaids = document.querySelectorAll(".mermaid");
+    const mermaids_processed = document.querySelectorAll(".mermaid[data-processed='true']");
+
+    if ("False" === "True") {
+        const mermaids_to_add_zoom = -1 === -1 ? all_mermaids.length : -1;
+        if(mermaids_to_add_zoom > 0) {
+            var svgs = d3.selectAll("");
+            if(all_mermaids.length !== mermaids_processed.length) {
+                setTimeout(load, 200);
+                return;
+            } else if(svgs.size() !== mermaids_to_add_zoom) {
+                setTimeout(load, 200);
+                return;
+            } else {
+                svgs.each(function() {
+                    var svg = d3.select(this);
+                    svg.html("<g class='wrapper'>" + svg.html() + "</g>");
+                    var inner = svg.select("g");
+                    var zoom = d3.zoom().on("zoom", function(event) {
+                        inner.attr("transform", event.transform);
+                    });
+                    svg.call(zoom);
+                });
+            }
+        }
+    } else if(all_mermaids.length !== mermaids_processed.length) {
+        // Wait for mermaid to process all diagrams
+        setTimeout(load, 200);
+        return;
+    }
+
+    const darkTheme = isDarkTheme();
+
+    // Stop here if not adding fullscreen capability
+    if ("True" !== "True") return;
+
+    const modal = document.createElement('div');
+    modal.className = 'mermaid-fullscreen-modal' + (darkTheme ? ' dark-theme' : '');
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    modal.setAttribute('aria-label', 'Fullscreen diagram viewer');
+    modal.innerHTML = `
+        <button class="mermaid-fullscreen-close${darkTheme ? ' dark-theme' : ''}" aria-label="Close fullscreen">✕</button>
+        <div class="mermaid-container-fullscreen${darkTheme ? ' dark-theme' : ''}"></div>
+    `;
+    document.body.appendChild(modal);
+
+    const modalContent = modal.querySelector('.mermaid-container-fullscreen');
+    const closeBtn = modal.querySelector('.mermaid-fullscreen-close');
+
+    let previousScrollOffset = [window.scrollX, window.scrollY];
+
+    const closeModal = () => {
+        modal.classList.remove('active');
+        modalContent.innerHTML = '';
+        document.body.style.overflow = ''
+        window.scrollTo({left: previousScrollOffset[0], top: previousScrollOffset[1], behavior: 'instant'});
+    };
+
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            closeModal();
+        }
+    });
+
+    const allButtons = [];
+
+    document.querySelectorAll('.mermaid').forEach((mermaidDiv) => {
+        if (mermaidDiv.parentNode.classList.contains('mermaid-container') ||
+            mermaidDiv.closest('.mermaid-fullscreen-modal')) {
+            return;
+        }
+
+        const container = document.createElement('div');
+        container.className = 'mermaid-container';
+        mermaidDiv.parentNode.insertBefore(container, mermaidDiv);
+        container.appendChild(mermaidDiv);
+
+        const fullscreenBtn = document.createElement('button');
+        fullscreenBtn.className = 'mermaid-fullscreen-btn' + (darkTheme ? ' dark-theme' : '');
+        fullscreenBtn.setAttribute('aria-label', 'View diagram in fullscreen');
+        fullscreenBtn.textContent = '⛶';
+        fullscreenBtn.style.opacity = '50%';
+
+        // Calculate dynamic position based on diagram's margin and padding
+        const diagramStyle = window.getComputedStyle(mermaidDiv);
+        const marginTop = parseFloat(diagramStyle.marginTop) || 0;
+        const marginRight = parseFloat(diagramStyle.marginRight) || 0;
+        const paddingTop = parseFloat(diagramStyle.paddingTop) || 0;
+        const paddingRight = parseFloat(diagramStyle.paddingRight) || 0;
+        fullscreenBtn.style.top = `${marginTop + paddingTop + 4}px`;
+        fullscreenBtn.style.right = `${marginRight + paddingRight + 4}px`;
+
+        fullscreenBtn.addEventListener('click', () => {
+            previousScrollOffset = [window.scroll, window.scrollY];
+            const clone = mermaidDiv.cloneNode(true);
+            modalContent.innerHTML = '';
+            modalContent.appendChild(clone);
+
+            const svg = clone.querySelector('svg');
+            if (svg) {
+                svg.removeAttribute('width');
+                svg.removeAttribute('height');
+                svg.style.width = '100%';
+                svg.style.height = 'auto';
+                svg.style.maxWidth = '100%';
+                svg.style.sdisplay = 'block';
+
+                if ("False" === "True") {
+                    setTimeout(() => {
+                        const g = svg.querySelector('g');
+                        if (g) {
+                            var svgD3 = d3.select(svg);
+                            svgD3.html("<g class='wrapper'>" + svgD3.html() + "</g>");
+                            var inner = svgD3.select("g");
+                            var zoom = d3.zoom().on("zoom", function(event) {
+                                inner.attr("transform", event.transform);
+                            });
+                            svgD3.call(zoom);
+                        }
+                    }, 100);
+                }
+            }
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        container.appendChild(fullscreenBtn);
+        allButtons.push(fullscreenBtn);
+    });
+
+    // Update theme classes when theme changes
+    const updateTheme = () => {
+        const dark = isDarkTheme();
+        allButtons.forEach(btn => {
+            if (dark) {
+                btn.classList.add('dark-theme');
+            } else {
+                btn.classList.remove('dark-theme');
+            }
+        });
+        if (dark) {
+            modal.classList.add('dark-theme');
+            modalContent.classList.add('dark-theme');
+            closeBtn.classList.add('dark-theme');
+        } else {
+            modal.classList.remove('dark-theme');
+            modalContent.classList.remove('dark-theme');
+            closeBtn.classList.remove('dark-theme');
+        }
+    };
+
+    // Watch for theme changes
+    const observer = new MutationObserver(updateTheme);
+    observer.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['class', 'style', 'data-theme']
+    });
+    observer.observe(document.body, {
+        attributes: true,
+        attributeFilter: ['class', 'style']
+    });
+};
+
+window.addEventListener("load", load);
 </script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/trinity/buffer/reader/file_reader';</script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
@@ -143,8 +500,8 @@ window.addEventListener("load", () => mermaid.run());
       
     
     
-    <img src="../../../../_static/logo.svg" class="logo__image only-light" alt="Trinity-RFT 0.3.2 documentation - Home"/>
-    <script>document.write(`<img src="../../../../_static/logo.svg" class="logo__image only-dark" alt="Trinity-RFT 0.3.2 documentation - Home"/>`);</script>
+    <img src="../../../../_static/logo.svg" class="logo__image only-light" alt="Trinity-RFT 0.3.3 documentation - Home"/>
+    <script>document.write(`<img src="../../../../_static/logo.svg" class="logo__image only-dark" alt="Trinity-RFT 0.3.3 documentation - Home"/>`);</script>
   
   
 </a></div>
@@ -230,6 +587,7 @@ window.addEventListener("load", () => mermaid.run());
 <li class="toctree-l3 has-children"><a class="reference internal" href="../../../../build_api/trinity.buffer.reader.html">trinity.buffer.reader package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="../../../../build_api/trinity.buffer.reader.file_reader.html">trinity.buffer.reader.file_reader module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../../build_api/trinity.buffer.reader.queue_reader.html">trinity.buffer.reader.queue_reader module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../build_api/trinity.buffer.reader.reader.html">trinity.buffer.reader.reader module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../../build_api/trinity.buffer.reader.sql_reader.html">trinity.buffer.reader.sql_reader module</a></li>
 </ul>
 </details></li>
@@ -355,6 +713,7 @@ window.addEventListener("load", () => mermaid.run());
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../../../build_api/trinity.common.html">trinity.common package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../../../../build_api/trinity.common.models.html">trinity.common.models package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../build_api/trinity.common.models.vllm_patch.html">trinity.common.models.vllm_patch package</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../../build_api/trinity.common.models.mm_utils.html">trinity.common.models.mm_utils module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../../build_api/trinity.common.models.model.html">trinity.common.models.model module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../../build_api/trinity.common.models.utils.html">trinity.common.models.utils module</a></li>
@@ -559,27 +918,28 @@ document.write(`
 <span class="kn">from</span><span class="w"> </span><span class="nn">datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dataset</span><span class="p">,</span> <span class="n">load_dataset</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">trinity.buffer.buffer_reader</span><span class="w"> </span><span class="kn">import</span> <span class="n">BufferReader</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">trinity.buffer.reader.reader</span><span class="w"> </span><span class="kn">import</span> <span class="n">READER</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">trinity.buffer.schema.formatter</span><span class="w"> </span><span class="kn">import</span> <span class="n">FORMATTER</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">trinity.common.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">StorageConfig</span>
 
 
 <div class="viewcode-block" id="DummyProgressBar">
-<a class="viewcode-back" href="../../../../build_api/trinity.buffer.reader.file_reader.html#trinity.buffer.reader.file_reader.DummyProgressBar">[docs]</a>
+<a class="viewcode-back" href="../../../../build_api/trinity.buffer.reader.file_reader.html#trinity.buffer.reader.DummyProgressBar">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">DummyProgressBar</span><span class="p">:</span>
 <div class="viewcode-block" id="DummyProgressBar.__init__">
-<a class="viewcode-back" href="../../../../build_api/trinity.buffer.reader.file_reader.html#trinity.buffer.reader.file_reader.DummyProgressBar.__init__">[docs]</a>
+<a class="viewcode-back" href="../../../../build_api/trinity.buffer.reader.file_reader.html#trinity.buffer.reader.DummyProgressBar.__init__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">pass</span></div>
 
 
 <div class="viewcode-block" id="DummyProgressBar.update">
-<a class="viewcode-back" href="../../../../build_api/trinity.buffer.reader.file_reader.html#trinity.buffer.reader.file_reader.DummyProgressBar.update">[docs]</a>
+<a class="viewcode-back" href="../../../../build_api/trinity.buffer.reader.file_reader.html#trinity.buffer.reader.DummyProgressBar.update">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
         <span class="k">pass</span></div>
 
 
 <div class="viewcode-block" id="DummyProgressBar.close">
-<a class="viewcode-back" href="../../../../build_api/trinity.buffer.reader.file_reader.html#trinity.buffer.reader.file_reader.DummyProgressBar.close">[docs]</a>
+<a class="viewcode-back" href="../../../../build_api/trinity.buffer.reader.file_reader.html#trinity.buffer.reader.DummyProgressBar.close">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">pass</span></div>
 </div>
@@ -645,17 +1005,15 @@ document.write(`
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">indices</span><span class="p">:</span>
             <span class="k">assert</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataset_size</span>
             <span class="n">batch</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="p">)])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">progress_bar</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">batch</span><span class="p">))</span>  <span class="c1"># update progress bar</span>
         <span class="k">return</span> <span class="n">batch</span>
 
 
 <div class="viewcode-block" id="BaseFileReader">
-<a class="viewcode-back" href="../../../../build_api/trinity.buffer.reader.file_reader.html#trinity.buffer.reader.file_reader.BaseFileReader">[docs]</a>
+<a class="viewcode-back" href="../../../../build_api/trinity.buffer.reader.file_reader.html#trinity.buffer.reader.BaseFileReader">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">BaseFileReader</span><span class="p">(</span><span class="n">BufferReader</span><span class="p">):</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">dataset_size</span>
-
 <div class="viewcode-block" id="BaseFileReader.read_async">
-<a class="viewcode-back" href="../../../../build_api/trinity.buffer.reader.file_reader.html#trinity.buffer.reader.file_reader.BaseFileReader.read_async">[docs]</a>
+<a class="viewcode-back" href="../../../../build_api/trinity.buffer.reader.file_reader.html#trinity.buffer.reader.BaseFileReader.read_async">[docs]</a>
     <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">read_async</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">batch_size</span><span class="p">)</span>
@@ -665,13 +1023,65 @@ document.write(`
 
 
 
+<div class="viewcode-block" id="FileReader">
+<a class="viewcode-back" href="../../../../build_api/trinity.buffer.reader.file_reader.html#trinity.buffer.reader.FileReader">[docs]</a>
+<span class="nd">@READER</span><span class="o">.</span><span class="n">register_module</span><span class="p">(</span><span class="s2">&quot;file&quot;</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">FileReader</span><span class="p">(</span><span class="n">BaseFileReader</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Provide a unified interface for Experience and Task file readers.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="FileReader.__init__">
+<a class="viewcode-back" href="../../../../build_api/trinity.buffer.reader.file_reader.html#trinity.buffer.reader.FileReader.__init__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">:</span> <span class="n">StorageConfig</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">schema_type</span> <span class="ow">and</span> <span class="n">config</span><span class="o">.</span><span class="n">schema_type</span> <span class="o">!=</span> <span class="s2">&quot;task&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">reader</span> <span class="o">=</span> <span class="n">ExperienceFileReader</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">reader</span> <span class="o">=</span> <span class="n">TaskFileReader</span><span class="p">(</span><span class="n">config</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="FileReader.read">
+<a class="viewcode-back" href="../../../../build_api/trinity.buffer.reader.file_reader.html#trinity.buffer.reader.FileReader.read">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">reader</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">batch_size</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="FileReader.read_with_indices">
+<a class="viewcode-back" href="../../../../build_api/trinity.buffer.reader.file_reader.html#trinity.buffer.reader.FileReader.read_with_indices">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">read_with_indices</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">indices</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Read tasks with indices.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">reader</span><span class="o">.</span><span class="n">read_with_indices</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="FileReader.read_with_indices_async">
+<a class="viewcode-back" href="../../../../build_api/trinity.buffer.reader.file_reader.html#trinity.buffer.reader.FileReader.read_with_indices_async">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">read_with_indices_async</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">indices</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Read tasks with indices asynchronously.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">reader</span><span class="o">.</span><span class="n">read_with_indices_async</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="FileReader.state_dict">
+<a class="viewcode-back" href="../../../../build_api/trinity.buffer.reader.file_reader.html#trinity.buffer.reader.FileReader.state_dict">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">state_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">reader</span><span class="o">.</span><span class="n">state_dict</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="FileReader.load_state_dict">
+<a class="viewcode-back" href="../../../../build_api/trinity.buffer.reader.file_reader.html#trinity.buffer.reader.FileReader.load_state_dict">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">load_state_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state_dict</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">reader</span><span class="o">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">state_dict</span><span class="p">)</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">reader</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span></div>
+
+
+
 <div class="viewcode-block" id="ExperienceFileReader">
-<a class="viewcode-back" href="../../../../build_api/trinity.buffer.reader.file_reader.html#trinity.buffer.reader.file_reader.ExperienceFileReader">[docs]</a>
+<a class="viewcode-back" href="../../../../build_api/trinity.buffer.reader.file_reader.html#trinity.buffer.reader.ExperienceFileReader">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">ExperienceFileReader</span><span class="p">(</span><span class="n">BaseFileReader</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Reader for SFT / DPO file data.&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="ExperienceFileReader.__init__">
-<a class="viewcode-back" href="../../../../build_api/trinity.buffer.reader.file_reader.html#trinity.buffer.reader.file_reader.ExperienceFileReader.__init__">[docs]</a>
+<a class="viewcode-back" href="../../../../build_api/trinity.buffer.reader.file_reader.html#trinity.buffer.reader.ExperienceFileReader.__init__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">:</span> <span class="n">StorageConfig</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">formatter</span> <span class="o">=</span> <span class="n">FORMATTER</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">schema_type</span><span class="p">)(</span>
             <span class="n">tokenizer_path</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">tokenizer_path</span><span class="p">,</span> <span class="n">format_config</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">format</span>
@@ -689,7 +1099,7 @@ document.write(`
 
 
 <div class="viewcode-block" id="ExperienceFileReader.read">
-<a class="viewcode-back" href="../../../../build_api/trinity.buffer.reader.file_reader.html#trinity.buffer.reader.file_reader.ExperienceFileReader.read">[docs]</a>
+<a class="viewcode-back" href="../../../../build_api/trinity.buffer.reader.file_reader.html#trinity.buffer.reader.ExperienceFileReader.read">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">:</span>
         <span class="n">samples</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">read_batch</span><span class="p">(</span><span class="n">batch_size</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_batch_size</span><span class="p">)</span>
         <span class="n">exp_list</span> <span class="o">=</span> <span class="p">[]</span>
@@ -697,17 +1107,32 @@ document.write(`
             <span class="n">experience</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">formatter</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
             <span class="n">exp_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">experience</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">exp_list</span></div>
-</div>
+
+
+<div class="viewcode-block" id="ExperienceFileReader.state_dict">
+<a class="viewcode-back" href="../../../../build_api/trinity.buffer.reader.file_reader.html#trinity.buffer.reader.ExperienceFileReader.state_dict">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">state_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;current_index&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">current_offset</span><span class="p">}</span></div>
+
+
+<div class="viewcode-block" id="ExperienceFileReader.load_state_dict">
+<a class="viewcode-back" href="../../../../build_api/trinity.buffer.reader.file_reader.html#trinity.buffer.reader.ExperienceFileReader.load_state_dict">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">load_state_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state_dict</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">current_offset</span> <span class="o">=</span> <span class="n">state_dict</span><span class="p">[</span><span class="s2">&quot;current_index&quot;</span><span class="p">]</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">dataset_size</span></div>
 
 
 
 <div class="viewcode-block" id="TaskFileReader">
-<a class="viewcode-back" href="../../../../build_api/trinity.buffer.reader.file_reader.html#trinity.buffer.reader.file_reader.TaskFileReader">[docs]</a>
+<a class="viewcode-back" href="../../../../build_api/trinity.buffer.reader.file_reader.html#trinity.buffer.reader.TaskFileReader">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">TaskFileReader</span><span class="p">(</span><span class="n">BaseFileReader</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;A Reader for task file data.&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="TaskFileReader.__init__">
-<a class="viewcode-back" href="../../../../build_api/trinity.buffer.reader.file_reader.html#trinity.buffer.reader.file_reader.TaskFileReader.__init__">[docs]</a>
+<a class="viewcode-back" href="../../../../build_api/trinity.buffer.reader.file_reader.html#trinity.buffer.reader.TaskFileReader.__init__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">:</span> <span class="n">StorageConfig</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">config</span> <span class="o">=</span> <span class="n">config</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">name</span>
@@ -721,7 +1146,7 @@ document.write(`
             <span class="n">total_epochs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">total_epochs</span> <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">is_eval</span> <span class="k">else</span> <span class="mi">1</span><span class="p">,</span>
             <span class="n">offset</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">index</span><span class="p">,</span>
             <span class="n">drop_last</span><span class="o">=</span><span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">is_eval</span><span class="p">,</span>
-            <span class="n">total_steps</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">total_steps</span><span class="p">,</span>
+            <span class="n">total_steps</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">total_steps</span> <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">is_eval</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
             <span class="n">enable_progress_bar</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">enable_progress_bar</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">formatter</span> <span class="o">=</span> <span class="n">FORMATTER</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;task&quot;</span><span class="p">)(</span><span class="n">config</span><span class="p">)</span></div>
@@ -736,7 +1161,7 @@ document.write(`
         <span class="k">return</span> <span class="n">tasks</span>
 
 <div class="viewcode-block" id="TaskFileReader.read">
-<a class="viewcode-back" href="../../../../build_api/trinity.buffer.reader.file_reader.html#trinity.buffer.reader.file_reader.TaskFileReader.read">[docs]</a>
+<a class="viewcode-back" href="../../../../build_api/trinity.buffer.reader.file_reader.html#trinity.buffer.reader.TaskFileReader.read">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">:</span>
         <span class="n">batch_size</span> <span class="o">=</span> <span class="n">batch_size</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_batch_size</span>
         <span class="n">samples</span><span class="p">,</span> <span class="n">indices</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">read_batch</span><span class="p">(</span><span class="n">batch_size</span><span class="p">)</span>
@@ -744,7 +1169,7 @@ document.write(`
 
 
 <div class="viewcode-block" id="TaskFileReader.read_with_indices">
-<a class="viewcode-back" href="../../../../build_api/trinity.buffer.reader.file_reader.html#trinity.buffer.reader.file_reader.TaskFileReader.read_with_indices">[docs]</a>
+<a class="viewcode-back" href="../../../../build_api/trinity.buffer.reader.file_reader.html#trinity.buffer.reader.TaskFileReader.read_with_indices">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">read_with_indices</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">indices</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Read tasks with indices.&quot;&quot;&quot;</span>
         <span class="n">samples</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">select_batch</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span>
@@ -752,11 +1177,26 @@ document.write(`
 
 
 <div class="viewcode-block" id="TaskFileReader.read_with_indices_async">
-<a class="viewcode-back" href="../../../../build_api/trinity.buffer.reader.file_reader.html#trinity.buffer.reader.file_reader.TaskFileReader.read_with_indices_async">[docs]</a>
+<a class="viewcode-back" href="../../../../build_api/trinity.buffer.reader.file_reader.html#trinity.buffer.reader.TaskFileReader.read_with_indices_async">[docs]</a>
     <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">read_with_indices_async</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">indices</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Read tasks with indices asynchronously.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_with_indices</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span></div>
-</div>
+
+
+<div class="viewcode-block" id="TaskFileReader.state_dict">
+<a class="viewcode-back" href="../../../../build_api/trinity.buffer.reader.file_reader.html#trinity.buffer.reader.TaskFileReader.state_dict">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">state_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;current_index&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">current_offset</span><span class="p">}</span></div>
+
+
+<div class="viewcode-block" id="TaskFileReader.load_state_dict">
+<a class="viewcode-back" href="../../../../build_api/trinity.buffer.reader.file_reader.html#trinity.buffer.reader.TaskFileReader.load_state_dict">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">load_state_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state_dict</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">current_offset</span> <span class="o">=</span> <span class="n">state_dict</span><span class="p">[</span><span class="s2">&quot;current_index&quot;</span><span class="p">]</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">dataset_size</span></div>
 
 </pre></div>
 

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>trinity.explorer.workflow_runner module &#8212; Trinity-RFT 0.3.2 documentation</title>
+    <title>trinity.explorer.workflow_runner module &#8212; Trinity-RFT 0.3.3 documentation</title>
   
   
   
@@ -36,7 +36,7 @@
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script src="../_static/documentation_options.js?v=2f2e10e9"></script>
+    <script src="../_static/documentation_options.js?v=94d292f4"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
@@ -136,8 +136,8 @@
       
     
     
-    <img src="../_static/logo.svg" class="logo__image only-light" alt="Trinity-RFT 0.3.2 documentation - Home"/>
-    <script>document.write(`<img src="../_static/logo.svg" class="logo__image only-dark" alt="Trinity-RFT 0.3.2 documentation - Home"/>`);</script>
+    <img src="../_static/logo.svg" class="logo__image only-light" alt="Trinity-RFT 0.3.3 documentation - Home"/>
+    <script>document.write(`<img src="../_static/logo.svg" class="logo__image only-dark" alt="Trinity-RFT 0.3.3 documentation - Home"/>`);</script>
   
   
 </a></div>
@@ -223,6 +223,7 @@
 <li class="toctree-l3 has-children"><a class="reference internal" href="trinity.buffer.reader.html">trinity.buffer.reader package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="trinity.buffer.reader.file_reader.html">trinity.buffer.reader.file_reader module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.buffer.reader.queue_reader.html">trinity.buffer.reader.queue_reader module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.buffer.reader.reader.html">trinity.buffer.reader.reader module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.buffer.reader.sql_reader.html">trinity.buffer.reader.sql_reader module</a></li>
 </ul>
 </details></li>
@@ -348,6 +349,7 @@
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="trinity.common.html">trinity.common package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3 has-children"><a class="reference internal" href="trinity.common.models.html">trinity.common.models package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.models.vllm_patch.html">trinity.common.models.vllm_patch package</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.models.mm_utils.html">trinity.common.models.mm_utils module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.models.model.html">trinity.common.models.model module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.models.utils.html">trinity.common.models.utils module</a></li>
@@ -591,15 +593,17 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.explorer.workflow_runner.Status"><code class="docutils literal notranslate"><span class="pre">Status</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.explorer.workflow_runner.Status.ok"><code class="docutils literal notranslate"><span class="pre">Status.ok</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.explorer.workflow_runner.Status.metric"><code class="docutils literal notranslate"><span class="pre">Status.metric</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.explorer.workflow_runner.Status.metrics"><code class="docutils literal notranslate"><span class="pre">Status.metrics</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.explorer.workflow_runner.Status.message"><code class="docutils literal notranslate"><span class="pre">Status.message</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.explorer.workflow_runner.Status.__init__"><code class="docutils literal notranslate"><span class="pre">Status.__init__()</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.explorer.workflow_runner.calculate_run_level_metrics"><code class="docutils literal notranslate"><span class="pre">calculate_run_level_metrics()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.explorer.workflow_runner.WorkflowRunner"><code class="docutils literal notranslate"><span class="pre">WorkflowRunner</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.explorer.workflow_runner.WorkflowRunner.__init__"><code class="docutils literal notranslate"><span class="pre">WorkflowRunner.__init__()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.explorer.workflow_runner.WorkflowRunner.prepare"><code class="docutils literal notranslate"><span class="pre">WorkflowRunner.prepare()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.explorer.workflow_runner.WorkflowRunner.is_alive"><code class="docutils literal notranslate"><span class="pre">WorkflowRunner.is_alive()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.explorer.workflow_runner.WorkflowRunner.get_runner_state"><code class="docutils literal notranslate"><span class="pre">WorkflowRunner.get_runner_state()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.explorer.workflow_runner.WorkflowRunner.run_task"><code class="docutils literal notranslate"><span class="pre">WorkflowRunner.run_task()</span></code></a></li>
 </ul>
 </li>
@@ -624,7 +628,7 @@ document.write(`
 <p>The Workflow Runner Module.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="trinity.explorer.workflow_runner.Status">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">trinity.explorer.workflow_runner.</span></span><span class="sig-name descname"><span class="pre">Status</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ok</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trinity/explorer/workflow_runner.html#Status"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trinity.explorer.workflow_runner.Status" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">trinity.explorer.workflow_runner.</span></span><span class="sig-name descname"><span class="pre">Status</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ok</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metrics</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trinity/explorer/workflow_runner.html#Status"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trinity.explorer.workflow_runner.Status" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Status of the task running result.</p>
 <dl class="py attribute">
@@ -633,8 +637,8 @@ document.write(`
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="trinity.explorer.workflow_runner.Status.metric">
-<span class="sig-name descname"><span class="pre">metric</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#trinity.explorer.workflow_runner.Status.metric" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="trinity.explorer.workflow_runner.Status.metrics">
+<span class="sig-name descname"><span class="pre">metrics</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#trinity.explorer.workflow_runner.Status.metrics" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -644,9 +648,18 @@ document.write(`
 
 <dl class="py method">
 <dt class="sig sig-object py" id="trinity.explorer.workflow_runner.Status.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ok</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#trinity.explorer.workflow_runner.Status.__init__" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ok</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metrics</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#trinity.explorer.workflow_runner.Status.__init__" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="trinity.explorer.workflow_runner.calculate_run_level_metrics">
+<span class="sig-prename descclassname"><span class="pre">trinity.explorer.workflow_runner.</span></span><span class="sig-name descname"><span class="pre">calculate_run_level_metrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">experiences</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="trinity.common.experience.html#trinity.common.experience.Experience" title="trinity.common.experience.Experience"><span class="pre">Experience</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/trinity/explorer/workflow_runner.html#calculate_run_level_metrics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trinity.explorer.workflow_runner.calculate_run_level_metrics" title="Link to this definition">#</a></dt>
+<dd><p>Calculate metrics from experiences.</p>
+<p>For non-repeatable workflows, this function will average the metrics from experiences
+generated by each run, which is equivalent to calculating run level metrics.</p>
+<p>For repeatable workflows, please do not use this function.</p>
 </dd></dl>
 
 <dl class="py class">
@@ -669,6 +682,12 @@ document.write(`
 <dt class="sig sig-object py" id="trinity.explorer.workflow_runner.WorkflowRunner.is_alive">
 <span class="sig-name descname"><span class="pre">is_alive</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trinity/explorer/workflow_runner.html#WorkflowRunner.is_alive"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trinity.explorer.workflow_runner.WorkflowRunner.is_alive" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="trinity.explorer.workflow_runner.WorkflowRunner.get_runner_state">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_runner_state</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span></span></span><a class="reference internal" href="../_modules/trinity/explorer/workflow_runner.html#WorkflowRunner.get_runner_state"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trinity.explorer.workflow_runner.WorkflowRunner.get_runner_state" title="Link to this definition">#</a></dt>
+<dd><p>Get the runner state.</p>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="trinity.explorer.workflow_runner.WorkflowRunner.run_task">
@@ -745,15 +764,17 @@ document.write(`
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.explorer.workflow_runner.Status"><code class="docutils literal notranslate"><span class="pre">Status</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.explorer.workflow_runner.Status.ok"><code class="docutils literal notranslate"><span class="pre">Status.ok</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.explorer.workflow_runner.Status.metric"><code class="docutils literal notranslate"><span class="pre">Status.metric</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.explorer.workflow_runner.Status.metrics"><code class="docutils literal notranslate"><span class="pre">Status.metrics</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.explorer.workflow_runner.Status.message"><code class="docutils literal notranslate"><span class="pre">Status.message</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.explorer.workflow_runner.Status.__init__"><code class="docutils literal notranslate"><span class="pre">Status.__init__()</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.explorer.workflow_runner.calculate_run_level_metrics"><code class="docutils literal notranslate"><span class="pre">calculate_run_level_metrics()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.explorer.workflow_runner.WorkflowRunner"><code class="docutils literal notranslate"><span class="pre">WorkflowRunner</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.explorer.workflow_runner.WorkflowRunner.__init__"><code class="docutils literal notranslate"><span class="pre">WorkflowRunner.__init__()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.explorer.workflow_runner.WorkflowRunner.prepare"><code class="docutils literal notranslate"><span class="pre">WorkflowRunner.prepare()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.explorer.workflow_runner.WorkflowRunner.is_alive"><code class="docutils literal notranslate"><span class="pre">WorkflowRunner.is_alive()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.explorer.workflow_runner.WorkflowRunner.get_runner_state"><code class="docutils literal notranslate"><span class="pre">WorkflowRunner.get_runner_state()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.explorer.workflow_runner.WorkflowRunner.run_task"><code class="docutils literal notranslate"><span class="pre">WorkflowRunner.run_task()</span></code></a></li>
 </ul>
 </li>
