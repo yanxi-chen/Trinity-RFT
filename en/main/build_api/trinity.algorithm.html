@@ -316,6 +316,7 @@
 <li class="toctree-l4"><a class="reference internal" href="trinity.algorithm.policy_loss_fn.policy_loss_fn.html">trinity.algorithm.policy_loss_fn.policy_loss_fn module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.algorithm.policy_loss_fn.ppo_policy_loss.html">trinity.algorithm.policy_loss_fn.ppo_policy_loss module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.algorithm.policy_loss_fn.rec_policy_loss.html">trinity.algorithm.policy_loss_fn.rec_policy_loss module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.algorithm.policy_loss_fn.sapo_policy_loss.html">trinity.algorithm.policy_loss_fn.sapo_policy_loss module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.algorithm.policy_loss_fn.sft_loss.html">trinity.algorithm.policy_loss_fn.sft_loss module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.algorithm.policy_loss_fn.sppo_loss_fn.html">trinity.algorithm.policy_loss_fn.sppo_loss_fn module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.algorithm.policy_loss_fn.topr_policy_loss.html">trinity.algorithm.policy_loss_fn.topr_policy_loss module</a></li>
@@ -828,6 +829,7 @@ document.write(`
 <li class="toctree-l4"><a class="reference internal" href="trinity.algorithm.kl_fn.kl_fn.html#trinity.algorithm.kl_fn.kl_fn.K3Fn"><code class="docutils literal notranslate"><span class="pre">K3Fn</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.algorithm.kl_fn.kl_fn.html#trinity.algorithm.kl_fn.kl_fn.LowVarKLFn"><code class="docutils literal notranslate"><span class="pre">LowVarKLFn</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.algorithm.kl_fn.kl_fn.html#trinity.algorithm.kl_fn.kl_fn.AbsFn"><code class="docutils literal notranslate"><span class="pre">AbsFn</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.algorithm.kl_fn.kl_fn.html#trinity.algorithm.kl_fn.kl_fn.CorrectedK3Fn"><code class="docutils literal notranslate"><span class="pre">CorrectedK3Fn</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -887,6 +889,10 @@ document.write(`
 </li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.algorithm.policy_loss_fn.rec_policy_loss.html">trinity.algorithm.policy_loss_fn.rec_policy_loss module</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="trinity.algorithm.policy_loss_fn.rec_policy_loss.html#trinity.algorithm.policy_loss_fn.rec_policy_loss.RECPolicyLossFn"><code class="docutils literal notranslate"><span class="pre">RECPolicyLossFn</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="trinity.algorithm.policy_loss_fn.sapo_policy_loss.html">trinity.algorithm.policy_loss_fn.sapo_policy_loss module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="trinity.algorithm.policy_loss_fn.sapo_policy_loss.html#trinity.algorithm.policy_loss_fn.sapo_policy_loss.SAPOPolicyLossFn"><code class="docutils literal notranslate"><span class="pre">SAPOPolicyLossFn</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.algorithm.policy_loss_fn.sft_loss.html">trinity.algorithm.policy_loss_fn.sft_loss module</a><ul>
@@ -986,6 +992,13 @@ document.write(`
 <li class="toctree-l4"><a class="reference internal" href="trinity.algorithm.policy_loss_fn.html#trinity.algorithm.policy_loss_fn.RECPolicyLossFn.__init__"><code class="docutils literal notranslate"><span class="pre">RECPolicyLossFn.__init__()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.algorithm.policy_loss_fn.html#trinity.algorithm.policy_loss_fn.RECPolicyLossFn.default_args"><code class="docutils literal notranslate"><span class="pre">RECPolicyLossFn.default_args()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.algorithm.policy_loss_fn.html#trinity.algorithm.policy_loss_fn.RECPolicyLossFn.select_keys"><code class="docutils literal notranslate"><span class="pre">RECPolicyLossFn.select_keys</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="trinity.algorithm.policy_loss_fn.html#trinity.algorithm.policy_loss_fn.SAPOPolicyLossFn"><code class="docutils literal notranslate"><span class="pre">SAPOPolicyLossFn</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="trinity.algorithm.policy_loss_fn.html#trinity.algorithm.policy_loss_fn.SAPOPolicyLossFn.__init__"><code class="docutils literal notranslate"><span class="pre">SAPOPolicyLossFn.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.algorithm.policy_loss_fn.html#trinity.algorithm.policy_loss_fn.SAPOPolicyLossFn.soft_gate_function"><code class="docutils literal notranslate"><span class="pre">SAPOPolicyLossFn.soft_gate_function()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.algorithm.policy_loss_fn.html#trinity.algorithm.policy_loss_fn.SAPOPolicyLossFn.default_args"><code class="docutils literal notranslate"><span class="pre">SAPOPolicyLossFn.default_args()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.algorithm.policy_loss_fn.html#trinity.algorithm.policy_loss_fn.SAPOPolicyLossFn.select_keys"><code class="docutils literal notranslate"><span class="pre">SAPOPolicyLossFn.select_keys</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -1091,6 +1104,24 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="trinity.algorithm.algorithm.html#trinity.algorithm.algorithm.GRPOAlgorithm.default_config"><code class="docutils literal notranslate"><span class="pre">GRPOAlgorithm.default_config()</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="trinity.algorithm.algorithm.html#trinity.algorithm.algorithm.ReinforcePlusPlusAlgorithm"><code class="docutils literal notranslate"><span class="pre">ReinforcePlusPlusAlgorithm</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="trinity.algorithm.algorithm.html#trinity.algorithm.algorithm.ReinforcePlusPlusAlgorithm.use_critic"><code class="docutils literal notranslate"><span class="pre">ReinforcePlusPlusAlgorithm.use_critic</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trinity.algorithm.algorithm.html#trinity.algorithm.algorithm.ReinforcePlusPlusAlgorithm.use_reference"><code class="docutils literal notranslate"><span class="pre">ReinforcePlusPlusAlgorithm.use_reference</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trinity.algorithm.algorithm.html#trinity.algorithm.algorithm.ReinforcePlusPlusAlgorithm.compute_advantage_in_trainer"><code class="docutils literal notranslate"><span class="pre">ReinforcePlusPlusAlgorithm.compute_advantage_in_trainer</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trinity.algorithm.algorithm.html#trinity.algorithm.algorithm.ReinforcePlusPlusAlgorithm.can_balance_batch"><code class="docutils literal notranslate"><span class="pre">ReinforcePlusPlusAlgorithm.can_balance_batch</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trinity.algorithm.algorithm.html#trinity.algorithm.algorithm.ReinforcePlusPlusAlgorithm.schema"><code class="docutils literal notranslate"><span class="pre">ReinforcePlusPlusAlgorithm.schema</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trinity.algorithm.algorithm.html#trinity.algorithm.algorithm.ReinforcePlusPlusAlgorithm.default_config"><code class="docutils literal notranslate"><span class="pre">ReinforcePlusPlusAlgorithm.default_config()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="trinity.algorithm.algorithm.html#trinity.algorithm.algorithm.RLOOAlgorithm"><code class="docutils literal notranslate"><span class="pre">RLOOAlgorithm</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="trinity.algorithm.algorithm.html#trinity.algorithm.algorithm.RLOOAlgorithm.use_critic"><code class="docutils literal notranslate"><span class="pre">RLOOAlgorithm.use_critic</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trinity.algorithm.algorithm.html#trinity.algorithm.algorithm.RLOOAlgorithm.use_reference"><code class="docutils literal notranslate"><span class="pre">RLOOAlgorithm.use_reference</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trinity.algorithm.algorithm.html#trinity.algorithm.algorithm.RLOOAlgorithm.compute_advantage_in_trainer"><code class="docutils literal notranslate"><span class="pre">RLOOAlgorithm.compute_advantage_in_trainer</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trinity.algorithm.algorithm.html#trinity.algorithm.algorithm.RLOOAlgorithm.can_balance_batch"><code class="docutils literal notranslate"><span class="pre">RLOOAlgorithm.can_balance_batch</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trinity.algorithm.algorithm.html#trinity.algorithm.algorithm.RLOOAlgorithm.schema"><code class="docutils literal notranslate"><span class="pre">RLOOAlgorithm.schema</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trinity.algorithm.algorithm.html#trinity.algorithm.algorithm.RLOOAlgorithm.default_config"><code class="docutils literal notranslate"><span class="pre">RLOOAlgorithm.default_config()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="trinity.algorithm.algorithm.html#trinity.algorithm.algorithm.OPMDAlgorithm"><code class="docutils literal notranslate"><span class="pre">OPMDAlgorithm</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="trinity.algorithm.algorithm.html#trinity.algorithm.algorithm.OPMDAlgorithm.use_critic"><code class="docutils literal notranslate"><span class="pre">OPMDAlgorithm.use_critic</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.algorithm.algorithm.html#trinity.algorithm.algorithm.OPMDAlgorithm.use_reference"><code class="docutils literal notranslate"><span class="pre">OPMDAlgorithm.use_reference</span></code></a></li>
@@ -1135,6 +1166,24 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="trinity.algorithm.algorithm.html#trinity.algorithm.algorithm.CISPOAlgorithm.can_balance_batch"><code class="docutils literal notranslate"><span class="pre">CISPOAlgorithm.can_balance_batch</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.algorithm.algorithm.html#trinity.algorithm.algorithm.CISPOAlgorithm.schema"><code class="docutils literal notranslate"><span class="pre">CISPOAlgorithm.schema</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.algorithm.algorithm.html#trinity.algorithm.algorithm.CISPOAlgorithm.default_config"><code class="docutils literal notranslate"><span class="pre">CISPOAlgorithm.default_config()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="trinity.algorithm.algorithm.html#trinity.algorithm.algorithm.GSPOAlgorithm"><code class="docutils literal notranslate"><span class="pre">GSPOAlgorithm</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="trinity.algorithm.algorithm.html#trinity.algorithm.algorithm.GSPOAlgorithm.use_critic"><code class="docutils literal notranslate"><span class="pre">GSPOAlgorithm.use_critic</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trinity.algorithm.algorithm.html#trinity.algorithm.algorithm.GSPOAlgorithm.use_reference"><code class="docutils literal notranslate"><span class="pre">GSPOAlgorithm.use_reference</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trinity.algorithm.algorithm.html#trinity.algorithm.algorithm.GSPOAlgorithm.compute_advantage_in_trainer"><code class="docutils literal notranslate"><span class="pre">GSPOAlgorithm.compute_advantage_in_trainer</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trinity.algorithm.algorithm.html#trinity.algorithm.algorithm.GSPOAlgorithm.can_balance_batch"><code class="docutils literal notranslate"><span class="pre">GSPOAlgorithm.can_balance_batch</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trinity.algorithm.algorithm.html#trinity.algorithm.algorithm.GSPOAlgorithm.schema"><code class="docutils literal notranslate"><span class="pre">GSPOAlgorithm.schema</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trinity.algorithm.algorithm.html#trinity.algorithm.algorithm.GSPOAlgorithm.default_config"><code class="docutils literal notranslate"><span class="pre">GSPOAlgorithm.default_config()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="trinity.algorithm.algorithm.html#trinity.algorithm.algorithm.SAPOAlgorithm"><code class="docutils literal notranslate"><span class="pre">SAPOAlgorithm</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="trinity.algorithm.algorithm.html#trinity.algorithm.algorithm.SAPOAlgorithm.use_critic"><code class="docutils literal notranslate"><span class="pre">SAPOAlgorithm.use_critic</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trinity.algorithm.algorithm.html#trinity.algorithm.algorithm.SAPOAlgorithm.use_reference"><code class="docutils literal notranslate"><span class="pre">SAPOAlgorithm.use_reference</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trinity.algorithm.algorithm.html#trinity.algorithm.algorithm.SAPOAlgorithm.compute_advantage_in_trainer"><code class="docutils literal notranslate"><span class="pre">SAPOAlgorithm.compute_advantage_in_trainer</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trinity.algorithm.algorithm.html#trinity.algorithm.algorithm.SAPOAlgorithm.can_balance_batch"><code class="docutils literal notranslate"><span class="pre">SAPOAlgorithm.can_balance_batch</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trinity.algorithm.algorithm.html#trinity.algorithm.algorithm.SAPOAlgorithm.schema"><code class="docutils literal notranslate"><span class="pre">SAPOAlgorithm.schema</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trinity.algorithm.algorithm.html#trinity.algorithm.algorithm.SAPOAlgorithm.default_config"><code class="docutils literal notranslate"><span class="pre">SAPOAlgorithm.default_config()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="trinity.algorithm.algorithm.html#trinity.algorithm.algorithm.MIXAlgorithm"><code class="docutils literal notranslate"><span class="pre">MIXAlgorithm</span></code></a><ul>
@@ -1353,14 +1402,34 @@ while handling parameter name mapping between different training frameworks.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="trinity.algorithm.KLFn.calculate_kl_loss">
-<span class="sig-name descname"><span class="pre">calculate_kl_loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logprob</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ref_logprob</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">response_mask</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss_agg_mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Tensor</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/trinity/algorithm/kl_fn/kl_fn.html#KLFn.calculate_kl_loss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trinity.algorithm.KLFn.calculate_kl_loss" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">calculate_kl_loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logprob</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ref_logprob</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">response_mask</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss_agg_mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">old_logprob</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Tensor</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/trinity/algorithm/kl_fn/kl_fn.html#KLFn.calculate_kl_loss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trinity.algorithm.KLFn.calculate_kl_loss" title="Link to this definition">#</a></dt>
 <dd><p>Compute KL loss.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>logprob</strong> – Log probabilities from current policy</p></li>
+<li><p><strong>ref_logprob</strong> – Log probabilities from reference policy</p></li>
+<li><p><strong>response_mask</strong> – Mask for valid response tokens</p></li>
+<li><p><strong>loss_agg_mode</strong> – Loss aggregation mode</p></li>
+<li><p><strong>old_logprob</strong> – Log probabilities from old policy (for importance sampling)</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="trinity.algorithm.KLFn.calculate_kl">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">calculate_kl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logprob</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ref_logprob</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="../_modules/trinity/algorithm/kl_fn/kl_fn.html#KLFn.calculate_kl"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trinity.algorithm.KLFn.calculate_kl" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">calculate_kl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logprob</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ref_logprob</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">old_logprob</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="../_modules/trinity/algorithm/kl_fn/kl_fn.html#KLFn.calculate_kl"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trinity.algorithm.KLFn.calculate_kl" title="Link to this definition">#</a></dt>
 <dd><p>Compute KL divergence between logprob and ref_logprob.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>logprob</strong> – Log probabilities from current policy</p></li>
+<li><p><strong>ref_logprob</strong> – Log probabilities from reference policy</p></li>
+<li><p><strong>old_logprob</strong> – Log probabilities from old policy (for importance sampling)</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
