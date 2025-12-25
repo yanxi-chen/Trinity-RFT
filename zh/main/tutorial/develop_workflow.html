@@ -549,9 +549,11 @@ window.addEventListener("load", load);
 <li class="toctree-l1"><a class="reference internal" href="develop_algorithm.html">Algorithm 开发指南</a></li>
 <li class="toctree-l1"><a class="reference internal" href="example_mix_algo.html">Algorithm 进阶开发</a></li>
 <li class="toctree-l1"><a class="reference internal" href="develop_operator.html">Operator 开发指南</a></li>
-<li class="toctree-l1"><a class="reference internal" href="develop_selector.html">🧪 实验性功能：任务选择与调度系统</a></li>
+<li class="toctree-l1"><a class="reference internal" href="develop_selector.html">🧪 实验性功能：任务选择器</a></li>
 <li class="toctree-l1"><a class="reference internal" href="trinity_configs.html">参数配置指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trinity_gpu_configs.html">GPU 资源相关配置指南</a></li>
 <li class="toctree-l1"><a class="reference internal" href="synchronizer.html">Synchronizer 介绍</a></li>
+<li class="toctree-l1"><a class="reference internal" href="align_with_verl.html">与 veRL 对齐训练配置</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">样例</span></p>
 <ul class="nav bd-sidenav">
@@ -565,10 +567,11 @@ window.addEventListener("load", load);
 <li class="toctree-l1"><a class="reference internal" href="example_dpo.html">离线 DPO 和 SFT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="example_megatron.html">Megatron-LM 支持</a></li>
 <li class="toctree-l1"><a class="reference internal" href="example_data_functionalities.html">数据处理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example_dataset_perspective.html">样例总览</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">常见问题</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="faq.html">常见问题</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">常见问题（FAQ）</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul class="nav bd-sidenav">
@@ -589,7 +592,6 @@ window.addEventListener("load", load);
 <li class="toctree-l3 has-children"><a class="reference internal" href="../build_api/trinity.buffer.reader.html">trinity.buffer.reader package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.buffer.reader.file_reader.html">trinity.buffer.reader.file_reader module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.buffer.reader.queue_reader.html">trinity.buffer.reader.queue_reader module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.buffer.reader.reader.html">trinity.buffer.reader.reader module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.buffer.reader.sql_reader.html">trinity.buffer.reader.sql_reader module</a></li>
 </ul>
 </details></li>
@@ -620,16 +622,18 @@ window.addEventListener("load", load);
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.buffer.buffer_writer.html">trinity.buffer.buffer_writer module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.buffer.task_scheduler.html">trinity.buffer.task_scheduler module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.buffer.utils.html">trinity.buffer.utils module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.buffer.viewer.html">trinity.buffer.viewer module</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../build_api/trinity.explorer.html">trinity.explorer package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../build_api/trinity.explorer.api.html">trinity.explorer.api package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.explorer.api.api.html">trinity.explorer.api.api module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.explorer.api.service.html">trinity.explorer.api.service module</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../build_api/trinity.explorer.proxy.html">trinity.explorer.proxy package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.explorer.proxy.app.html">trinity.explorer.proxy.app module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.explorer.proxy.client.html">trinity.explorer.proxy.client module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.explorer.proxy.recorder.html">trinity.explorer.proxy.recorder module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.explorer.proxy.service.html">trinity.explorer.proxy.service module</a></li>
 </ul>
 </details></li>
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.explorer.explorer.html">trinity.explorer.explorer module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.explorer.explorer_client.html">trinity.explorer.explorer_client module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.explorer.scheduler.html">trinity.explorer.scheduler module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.explorer.workflow_runner.html">trinity.explorer.workflow_runner module</a></li>
 </ul>
@@ -655,6 +659,7 @@ window.addEventListener("load", load);
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.algorithm.advantage_fn.asymre_advantage.html">trinity.algorithm.advantage_fn.asymre_advantage module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.algorithm.advantage_fn.grpo_advantage.html">trinity.algorithm.advantage_fn.grpo_advantage module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.algorithm.advantage_fn.multi_step_grpo_advantage.html">trinity.algorithm.advantage_fn.multi_step_grpo_advantage module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.algorithm.advantage_fn.on_policy_distill_advantage.html">trinity.algorithm.advantage_fn.on_policy_distill_advantage module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.algorithm.advantage_fn.opmd_advantage.html">trinity.algorithm.advantage_fn.opmd_advantage module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.algorithm.advantage_fn.ppo_advantage.html">trinity.algorithm.advantage_fn.ppo_advantage module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.algorithm.advantage_fn.rec_advantage.html">trinity.algorithm.advantage_fn.rec_advantage module</a></li>
@@ -677,6 +682,7 @@ window.addEventListener("load", load);
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.algorithm.policy_loss_fn.cispo_policy_loss.html">trinity.algorithm.policy_loss_fn.cispo_policy_loss module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.algorithm.policy_loss_fn.dpo_loss.html">trinity.algorithm.policy_loss_fn.dpo_loss module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.algorithm.policy_loss_fn.gspo_policy_loss.html">trinity.algorithm.policy_loss_fn.gspo_policy_loss module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.algorithm.policy_loss_fn.importance_sampling_policy_loss.html">trinity.algorithm.policy_loss_fn.importance_sampling_policy_loss module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.algorithm.policy_loss_fn.mix_policy_loss.html">trinity.algorithm.policy_loss_fn.mix_policy_loss module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.algorithm.policy_loss_fn.opmd_policy_loss.html">trinity.algorithm.policy_loss_fn.opmd_policy_loss module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.algorithm.policy_loss_fn.policy_loss_fn.html">trinity.algorithm.policy_loss_fn.policy_loss_fn module</a></li>
@@ -729,9 +735,12 @@ window.addEventListener("load", load);
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.common.rewards.agents_reward.html">trinity.common.rewards.agents_reward module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.common.rewards.countdown_reward.html">trinity.common.rewards.countdown_reward module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.common.rewards.dapo_reward.html">trinity.common.rewards.dapo_reward module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.common.rewards.eval_utils.html">trinity.common.rewards.eval_utils module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.common.rewards.format_reward.html">trinity.common.rewards.format_reward module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.common.rewards.human_reward.html">trinity.common.rewards.human_reward module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.common.rewards.math_reward.html">trinity.common.rewards.math_reward module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.common.rewards.naive_dapo_score.html">trinity.common.rewards.naive_dapo_score module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.common.rewards.qwen25_eval.html">trinity.common.rewards.qwen25_eval module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.common.rewards.reward_fn.html">trinity.common.rewards.reward_fn module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.common.rewards.tool_reward.html">trinity.common.rewards.tool_reward module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.common.rewards.utils.html">trinity.common.rewards.utils module</a></li>
@@ -746,6 +755,7 @@ window.addEventListener("load", load);
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.common.workflows.math_rm_workflow.html">trinity.common.workflows.math_rm_workflow module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.common.workflows.math_ruler_workflow.html">trinity.common.workflows.math_ruler_workflow module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.common.workflows.math_trainable_ruler_workflow.html">trinity.common.workflows.math_trainable_ruler_workflow module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.common.workflows.on_policy_distill_workflow.html">trinity.common.workflows.on_policy_distill_workflow module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.common.workflows.rubric_judge_workflow.html">trinity.common.workflows.rubric_judge_workflow module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.common.workflows.simple_mm_workflow.html">trinity.common.workflows.simple_mm_workflow module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.common.workflows.step_wise_workflow.html">trinity.common.workflows.step_wise_workflow module</a></li>
@@ -762,10 +772,8 @@ window.addEventListener("load", load);
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.utils.annotations.html">trinity.utils.annotations module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.utils.distributed.html">trinity.utils.distributed module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.utils.dlc_utils.html">trinity.utils.dlc_utils module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.utils.eval_utils.html">trinity.utils.eval_utils module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.utils.log.html">trinity.utils.log module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.utils.lora_utils.html">trinity.utils.lora_utils module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.utils.math_eval_utils.html">trinity.utils.math_eval_utils module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.utils.monitor.html">trinity.utils.monitor module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.utils.plugin_loader.html">trinity.utils.plugin_loader module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.utils.registry.html">trinity.utils.registry module</a></li>
@@ -851,6 +859,21 @@ window.addEventListener("load", load);
 
 
 <div class="article-header-buttons">
+
+
+<a href="https://github.com/modelscope/Trinity-RFT" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="源码库"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
 
 
 
@@ -1013,9 +1036,9 @@ document.write(`
 <li><p><strong>模型（Model）</strong> (<a class="reference internal" href="../build_api/trinity.common.models.model.html#trinity.common.models.model.ModelWrapper" title="trinity.common.models.model.ModelWrapper"><code class="xref py py-class docutils literal notranslate"><span class="pre">trinity.common.models.model.ModelWrapper</span></code></a>)：被训练的模型，工作流内需要使用该模型来执行推理。该实例由 Trinity-RFT 自动提供，支持同步以及异步的 <code class="docutils literal notranslate"><span class="pre">generate</span></code> 以及 <code class="docutils literal notranslate"><span class="pre">chat</span></code> 等方法，同时也提供了 OpenAI API 接口，能够兼容大部分 Agent 框架。</p></li>
 <li><p><strong>工作流（Workflow）</strong> (<a class="reference internal" href="../build_api/trinity.common.workflows.html#trinity.common.workflows.Workflow" title="trinity.common.workflows.Workflow"><code class="xref py py-class docutils literal notranslate"><span class="pre">trinity.common.workflows.Workflow</span></code></a>)：定义了 Agent 与 Environment 的交互流程。<code class="docutils literal notranslate"><span class="pre">Workflow</span></code> 通过 <code class="docutils literal notranslate"><span class="pre">Task</span></code> 中提供的信息初始化自身，并借助 <code class="docutils literal notranslate"><span class="pre">Model</span></code> 来执行其中定义好的交互流程。与常规 Agent 应用不同的是，工作流内部还需要计算奖励信号（reward）以指导训练过程。Trinity-RFT 包含多个内置工作流：</p>
 <ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">MathWorkflow</span></code> (<a class="reference internal" href="../build_api/trinity.common.workflows.html#trinity.common.workflows.MathWorkflow" title="trinity.common.workflows.MathWorkflow"><code class="xref py py-class docutils literal notranslate"><span class="pre">trinity.common.workflows.MathWorkflow</span></code></a>)：用于数学场景，将问题提交给 LLM，解析 LLM 响应，并计算分数（奖励）。</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">WebShopWorkflow</span></code> (<a class="reference internal" href="../build_api/trinity.common.workflows.html#trinity.common.workflows.WebShopWorkflow" title="trinity.common.workflows.WebShopWorkflow"><code class="xref py py-class docutils literal notranslate"><span class="pre">trinity.common.workflows.WebShopWorkflow</span></code></a>)：用于 webshop 场景，包含与环境的多轮交互。</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">AgentScopeReActWorkflow</span></code> (<a class="reference internal" href="../build_api/trinity.common.workflows.html#trinity.common.workflows.AgentScopeReActWorkflow" title="trinity.common.workflows.AgentScopeReActWorkflow"><code class="xref py py-class docutils literal notranslate"><span class="pre">trinity.common.workflows.AgentScopeReActWorkflow</span></code></a>)：直接使用现有的 ReActAgent（基于 AgentScope）来解决问题。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MathWorkflow</span></code> (<code class="xref py py-class docutils literal notranslate"><span class="pre">trinity.common.workflows.MathWorkflow</span></code>)：用于数学场景，将问题提交给 LLM，解析 LLM 响应，并计算分数（奖励）。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">WebShopWorkflow</span></code> (<code class="xref py py-class docutils literal notranslate"><span class="pre">trinity.common.workflows.WebShopWorkflow</span></code>)：用于 webshop 场景，包含与环境的多轮交互。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">AgentScopeReActWorkflow</span></code> (<code class="xref py py-class docutils literal notranslate"><span class="pre">trinity.common.workflows.AgentScopeReActWorkflow</span></code>)：直接使用现有的 ReActAgent（基于 AgentScope）来解决问题。</p></li>
 </ul>
 </li>
 <li><p><strong>经验（Experience）</strong> (<a class="reference internal" href="../build_api/trinity.common.experience.html#trinity.common.experience.Experience" title="trinity.common.experience.Experience"><code class="xref py py-class docutils literal notranslate"><span class="pre">trinity.common.experience.Experience</span></code></a>)：<code class="docutils literal notranslate"><span class="pre">Workflow</span></code> 的运行产出。产出的数量以及内部数据格式取决于所使用的训练算法。例如，对于常见的 PPO/GRPO 算法，<code class="docutils literal notranslate"><span class="pre">Experience</span></code> 包含 token ID 列表、动作掩码（标识哪些 token 是由 LLM 生成的）、每个 token 的对数概率（logprobs）、奖励信号（reward）等。</p></li>
@@ -1077,11 +1100,12 @@ document.write(`
         <span class="o">*</span><span class="p">,</span>
         <span class="n">task</span><span class="p">:</span> <span class="n">Task</span><span class="p">,</span>
         <span class="n">model</span><span class="p">:</span> <span class="n">ModelWrapper</span><span class="p">,</span>
-        <span class="n">auxiliary_models</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">openai</span><span class="o">.</span><span class="n">OpenAI</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># 主要用于 LLM-as-a-judge 场景，这里可以忽略</span>
+        <span class="n">auxiliary_models</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">ModelWrapper</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># 主要用于 LLM-as-a-judge 场景, 也可以用作distillation的techer</span>
     <span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">task</span> <span class="o">=</span> <span class="n">task</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">auxiliary_models</span> <span class="o">=</span> <span class="n">auxiliary_models</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">auxiliary_model_wrappers</span> <span class="o">=</span> <span class="n">auxiliary_models</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">auxiliary_models</span> <span class="o">=</span> <span class="o">...</span>  <span class="c1"># 从 ModelWrapper 自动派生的 OpenAI client</span>
 
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Experience</span><span class="p">]:</span>
@@ -1094,7 +1118,7 @@ document.write(`
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">task</span></code>(<a class="reference internal" href="../build_api/trinity.common.workflows.html#trinity.common.workflows.Task" title="trinity.common.workflows.Task"><code class="xref py py-class docutils literal notranslate"><span class="pre">trinity.common.workflows.Task</span></code></a>)：数据集中的单个任务。</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">model</span></code>(<a class="reference internal" href="../build_api/trinity.common.models.model.html#trinity.common.models.model.ModelWrapper" title="trinity.common.models.model.ModelWrapper"><code class="xref py py-class docutils literal notranslate"><span class="pre">trinity.common.models.model.ModelWrapper</span></code></a>)：正在训练的模型，提供类似于 OpenAI 的接口，能够接收对话消息列表并返回 LLM 生成的内容（包括回复文本 <code class="docutils literal notranslate"><span class="pre">response_text</span></code>、完整序列 token id <code class="docutils literal notranslate"><span class="pre">tokens</span></code>、prompt 部分 token 长度 <code class="docutils literal notranslate"><span class="pre">prompt_length</span></code>，以及输出 token 对数概率列表 <code class="docutils literal notranslate"><span class="pre">logprobs</span></code>）。</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">auxiliary_models</span></code>(<code class="docutils literal notranslate"><span class="pre">List[openai.OpenAI]</span></code>)：未参与训练的辅助模型列表。所有模型均通过兼容 OpenAI 的 API 提供，主要用于 LLM-as-a-judge 场景。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">auxiliary_models</span></code>(<code class="docutils literal notranslate"><span class="pre">List[ModelWrapper]</span></code>)：辅助模型的 ModelWrapper 列表。可通过 <code class="docutils literal notranslate"><span class="pre">self.auxiliary_models</span></code> 访问 OpenAI client（根据 workflow 的 <code class="docutils literal notranslate"><span class="pre">is_async</span></code> 自动派生）。</p></li>
 </ul>
 <p>以下是一个仅使用 <code class="docutils literal notranslate"><span class="pre">raw_task</span></code> 和 <code class="docutils literal notranslate"><span class="pre">rollout_args</span></code> 初始化简单工作流的示例。在更复杂的情况下，你可以使用 <code class="docutils literal notranslate"><span class="pre">format_args</span></code> 进行进一步自定义。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ExampleWorkflow</span><span class="p">(</span><span class="n">Workflow</span><span class="p">):</span>
@@ -1152,23 +1176,13 @@ document.write(`
 </section>
 <section id="id5">
 <h3>注册你的工作流<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
-<p>为了让 Trinity-RFT 能够通过配置文件中的名称自动找到你的工作流，你需要使用 <code class="docutils literal notranslate"><span class="pre">WORKFLOWS.register_module</span></code> 装饰器注册。</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># import some packages</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">trinity.common.workflows.workflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">WORKFLOWS</span>
-
-<span class="nd">@WORKFLOWS</span><span class="o">.</span><span class="n">register_module</span><span class="p">(</span><span class="s2">&quot;example_workflow&quot;</span><span class="p">)</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">ExampleWorkflow</span><span class="p">(</span><span class="n">Workflow</span><span class="p">):</span>
-    <span class="k">pass</span>
-</pre></div>
-</div>
-<p>对于准备贡献给 Trinity-RFT 项目的模块，你需要将上述代码放入 <code class="docutils literal notranslate"><span class="pre">trinity/common/workflows</span></code> 文件夹中，例如 <code class="docutils literal notranslate"><span class="pre">trinity/common/workflows/example_workflow.py</span></code>。并在 <code class="docutils literal notranslate"><span class="pre">trinity/common/workflows/__init__.py</span></code> 中添加以下行：</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># existing import lines</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">trinity.common.workflows.example_workflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">ExampleWorkflow</span>
-
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="c1"># existing __all__ lines</span>
-    <span class="s2">&quot;ExampleWorkflow&quot;</span><span class="p">,</span>
-<span class="p">]</span>
+<p>为了让 Trinity-RFT 能够通过配置文件中的名称自动找到你的工作流，你需要在 <code class="docutils literal notranslate"><span class="pre">trinity/common/workflows/__init__.py</span></code> 中的 <code class="docutils literal notranslate"><span class="pre">default_mapping</span></code> 中注册。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">WORKFLOWS</span> <span class="o">=</span> <span class="n">Registry</span><span class="p">(</span>
+    <span class="s2">&quot;workflows&quot;</span><span class="p">,</span>
+    <span class="n">default_mapping</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;example_workflow&quot;</span><span class="p">:</span> <span class="s2">&quot;trinity.common.workflows.workflow.ExampleWorkflow&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </section>
@@ -1181,8 +1195,7 @@ document.write(`
 此时，你可以设置 <code class="docutils literal notranslate"><span class="pre">can_reset</span></code> 属性并实现 <code class="docutils literal notranslate"><span class="pre">reset</span></code> 方法以避免重复初始化。</p>
 <p><code class="docutils literal notranslate"><span class="pre">can_reset</span></code> 是一个类属性，表示工作流是否支持轻量化重置。</p>
 <p><code class="docutils literal notranslate"><span class="pre">reset</span></code> 方法接受一个新的 <code class="docutils literal notranslate"><span class="pre">Task</span></code> 实例，并使用该实例更新工作流的状态。</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@WORKFLOWS</span><span class="o">.</span><span class="n">register_module</span><span class="p">(</span><span class="s2">&quot;example_workflow&quot;</span><span class="p">)</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">ExampleWorkflow</span><span class="p">(</span><span class="n">Workflow</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ExampleWorkflow</span><span class="p">(</span><span class="n">Workflow</span><span class="p">):</span>
     <span class="n">can_reset</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
 
     <span class="c1"># some code</span>
@@ -1200,8 +1213,7 @@ document.write(`
 针对该情况，你可以设置 <code class="docutils literal notranslate"><span class="pre">can_repeat</span></code> 属性并实现 <code class="docutils literal notranslate"><span class="pre">set_repeat_times</span></code> 方法。</p>
 <p><code class="docutils literal notranslate"><span class="pre">can_repeat</span></code> 是一个类属性，指示工作流是否支持在 <code class="docutils literal notranslate"><span class="pre">run</span></code> 方法内多次执行。</p>
 <p><code class="docutils literal notranslate"><span class="pre">set_repeat_times</span></code> 方法接受两个参数：<code class="docutils literal notranslate"><span class="pre">repeat_times</span></code> 指定了在 <code class="docutils literal notranslate"><span class="pre">run</span></code> 方法内需要执行的次数，<code class="docutils literal notranslate"><span class="pre">run_id_base</span></code> 是一个整数，用于标识多次运行中第一次的运行 ID，之后各次的 ID 基于此递增（该参数用于多轮交互场景，单次模型调用即可完成的任务可以忽略该项）。</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@WORKFLOWS</span><span class="o">.</span><span class="n">register_module</span><span class="p">(</span><span class="s2">&quot;example_workflow&quot;</span><span class="p">)</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">ExampleWorkflow</span><span class="p">(</span><span class="n">Workflow</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ExampleWorkflow</span><span class="p">(</span><span class="n">Workflow</span><span class="p">):</span>
     <span class="n">can_repeat</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="c1"># some code</span>
 
@@ -1241,8 +1253,7 @@ document.write(`
 </section>
 <section id="id9">
 <h3>完整代码示例<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@WORKFLOWS</span><span class="o">.</span><span class="n">register_module</span><span class="p">(</span><span class="s2">&quot;example_workflow&quot;</span><span class="p">)</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">ExampleWorkflow</span><span class="p">(</span><span class="n">Workflow</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ExampleWorkflow</span><span class="p">(</span><span class="n">Workflow</span><span class="p">):</span>
     <span class="n">can_reset</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="n">can_repeat</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
 
@@ -1320,8 +1331,7 @@ document.write(`
 <section id="async">
 <h3>async 支持<a class="headerlink" href="#async" title="Link to this heading">#</a></h3>
 <p>本节样例主要针对同步模式，如果你的工作流需要使用异步方法（例如异步 API）,你可以将 <code class="docutils literal notranslate"><span class="pre">is_async</span></code> 属性设置为 <code class="docutils literal notranslate"><span class="pre">True</span></code>，然后实现 <code class="docutils literal notranslate"><span class="pre">run_async</span></code> 方法，在这种情况下不再需要实现 <code class="docutils literal notranslate"><span class="pre">run</span></code> 方法，并且初始化参数 <code class="docutils literal notranslate"><span class="pre">auxiliary_models</span></code> 也会自动变为 <code class="docutils literal notranslate"><span class="pre">List[openai.AsyncOpenAI]</span></code> 类型，其余方法和属性保持不变。</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@WORKFLOWS</span><span class="o">.</span><span class="n">register_module</span><span class="p">(</span><span class="s2">&quot;example_workflow_async&quot;</span><span class="p">)</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">ExampleWorkflowAsync</span><span class="p">(</span><span class="n">Workflow</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ExampleWorkflowAsync</span><span class="p">(</span><span class="n">Workflow</span><span class="p">):</span>
 
     <span class="n">is_async</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
 
@@ -1345,8 +1355,7 @@ document.write(`
 <span class="w">    </span><span class="c1"># Other fields</span>
 </pre></div>
 </div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@WORKFLOWS</span><span class="o">.</span><span class="n">register_module</span><span class="p">(</span><span class="s2">&quot;example_workflow&quot;</span><span class="p">)</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">ExampleWorkflow</span><span class="p">(</span><span class="n">Workflow</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ExampleWorkflow</span><span class="p">(</span><span class="n">Workflow</span><span class="p">):</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task</span><span class="p">:</span> <span class="n">Task</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="n">ModelWrapper</span><span class="p">,</span> <span class="n">auxiliary_models</span><span class="p">:</span> <span class="n">List</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">task</span><span class="o">=</span><span class="n">task</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">auxiliary_models</span><span class="o">=</span><span class="n">auxiliary_models</span><span class="p">)</span>
@@ -1411,10 +1420,10 @@ document.write(`
         <span class="o">*</span><span class="p">,</span>
         <span class="n">task</span><span class="p">:</span> <span class="n">Task</span><span class="p">,</span>
         <span class="n">model</span><span class="p">:</span> <span class="n">ModelWrapper</span><span class="p">,</span>
-        <span class="n">auxiliary_models</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">openai</span><span class="o">.</span><span class="n">OpenAI</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">auxiliary_models</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">ModelWrapper</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">task</span><span class="o">=</span><span class="n">task</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">auxiliary_models</span><span class="o">=</span><span class="n">auxiliary_models</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">judge_model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">auxiliary_models</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># 使用第一个辅助模型作为评判者</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">judge_model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">auxiliary_models</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># 从 ModelWrapper 自动派生的 OpenAI client</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Experience</span><span class="p">]:</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">do_something</span><span class="p">()</span>
@@ -1452,14 +1461,15 @@ document.write(`
 <pre  class="mermaid">
         flowchart LR
     A[启动推理模型] --&gt; B[调试 Workflow]
-    B --&gt; B
+    B --&gt; C[检查 Experience]
+    C --&gt; B
     </pre><p>启动推理模型的命令如下：</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>trinity<span class="w"> </span>debug<span class="w"> </span>--config<span class="w"> </span>&lt;config_file_path&gt;<span class="w"> </span>--module<span class="w"> </span>inference_model
 </pre></div>
 </div>
 <p>其中，<code class="docutils literal notranslate"><span class="pre">config_file_path</span></code> 为 YAML 格式的配置文件路径，格式与 <code class="docutils literal notranslate"><span class="pre">trinity</span> <span class="pre">run</span></code> 命令所用配置文件一致。配置文件中的 <code class="docutils literal notranslate"><span class="pre">explorer.rollout_model</span></code> 和 <code class="docutils literal notranslate"><span class="pre">explorer.auxiliary_models</span></code> 字段会被加载，用于初始化推理模型。</p>
 <p>模型启动后会持续运行并等待调试指令，不会自动退出。此时，你可在另一个终端执行如下命令进行 Workflow 调试：</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>trinity<span class="w"> </span>debug<span class="w"> </span>--config<span class="w"> </span>&lt;config_file_path&gt;<span class="w"> </span>--module<span class="w"> </span>workflow<span class="w"> </span>--output-dir<span class="w"> </span>&lt;output_dir&gt;<span class="w"> </span>--plugin-dir<span class="w"> </span>&lt;plugin_dir&gt;<span class="w"> </span>--enable-profiling
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>trinity<span class="w"> </span>debug<span class="w"> </span>--config<span class="w"> </span>&lt;config_file_path&gt;<span class="w"> </span>--module<span class="w"> </span>workflow<span class="w"> </span>--output-dir<span class="w"> </span>&lt;output_dir&gt;<span class="w"> </span><span class="o">[</span>--plugin-dir<span class="w"> </span>&lt;plugin_dir&gt;<span class="o">]</span><span class="w"> </span><span class="o">[</span>--enable-profiling<span class="o">]</span><span class="w"> </span><span class="o">[</span>--disable-overwrite<span class="o">]</span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -1467,8 +1477,13 @@ document.write(`
 <li><p><code class="docutils literal notranslate"><span class="pre">&lt;output_dir&gt;</span></code>：调试输出保存目录。如果未指定，调试输出将保存在当前工作目录下的 <code class="docutils literal notranslate"><span class="pre">debug_output</span></code> 目录中。</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">&lt;plugin_dir&gt;</span></code>（可选）：插件目录路径。如果你的 Workflow 或奖励函数等模块未内置于 Trinity-RFT，可通过该参数加载自定义模块。</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">--enable-profiling</span></code>（可选）：启用性能分析，使用 <a class="reference external" href="https://github.com/gaogaotiantian/viztracer">viztracer</a> 对 Workflow 运行过程进行性能分析。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--disable-overwrite</span></code>（可选）：禁用输出目录覆盖功能。如果指定的文件夹非空，程序将自动创建一个带有时间戳后缀的新目录（例如 <code class="docutils literal notranslate"><span class="pre">debug_output_20251203211200</span></code>）以避免覆盖现有数据。</p></li>
 </ul>
-<p>调试过程中，配置文件中的 <code class="docutils literal notranslate"><span class="pre">buffer.explorer_input.taskset</span></code> 字段会被加载，用于初始化 Workflow 所需的任务数据集和实例。需注意，调试模式仅会读取数据集中的第一条数据进行测试。运行上述命令后，Workflow 的返回值会自动格式化并打印在终端以供观察和查看，同时产出的 Experience 会保存到 <code class="docutils literal notranslate"><span class="pre">&lt;output_dir&gt;/experiences.db</span></code> 数据库中。</p>
+<p>调试过程中，配置文件中的 <code class="docutils literal notranslate"><span class="pre">buffer.explorer_input.taskset</span></code> 字段会被加载，用于初始化 Workflow 所需的任务数据集和实例。需注意，调试模式仅会读取数据集中的第一条数据进行测试。运行上述命令后，工作流的返回 Experience 会被写入指定输出目录下的 <code class="docutils literal notranslate"><span class="pre">experiences.db</span></code> 文件中，而运行过程中记录的指标会打印在终端以便检查。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>trinity<span class="w"> </span>debug<span class="w"> </span>--config<span class="w"> </span>&lt;config_file_path&gt;<span class="w"> </span>--module<span class="w"> </span>viewer<span class="w"> </span>--output-dir<span class="w"> </span>&lt;output_dir&gt;<span class="w"> </span>--port<span class="w"> </span><span class="m">8502</span>
+</pre></div>
+</div>
+<p>该命令会在 <code class="docutils literal notranslate"><span class="pre">http://localhost:8502</span></code> 启动 Experience Viewer，用于可视化调试过程中生成的 Experience。你可以在用户友好的界面中检查生成的 Experience。需注意，Viewer 会从指定输出目录下的 <code class="docutils literal notranslate"><span class="pre">experiences.db</span></code> 文件中读取 Experience，因此请确保你已成功运行过 Workflow 调试命令，且替换 <code class="docutils literal notranslate"><span class="pre">&lt;output_dir&gt;</span></code> 为实际的输出目录。</p>
 <p>调试完成后，可在推理模型终端输入 <code class="docutils literal notranslate"><span class="pre">Ctrl+C</span></code> 以终止模型运行。</p>
 </section>
 </section>

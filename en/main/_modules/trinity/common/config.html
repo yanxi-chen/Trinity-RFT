@@ -547,9 +547,11 @@ window.addEventListener("load", load);
 <li class="toctree-l1"><a class="reference internal" href="../../../tutorial/develop_algorithm.html">Algorithms Development Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../tutorial/example_mix_algo.html">Advanced Algorithm Development</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../tutorial/develop_operator.html">Operator Development Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../tutorial/develop_selector.html">🧪 Experimental: Task Selection &amp; Scheduling System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorial/develop_selector.html">🧪 Experimental: Task Selection</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../tutorial/trinity_configs.html">Configuration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorial/trinity_gpu_configs.html">GPU Configuration Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../tutorial/synchronizer.html">Synchronizer in Trinity-RFT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorial/align_with_verl.html">Align configuration with veRL</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples</span></p>
 <ul class="nav bd-sidenav">
@@ -563,6 +565,7 @@ window.addEventListener("load", load);
 <li class="toctree-l1"><a class="reference internal" href="../../../tutorial/example_dpo.html">Offline DPO and SFT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../tutorial/example_megatron.html">Megatron-LM Backend</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../tutorial/example_data_functionalities.html">Data Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorial/example_dataset_perspective.html">Example Summary</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">FAQ</span></p>
 <ul class="nav bd-sidenav">
@@ -587,7 +590,6 @@ window.addEventListener("load", load);
 <li class="toctree-l3 has-children"><a class="reference internal" href="../../../build_api/trinity.buffer.reader.html">trinity.buffer.reader package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.buffer.reader.file_reader.html">trinity.buffer.reader.file_reader module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.buffer.reader.queue_reader.html">trinity.buffer.reader.queue_reader module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.buffer.reader.reader.html">trinity.buffer.reader.reader module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.buffer.reader.sql_reader.html">trinity.buffer.reader.sql_reader module</a></li>
 </ul>
 </details></li>
@@ -618,16 +620,18 @@ window.addEventListener("load", load);
 <li class="toctree-l3"><a class="reference internal" href="../../../build_api/trinity.buffer.buffer_writer.html">trinity.buffer.buffer_writer module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../build_api/trinity.buffer.task_scheduler.html">trinity.buffer.task_scheduler module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../build_api/trinity.buffer.utils.html">trinity.buffer.utils module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../build_api/trinity.buffer.viewer.html">trinity.buffer.viewer module</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../../build_api/trinity.explorer.html">trinity.explorer package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../../../build_api/trinity.explorer.api.html">trinity.explorer.api package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.explorer.api.api.html">trinity.explorer.api.api module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.explorer.api.service.html">trinity.explorer.api.service module</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../build_api/trinity.explorer.proxy.html">trinity.explorer.proxy package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.explorer.proxy.app.html">trinity.explorer.proxy.app module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.explorer.proxy.client.html">trinity.explorer.proxy.client module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.explorer.proxy.recorder.html">trinity.explorer.proxy.recorder module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.explorer.proxy.service.html">trinity.explorer.proxy.service module</a></li>
 </ul>
 </details></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../build_api/trinity.explorer.explorer.html">trinity.explorer.explorer module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../build_api/trinity.explorer.explorer_client.html">trinity.explorer.explorer_client module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../build_api/trinity.explorer.scheduler.html">trinity.explorer.scheduler module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../build_api/trinity.explorer.workflow_runner.html">trinity.explorer.workflow_runner module</a></li>
 </ul>
@@ -653,6 +657,7 @@ window.addEventListener("load", load);
 <li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.algorithm.advantage_fn.asymre_advantage.html">trinity.algorithm.advantage_fn.asymre_advantage module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.algorithm.advantage_fn.grpo_advantage.html">trinity.algorithm.advantage_fn.grpo_advantage module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.algorithm.advantage_fn.multi_step_grpo_advantage.html">trinity.algorithm.advantage_fn.multi_step_grpo_advantage module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.algorithm.advantage_fn.on_policy_distill_advantage.html">trinity.algorithm.advantage_fn.on_policy_distill_advantage module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.algorithm.advantage_fn.opmd_advantage.html">trinity.algorithm.advantage_fn.opmd_advantage module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.algorithm.advantage_fn.ppo_advantage.html">trinity.algorithm.advantage_fn.ppo_advantage module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.algorithm.advantage_fn.rec_advantage.html">trinity.algorithm.advantage_fn.rec_advantage module</a></li>
@@ -675,6 +680,7 @@ window.addEventListener("load", load);
 <li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.algorithm.policy_loss_fn.cispo_policy_loss.html">trinity.algorithm.policy_loss_fn.cispo_policy_loss module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.algorithm.policy_loss_fn.dpo_loss.html">trinity.algorithm.policy_loss_fn.dpo_loss module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.algorithm.policy_loss_fn.gspo_policy_loss.html">trinity.algorithm.policy_loss_fn.gspo_policy_loss module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.algorithm.policy_loss_fn.importance_sampling_policy_loss.html">trinity.algorithm.policy_loss_fn.importance_sampling_policy_loss module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.algorithm.policy_loss_fn.mix_policy_loss.html">trinity.algorithm.policy_loss_fn.mix_policy_loss module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.algorithm.policy_loss_fn.opmd_policy_loss.html">trinity.algorithm.policy_loss_fn.opmd_policy_loss module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.algorithm.policy_loss_fn.policy_loss_fn.html">trinity.algorithm.policy_loss_fn.policy_loss_fn module</a></li>
@@ -727,9 +733,12 @@ window.addEventListener("load", load);
 <li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.common.rewards.agents_reward.html">trinity.common.rewards.agents_reward module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.common.rewards.countdown_reward.html">trinity.common.rewards.countdown_reward module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.common.rewards.dapo_reward.html">trinity.common.rewards.dapo_reward module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.common.rewards.eval_utils.html">trinity.common.rewards.eval_utils module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.common.rewards.format_reward.html">trinity.common.rewards.format_reward module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.common.rewards.human_reward.html">trinity.common.rewards.human_reward module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.common.rewards.math_reward.html">trinity.common.rewards.math_reward module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.common.rewards.naive_dapo_score.html">trinity.common.rewards.naive_dapo_score module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.common.rewards.qwen25_eval.html">trinity.common.rewards.qwen25_eval module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.common.rewards.reward_fn.html">trinity.common.rewards.reward_fn module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.common.rewards.tool_reward.html">trinity.common.rewards.tool_reward module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.common.rewards.utils.html">trinity.common.rewards.utils module</a></li>
@@ -744,6 +753,7 @@ window.addEventListener("load", load);
 <li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.common.workflows.math_rm_workflow.html">trinity.common.workflows.math_rm_workflow module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.common.workflows.math_ruler_workflow.html">trinity.common.workflows.math_ruler_workflow module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.common.workflows.math_trainable_ruler_workflow.html">trinity.common.workflows.math_trainable_ruler_workflow module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.common.workflows.on_policy_distill_workflow.html">trinity.common.workflows.on_policy_distill_workflow module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.common.workflows.rubric_judge_workflow.html">trinity.common.workflows.rubric_judge_workflow module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.common.workflows.simple_mm_workflow.html">trinity.common.workflows.simple_mm_workflow module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.common.workflows.step_wise_workflow.html">trinity.common.workflows.step_wise_workflow module</a></li>
@@ -760,10 +770,8 @@ window.addEventListener("load", load);
 <li class="toctree-l3"><a class="reference internal" href="../../../build_api/trinity.utils.annotations.html">trinity.utils.annotations module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../build_api/trinity.utils.distributed.html">trinity.utils.distributed module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../build_api/trinity.utils.dlc_utils.html">trinity.utils.dlc_utils module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../build_api/trinity.utils.eval_utils.html">trinity.utils.eval_utils module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../build_api/trinity.utils.log.html">trinity.utils.log module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../build_api/trinity.utils.lora_utils.html">trinity.utils.lora_utils module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../build_api/trinity.utils.math_eval_utils.html">trinity.utils.math_eval_utils module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../build_api/trinity.utils.monitor.html">trinity.utils.monitor module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../build_api/trinity.utils.plugin_loader.html">trinity.utils.plugin_loader module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../build_api/trinity.utils.registry.html">trinity.utils.registry module</a></li>
@@ -849,6 +857,21 @@ window.addEventListener("load", load);
 
 
 <div class="article-header-buttons">
+
+
+<a href="https://github.com/modelscope/Trinity-RFT" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
 
 
 
@@ -1001,7 +1024,7 @@ document.write(`
 <span class="k">class</span><span class="w"> </span><span class="nc">GenerationConfig</span><span class="p">:</span>
     <span class="n">temperature</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># 1.0</span>
     <span class="n">top_p</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># 1.0</span>
-    <span class="n">top_k</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># -1</span>
+    <span class="n">top_k</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>  <span class="c1"># -1 means disabled</span>
     <span class="n">logprobs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># 0  # vLLM return `logprobs + 1` elements</span>
     <span class="n">max_tokens</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># if None, use model.max_response_tokens</span>
     <span class="c1"># repeat each task for `n` times</span>
@@ -1425,10 +1448,12 @@ document.write(`
     <span class="c1"># the maximum number of tokens for the response</span>
     <span class="n">max_response_tokens</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="c1"># the minimum number of tokens for the response</span>
-    <span class="n">min_response_tokens</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">min_response_tokens</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="c1"># whether to truncate the prompt; if set to True, the prompt will be truncated to `max_prompt_tokens` tokens;</span>
     <span class="c1"># not applicable for OpenAI API</span>
     <span class="n">enable_prompt_truncation</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="c1"># repetition penalty for response generation</span>
+    <span class="n">repetition_penalty</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span>
 
     <span class="c1"># lora config</span>
     <span class="n">lora_configs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">LoRAConfig</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
@@ -1446,15 +1471,15 @@ document.write(`
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">InferenceModelConfig</span><span class="p">:</span>
     <span class="c1"># ! DO NOT SET in explorer.rollout_model, automatically set from config.model.model_path</span>
-    <span class="n">model_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">model_path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="n">engine_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;vllm&quot;</span>
     <span class="n">engine_num</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span>
     <span class="n">tensor_parallel_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span>
     <span class="n">use_v1</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="n">enforce_eager</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
-    <span class="n">enable_prefix_caching</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
-    <span class="n">enable_chunked_prefill</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">enable_prefix_caching</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">enable_chunked_prefill</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="n">gpu_memory_utilization</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.9</span>
     <span class="n">dtype</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;bfloat16&quot;</span>
     <span class="n">seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">42</span>
@@ -1475,6 +1500,8 @@ document.write(`
     <span class="n">min_response_tokens</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="c1"># if not set, use `model.enable_prompt_truncation`</span>
     <span class="n">enable_prompt_truncation</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="c1"># If not set, use `model.repetition_penalty`</span>
+    <span class="n">repetition_penalty</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="c1"># used for testing very long response generation, do not set it unless you know what you are doing</span>
     <span class="n">ignore_eos</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
 
@@ -1489,6 +1516,7 @@ document.write(`
 
     <span class="c1"># For OpenAI API</span>
     <span class="n">enable_openai_api</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">enable_log_requests</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># whether to enable request logging in vLLM API server</span>
 
     <span class="c1"># For tool calls in OpenAI API</span>
     <span class="n">enable_auto_tool_choice</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
@@ -1654,14 +1682,17 @@ document.write(`
     <span class="c1"># for benchmark</span>
     <span class="n">bench_on_latest_checkpoint</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># only benchmark the latest checkpoint</span>
 
-    <span class="c1"># for serve mode</span>
-    <span class="n">api_port</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">8010</span>
+    <span class="c1"># for serve mode proxy</span>
+    <span class="n">proxy_port</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">8010</span>
     <span class="c1"># listen on all interfaces by default</span>
     <span class="n">listen_address</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;0.0.0.0&quot;</span>
     <span class="c1"># check the running status of the server every 60 seconds</span>
     <span class="n">service_status_check_interval</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">60</span>
     <span class="c1"># keep at least 1 model in running status</span>
     <span class="n">min_running_model_num</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="c1"># db url for proxy history recorder, if not set, use proxy_history.db in buffer cache dir</span>
+    <span class="n">db_url</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
     <span class="c1"># Experimental feature</span>
     <span class="n">over_rollout</span><span class="p">:</span> <span class="n">OverRolloutConfig</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">OverRolloutConfig</span><span class="p">)</span>
     <span class="n">dynamic_timeout</span><span class="p">:</span> <span class="n">DynamicTimeoutConfig</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">DynamicTimeoutConfig</span><span class="p">)</span>
@@ -1676,7 +1707,7 @@ document.write(`
 <span class="k">class</span><span class="w"> </span><span class="nc">TrainerConfig</span><span class="p">:</span>
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">TRAINER_NAME</span>
     <span class="n">trainer_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;verl&quot;</span>
-    <span class="n">trainer_strategy</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;fsdp&quot;</span>
+    <span class="n">trainer_strategy</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;fsdp&quot;</span>  <span class="c1"># &quot;fsdp&quot;, &quot;fsdp2&quot; or &quot;megatron&quot;</span>
     <span class="n">save_interval</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">enable_preview</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># enable rollout preview in wandb</span>
     <span class="n">total_steps</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span>
@@ -1856,7 +1887,6 @@ document.write(`
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Update config if `node_num` or `gpu_per_node` are not set.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cluster</span><span class="o">.</span><span class="n">node_num</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">cluster</span><span class="o">.</span><span class="n">gpu_per_node</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span>
-
         <span class="c1"># init ray cluster to detect node_num and gpu_per_node</span>
         <span class="n">was_initialized</span> <span class="o">=</span> <span class="n">ray</span><span class="o">.</span><span class="n">is_initialized</span><span class="p">()</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">was_initialized</span><span class="p">:</span>
@@ -1904,6 +1934,8 @@ document.write(`
                 <span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_check_explorer_input</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">trinity.buffer.selector</span><span class="w"> </span><span class="kn">import</span> <span class="n">SELECTORS</span>
+
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="ow">in</span> <span class="p">{</span><span class="s2">&quot;train&quot;</span><span class="p">,</span> <span class="s2">&quot;serve&quot;</span><span class="p">}:</span>
             <span class="c1"># no need to check explorer_input in serve mode</span>
             <span class="k">return</span>
@@ -1943,6 +1975,13 @@ document.write(`
             <span class="n">set_if_none</span><span class="p">(</span><span class="n">taskset</span><span class="o">.</span><span class="n">rollout_args</span><span class="p">,</span> <span class="s2">&quot;logprobs&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">logprobs</span><span class="p">)</span>
             <span class="n">set_if_none</span><span class="p">(</span><span class="n">taskset</span><span class="o">.</span><span class="n">rollout_args</span><span class="p">,</span> <span class="s2">&quot;max_tokens&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">max_response_tokens</span><span class="p">)</span>
             <span class="n">set_if_none</span><span class="p">(</span><span class="n">taskset</span><span class="o">.</span><span class="n">format</span><span class="p">,</span> <span class="s2">&quot;chat_template&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">custom_chat_template</span><span class="p">)</span>
+
+            <span class="c1"># check if selector is supported</span>
+            <span class="n">selector</span> <span class="o">=</span> <span class="n">SELECTORS</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">taskset</span><span class="o">.</span><span class="n">task_selector</span><span class="o">.</span><span class="n">selector_type</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">selector</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Selector </span><span class="si">{</span><span class="n">taskset</span><span class="o">.</span><span class="n">task_selector</span><span class="o">.</span><span class="n">selector_type</span><span class="si">}</span><span class="s2"> is not supported.&quot;</span>
+                <span class="p">)</span>
 
         <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">dataset</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">explorer_input</span><span class="o">.</span><span class="n">eval_tasksets</span><span class="p">):</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">dataset</span><span class="o">.</span><span class="n">path</span><span class="p">:</span>
@@ -1994,7 +2033,7 @@ document.write(`
                 <span class="sa">f</span><span class="s2">&quot;Auto set `buffer.trainer_input.experience_buffer.path` to </span><span class="si">{</span><span class="n">experience_buffer</span><span class="o">.</span><span class="n">path</span><span class="si">}</span><span class="s2">&quot;</span>
             <span class="p">)</span>
 
-        <span class="kn">from</span><span class="w"> </span><span class="nn">trinity.algorithm.algorithm</span><span class="w"> </span><span class="kn">import</span> <span class="n">ALGORITHM_TYPE</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">trinity.algorithm</span><span class="w"> </span><span class="kn">import</span> <span class="n">ALGORITHM_TYPE</span>
 
         <span class="n">experience_buffer</span><span class="o">.</span><span class="n">schema_type</span> <span class="o">=</span> <span class="n">ALGORITHM_TYPE</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">algorithm</span><span class="o">.</span><span class="n">algorithm_type</span><span class="p">)</span><span class="o">.</span><span class="n">schema</span>
         <span class="n">experience_buffer</span><span class="o">.</span><span class="n">batch_size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="o">.</span><span class="n">train_batch_size</span>
@@ -2029,8 +2068,8 @@ document.write(`
         <span class="n">experience_pipeline</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_processor</span><span class="o">.</span><span class="n">experience_pipeline</span>
         <span class="k">if</span> <span class="n">experience_pipeline</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="ow">in</span> <span class="p">{</span><span class="s2">&quot;explore&quot;</span><span class="p">,</span> <span class="s2">&quot;both&quot;</span><span class="p">,</span> <span class="s2">&quot;serve&quot;</span><span class="p">}:</span>
             <span class="k">if</span> <span class="n">experience_pipeline</span><span class="o">.</span><span class="n">save_input</span> <span class="ow">and</span> <span class="n">experience_pipeline</span><span class="o">.</span><span class="n">input_save_path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">experience_pipeline</span><span class="o">.</span><span class="n">input_save_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="o">.</span><span class="n">cache_dir</span><span class="p">,</span> <span class="s2">&quot;explorer_output.jsonl&quot;</span>  <span class="c1"># type: ignore[arg-type]</span>
+                <span class="n">experience_pipeline</span><span class="o">.</span><span class="n">input_save_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_default_storage_path</span><span class="p">(</span>
+                    <span class="n">StorageType</span><span class="o">.</span><span class="n">SQL</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="s2">&quot;explorer_output&quot;</span>
                 <span class="p">)</span>
                 <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
                     <span class="sa">f</span><span class="s2">&quot;Auto set `data_processor.experience_pipeline.input_save_path` to </span><span class="si">{</span><span class="n">experience_pipeline</span><span class="o">.</span><span class="n">input_save_path</span><span class="si">}</span><span class="s2">&quot;</span>
@@ -2106,12 +2145,12 @@ document.write(`
     <span class="k">def</span><span class="w"> </span><span class="nf">_check_algorithm</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">trinity.algorithm</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
             <span class="n">ADVANTAGE_FN</span><span class="p">,</span>
+            <span class="n">ALGORITHM_TYPE</span><span class="p">,</span>
             <span class="n">ENTROPY_LOSS_FN</span><span class="p">,</span>
             <span class="n">KL_FN</span><span class="p">,</span>
             <span class="n">POLICY_LOSS_FN</span><span class="p">,</span>
             <span class="n">SAMPLE_STRATEGY</span><span class="p">,</span>
         <span class="p">)</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">trinity.algorithm.algorithm</span><span class="w"> </span><span class="kn">import</span> <span class="n">ALGORITHM_TYPE</span>
 
         <span class="n">algorithm</span> <span class="o">=</span> <span class="n">ALGORITHM_TYPE</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">algorithm</span><span class="o">.</span><span class="n">algorithm_type</span><span class="p">)</span>
         <span class="n">algorithm</span><span class="o">.</span><span class="n">check_config</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
@@ -2294,7 +2333,7 @@ document.write(`
 
         <span class="c1"># check explorer</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">explorer</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">rollout_args</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;temperature&quot;</span><span class="p">,</span> <span class="s2">&quot;top_p&quot;</span><span class="p">,</span> <span class="s2">&quot;top_k&quot;</span><span class="p">,</span> <span class="s2">&quot;logprobs&quot;</span><span class="p">]</span>
+            <span class="n">rollout_args</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;temperature&quot;</span><span class="p">,</span> <span class="s2">&quot;top_p&quot;</span><span class="p">,</span> <span class="s2">&quot;top_k&quot;</span><span class="p">,</span> <span class="s2">&quot;logprobs&quot;</span><span class="p">,</span> <span class="s2">&quot;repetition_penalty&quot;</span><span class="p">]</span>
             <span class="n">length_args</span> <span class="o">=</span> <span class="p">[</span>
                 <span class="s2">&quot;max_model_len&quot;</span><span class="p">,</span>
                 <span class="s2">&quot;max_prompt_tokens&quot;</span><span class="p">,</span>
@@ -2305,7 +2344,7 @@ document.write(`
             <span class="n">rope_args</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;rope_scaling&quot;</span><span class="p">,</span> <span class="s2">&quot;rope_theta&quot;</span><span class="p">]</span>
             <span class="n">model_args</span> <span class="o">=</span> <span class="n">rollout_args</span> <span class="o">+</span> <span class="n">length_args</span> <span class="o">+</span> <span class="n">rope_args</span>
             <span class="k">for</span> <span class="n">args</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;model_path&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">model_args</span><span class="p">:</span>
-                <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">explorer</span><span class="o">.</span><span class="n">rollout_model</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">,</span> <span class="n">args</span><span class="p">))</span>
+                <span class="n">set_if_none</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">explorer</span><span class="o">.</span><span class="n">rollout_model</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">,</span> <span class="n">args</span><span class="p">))</span>
             <span class="k">if</span> <span class="p">(</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">explorer</span><span class="o">.</span><span class="n">rollout_model</span><span class="o">.</span><span class="n">chat_template</span> <span class="ow">is</span> <span class="kc">None</span>
                 <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">custom_chat_template</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
@@ -2316,6 +2355,29 @@ document.write(`
                     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;auxiliary model&#39;s model_path is required.&quot;</span><span class="p">)</span>
                 <span class="k">for</span> <span class="n">args</span> <span class="ow">in</span> <span class="n">model_args</span><span class="p">:</span>
                     <span class="n">set_if_none</span><span class="p">(</span><span class="n">aux_model</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">,</span> <span class="n">args</span><span class="p">))</span>
+
+            <span class="c1"># check gpu number</span>
+            <span class="n">rollout_gpu_num</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">explorer</span><span class="o">.</span><span class="n">rollout_model</span><span class="o">.</span><span class="n">tensor_parallel_size</span>
+                <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">explorer</span><span class="o">.</span><span class="n">rollout_model</span><span class="o">.</span><span class="n">engine_num</span>
+                <span class="o">+</span> <span class="nb">sum</span><span class="p">(</span>
+                    <span class="p">(</span>
+                        <span class="n">model</span><span class="o">.</span><span class="n">tensor_parallel_size</span> <span class="o">*</span> <span class="n">model</span><span class="o">.</span><span class="n">engine_num</span>
+                        <span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">explorer</span><span class="o">.</span><span class="n">auxiliary_models</span>
+                    <span class="p">)</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+            <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">cluster</span><span class="o">.</span><span class="n">node_num</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+            <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">cluster</span><span class="o">.</span><span class="n">gpu_per_node</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+            <span class="n">total_gpu_num</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cluster</span><span class="o">.</span><span class="n">node_num</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">cluster</span><span class="o">.</span><span class="n">gpu_per_node</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;explore&quot;</span><span class="p">,</span> <span class="s2">&quot;bench&quot;</span><span class="p">,</span> <span class="s2">&quot;serve&quot;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">rollout_gpu_num</span> <span class="o">&gt;</span> <span class="n">total_gpu_num</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Total GPU number (</span><span class="si">{</span><span class="n">total_gpu_num</span><span class="si">}</span><span class="s2">) is less than the number of GPUs required for rollout (</span><span class="si">{</span><span class="n">rollout_gpu_num</span><span class="si">}</span><span class="s2">).&quot;</span>
+                <span class="p">)</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;both&quot;</span> <span class="ow">and</span> <span class="n">rollout_gpu_num</span> <span class="o">&gt;=</span> <span class="n">total_gpu_num</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Not enough GPUs for trainer in &#39;both&#39; mode. Explorer requires </span><span class="si">{</span><span class="n">rollout_gpu_num</span><span class="si">}</span><span class="s2"> GPUs, but total available GPUs are </span><span class="si">{</span><span class="n">total_gpu_num</span><span class="si">}</span><span class="s2">.&quot;</span>
+                <span class="p">)</span>
 
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">explorer</span><span class="o">.</span><span class="n">over_rollout</span><span class="o">.</span><span class="n">ratio</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">:</span>
                 <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="mf">0.0</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">explorer</span><span class="o">.</span><span class="n">over_rollout</span><span class="o">.</span><span class="n">ratio</span> <span class="o">&lt;</span> <span class="mf">1.0</span><span class="p">):</span>
@@ -2402,7 +2464,7 @@ document.write(`
         <span class="c1"># check buffer</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_check_buffer</span><span class="p">()</span>
         <span class="c1"># check and update trainer</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;train&quot;</span><span class="p">,</span> <span class="s2">&quot;both&quot;</span><span class="p">,</span> <span class="s2">&quot;bench&quot;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;train&quot;</span><span class="p">,</span> <span class="s2">&quot;both&quot;</span><span class="p">,</span> <span class="s2">&quot;bench&quot;</span><span class="p">]</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="o">.</span><span class="n">trainer_strategy</span> <span class="o">==</span> <span class="s2">&quot;megatron&quot;</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="o">.</span><span class="n">trainer_type</span> <span class="o">==</span> <span class="s2">&quot;verl&quot;</span><span class="p">:</span>
                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="o">.</span><span class="n">trainer_config</span><span class="p">:</span>
                     <span class="kn">from</span><span class="w"> </span><span class="nn">trinity.common.verl_config</span><span class="w"> </span><span class="kn">import</span> <span class="n">veRLConfig</span>

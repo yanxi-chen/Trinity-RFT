@@ -551,9 +551,11 @@ window.addEventListener("load", load);
 <li class="toctree-l1"><a class="reference internal" href="tutorial/develop_algorithm.html">Algorithm 开发指南</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tutorial/example_mix_algo.html">Algorithm 进阶开发</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tutorial/develop_operator.html">Operator 开发指南</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tutorial/develop_selector.html">🧪 实验性功能：任务选择与调度系统</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/develop_selector.html">🧪 实验性功能：任务选择器</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tutorial/trinity_configs.html">参数配置指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/trinity_gpu_configs.html">GPU 资源相关配置指南</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tutorial/synchronizer.html">Synchronizer 介绍</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/align_with_verl.html">与 veRL 对齐训练配置</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">样例</span></p>
 <ul class="nav bd-sidenav">
@@ -567,10 +569,11 @@ window.addEventListener("load", load);
 <li class="toctree-l1"><a class="reference internal" href="tutorial/example_dpo.html">离线 DPO 和 SFT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tutorial/example_megatron.html">Megatron-LM 支持</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tutorial/example_data_functionalities.html">数据处理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/example_dataset_perspective.html">样例总览</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">常见问题</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="tutorial/faq.html">常见问题</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/faq.html">常见问题（FAQ）</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul class="nav bd-sidenav">
@@ -591,7 +594,6 @@ window.addEventListener("load", load);
 <li class="toctree-l3 has-children"><a class="reference internal" href="build_api/trinity.buffer.reader.html">trinity.buffer.reader package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="build_api/trinity.buffer.reader.file_reader.html">trinity.buffer.reader.file_reader module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="build_api/trinity.buffer.reader.queue_reader.html">trinity.buffer.reader.queue_reader module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="build_api/trinity.buffer.reader.reader.html">trinity.buffer.reader.reader module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="build_api/trinity.buffer.reader.sql_reader.html">trinity.buffer.reader.sql_reader module</a></li>
 </ul>
 </details></li>
@@ -622,16 +624,18 @@ window.addEventListener("load", load);
 <li class="toctree-l3"><a class="reference internal" href="build_api/trinity.buffer.buffer_writer.html">trinity.buffer.buffer_writer module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="build_api/trinity.buffer.task_scheduler.html">trinity.buffer.task_scheduler module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="build_api/trinity.buffer.utils.html">trinity.buffer.utils module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build_api/trinity.buffer.viewer.html">trinity.buffer.viewer module</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="build_api/trinity.explorer.html">trinity.explorer package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3 has-children"><a class="reference internal" href="build_api/trinity.explorer.api.html">trinity.explorer.api package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l4"><a class="reference internal" href="build_api/trinity.explorer.api.api.html">trinity.explorer.api.api module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="build_api/trinity.explorer.api.service.html">trinity.explorer.api.service module</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="build_api/trinity.explorer.proxy.html">trinity.explorer.proxy package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="build_api/trinity.explorer.proxy.app.html">trinity.explorer.proxy.app module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="build_api/trinity.explorer.proxy.client.html">trinity.explorer.proxy.client module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="build_api/trinity.explorer.proxy.recorder.html">trinity.explorer.proxy.recorder module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="build_api/trinity.explorer.proxy.service.html">trinity.explorer.proxy.service module</a></li>
 </ul>
 </details></li>
 <li class="toctree-l3"><a class="reference internal" href="build_api/trinity.explorer.explorer.html">trinity.explorer.explorer module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="build_api/trinity.explorer.explorer_client.html">trinity.explorer.explorer_client module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="build_api/trinity.explorer.scheduler.html">trinity.explorer.scheduler module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="build_api/trinity.explorer.workflow_runner.html">trinity.explorer.workflow_runner module</a></li>
 </ul>
@@ -657,6 +661,7 @@ window.addEventListener("load", load);
 <li class="toctree-l4"><a class="reference internal" href="build_api/trinity.algorithm.advantage_fn.asymre_advantage.html">trinity.algorithm.advantage_fn.asymre_advantage module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="build_api/trinity.algorithm.advantage_fn.grpo_advantage.html">trinity.algorithm.advantage_fn.grpo_advantage module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="build_api/trinity.algorithm.advantage_fn.multi_step_grpo_advantage.html">trinity.algorithm.advantage_fn.multi_step_grpo_advantage module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="build_api/trinity.algorithm.advantage_fn.on_policy_distill_advantage.html">trinity.algorithm.advantage_fn.on_policy_distill_advantage module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="build_api/trinity.algorithm.advantage_fn.opmd_advantage.html">trinity.algorithm.advantage_fn.opmd_advantage module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="build_api/trinity.algorithm.advantage_fn.ppo_advantage.html">trinity.algorithm.advantage_fn.ppo_advantage module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="build_api/trinity.algorithm.advantage_fn.rec_advantage.html">trinity.algorithm.advantage_fn.rec_advantage module</a></li>
@@ -679,6 +684,7 @@ window.addEventListener("load", load);
 <li class="toctree-l4"><a class="reference internal" href="build_api/trinity.algorithm.policy_loss_fn.cispo_policy_loss.html">trinity.algorithm.policy_loss_fn.cispo_policy_loss module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="build_api/trinity.algorithm.policy_loss_fn.dpo_loss.html">trinity.algorithm.policy_loss_fn.dpo_loss module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="build_api/trinity.algorithm.policy_loss_fn.gspo_policy_loss.html">trinity.algorithm.policy_loss_fn.gspo_policy_loss module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="build_api/trinity.algorithm.policy_loss_fn.importance_sampling_policy_loss.html">trinity.algorithm.policy_loss_fn.importance_sampling_policy_loss module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="build_api/trinity.algorithm.policy_loss_fn.mix_policy_loss.html">trinity.algorithm.policy_loss_fn.mix_policy_loss module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="build_api/trinity.algorithm.policy_loss_fn.opmd_policy_loss.html">trinity.algorithm.policy_loss_fn.opmd_policy_loss module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="build_api/trinity.algorithm.policy_loss_fn.policy_loss_fn.html">trinity.algorithm.policy_loss_fn.policy_loss_fn module</a></li>
@@ -731,9 +737,12 @@ window.addEventListener("load", load);
 <li class="toctree-l4"><a class="reference internal" href="build_api/trinity.common.rewards.agents_reward.html">trinity.common.rewards.agents_reward module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="build_api/trinity.common.rewards.countdown_reward.html">trinity.common.rewards.countdown_reward module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="build_api/trinity.common.rewards.dapo_reward.html">trinity.common.rewards.dapo_reward module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="build_api/trinity.common.rewards.eval_utils.html">trinity.common.rewards.eval_utils module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="build_api/trinity.common.rewards.format_reward.html">trinity.common.rewards.format_reward module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="build_api/trinity.common.rewards.human_reward.html">trinity.common.rewards.human_reward module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="build_api/trinity.common.rewards.math_reward.html">trinity.common.rewards.math_reward module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="build_api/trinity.common.rewards.naive_dapo_score.html">trinity.common.rewards.naive_dapo_score module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="build_api/trinity.common.rewards.qwen25_eval.html">trinity.common.rewards.qwen25_eval module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="build_api/trinity.common.rewards.reward_fn.html">trinity.common.rewards.reward_fn module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="build_api/trinity.common.rewards.tool_reward.html">trinity.common.rewards.tool_reward module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="build_api/trinity.common.rewards.utils.html">trinity.common.rewards.utils module</a></li>
@@ -748,6 +757,7 @@ window.addEventListener("load", load);
 <li class="toctree-l4"><a class="reference internal" href="build_api/trinity.common.workflows.math_rm_workflow.html">trinity.common.workflows.math_rm_workflow module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="build_api/trinity.common.workflows.math_ruler_workflow.html">trinity.common.workflows.math_ruler_workflow module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="build_api/trinity.common.workflows.math_trainable_ruler_workflow.html">trinity.common.workflows.math_trainable_ruler_workflow module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="build_api/trinity.common.workflows.on_policy_distill_workflow.html">trinity.common.workflows.on_policy_distill_workflow module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="build_api/trinity.common.workflows.rubric_judge_workflow.html">trinity.common.workflows.rubric_judge_workflow module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="build_api/trinity.common.workflows.simple_mm_workflow.html">trinity.common.workflows.simple_mm_workflow module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="build_api/trinity.common.workflows.step_wise_workflow.html">trinity.common.workflows.step_wise_workflow module</a></li>
@@ -764,10 +774,8 @@ window.addEventListener("load", load);
 <li class="toctree-l3"><a class="reference internal" href="build_api/trinity.utils.annotations.html">trinity.utils.annotations module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="build_api/trinity.utils.distributed.html">trinity.utils.distributed module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="build_api/trinity.utils.dlc_utils.html">trinity.utils.dlc_utils module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="build_api/trinity.utils.eval_utils.html">trinity.utils.eval_utils module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="build_api/trinity.utils.log.html">trinity.utils.log module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="build_api/trinity.utils.lora_utils.html">trinity.utils.lora_utils module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="build_api/trinity.utils.math_eval_utils.html">trinity.utils.math_eval_utils module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="build_api/trinity.utils.monitor.html">trinity.utils.monitor module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="build_api/trinity.utils.plugin_loader.html">trinity.utils.plugin_loader module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="build_api/trinity.utils.registry.html">trinity.utils.registry module</a></li>
@@ -853,6 +861,21 @@ window.addEventListener("load", load);
 
 
 <div class="article-header-buttons">
+
+
+<a href="https://github.com/modelscope/Trinity-RFT" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="源码库"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
 
 
 
@@ -964,6 +987,11 @@ document.write(`
      <tr class="cg-1">
        <td></td>
        <td>&#160;&#160;&#160;
+       <a href="build_api/trinity.algorithm.advantage_fn.on_policy_distill_advantage.html#module-trinity.algorithm.advantage_fn.on_policy_distill_advantage"><code class="xref">trinity.algorithm.advantage_fn.on_policy_distill_advantage</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
        <a href="build_api/trinity.algorithm.advantage_fn.opmd_advantage.html#module-trinity.algorithm.advantage_fn.opmd_advantage"><code class="xref">trinity.algorithm.advantage_fn.opmd_advantage</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-1">
@@ -1050,6 +1078,11 @@ document.write(`
        <td></td>
        <td>&#160;&#160;&#160;
        <a href="build_api/trinity.algorithm.policy_loss_fn.gspo_policy_loss.html#module-trinity.algorithm.policy_loss_fn.gspo_policy_loss"><code class="xref">trinity.algorithm.policy_loss_fn.gspo_policy_loss</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="build_api/trinity.algorithm.policy_loss_fn.importance_sampling_policy_loss.html#module-trinity.algorithm.policy_loss_fn.importance_sampling_policy_loss"><code class="xref">trinity.algorithm.policy_loss_fn.importance_sampling_policy_loss</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-1">
        <td></td>
@@ -1214,11 +1247,6 @@ document.write(`
      <tr class="cg-1">
        <td></td>
        <td>&#160;&#160;&#160;
-       <a href="build_api/trinity.buffer.reader.reader.html#module-trinity.buffer.reader.reader"><code class="xref">trinity.buffer.reader.reader</code></a></td><td>
-       <em></em></td></tr>
-     <tr class="cg-1">
-       <td></td>
-       <td>&#160;&#160;&#160;
        <a href="build_api/trinity.buffer.reader.sql_reader.html#module-trinity.buffer.reader.sql_reader"><code class="xref">trinity.buffer.reader.sql_reader</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-1">
@@ -1280,6 +1308,11 @@ document.write(`
        <td></td>
        <td>&#160;&#160;&#160;
        <a href="build_api/trinity.buffer.utils.html#module-trinity.buffer.utils"><code class="xref">trinity.buffer.utils</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="build_api/trinity.buffer.viewer.html#module-trinity.buffer.viewer"><code class="xref">trinity.buffer.viewer</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-1">
        <td></td>
@@ -1394,6 +1427,11 @@ document.write(`
      <tr class="cg-1">
        <td></td>
        <td>&#160;&#160;&#160;
+       <a href="build_api/trinity.common.rewards.eval_utils.html#module-trinity.common.rewards.eval_utils"><code class="xref">trinity.common.rewards.eval_utils</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
        <a href="build_api/trinity.common.rewards.format_reward.html#module-trinity.common.rewards.format_reward"><code class="xref">trinity.common.rewards.format_reward</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-1">
@@ -1405,6 +1443,16 @@ document.write(`
        <td></td>
        <td>&#160;&#160;&#160;
        <a href="build_api/trinity.common.rewards.math_reward.html#module-trinity.common.rewards.math_reward"><code class="xref">trinity.common.rewards.math_reward</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="build_api/trinity.common.rewards.naive_dapo_score.html#module-trinity.common.rewards.naive_dapo_score"><code class="xref">trinity.common.rewards.naive_dapo_score</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="build_api/trinity.common.rewards.qwen25_eval.html#module-trinity.common.rewards.qwen25_eval"><code class="xref">trinity.common.rewards.qwen25_eval</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-1">
        <td></td>
@@ -1489,6 +1537,11 @@ document.write(`
      <tr class="cg-1">
        <td></td>
        <td>&#160;&#160;&#160;
+       <a href="build_api/trinity.common.workflows.on_policy_distill_workflow.html#module-trinity.common.workflows.on_policy_distill_workflow"><code class="xref">trinity.common.workflows.on_policy_distill_workflow</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
        <a href="build_api/trinity.common.workflows.rubric_judge_workflow.html#module-trinity.common.workflows.rubric_judge_workflow"><code class="xref">trinity.common.workflows.rubric_judge_workflow</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-1">
@@ -1514,27 +1567,32 @@ document.write(`
      <tr class="cg-1">
        <td></td>
        <td>&#160;&#160;&#160;
-       <a href="build_api/trinity.explorer.api.html#module-trinity.explorer.api"><code class="xref">trinity.explorer.api</code></a></td><td>
-       <em></em></td></tr>
-     <tr class="cg-1">
-       <td></td>
-       <td>&#160;&#160;&#160;
-       <a href="build_api/trinity.explorer.api.api.html#module-trinity.explorer.api.api"><code class="xref">trinity.explorer.api.api</code></a></td><td>
-       <em></em></td></tr>
-     <tr class="cg-1">
-       <td></td>
-       <td>&#160;&#160;&#160;
-       <a href="build_api/trinity.explorer.api.service.html#module-trinity.explorer.api.service"><code class="xref">trinity.explorer.api.service</code></a></td><td>
-       <em></em></td></tr>
-     <tr class="cg-1">
-       <td></td>
-       <td>&#160;&#160;&#160;
        <a href="build_api/trinity.explorer.explorer.html#module-trinity.explorer.explorer"><code class="xref">trinity.explorer.explorer</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-1">
        <td></td>
        <td>&#160;&#160;&#160;
-       <a href="build_api/trinity.explorer.explorer_client.html#module-trinity.explorer.explorer_client"><code class="xref">trinity.explorer.explorer_client</code></a></td><td>
+       <a href="build_api/trinity.explorer.proxy.html#module-trinity.explorer.proxy"><code class="xref">trinity.explorer.proxy</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="build_api/trinity.explorer.proxy.app.html#module-trinity.explorer.proxy.app"><code class="xref">trinity.explorer.proxy.app</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="build_api/trinity.explorer.proxy.client.html#module-trinity.explorer.proxy.client"><code class="xref">trinity.explorer.proxy.client</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="build_api/trinity.explorer.proxy.recorder.html#module-trinity.explorer.proxy.recorder"><code class="xref">trinity.explorer.proxy.recorder</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="build_api/trinity.explorer.proxy.service.html#module-trinity.explorer.proxy.service"><code class="xref">trinity.explorer.proxy.service</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-1">
        <td></td>
@@ -1689,22 +1747,12 @@ document.write(`
      <tr class="cg-1">
        <td></td>
        <td>&#160;&#160;&#160;
-       <a href="build_api/trinity.utils.eval_utils.html#module-trinity.utils.eval_utils"><code class="xref">trinity.utils.eval_utils</code></a></td><td>
-       <em></em></td></tr>
-     <tr class="cg-1">
-       <td></td>
-       <td>&#160;&#160;&#160;
        <a href="build_api/trinity.utils.log.html#module-trinity.utils.log"><code class="xref">trinity.utils.log</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-1">
        <td></td>
        <td>&#160;&#160;&#160;
        <a href="build_api/trinity.utils.lora_utils.html#module-trinity.utils.lora_utils"><code class="xref">trinity.utils.lora_utils</code></a></td><td>
-       <em></em></td></tr>
-     <tr class="cg-1">
-       <td></td>
-       <td>&#160;&#160;&#160;
-       <a href="build_api/trinity.utils.math_eval_utils.html#module-trinity.utils.math_eval_utils"><code class="xref">trinity.utils.math_eval_utils</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-1">
        <td></td>

@@ -44,7 +44,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="trinity.utils.plugin_loader module" href="trinity.utils.plugin_loader.html" />
-    <link rel="prev" title="trinity.utils.math_eval_utils module" href="trinity.utils.math_eval_utils.html" />
+    <link rel="prev" title="trinity.utils.lora_utils module" href="trinity.utils.lora_utils.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -183,9 +183,11 @@
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/develop_algorithm.html">Algorithms Development Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/example_mix_algo.html">Advanced Algorithm Development</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/develop_operator.html">Operator Development Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../tutorial/develop_selector.html">🧪 Experimental: Task Selection &amp; Scheduling System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/develop_selector.html">🧪 Experimental: Task Selection</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/trinity_configs.html">Configuration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/trinity_gpu_configs.html">GPU Configuration Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/synchronizer.html">Synchronizer in Trinity-RFT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/align_with_verl.html">Align configuration with veRL</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples</span></p>
 <ul class="nav bd-sidenav">
@@ -199,6 +201,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/example_dpo.html">Offline DPO and SFT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/example_megatron.html">Megatron-LM Backend</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/example_data_functionalities.html">Data Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/example_dataset_perspective.html">Example Summary</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">FAQ</span></p>
 <ul class="nav bd-sidenav">
@@ -223,7 +226,6 @@
 <li class="toctree-l3 has-children"><a class="reference internal" href="trinity.buffer.reader.html">trinity.buffer.reader package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="trinity.buffer.reader.file_reader.html">trinity.buffer.reader.file_reader module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.buffer.reader.queue_reader.html">trinity.buffer.reader.queue_reader module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="trinity.buffer.reader.reader.html">trinity.buffer.reader.reader module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.buffer.reader.sql_reader.html">trinity.buffer.reader.sql_reader module</a></li>
 </ul>
 </details></li>
@@ -254,16 +256,18 @@
 <li class="toctree-l3"><a class="reference internal" href="trinity.buffer.buffer_writer.html">trinity.buffer.buffer_writer module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.buffer.task_scheduler.html">trinity.buffer.task_scheduler module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.buffer.utils.html">trinity.buffer.utils module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="trinity.buffer.viewer.html">trinity.buffer.viewer module</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="trinity.explorer.html">trinity.explorer package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3 has-children"><a class="reference internal" href="trinity.explorer.api.html">trinity.explorer.api package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l4"><a class="reference internal" href="trinity.explorer.api.api.html">trinity.explorer.api.api module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="trinity.explorer.api.service.html">trinity.explorer.api.service module</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="trinity.explorer.proxy.html">trinity.explorer.proxy package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="trinity.explorer.proxy.app.html">trinity.explorer.proxy.app module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.explorer.proxy.client.html">trinity.explorer.proxy.client module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.explorer.proxy.recorder.html">trinity.explorer.proxy.recorder module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.explorer.proxy.service.html">trinity.explorer.proxy.service module</a></li>
 </ul>
 </details></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.explorer.explorer.html">trinity.explorer.explorer module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="trinity.explorer.explorer_client.html">trinity.explorer.explorer_client module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.explorer.scheduler.html">trinity.explorer.scheduler module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.explorer.workflow_runner.html">trinity.explorer.workflow_runner module</a></li>
 </ul>
@@ -289,6 +293,7 @@
 <li class="toctree-l4"><a class="reference internal" href="trinity.algorithm.advantage_fn.asymre_advantage.html">trinity.algorithm.advantage_fn.asymre_advantage module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.algorithm.advantage_fn.grpo_advantage.html">trinity.algorithm.advantage_fn.grpo_advantage module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.algorithm.advantage_fn.multi_step_grpo_advantage.html">trinity.algorithm.advantage_fn.multi_step_grpo_advantage module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.algorithm.advantage_fn.on_policy_distill_advantage.html">trinity.algorithm.advantage_fn.on_policy_distill_advantage module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.algorithm.advantage_fn.opmd_advantage.html">trinity.algorithm.advantage_fn.opmd_advantage module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.algorithm.advantage_fn.ppo_advantage.html">trinity.algorithm.advantage_fn.ppo_advantage module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.algorithm.advantage_fn.rec_advantage.html">trinity.algorithm.advantage_fn.rec_advantage module</a></li>
@@ -311,6 +316,7 @@
 <li class="toctree-l4"><a class="reference internal" href="trinity.algorithm.policy_loss_fn.cispo_policy_loss.html">trinity.algorithm.policy_loss_fn.cispo_policy_loss module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.algorithm.policy_loss_fn.dpo_loss.html">trinity.algorithm.policy_loss_fn.dpo_loss module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.algorithm.policy_loss_fn.gspo_policy_loss.html">trinity.algorithm.policy_loss_fn.gspo_policy_loss module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.algorithm.policy_loss_fn.importance_sampling_policy_loss.html">trinity.algorithm.policy_loss_fn.importance_sampling_policy_loss module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.algorithm.policy_loss_fn.mix_policy_loss.html">trinity.algorithm.policy_loss_fn.mix_policy_loss module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.algorithm.policy_loss_fn.opmd_policy_loss.html">trinity.algorithm.policy_loss_fn.opmd_policy_loss module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.algorithm.policy_loss_fn.policy_loss_fn.html">trinity.algorithm.policy_loss_fn.policy_loss_fn module</a></li>
@@ -363,9 +369,12 @@
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.rewards.agents_reward.html">trinity.common.rewards.agents_reward module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.rewards.countdown_reward.html">trinity.common.rewards.countdown_reward module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.rewards.dapo_reward.html">trinity.common.rewards.dapo_reward module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.rewards.eval_utils.html">trinity.common.rewards.eval_utils module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.rewards.format_reward.html">trinity.common.rewards.format_reward module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.rewards.human_reward.html">trinity.common.rewards.human_reward module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.rewards.math_reward.html">trinity.common.rewards.math_reward module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.rewards.naive_dapo_score.html">trinity.common.rewards.naive_dapo_score module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.rewards.qwen25_eval.html">trinity.common.rewards.qwen25_eval module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.rewards.reward_fn.html">trinity.common.rewards.reward_fn module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.rewards.tool_reward.html">trinity.common.rewards.tool_reward module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.rewards.utils.html">trinity.common.rewards.utils module</a></li>
@@ -380,6 +389,7 @@
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.workflows.math_rm_workflow.html">trinity.common.workflows.math_rm_workflow module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.workflows.math_ruler_workflow.html">trinity.common.workflows.math_ruler_workflow module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.workflows.math_trainable_ruler_workflow.html">trinity.common.workflows.math_trainable_ruler_workflow module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.workflows.on_policy_distill_workflow.html">trinity.common.workflows.on_policy_distill_workflow module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.workflows.rubric_judge_workflow.html">trinity.common.workflows.rubric_judge_workflow module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.workflows.simple_mm_workflow.html">trinity.common.workflows.simple_mm_workflow module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.workflows.step_wise_workflow.html">trinity.common.workflows.step_wise_workflow module</a></li>
@@ -396,10 +406,8 @@
 <li class="toctree-l3"><a class="reference internal" href="trinity.utils.annotations.html">trinity.utils.annotations module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.utils.distributed.html">trinity.utils.distributed module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.utils.dlc_utils.html">trinity.utils.dlc_utils module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="trinity.utils.eval_utils.html">trinity.utils.eval_utils module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.utils.log.html">trinity.utils.log module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.utils.lora_utils.html">trinity.utils.lora_utils module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="trinity.utils.math_eval_utils.html">trinity.utils.math_eval_utils module</a></li>
 <li class="toctree-l3 current active"><a class="current reference internal" href="#">trinity.utils.monitor module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.utils.plugin_loader.html">trinity.utils.plugin_loader module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.utils.registry.html">trinity.utils.registry module</a></li>
@@ -485,6 +493,21 @@
 
 
 <div class="article-header-buttons">
+
+
+<a href="https://github.com/modelscope/Trinity-RFT" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
 
 
 
@@ -623,6 +646,14 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.utils.monitor.MlflowMonitor.log"><code class="docutils literal notranslate"><span class="pre">MlflowMonitor.log()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.utils.monitor.MlflowMonitor.close"><code class="docutils literal notranslate"><span class="pre">MlflowMonitor.close()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.utils.monitor.MlflowMonitor.default_args"><code class="docutils literal notranslate"><span class="pre">MlflowMonitor.default_args()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.utils.monitor.SwanlabMonitor"><code class="docutils literal notranslate"><span class="pre">SwanlabMonitor</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.utils.monitor.SwanlabMonitor.__init__"><code class="docutils literal notranslate"><span class="pre">SwanlabMonitor.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.utils.monitor.SwanlabMonitor.log_table"><code class="docutils literal notranslate"><span class="pre">SwanlabMonitor.log_table()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.utils.monitor.SwanlabMonitor.log"><code class="docutils literal notranslate"><span class="pre">SwanlabMonitor.log()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.utils.monitor.SwanlabMonitor.close"><code class="docutils literal notranslate"><span class="pre">SwanlabMonitor.close()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.utils.monitor.SwanlabMonitor.default_args"><code class="docutils literal notranslate"><span class="pre">SwanlabMonitor.default_args()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -802,6 +833,66 @@ document.write(`
 
 </dd></dl>
 
+<dl class="py class">
+<dt class="sig sig-object py" id="trinity.utils.monitor.SwanlabMonitor">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">trinity.utils.monitor.</span></span><span class="sig-name descname"><span class="pre">SwanlabMonitor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">role</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="trinity.common.config.html#trinity.common.config.Config" title="trinity.common.config.Config"><span class="pre">Config</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trinity/utils/monitor.html#SwanlabMonitor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trinity.utils.monitor.SwanlabMonitor" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#trinity.utils.monitor.Monitor" title="trinity.utils.monitor.Monitor"><code class="xref py py-class docutils literal notranslate"><span class="pre">Monitor</span></code></a></p>
+<p>Monitor with SwanLab.</p>
+<p>This monitor integrates with SwanLab (<a class="reference external" href="https://swanlab.cn/">https://swanlab.cn/</a>) to track experiments.</p>
+<dl>
+<dt>Supported monitor_args in config.monitor.monitor_args:</dt><dd><blockquote>
+<div><ul class="simple">
+<li><dl class="simple">
+<dt>api_key (Optional[str]): API key for swanlab.login(). If omitted, will read from env</dt><dd><p>(SWANLAB_API_KEY, SWANLAB_APIKEY, SWANLAB_KEY, SWANLAB_TOKEN) or assume prior CLI login.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>workspace (Optional[str]): Organization/username workspace.</p></li>
+<li><p>mode (Optional[str]): “cloud” | “local” | “offline” | “disabled”.</p></li>
+<li><p>logdir (Optional[str]): Local log directory when in local/offline modes.</p></li>
+<li><p>experiment_name (Optional[str]): Explicit experiment name. Defaults to “{name}_{role}”.</p></li>
+<li><p>description (Optional[str]): Experiment description.</p></li>
+<li><p>tags (Optional[List[str]]): Tags to attach. Role and group are appended automatically.</p></li>
+<li><p>id (Optional[str]): Resume target run id (21 chars) when using resume modes.</p></li>
+<li><p>resume (Optional[Literal[‘must’,’allow’,’never’]|bool]): Resume policy.</p></li>
+<li><p>reinit (Optional[bool]): Whether to re-init on repeated init() calls.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="trinity.utils.monitor.SwanlabMonitor.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">role</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="trinity.common.config.html#trinity.common.config.Config" title="trinity.common.config.Config"><span class="pre">Config</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/trinity/utils/monitor.html#SwanlabMonitor.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trinity.utils.monitor.SwanlabMonitor.__init__" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="trinity.utils.monitor.SwanlabMonitor.log_table">
+<span class="sig-name descname"><span class="pre">log_table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">experiences_table</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trinity/utils/monitor.html#SwanlabMonitor.log_table"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trinity.utils.monitor.SwanlabMonitor.log_table" title="Link to this definition">#</a></dt>
+<dd><p>Log a table</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="trinity.utils.monitor.SwanlabMonitor.log">
+<span class="sig-name descname"><span class="pre">log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">commit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/trinity/utils/monitor.html#SwanlabMonitor.log"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trinity.utils.monitor.SwanlabMonitor.log" title="Link to this definition">#</a></dt>
+<dd><p>Log metrics.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="trinity.utils.monitor.SwanlabMonitor.close">
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/trinity/utils/monitor.html#SwanlabMonitor.close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trinity.utils.monitor.SwanlabMonitor.close" title="Link to this definition">#</a></dt>
+<dd><p>Close the monitor</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="trinity.utils.monitor.SwanlabMonitor.default_args">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">default_args</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span></span></span><a class="reference internal" href="../_modules/trinity/utils/monitor.html#SwanlabMonitor.default_args"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trinity.utils.monitor.SwanlabMonitor.default_args" title="Link to this definition">#</a></dt>
+<dd><p>Return default arguments for the monitor.</p>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 
 
@@ -816,12 +907,12 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="trinity.utils.math_eval_utils.html"
+       href="trinity.utils.lora_utils.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">trinity.utils.math_eval_utils module</p>
+        <p class="prev-next-title">trinity.utils.lora_utils module</p>
       </div>
     </a>
     <a class="right-next"
@@ -880,6 +971,14 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.utils.monitor.MlflowMonitor.log"><code class="docutils literal notranslate"><span class="pre">MlflowMonitor.log()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.utils.monitor.MlflowMonitor.close"><code class="docutils literal notranslate"><span class="pre">MlflowMonitor.close()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.utils.monitor.MlflowMonitor.default_args"><code class="docutils literal notranslate"><span class="pre">MlflowMonitor.default_args()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.utils.monitor.SwanlabMonitor"><code class="docutils literal notranslate"><span class="pre">SwanlabMonitor</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.utils.monitor.SwanlabMonitor.__init__"><code class="docutils literal notranslate"><span class="pre">SwanlabMonitor.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.utils.monitor.SwanlabMonitor.log_table"><code class="docutils literal notranslate"><span class="pre">SwanlabMonitor.log_table()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.utils.monitor.SwanlabMonitor.log"><code class="docutils literal notranslate"><span class="pre">SwanlabMonitor.log()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.utils.monitor.SwanlabMonitor.close"><code class="docutils literal notranslate"><span class="pre">SwanlabMonitor.close()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.utils.monitor.SwanlabMonitor.default_args"><code class="docutils literal notranslate"><span class="pre">SwanlabMonitor.default_args()</span></code></a></li>
 </ul>
 </li>
 </ul>
