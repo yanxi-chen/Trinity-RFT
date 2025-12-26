@@ -3,10 +3,7 @@ from typing import Dict, Tuple
 
 import torch
 
-from trinity.algorithm.utils import masked_mean
-from trinity.utils.registry import Registry
-
-ENTROPY_LOSS_FN = Registry("entropy_loss_fn")
+from trinity.algorithm.utils import aggregate_loss
 
 
 class EntropyLossFn(ABC):
@@ -40,7 +37,6 @@ class EntropyLossFn(ABC):
         return {"entropy_coef": 0.0}
 
 
-@ENTROPY_LOSS_FN.register_module("default")
 class DefaultEntropyLossFn(EntropyLossFn):
     """
     Basic entropy loss function.
@@ -53,13 +49,13 @@ class DefaultEntropyLossFn(EntropyLossFn):
         self,
         entropy: torch.Tensor,
         action_mask: torch.Tensor,
+        loss_agg_mode: str = "token-mean",
         **kwargs,
     ) -> Tuple[torch.Tensor, Dict]:
-        entropy_loss = masked_mean(entropy, action_mask)
+        entropy_loss = aggregate_loss(entropy, action_mask, loss_agg_mode=loss_agg_mode)
         return entropy_loss * self.entropy_coef, {"entropy_loss": entropy_loss.detach().item()}
 
 
-@ENTROPY_LOSS_FN.register_module("mix")
 class MixEntropyLossFn(EntropyLossFn):
     """
     Basic entropy loss function for mix algorithm.
@@ -73,6 +69,7 @@ class MixEntropyLossFn(EntropyLossFn):
         entropy: torch.Tensor,
         action_mask: torch.Tensor,
         expert_mask: torch.Tensor = None,
+        loss_agg_mode: str = "token-mean",
         **kwargs,
     ) -> Tuple[torch.Tensor, Dict]:
         if expert_mask is None:
@@ -82,11 +79,10 @@ class MixEntropyLossFn(EntropyLossFn):
         ), f"Error: {len(expert_mask)=} != {entropy.shape[0]=}"
         entropy = entropy[~expert_mask]
         action_mask = action_mask[~expert_mask]
-        entropy_loss = masked_mean(entropy, action_mask)
+        entropy_loss = aggregate_loss(entropy, action_mask, loss_agg_mode=loss_agg_mode)
         return entropy_loss * self.entropy_coef, {"entropy_loss": entropy_loss.detach().item()}
 
 
-@ENTROPY_LOSS_FN.register_module("none")
 class DummyEntropyLossFn(EntropyLossFn):
     """
     Dummy entropy loss function.

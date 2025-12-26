@@ -5,7 +5,7 @@ from typing import Any, Dict, List, Optional
 
 from omegaconf import OmegaConf
 
-from trinity.common.config import Config, SynchronizerConfig
+from trinity.common.config import Config, SynchronizerConfig, set_if_none
 from trinity.common.constants import EXPLORER_NAME
 from trinity.utils.log import get_logger
 
@@ -15,6 +15,7 @@ logger = get_logger(__name__)
 @dataclass
 class Data:
     train_batch_size: int = 1024  # kept to pass RayPPOTrainer._validate_config
+    trust_remote_code: bool = False
 
 
 @dataclass
@@ -34,11 +35,16 @@ class ActorModel:
     custom_chat_template: Optional[str] = None
     enable_activation_offload: bool = False
     use_shm: bool = False
+    trust_remote_code: bool = False  # Whether to enable loading a remote code model
 
     # lora configs
     lora_rank: int = 0  # The rank of the LoRA model, default to 0. If lora_rank > 0, LoRA module is enabled in trainer
     lora_alpha: int = 32
     target_modules: Optional[str] = "all-linear"
+
+    # rope configs
+    rope_scaling: Optional[dict] = None
+    rope_theta: Optional[float] = None
 
 
 @dataclass
@@ -79,6 +85,7 @@ class FSDPConfig:
     wrap_policy: WrapPolicy = field(default_factory=WrapPolicy)
     fsdp_size: int = -1
     forward_prefetch: bool = False
+    model_dtype: Optional[str] = None
 
 
 @dataclass
@@ -130,7 +137,7 @@ class ProfileConfig:
 
 @dataclass
 class Actor:
-    strategy: str = "fsdp"
+    strategy: Optional[str] = None
     ppo_mini_batch_size: int = 256
     ppo_micro_batch_size: Optional[int] = None
     ppo_micro_batch_size_per_gpu: int = 1
@@ -157,8 +164,6 @@ class Actor:
     clip_ratio_high: Optional[float] = None
     entropy_coeff: float = 0.001
     use_kl_loss: bool = False
-    kl_loss_coef: float = 0.0
-    kl_loss_type: str = "low_var_kl"
 
 
 @dataclass
@@ -219,6 +224,7 @@ class CriticModel:
     tokenizer_path: str = ""
     override_config: Dict[str, str] = field(default_factory=dict)
     external_lib: Optional[str] = None
+    trust_remote_code: bool = False  # Whether to enable loading a remote code model
     enable_gradient_checkpointing: bool = True
     use_remove_padding: bool = True
     fsdp_config: FSDPConfig = field(default_factory=FSDPConfig)
@@ -226,7 +232,7 @@ class CriticModel:
 
 @dataclass
 class Critic:
-    strategy: str = "fsdp"
+    strategy: Optional[str] = None
     optim: Optim = field(default_factory=Optim)
     model: CriticModel = field(default_factory=CriticModel)
     ppo_mini_batch_size: int = 0
@@ -238,7 +244,7 @@ class Critic:
     ppo_max_token_len_per_gpu: Optional[int] = None
     forward_max_token_len_per_gpu: Optional[int] = None
     ulysses_sequence_parallel_size: Optional[int] = None
-    ppo_epochs: int = 0
+    ppo_epochs: int = 1
     shuffle: bool = False
     grad_clip: Optional[float] = None
     cliprange_value: float = 0.0
@@ -264,7 +270,7 @@ class _RewardModel:
 @dataclass
 class RewardModel:
     enable: bool = False
-    strategy: str = "fsdp"
+    strategy: Optional[str] = None
     model: _RewardModel = field(default_factory=_RewardModel)
     micro_batch_size_per_gpu: int = 1
     max_length: Optional[int] = None
@@ -370,14 +376,26 @@ class veRLConfig:
             self.trainer.n_gpus_per_node = config.cluster.gpu_per_node - rollout_gpu_num
         else:
             # for multi-node scenarios, some nodes for rollout, others for training
-            assert (
-                rollout_gpu_num % config.cluster.gpu_per_node == 0
-            ), f"rollout_gpu_num ({rollout_gpu_num}) must be divisible by `gpu_per_node` ({config.cluster.gpu_per_node})"
-            rollout_node_num = math.ceil(rollout_gpu_num / config.cluster.gpu_per_node)
-            self.trainer.nnodes = config.cluster.node_num - rollout_node_num
-            if self.trainer.nnodes < 1:
-                raise ValueError("The number of training nodes must be greater than 0")
-            self.trainer.n_gpus_per_node = config.cluster.gpu_per_node
+            trainer_gpu_num = (
+                config.cluster.node_num * config.cluster.gpu_per_node - rollout_gpu_num
+            )
+            if (
+                trainer_gpu_num > config.cluster.gpu_per_node
+                and trainer_gpu_num % config.cluster.gpu_per_node != 0
+            ):
+                raise ValueError(
+                    f"Trainer must use an integer number of nodes, but got trainer_gpu_num ({trainer_gpu_num}) with gpu_per_node ({config.cluster.gpu_per_node})"
+                )
+            elif trainer_gpu_num <= 0:
+                raise ValueError(
+                    f"Not enough GPUs for training after allocating {rollout_gpu_num} GPUs for explorer."
+                )
+            if trainer_gpu_num > 0 and trainer_gpu_num <= config.cluster.gpu_per_node:
+                self.trainer.nnodes = 1
+                self.trainer.n_gpus_per_node = trainer_gpu_num
+            else:
+                self.trainer.nnodes = trainer_gpu_num // config.cluster.gpu_per_node
+                self.trainer.n_gpus_per_node = config.cluster.gpu_per_node
 
         world_size = self.trainer.nnodes * self.trainer.n_gpus_per_node
         if world_size <= 0:
@@ -410,8 +428,11 @@ class veRLConfig:
         self.critic.ray_namespace = config.synchronizer.ray_namespace
 
         # Actor / Rollout Config
+        set_if_none(self.actor_rollout_ref.actor, "strategy", config.trainer.trainer_strategy)
         self.actor_rollout_ref.model.path = config.model.model_path
         self.actor_rollout_ref.model.custom_chat_template = config.model.custom_chat_template
+        self.actor_rollout_ref.model.rope_scaling = config.model.rope_scaling
+        self.actor_rollout_ref.model.rope_theta = config.model.rope_theta
         self.actor_rollout_ref.actor.optim.total_training_steps = self.trainer.total_training_steps
         self.actor_rollout_ref.actor.ppo_mini_batch_size = config.buffer.train_batch_size
         self.actor_rollout_ref.rollout.temperature = (
@@ -480,7 +501,7 @@ class veRLConfig:
             )
 
         # Critic config
-        self.critic.strategy = self.actor_rollout_ref.actor.strategy
+        set_if_none(self.critic, "strategy", config.trainer.trainer_strategy)
         self.critic.model.path = config.model.critic_model_path
         self.critic.model.tokenizer_path = config.model.critic_model_path
         self.critic.ppo_mini_batch_size = config.buffer.train_batch_size

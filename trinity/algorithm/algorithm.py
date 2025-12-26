@@ -7,11 +7,8 @@ from typing import Dict
 from trinity.common.config import Config
 from trinity.common.constants import SyncMethod
 from trinity.utils.log import get_logger
-from trinity.utils.registry import Registry
 
 logger = get_logger(__name__)
-
-ALGORITHM_TYPE = Registry("algorithm")
 
 
 class ConstantMeta(ABCMeta):
@@ -48,7 +45,6 @@ class AlgorithmType(ABC, metaclass=ConstantMeta):
         pass
 
 
-@ALGORITHM_TYPE.register_module("sft")
 class SFTAlgorithm(AlgorithmType):
     """SFT Algorithm."""
 
@@ -68,7 +64,6 @@ class SFTAlgorithm(AlgorithmType):
         }
 
 
-@ALGORITHM_TYPE.register_module("ppo")
 class PPOAlgorithm(AlgorithmType):
     """PPO Algorithm."""
 
@@ -91,7 +86,6 @@ class PPOAlgorithm(AlgorithmType):
         }
 
 
-@ALGORITHM_TYPE.register_module("grpo")
 class GRPOAlgorithm(AlgorithmType):
     """GRPO algorithm."""
 
@@ -114,7 +108,50 @@ class GRPOAlgorithm(AlgorithmType):
         }
 
 
-@ALGORITHM_TYPE.register_module("opmd")
+class ReinforcePlusPlusAlgorithm(AlgorithmType):
+    """Reinforce++ algorithm."""
+
+    use_critic: bool = False
+    use_reference: bool = True
+    compute_advantage_in_trainer: bool = True
+    can_balance_batch: bool = True
+    schema: str = "experience"
+
+    @classmethod
+    def default_config(cls) -> Dict:
+        return {
+            "repeat_times": 2,
+            "advantage_fn": "reinforceplusplus",
+            "sample_strategy": "default",
+            "policy_loss_fn": "ppo",
+            "kl_penalty_fn": "none",
+            "kl_loss_fn": "k2",
+            "entropy_loss_fn": "default",
+        }
+
+
+class RLOOAlgorithm(AlgorithmType):
+    """RLOO algorithm."""
+
+    use_critic: bool = False
+    use_reference: bool = True
+    compute_advantage_in_trainer: bool = True
+    can_balance_batch: bool = True
+    schema: str = "experience"
+
+    @classmethod
+    def default_config(cls) -> Dict:
+        return {
+            "repeat_times": 2,
+            "advantage_fn": "rloo",
+            "sample_strategy": "default",
+            "policy_loss_fn": "ppo",
+            "kl_penalty_fn": "none",
+            "kl_loss_fn": "k2",
+            "entropy_loss_fn": "default",
+        }
+
+
 class OPMDAlgorithm(AlgorithmType):
     """OPMD algorithm."""
 
@@ -137,7 +174,6 @@ class OPMDAlgorithm(AlgorithmType):
         }
 
 
-@ALGORITHM_TYPE.register_module("asymre")
 class AsymREAlgorithm(AlgorithmType):
     """AsymRE algorithm."""
 
@@ -160,7 +196,6 @@ class AsymREAlgorithm(AlgorithmType):
         }
 
 
-@ALGORITHM_TYPE.register_module("dpo")
 class DPOAlgorithm(AlgorithmType):
     """DPO algorithm."""
 
@@ -204,7 +239,6 @@ class DPOAlgorithm(AlgorithmType):
             logger.warning("DPO must use KL loss. Set `algorithm.kl_loss_fn` to `k2`")
 
 
-@ALGORITHM_TYPE.register_module("topr")
 class TOPRAlgorithm(AlgorithmType):
     """TOPR algorithm. See https://arxiv.org/pdf/2503.14286v1"""
 
@@ -227,7 +261,6 @@ class TOPRAlgorithm(AlgorithmType):
         }
 
 
-@ALGORITHM_TYPE.register_module("cispo")
 class CISPOAlgorithm(AlgorithmType):
     """CISPO algorithm. See https://arxiv.org/abs/2506.13585"""
 
@@ -250,7 +283,54 @@ class CISPOAlgorithm(AlgorithmType):
         }
 
 
-@ALGORITHM_TYPE.register_module("mix")
+class GSPOAlgorithm(AlgorithmType):
+    """GSPO algorithm. See https://arxiv.org/pdf/2507.18071"""
+
+    use_critic: bool = False
+    use_reference: bool = True
+    compute_advantage_in_trainer: bool = False
+    can_balance_batch: bool = True
+    schema: str = "experience"
+
+    @classmethod
+    def default_config(cls) -> Dict:
+        return {
+            "repeat_times": 2,
+            "advantage_fn": "grpo",
+            "sample_strategy": "default",
+            "policy_loss_fn": "gspo",
+            "kl_penalty_fn": "none",
+            "kl_loss_fn": "k2",
+            "entropy_loss_fn": "default",
+        }
+
+
+class SAPOAlgorithm(AlgorithmType):
+    """SAPO (Soft Adaptive Policy Optimization) algorithm.
+
+    SAPO uses a smooth, temperature-controlled soft gate instead of hard clipping
+    to stabilize training while maintaining effective learning.
+    """
+
+    use_critic: bool = False
+    use_reference: bool = True
+    compute_advantage_in_trainer: bool = False
+    can_balance_batch: bool = True
+    schema: str = "experience"
+
+    @classmethod
+    def default_config(cls) -> Dict:
+        return {
+            "repeat_times": 2,
+            "advantage_fn": "grpo",
+            "sample_strategy": "default",
+            "policy_loss_fn": "sapo",
+            "kl_penalty_fn": "none",
+            "kl_loss_fn": "k2",
+            "entropy_loss_fn": "default",
+        }
+
+
 class MIXAlgorithm(AlgorithmType):
     """MIX algorithm."""
 
@@ -272,7 +352,6 @@ class MIXAlgorithm(AlgorithmType):
         }
 
 
-@ALGORITHM_TYPE.register_module("mix_chord")
 class MIXCHORDAlgorithm(AlgorithmType):
     """MIX algorithm."""
 
@@ -294,7 +373,6 @@ class MIXCHORDAlgorithm(AlgorithmType):
         }
 
 
-@ALGORITHM_TYPE.register_module("raft")
 class RAFTAlgorithm(AlgorithmType):
     """RAFT Algorithm.
     This algorithm is conceptually similar to Supervised Fine-Tuning (SFT)
@@ -317,7 +395,6 @@ class RAFTAlgorithm(AlgorithmType):
         }
 
 
-@ALGORITHM_TYPE.register_module("sppo")
 class sPPOAlgorithm(AlgorithmType):
     """sPPO Algorithm."""
 
@@ -340,7 +417,6 @@ class sPPOAlgorithm(AlgorithmType):
         }
 
 
-@ALGORITHM_TYPE.register_module("rec")
 class RECAlgorithm(AlgorithmType):
     """REC Algorithm."""
 
@@ -363,7 +439,6 @@ class RECAlgorithm(AlgorithmType):
         }
 
 
-@ALGORITHM_TYPE.register_module("multi_step_grpo")
 class MultiStepGRPOAlgorithm(AlgorithmType):
     """Multi-Step GRPO Algorithm."""
 
@@ -383,4 +458,36 @@ class MultiStepGRPOAlgorithm(AlgorithmType):
             "kl_penalty_fn": "none",
             "kl_loss_fn": "k2",
             "entropy_loss_fn": "default",
+        }
+
+
+class OnPolicyDistillAlgorithm(AlgorithmType):
+    """On-Policy Distillation Algorithm.
+
+    Reference: Tinker library.
+
+    Workflow stores teacher_logprobs in experience.info["teacher_logprobs"].
+    Trainer's advantage_fn computes: advantages = teacher_logprobs - student_logprobs
+    Trainer uses:
+        importance_sampling loss if no clipping is needed
+        ppo loss if clipping is needed, for better stability
+    """
+
+    use_critic: bool = False
+    use_reference: bool = False
+    compute_advantage_in_trainer: bool = True  # advantage_fn computes from teacher_logprobs
+    can_balance_batch: bool = True
+    schema: str = "experience"
+
+    @classmethod
+    def default_config(cls) -> Dict:
+        return {
+            "repeat_times": 8,
+            "advantage_fn": "on_policy_distill",
+            "advantage_fn_args": {"kl_coef": 1.0},
+            "sample_strategy": "default",
+            "policy_loss_fn": "ppo",  # or importance_sampling if no clipping is needed
+            "kl_penalty_fn": "none",
+            "kl_loss_fn": "none",
+            "entropy_loss_fn": "none",
         }

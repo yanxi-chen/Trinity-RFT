@@ -4,10 +4,7 @@ from typing import Dict, List, Tuple
 
 import torch
 
-from trinity.algorithm.sample_strategy.sample_strategy import (
-    SAMPLE_STRATEGY,
-    SampleStrategy,
-)
+from trinity.algorithm.sample_strategy.sample_strategy import SampleStrategy
 from trinity.algorithm.sample_strategy.utils import representative_sample
 from trinity.buffer import get_buffer_reader
 from trinity.common.config import BufferConfig
@@ -15,7 +12,6 @@ from trinity.common.experience import CustomField, Experiences
 from trinity.utils.timer import Timer
 
 
-@SAMPLE_STRATEGY.register_module("mix")
 class MixSampleStrategy(SampleStrategy):
     """The default sample strategy."""
 
@@ -111,3 +107,15 @@ class MixSampleStrategy(SampleStrategy):
             "expert_data_ratio": 0.5,
             "sft_dataset_name": "sft_dataset",
         }
+
+    def state_dict(self) -> dict:
+        return {
+            "usual_buffer": self.usual_exp_buffer.state_dict(),
+            "expert_buffer": self.expert_exp_buffer.state_dict(),
+        }
+
+    def load_state_dict(self, state_dict: dict) -> None:
+        if state_dict.get("usual_buffer", None):
+            self.usual_exp_buffer.load_state_dict(state_dict["usual_buffer"])
+        if state_dict.get("expert_buffer", None):
+            self.expert_exp_buffer.load_state_dict(state_dict["expert_buffer"])

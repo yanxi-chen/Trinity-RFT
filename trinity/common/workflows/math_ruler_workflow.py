@@ -3,15 +3,12 @@
 import ast
 from typing import Any, List, Optional, Tuple
 
-import openai
-
 from trinity.common.experience import Experience
 from trinity.common.models.model import ModelWrapper
 from trinity.common.rewards.math_reward import MathRewardFn
-from trinity.common.workflows.workflow import WORKFLOWS, SimpleWorkflow, Task
+from trinity.common.workflows.workflow import SimpleWorkflow, Task
 
 
-@WORKFLOWS.register_module("math_ruler_workflow")
 class MathRULERWorkflow(SimpleWorkflow):
     """A workflow for math with RULER reward function.
 
@@ -24,7 +21,7 @@ class MathRULERWorkflow(SimpleWorkflow):
         *,
         task: Task,
         model: ModelWrapper,
-        auxiliary_models: Optional[List[openai.OpenAI]] = None,
+        auxiliary_models: Optional[List[ModelWrapper]] = None,
     ):
         super().__init__(
             task=task,
@@ -99,7 +96,7 @@ class MathRULERWorkflow(SimpleWorkflow):
 
         question_prompt = (
             f"Question: {self.task_desc}\n\n"
-            f"""Solution format requirement: first thinks about the reasoning process in the mind and then provides the final answer. The reasoning process and answer are enclosed within <think> </think> and <answer> </answer> tags, respectively, i.e.,
+            f"""Solution format requirement: first think about the reasoning process in the mind and then provides the final answer. The reasoning process and answer are enclosed within <think> </think> and <answer> </answer> tags, respectively, i.e.,
 <think> reasoning process here </think>
 <answer> answer here </answer>."""
         )
@@ -158,7 +155,6 @@ Conclude your response with a list of scores, in the following format: [score fo
             return False, [0.0 for _ in range(num_responses)]
 
 
-@WORKFLOWS.register_module("async_math_ruler_workflow")
 class AsyncMathRULERWorkflow(MathRULERWorkflow):
     is_async: bool = True
 

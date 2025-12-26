@@ -7,11 +7,9 @@ import re
 import time
 from typing import List, Optional
 
-import openai
-
 from trinity.common.experience import Experience
 from trinity.common.models.model import ModelWrapper
-from trinity.common.workflows import WORKFLOWS, SimpleWorkflow, Task
+from trinity.common.workflows.workflow import SimpleWorkflow, Task
 from trinity.utils.log import get_logger
 
 logger = get_logger(__name__)
@@ -28,7 +26,6 @@ Also, you can choose the reward `taskset.workflow_args.fusion_mode` to:
 """
 
 
-@WORKFLOWS.register_module("learn2ask_workflow")
 class Learn2AskWorkflow(SimpleWorkflow):
     """A workflow for Elem training with local model."""
 
@@ -37,7 +34,7 @@ class Learn2AskWorkflow(SimpleWorkflow):
         *,
         task: Task,
         model: ModelWrapper,
-        auxiliary_models: Optional[List[openai.OpenAI]] = None,
+        auxiliary_models: Optional[List[ModelWrapper]] = None,
     ):
         self.train_mode = task.workflow_args.get("train_mode", "Ra+Rs")
         self.fusion_mode = task.workflow_args.get("fusion_mode", "default")
@@ -56,11 +53,11 @@ class Learn2AskWorkflow(SimpleWorkflow):
 
     def reset(self, task: Task):
         if self.train_mode == "Ra":  # we have a different system prompt for this training mode.
-            from trinity.plugins.prompt_learn2ask import (
+            from examples.learn_to_ask.workflow.prompt_learn2ask import (
                 rollout_prompt_med_Ra as system_prompt,
             )
         else:  # other modes use the same system prompt
-            from trinity.plugins.prompt_learn2ask import (
+            from examples.learn_to_ask.workflow.prompt_learn2ask import (
                 rollout_prompt_med as system_prompt,
             )
 
@@ -129,7 +126,9 @@ class Learn2AskWorkflow(SimpleWorkflow):
         return responses
 
     def llm_reward(self, response):
-        from trinity.plugins.prompt_learn2ask import reward_prompt_med as reward_prompt
+        from examples.learn_to_ask.workflow.prompt_learn2ask import (
+            reward_prompt_med as reward_prompt,
+        )
 
         history = self.merge_msg_list(self.task_desc + [{"role": "assistant", "content": response}])
         messages = [

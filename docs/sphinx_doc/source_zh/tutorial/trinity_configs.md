@@ -82,7 +82,7 @@ checkpoint_root_dir: ${oc.env:TRINITY_CHECKPOINT_ROOT_DIR,./checkpoints}   # TRI
   - `explore`: 仅启动 explorer。
   - `bench`: 用于 benchmark 测试。
 - `checkpoint_root_dir`: 所有检查点和日志的根目录。该实验的检查点将存储在 `<checkpoint_root_dir>/<project>/<name>/` 路径下。
-- `continue_from_checkpoint`: 若设置为 `true`，实验将从检查点路径中的最新检查点继续；否则，会将当前实验重命名为 `<name>_<timestamp>` 并启动新实验。
+- `continue_from_checkpoint`: 若设置为 `true`，实验将从检查点路径中的最新检查点继续；否则，会将当前实验重命名为 `<name>_<timestamp>` 并启动新实验。由于我们的分离式设计，从检查点恢复的时候，我们只能保证Trainer的模型参数以及其使用的可选缓冲区（`auxiliary_buffers`）可以恢复到最新检查点的状态，而Explorer和Experience Buffer不能保证恢复到同一时点。
 - `ray_namespace`: 当前实验中启动模块的命名空间。若未指定，则默认为 `<project>/<name>`。
 
 ---
@@ -112,7 +112,7 @@ algorithm:
 - `optimizer`: Actor 优化器的参数。
   - `lr`: 优化器的学习率。
   - `warmup_style`: 学习率的预热策略。
-- `sample_strategy`: 从 experience buffer 加载 experience 时使用的采样策略。
+- `sample_strategy`: 从 experience buffer 加载 experience 时使用的采样策略。支持类型：`default`、`staleness_control`、`mix`。
 - `advantage_fn`: 用于计算优势值的函数。
 - `kl_penalty_fn`: 用于在奖励中计算 KL 惩罚的函数。
 - `kl_loss_fn`: 用于计算 KL 损失的函数。
@@ -157,18 +157,24 @@ monitor:
 model:
   model_path: ${oc.env:MODEL_PATH}  # MODEL_PATH 是预先设置的环境变量
   critic_model_path: ${model.model_path}  # 使用 model.model_path 的值
+  custom_chat_template: None
+  chat_template_path: None
   max_model_len: 20480
   max_prompt_tokens: 4096
   max_response_tokens: 16384
   min_response_tokens: 1
+  enable_prompt_truncation: true
 ```
 
 - `model_path`: 被训练模型的路径。
 - `critic_model_path`: 可选的独立 critic 模型路径。若为空，则默认为 `model_path`。
+- `custom_chat_template`: 可选的自定义 chat template 字符串格式。若未指定，系统会使用 tokenizer 的默认 chat template。
+- `chat_template_path`: 可选的 chat template 文件路径，类型通常为 jinja2；若设置，则覆盖 `custom_chat_template`。若未指定，系统会使用 tokenizer 的默认 chat template。
 - `max_model_len`: 表示模型所支持的单个序列最大 token 数。如未指定，系统会尝试将其设为 `max_prompt_tokens` + `max_response_tokens`。但前提是这两个值都必须已设置，否则将引发错误。
 - `max_prompt_tokens`: 输入 prompt 中允许的最大 token 数。仅对 `InferenceModel` 中的 `chat` 和 `generate` 方法生效。
 - `max_response_tokens`: 模型生成的回复中允许的最大 token 数。仅对 `InferenceModel` 中的 `chat` 和 `generate` 方法生效。
 - `min_response_tokens`: 模型生成的回复中允许的最小 token 数。仅对 `InferenceModel` 中的 `chat` 和 `generate` 方法生效。
+- `enable_prompt_truncation`: 是否截断 prompt。默认为 `true`。若设置为 `true`，则 prompt 将被截断为 `max_prompt_tokens` 个 token；若设置为 `false`，则 prompt 不会被截断，存在 prompt 和 response 长度之和超过 `max_model_len` 的风险。在 OpenAI API 模式下不生效。
 
 ```{tip}
 如果使用的是 Explorer 提供的 openai API，则只有 `max_model_len` 会生效，而 `max_response_tokens`、`max_prompt_tokens` 和 `min_response_tokens` 的值将被忽略，在没有独立指定 `max_tokens` 时，每次 API 调用将生成最多 `max_model_len - prompt_length` 个 token，因此在使用时请确保 prompt 长度小于 `max_model_len`。
@@ -221,7 +227,7 @@ buffer:
 - `total_epochs`: 总训练轮数。
 - `total_steps`: 总训练步数（可选）。若指定，则 `total_epochs` 不生效。
 
-### Explorer 输入
+### Explorer 输入配置
 
 定义 explorer 用于训练和评估的数据集。
 
@@ -283,7 +289,7 @@ buffer:
 - `default_reward_fn_type`: 探索过程中使用的奖励函数。若未指定，则使用 `buffer.default_reward_fn_type`。
 - `workflow_args`: 用于补充数据集级别参数的字典。
 
-### Trainer 输入
+### Trainer 输入配置
 
 定义 trainer 使用的 experience buffer 和可选的辅助数据集。
 
@@ -364,20 +370,34 @@ explorer:
     tensor_parallel_size: 1
   eval_interval: 100
   eval_on_startup: True
+  over_rollout:
+    ratio: 0.0
+    wait_after_min: 30.0
+  dynamic_timeout:
+    enable: false
+    ratio: 3.0
+  runner_state_report_interval: 0
 ```
 
 - `name`: explorer 的名称。该名称将用作 Ray actor 的名称，因此必须唯一。
-- `runner_per_model`: 每个 rollout 模型的并行工作流执行器数量。
-- `max_timeout`: 工作流完成的最大时间（秒）。
-- `max_retry_times`: 工作流的最大重试次数。
-- `env_vars`: 为每个工作流执行器设置的环境变量。
+- `runner_per_model`: 每个推理引擎实例所服务的 WorkflowRunner 数量。
+- `max_timeout`: 等待 Workflow 完成的最大时间（秒）。
+- `max_retry_times`: Workflow 失败或超时情况下的最大重试次数。
+- `env_vars`: 为每个 WorkflowRunner 设置的环境变量。
 - `rollout_model.engine_type`: 推理引擎类型。支持 `vllm_async` 和 `vllm`，二者的含义相同，都使用了异步引擎。后续版本会只保留 `vllm`。
-- `rollout_model.engine_num`: 推理引擎数量。
-- `rollout_model.tensor_parallel_size`: 张量并行度。
-- `rollout_model.enable_history`: 是否启用模型调用历史记录。若设为 `True`，模型包装器会自动记录模型调用返回的 experience。请定期通过 `extract_experience_from_history` 提取历史，以避免内存溢出。默认为 `False`。
-- `auxiliary_models`: 用于自定义工作流的额外模型。
-- `eval_interval`: 模型评估的间隔（以步为单位）。
-- `eval_on_startup`: 是否在启动时评估模型。更准确地说，是在第 0 步使用原始模型评估，因此重启时不会触发。
+- `rollout_model.engine_num`: 推理引擎实例的数量。
+- `rollout_model.tensor_parallel_size`: 每个实例的张量并行度。
+- `rollout_model.enable_history`: 是否启用模型调用历史记录功能。若设为 `True`，模型会自动记录调用返回的 experience。请定期通过 `extract_experience_from_history` 提取历史，以避免内存溢出。默认为 `False`。
+- `auxiliary_models`: 用于自定义工作流的辅助模型。
+- `eval_interval`: 模型评估的间隔（以 step 为单位）。
+- `eval_on_startup`: 是否在启动时评估模型。更准确地说，是在第 0 步使用原始模型评估，因此中断训练后重启时不会触发该行为。
+- `over_rollout`: [实验性] 超量 rollout 机制的配置，允许 explorer 在每个步骤中使用少于完整批次大小的任务继续进行。这在某些任务显著耗时较长的场景中能有效地提高吞吐量。仅当使用动态同步（`synchronizer.sync_style` 不是 `fixed`）时适用。
+  - `ratio`: explorer 在每个步骤中仅等待 `(1 - ratio) * batch_size` 的任务。默认为 `0.0`，表示等待所有任务。
+  - `wait_after_min`: 达到最小任务阈值后，等待此秒数后再继续。
+- `dynamic_timeout`: [实验性] 动态超时机制的配置，根据成功任务的平均耗时调整每个任务的超时时间。
+  - `enable`: 是否启用动态超时。默认为 `false`。
+  - `ratio`: 每个任务的超时时间动态设置为 `average_time_per_success_task * ratio`。默认为 `3.0`。
+- `runner_state_report_interval`: WorkflowRunner 报告自身状态的时间间隔（秒）。若设为大于 0 的值，工作流执行器会定期将其状态报告给 explorer 主进程并打印在命令行中，以便监控其运行状态。默认为 `0`，表示不启用此功能。推荐如需使用此功能，将其设置为 `10` 秒或更长时间以减少对性能的影响。
 
 ---
 
@@ -391,6 +411,7 @@ synchronizer:
   sync_interval: 10
   sync_offset: 0
   sync_timeout: 1200
+  sync_style: 'fixed'
 ```
 
 - `sync_method`: 同步方法。选项：
@@ -399,6 +420,9 @@ synchronizer:
 - `sync_interval`: trainer 和 explorer 之间模型权重同步的间隔（步）。
 - `sync_offset`: trainer 和 explorer 之间模型权重同步的偏移量（步）。explorer 可在 trainer 开始训练前运行 `sync_offset` 步。
 - `sync_timeout`: 同步超时时间。
+- `sync_style`: 同步风格。选项：
+  - `fixed`: explorer 和 trainer 每隔 `sync_interval` 步同步一次权重。
+  - `dynamic_by_explorer`: explorer 在完成 `sync_interval` 步后通知 trainer 同步权重，而不管此时 trainer 已完成多少步。
 
 ---
 
@@ -409,10 +433,12 @@ synchronizer:
 ```yaml
 trainer:
   name: trainer
-  trainer_type: 'verl'
-  save_interval: 100
+  trainer_type: "verl"
+  trainer_strategy: "fsdp"
   total_steps: 1000
+  save_interval: 100
   save_strategy: "unrestricted"
+  save_hf_checkpoint: "last"
   grad_clip: 1.0
   use_dynamic_bsz: true
   max_token_len_per_gpu: 16384
@@ -422,6 +448,10 @@ trainer:
 
 - `name`: trainer 的名称。该名称将用作 Ray actor 的名称，因此必须唯一。
 - `trainer_type`: trainer 后端实现。目前仅支持 `verl`。
+- `trainer_strategy`: VeRL 的训练策略。默认值为 `fsdp`。可选值如下：
+  - `fsdp`: 使用 PyTorch FSDP。
+  - `fsdp2`: 使用 PyTorch FSDP2。
+  - `megatron`: 使用 Megatron-LM。
 - `save_interval`: 保存模型检查点的频率（步）。
 - `total_steps`: 总训练步数。
 - `save_strategy`: 模型保存时的并行策略。默认值为`unrestricted`。可选值如下：
@@ -429,6 +459,10 @@ trainer:
   - `single_process`：整个系统中，仅允许一个进程执行保存，该进程内的多个线程可以并行处理保存任务，不同进程之间串行执行。
   - `single_node`：整个系统中，仅允许一个计算节点执行保存，该节点内的进程和线程可并行工作，不同节点的保存串行执行。
   - `unrestricted`：不限制保存操作，允许多个节点、进程或线程同时保存模型。
+- `save_hf_checkpoint`: 指定保存 HuggingFace 格式检查点的时机，默认为 "last"。注意在保存为 HuggingFace 格式会消耗额外的时间、存储空间和显存，可能影响训练性能或导致显存不足错误。可选值：
+  - `last`: 仅训练产生的最后一个检查点保存为 HuggingFace 格式。
+  - `always`: 所有检查点均保存为 HuggingFace 格式。
+  - `never`: 不保存 HuggingFace 格式检查点。
 - `grad_clip`: 梯度裁剪阈值。
 - `use_dynamic_bsz`: 是否使用动态批量大小。
 - `max_token_len_per_gpu`: 训练过程中，每个 GPU 最大 token 长度; 当 `use_dynamic_bsz=true` 时生效。

@@ -80,11 +80,11 @@ class FormatConfig:
 class GenerationConfig:
     temperature: Optional[float] = None  # 1.0
     top_p: Optional[float] = None  # 1.0
-    top_k: Optional[int] = None  # -1
+    top_k: int = -1  # -1 means disabled
     logprobs: Optional[int] = None  # 0  # vLLM return `logprobs + 1` elements
     max_tokens: Optional[int] = None  # if None, use model.max_response_tokens
     # repeat each task for `n` times
-    # ! DO NOT SET in `buffer.explorer_input.taskset.rollout_args`
+    # ! DO NOT SET, it will be set by `algorithm.repeat_times` or `buffer.explorer_input.eval_tasksets[i].repeat_times`
     n: int = 1
 
 
@@ -98,6 +98,11 @@ class OptimizerConfig:
     optimizer_type: str = "adam"
     betas: List[float] = field(default_factory=lambda: [0.9, 0.999])
     weight_decay: float = 0.01
+    clip_grad: float = 1.0
+    lr_warmup_init: float = 0.0
+    lr_decay_steps: Optional[int] = None
+    lr_decay_style: str = "constant"
+    min_lr: float = 0.0
 
 
 @dataclass
@@ -139,13 +144,31 @@ class ReplayBufferConfig:
 
 
 @dataclass
+class OverRolloutConfig:
+    """Config for over-rollout in explorer."""
+
+    ratio: float = 0.0  # explorer will only wait for (1 - over_rollout.ratio) * batch_size of tasks at each step
+    wait_after_min: float = 30.0  # wait 30 s after reaching minimum task threshold
+    # more settings will be added in the future
+    # e.g., postpone tasks into the next step if not finished in time
+
+
+@dataclass
+class DynamicTimeoutConfig:
+    """Config for dynamic timeout in explorer."""
+
+    enable: bool = False
+    ratio: float = 3.0  # the timeout for each step will be min(max_timeout, average_time_per_task * dynamic_timeout.ratio)
+
+
+@dataclass
 class StorageConfig:
     """Storage config for both taskset and experience buffer.
     Not visible to users directly. Please use ExperienceBufferConfig or TasksetConfig instead.
     """
 
     name: str = ""
-    storage_type: StorageType = StorageType.FILE
+    storage_type: str = StorageType.FILE.value
     path: Optional[str] = None
     repeat_times: Optional[int] = None
 
@@ -205,7 +228,7 @@ class StorageConfig:
 @dataclass
 class TasksetConfig:
     name: str = ""
-    storage_type: StorageType = StorageType.FILE
+    storage_type: str = StorageType.FILE.value
     path: Optional[str] = None
 
     default_workflow_type: Optional[str] = None
@@ -226,10 +249,10 @@ class TasksetConfig:
 
     enable_progress_bar: bool = False
 
+    # ! This setting is only valid for `eval_taskset`; for other taskset, it will be overridden by `algorithm.repeat_times`.
+    repeat_times: int = 1
     # ! DO NOT SET, automatically load from checkpoint
     index: int = 0
-    # ! DO NOT SET, automatically set from algorithm.repeat_times
-    repeat_times: int = 1
     # ! DO NOT SET, automatically set based on train/eval
     is_eval: bool = False
     # ! DO NOT SET, automatically set from buffer.batch_size
@@ -271,7 +294,7 @@ class ExperienceBufferConfig:
     """Storage Config for trainer input experience buffer."""
 
     name: str = ""
-    storage_type: StorageType = StorageType.FILE
+    storage_type: str = StorageType.QUEUE.value
     path: Optional[str] = None
 
     # used for StorageType.QUEUE
@@ -412,6 +435,9 @@ class ModelConfig:
     critic_model_path: str = ""
 
     custom_chat_template: Optional[str] = None
+    chat_template_path: Optional[
+        str
+    ] = None  # path to the chat template file, e.g., jinja2 type; overrides `custom_chat_template` if set
 
     # rollout args
     temperature: float = 1.0
@@ -430,26 +456,35 @@ class ModelConfig:
     # the maximum number of tokens for the response
     max_response_tokens: Optional[int] = None
     # the minimum number of tokens for the response
-    min_response_tokens: int = 1
+    min_response_tokens: int = 0
+    # whether to truncate the prompt; if set to True, the prompt will be truncated to `max_prompt_tokens` tokens;
+    # not applicable for OpenAI API
+    enable_prompt_truncation: bool = True
+    # repetition penalty for response generation
+    repetition_penalty: float = 1.0
 
     # lora config
     lora_configs: Optional[List[LoRAConfig]] = None
     fully_sharded_loras: bool = False
     max_cpu_loras: Optional[int] = None
 
+    # rope config
+    rope_scaling: Optional[dict] = None
+    rope_theta: Optional[float] = None
+
 
 @dataclass
 class InferenceModelConfig:
     # ! DO NOT SET in explorer.rollout_model, automatically set from config.model.model_path
-    model_path: str = ""
+    model_path: Optional[str] = None
 
     engine_type: str = "vllm"
     engine_num: int = 1
     tensor_parallel_size: int = 1
     use_v1: bool = True
     enforce_eager: bool = False
-    enable_prefix_caching: bool = False
-    enable_chunked_prefill: bool = False
+    enable_prefix_caching: bool = True
+    enable_chunked_prefill: bool = True
     gpu_memory_utilization: float = 0.9
     dtype: str = "bfloat16"
     seed: int = 42
@@ -468,6 +503,10 @@ class InferenceModelConfig:
     max_response_tokens: Optional[int] = None
     # if not set, use `model.min_response_tokens`
     min_response_tokens: Optional[int] = None
+    # if not set, use `model.enable_prompt_truncation`
+    enable_prompt_truncation: Optional[bool] = None
+    # If not set, use `model.repetition_penalty`
+    repetition_penalty: Optional[float] = None
     # used for testing very long response generation, do not set it unless you know what you are doing
     ignore_eos: bool = False
 
@@ -482,6 +521,7 @@ class InferenceModelConfig:
 
     # For OpenAI API
     enable_openai_api: bool = False
+    enable_log_requests: bool = False  # whether to enable request logging in vLLM API server
 
     # For tool calls in OpenAI API
     enable_auto_tool_choice: bool = False
@@ -497,6 +537,10 @@ class InferenceModelConfig:
     enable_lora: bool = False
     lora_modules: Optional[List[Dict]] = None
     lora_kwargs: Optional[dict] = field(default_factory=dict)
+
+    # ! DO NOT SET, rope config
+    rope_scaling: Optional[dict] = None
+    rope_theta: Optional[float] = None
 
 
 @dataclass
@@ -532,6 +576,10 @@ class AlgorithmConfig:
     entropy_loss_fn: Optional[str] = None  # "default"
     # If not set, use entropy_loss_fn.default_args()
     entropy_loss_fn_args: Optional[dict] = None
+
+    # aggregation mode for losses: 'token-mean' or 'seq-mean-token-sum' or 'seq-mean-token-mean' or 'seq-mean-token-sum-norm'
+    # If not set, use 'token-mean'
+    loss_agg_mode: Optional[str] = None
 
 
 @dataclass
@@ -599,7 +647,7 @@ class ExplorerConfig:
     # for workflow runner
     # number of workflow runners.
     runner_per_model: int = 8  # number of runners per each rollout model
-    max_timeout: int = 1800  # wait each task for 30 minutes
+    max_timeout: int = 1800  # wait each task for 30 minutes at most
     max_retry_times: int = 2  # retry each task for 2 times if it fails or timeout
     env_vars: dict = field(default_factory=dict)  # environment variables for workflow runner
     max_repeat_times_per_runner: Optional[
@@ -621,25 +669,39 @@ class ExplorerConfig:
     # for benchmark
     bench_on_latest_checkpoint: bool = False  # only benchmark the latest checkpoint
 
-    # for serve mode
-    api_port: int = 8010
+    # for serve mode proxy
+    proxy_port: int = 8010
     # listen on all interfaces by default
     listen_address: str = "0.0.0.0"
     # check the running status of the server every 60 seconds
     service_status_check_interval: int = 60
     # keep at least 1 model in running status
     min_running_model_num: int = 1
+    # db url for proxy history recorder, if not set, use proxy_history.db in buffer cache dir
+    db_url: Optional[str] = None
+
+    # Experimental feature
+    over_rollout: OverRolloutConfig = field(default_factory=OverRolloutConfig)
+    dynamic_timeout: DynamicTimeoutConfig = field(default_factory=DynamicTimeoutConfig)
+    # report runner state every `runner_state_report_interval` seconds, 0 to disable
+    runner_state_report_interval: int = 0
 
 
 @dataclass
 class TrainerConfig:
     name: str = TRAINER_NAME
     trainer_type: str = "verl"
+    trainer_strategy: str = "fsdp"  # "fsdp", "fsdp2" or "megatron"
     save_interval: int = 0
     enable_preview: bool = True  # enable rollout preview in wandb
     total_steps: Optional[
         int
     ] = None  # total training steps, training stops when reaching this step, None means no limit
+
+    save_hf_checkpoint: str = "last"  # whether to save checkpoint in HuggingFace format
+    # "always": save all checkpoints in HF format
+    # "never": never save checkpoint in HF format
+    # "last": only save the last checkpoint in HF format
 
     # trainer configs
     grad_clip: float = 1.0
@@ -785,7 +847,6 @@ class Config:
         """Update config if `node_num` or `gpu_per_node` are not set."""
         if self.cluster.node_num is not None and self.cluster.gpu_per_node is not None:
             return
-
         # init ray cluster to detect node_num and gpu_per_node
         was_initialized = ray.is_initialized()
         if not was_initialized:
@@ -833,8 +894,10 @@ class Config:
                 )
 
     def _check_explorer_input(self) -> None:
-        if self.mode == "train":
-            # no need to check explorer_input in train mode
+        from trinity.buffer.selector import SELECTORS
+
+        if self.mode in {"train", "serve"}:
+            # no need to check explorer_input in serve mode
             return
 
         explorer_input = self.buffer.explorer_input
@@ -844,12 +907,11 @@ class Config:
                 raise ValueError("Do not support setting `taskset` and `tasksets` simultaneously!")
             explorer_input.tasksets = [explorer_input.taskset]
             explorer_input.taskset = None
-        elif len(explorer_input.tasksets) == 0:
+        elif self.mode != "bench" and len(explorer_input.tasksets) == 0:
             raise ValueError("At least one taskset should be provided in explorer_input!")
-        tasksets = explorer_input.tasksets
 
-        for i, taskset in enumerate(tasksets):
-            if self.mode != "train" and not taskset.path:
+        for i, taskset in enumerate(explorer_input.tasksets):
+            if not taskset.path:
                 raise ValueError(
                     "`buffer.explorer_input.taskset.path` is required, please set it to the path of the taskset."
                 )
@@ -872,6 +934,14 @@ class Config:
             set_if_none(taskset.rollout_args, "top_k", self.model.top_k)
             set_if_none(taskset.rollout_args, "logprobs", self.model.logprobs)
             set_if_none(taskset.rollout_args, "max_tokens", self.model.max_response_tokens)
+            set_if_none(taskset.format, "chat_template", self.model.custom_chat_template)
+
+            # check if selector is supported
+            selector = SELECTORS.get(taskset.task_selector.selector_type)
+            if selector is None:
+                raise ValueError(
+                    f"Selector {taskset.task_selector.selector_type} is not supported."
+                )
 
         for idx, dataset in enumerate(explorer_input.eval_tasksets):
             if not dataset.path:
@@ -880,7 +950,7 @@ class Config:
             dataset.batch_size = self.buffer.batch_size
             if not dataset.name:
                 dataset.name = f"eval_taskset_{idx}"
-            set_if_none(dataset, "repeat_times", 1)
+
             # eval_workflow has higher priority than workflow in eval tasksets, so we set it first
             set_if_none(dataset, "default_workflow_type", explorer_input.default_eval_workflow_type)
             set_if_none(dataset, "default_workflow_type", explorer_input.default_workflow_type)
@@ -893,20 +963,24 @@ class Config:
             set_if_none(dataset.rollout_args, "max_tokens", self.model.max_response_tokens)
 
     def _check_trainer_input(self) -> None:
+        if self.mode == "bench":
+            # no need to check trainer_input in bench mode
+            return
+
         trainer_input = self.buffer.trainer_input
         experience_buffer = trainer_input.experience_buffer
 
         if experience_buffer is None:
             experience_buffer = trainer_input.experience_buffer = ExperienceBufferConfig(
                 name="experience_buffer",
-                storage_type=StorageType.QUEUE,
+                storage_type=StorageType.QUEUE.value,
             )
             logger.info(f"Auto set `buffer.trainer_input.experience_buffer` to {experience_buffer}")
-        elif experience_buffer.storage_type is StorageType.FILE and self.mode == "both":
+        elif experience_buffer.storage_type == StorageType.FILE.value and self.mode == "both":
             logger.warning(
                 "`FILE` storage is not supported to use as experience_buffer in `both` mode, use `QUEUE` instead."
             )
-            experience_buffer.storage_type = StorageType.QUEUE
+            experience_buffer.storage_type = StorageType.QUEUE.value
 
         if not experience_buffer.name:
             experience_buffer.name = "experience_buffer"
@@ -919,7 +993,7 @@ class Config:
                 f"Auto set `buffer.trainer_input.experience_buffer.path` to {experience_buffer.path}"
             )
 
-        from trinity.algorithm.algorithm import ALGORITHM_TYPE
+        from trinity.algorithm import ALGORITHM_TYPE
 
         experience_buffer.schema_type = ALGORITHM_TYPE.get(self.algorithm.algorithm_type).schema
         experience_buffer.batch_size = self.buffer.train_batch_size
@@ -943,8 +1017,8 @@ class Config:
             experience_buffer.total_epochs = self.buffer.total_epochs
             experience_buffer.total_steps = self.buffer.total_steps
 
-    def _default_storage_path(self, storage_type: StorageType, name: str) -> str:
-        if storage_type == StorageType.SQL:
+    def _default_storage_path(self, storage_type: str, name: str) -> str:
+        if storage_type == StorageType.SQL.value:
             return "sqlite:///" + os.path.join(self.buffer.cache_dir, f"{name}.db")  # type: ignore[arg-type]
         else:
             return os.path.join(self.buffer.cache_dir, f"{name}.jsonl")  # type: ignore[arg-type]
@@ -952,20 +1026,25 @@ class Config:
     def _check_data_processor(self) -> None:
         # check input/output buffers in pipelines
         experience_pipeline = self.data_processor.experience_pipeline
-        if experience_pipeline is not None:
+        if experience_pipeline is not None and self.mode in {"explore", "both", "serve"}:
             if experience_pipeline.save_input and experience_pipeline.input_save_path is None:
-                experience_pipeline.input_save_path = os.path.join(
-                    self.buffer.cache_dir, "explorer_output.jsonl"  # type: ignore[arg-type]
+                experience_pipeline.input_save_path = self._default_storage_path(
+                    StorageType.SQL.value, "explorer_output"
                 )
                 logger.info(
                     f"Auto set `data_processor.experience_pipeline.input_save_path` to {experience_pipeline.input_save_path}"
                 )
 
         task_pipeline = self.data_processor.task_pipeline
-        if task_pipeline is not None:
+        if task_pipeline is not None and self.mode in {"explore", "train", "both"}:
             if task_pipeline.output is None:
                 if self.mode != "train":
-                    task_pipeline.output = self.buffer.explorer_input.tasksets[0]
+                    if len(self.buffer.explorer_input.tasksets) > 0:
+                        task_pipeline.output = self.buffer.explorer_input.tasksets[0]
+                    else:
+                        raise ValueError(
+                            "At least one taskset should be provided in explorer_input!"
+                        )
                 elif self.mode == "train" and self.algorithm.algorithm_type in {"dpo", "sft"}:
                     task_pipeline.output = self.buffer.trainer_input.experience_buffer
                 else:
@@ -1026,12 +1105,12 @@ class Config:
     def _check_algorithm(self) -> None:
         from trinity.algorithm import (
             ADVANTAGE_FN,
+            ALGORITHM_TYPE,
             ENTROPY_LOSS_FN,
             KL_FN,
             POLICY_LOSS_FN,
             SAMPLE_STRATEGY,
         )
-        from trinity.algorithm.algorithm import ALGORITHM_TYPE
 
         algorithm = ALGORITHM_TYPE.get(self.algorithm.algorithm_type)
         algorithm.check_config(self)
@@ -1042,6 +1121,7 @@ class Config:
             "kl_penalty_fn": "none",
             "kl_loss_fn": "k2",
             "entropy_loss_fn": "default",
+            "loss_agg_mode": "token-mean",
         }
         default_config.update(algorithm.default_config())
         for key, value in default_config.items():
@@ -1060,11 +1140,24 @@ class Config:
         check_and_set("kl_loss_fn", KL_FN, "kl_loss_fn_args")
         check_and_set("kl_penalty_fn", KL_FN, "kl_penalty_fn_args")
         check_and_set("entropy_loss_fn", ENTROPY_LOSS_FN, "entropy_loss_fn_args")
+        if "loss_agg_mode" in self.algorithm.policy_loss_fn_args:  # type: ignore [operator]
+            # override loss_agg_mode in policy_loss_fn_args
+            self.algorithm.policy_loss_fn_args["loss_agg_mode"] = self.algorithm.loss_agg_mode  # type: ignore [index]
 
     def _check_model(self) -> None:
         model = self.model
         if not model.critic_model_path:
             model.critic_model_path = model.model_path
+
+        # check template
+        if model.chat_template_path is not None and model.custom_chat_template is None:
+            try:
+                with open(model.chat_template_path, "r") as f:
+                    model.custom_chat_template = f.read()
+            except Exception as e:
+                raise ValueError(
+                    f"Failed to read chat template from {model.chat_template_path}: {e}"
+                )
 
         # check max_model_len, max_prompt_tokens, max_response_tokens
 
@@ -1119,6 +1212,19 @@ class Config:
             model.min_response_tokens = max(model.max_response_tokens - 1, 0)  # type: ignore [operator]
             logger.warning(f"`min_response_tokens` is set to {model.min_response_tokens}.")
 
+        if model.enable_prompt_truncation is True:
+            if model.max_prompt_tokens is None:
+                raise ValueError(
+                    "When `model.enable_prompt_truncation` is True, `model.max_prompt_tokens` must be set properly. This function does not work with OpenAI API mode."
+                )
+            logger.warning(
+                f"`enable_prompt_truncation` is set to True; the prompt will be truncated to `max_prompt_tokens`={model.max_prompt_tokens} tokens if it is too long."
+            )
+        else:
+            logger.warning(
+                "`enable_prompt_truncation` is set to False; please make sure the prompt is not too long and `max_model_len` is large enough, otherwise prompt length + response length may exceed `max_model_len`!"
+            )
+
     def __iter__(self):
         """Iterate over configs with each stage applied in order.
 
@@ -1133,6 +1239,8 @@ class Config:
                     setattr(new_config, field_name, stage_value)
             if stage.stage_name:
                 new_config.name = f"{self.name}/{stage.stage_name}"
+            # set trainer.save_hf_checkpoint to "last" to make sure next stage can load from HF checkpoint
+            new_config.trainer.save_hf_checkpoint = "last"
             new_config.stages = []
             yield new_config
 
@@ -1183,20 +1291,60 @@ class Config:
 
         # check explorer
         if self.explorer is not None:
-            rollout_args = ["temperature", "top_p", "top_k", "logprobs"]
+            rollout_args = ["temperature", "top_p", "top_k", "logprobs", "repetition_penalty"]
             length_args = [
                 "max_model_len",
                 "max_prompt_tokens",
                 "max_response_tokens",
                 "min_response_tokens",
+                "enable_prompt_truncation",
             ]
-            for args in ["model_path"] + rollout_args + length_args:
-                setattr(self.explorer.rollout_model, args, getattr(self.model, args))
+            rope_args = ["rope_scaling", "rope_theta"]
+            model_args = rollout_args + length_args + rope_args
+            for args in ["model_path"] + model_args:
+                set_if_none(self.explorer.rollout_model, args, getattr(self.model, args))
+            if (
+                self.explorer.rollout_model.chat_template is None
+                and self.model.custom_chat_template is not None
+            ):
+                self.explorer.rollout_model.chat_template = self.model.custom_chat_template
             for aux_model in self.explorer.auxiliary_models:
                 if not aux_model.model_path:
                     raise ValueError("auxiliary model's model_path is required.")
-                for args in rollout_args + length_args:
+                for args in model_args:
                     set_if_none(aux_model, args, getattr(self.model, args))
+
+            # check gpu number
+            rollout_gpu_num = (
+                self.explorer.rollout_model.tensor_parallel_size
+                * self.explorer.rollout_model.engine_num
+                + sum(
+                    (
+                        model.tensor_parallel_size * model.engine_num
+                        for model in self.explorer.auxiliary_models
+                    )
+                )
+            )
+            assert self.cluster.node_num is not None
+            assert self.cluster.gpu_per_node is not None
+            total_gpu_num = self.cluster.node_num * self.cluster.gpu_per_node
+            if self.mode in ["explore", "bench", "serve"] and rollout_gpu_num > total_gpu_num:
+                raise ValueError(
+                    f"Total GPU number ({total_gpu_num}) is less than the number of GPUs required for rollout ({rollout_gpu_num})."
+                )
+            elif self.mode == "both" and rollout_gpu_num >= total_gpu_num:
+                raise ValueError(
+                    f"Not enough GPUs for trainer in 'both' mode. Explorer requires {rollout_gpu_num} GPUs, but total available GPUs are {total_gpu_num}."
+                )
+
+            if self.explorer.over_rollout.ratio > 0.0:
+                if not (0.0 <= self.explorer.over_rollout.ratio < 1.0):
+                    raise ValueError("over_rollout_ratio should be in [0.0, 1.0)")
+                if self.synchronizer.sync_style == SyncStyle.FIXED:
+                    raise ValueError(
+                        "over_rollout_ratio is not compatible with fixed sync_style, please set "
+                        "`synchronizer.sync_style` to `dynamic_by_explorer` or `dynamic_by_trainer`."
+                    )
 
             # for lora configs
             if self.model.lora_configs is not None:
@@ -1274,7 +1422,7 @@ class Config:
         # check buffer
         self._check_buffer()
         # check and update trainer
-        if self.mode in ["train", "both", "bench"]:
+        if self.mode in ["train", "both", "bench"] or self.trainer.trainer_strategy == "megatron":
             if self.trainer.trainer_type == "verl":
                 if self.trainer.trainer_config:
                     from trinity.common.verl_config import veRLConfig
@@ -1296,6 +1444,11 @@ class Config:
                 if self.trainer.max_token_len_per_gpu is None:
                     self.trainer.max_token_len_per_gpu = math.ceil(
                         2 * self.model.max_model_len / self.trainer.ulysses_sequence_parallel_size  # type: ignore [operator]
+                    )
+                if self.trainer.save_hf_checkpoint not in {"last", "always", "never"}:
+                    raise ValueError(
+                        f"Invalid trainer.save_hf_checkpoint: {self.trainer.save_hf_checkpoint}, "
+                        "must be one of 'last', 'always', or 'never'."
                     )
             else:
                 raise ValueError(f"Invalid trainer type: {self.trainer_type}")

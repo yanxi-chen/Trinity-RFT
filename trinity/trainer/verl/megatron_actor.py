@@ -42,12 +42,8 @@ from verl.utils.torch_functional import broadcast_dict_tensor
 from verl.workers.megatron_workers import MegatronPPOActor as OldMegatronPPOActor
 from verl.workers.megatron_workers import logger
 
-from trinity.algorithm.entropy_loss_fn.entropy_loss_fn import (
-    ENTROPY_LOSS_FN,
-    DummyEntropyLossFn,
-)
-from trinity.algorithm.kl_fn.kl_fn import KL_FN
-from trinity.algorithm.policy_loss_fn.policy_loss_fn import POLICY_LOSS_FN
+from trinity.algorithm import ENTROPY_LOSS_FN, KL_FN, POLICY_LOSS_FN
+from trinity.algorithm.entropy_loss_fn.entropy_loss_fn import DummyEntropyLossFn
 from trinity.algorithm.utils import prefix_metrics
 from trinity.common.config import AlgorithmConfig
 
@@ -64,6 +60,7 @@ class MegatronPPOActor(OldMegatronPPOActor):
         self.entropy_loss_fn = None
 
     def set_algorithm(self, algorithm_config: AlgorithmConfig):
+        self.loss_agg_mode = algorithm_config.loss_agg_mode
         self.policy_loss_fn = POLICY_LOSS_FN.get(algorithm_config.policy_loss_fn)(
             backend="verl", **algorithm_config.policy_loss_fn_args
         )
@@ -187,6 +184,7 @@ class MegatronPPOActor(OldMegatronPPOActor):
                     entropy_loss, entropy_loss_metrics = self.entropy_loss_fn(  # type: ignore
                         entropy=entropy,
                         action_mask=response_mask,
+                        loss_agg_mode=self.loss_agg_mode,
                         **data,
                     )
                     prefix_metrics(
@@ -207,6 +205,8 @@ class MegatronPPOActor(OldMegatronPPOActor):
                     logprob=log_prob,
                     ref_logprob=data.get("ref_log_prob", None),
                     response_mask=response_mask,
+                    loss_agg_mode=self.loss_agg_mode,
+                    old_logprob=data.get("old_log_probs", None),
                 )
                 prefix_metrics(
                     src_metrics=kl_loss_metrics,

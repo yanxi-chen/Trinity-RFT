@@ -92,11 +92,12 @@ class Workflow(ABC):
         *,
         task: Task,
         model: ModelWrapper,
-        auxiliary_models: Optional[List[openai.OpenAI]] = None,  # 主要用于 LLM-as-a-judge 场景，这里可以忽略
+        auxiliary_models: Optional[List[ModelWrapper]] = None,  # 主要用于 LLM-as-a-judge 场景, 也可以用作distillation的techer
     ):
         self.task = task
         self.model = model
-        self.auxiliary_models = auxiliary_models
+        self.auxiliary_model_wrappers = auxiliary_models
+        self.auxiliary_models = ...  # 从 ModelWrapper 自动派生的 OpenAI client
 
     @abstractmethod
     def run(self) -> List[Experience]:
@@ -109,7 +110,7 @@ class Workflow(ABC):
 
 - `task`({class}`trinity.common.workflows.Task`)：数据集中的单个任务。
 - `model`({class}`trinity.common.models.model.ModelWrapper`)：正在训练的模型，提供类似于 OpenAI 的接口，能够接收对话消息列表并返回 LLM 生成的内容（包括回复文本 `response_text`、完整序列 token id `tokens`、prompt 部分 token 长度 `prompt_length`，以及输出 token 对数概率列表 `logprobs`）。
-- `auxiliary_models`(`List[openai.OpenAI]`)：未参与训练的辅助模型列表。所有模型均通过兼容 OpenAI 的 API 提供，主要用于 LLM-as-a-judge 场景。
+- `auxiliary_models`(`List[ModelWrapper]`)：辅助模型的 ModelWrapper 列表。可通过 `self.auxiliary_models` 访问 OpenAI client（根据 workflow 的 `is_async` 自动派生）。
 
 以下是一个仅使用 `raw_task` 和 `rollout_args` 初始化简单工作流的示例。在更复杂的情况下，你可以使用 `format_args` 进行进一步自定义。
 
@@ -170,27 +171,15 @@ class ExampleWorkflow(Workflow):
 
 #### 注册你的工作流
 
-为了让 Trinity-RFT 能够通过配置文件中的名称自动找到你的工作流，你需要使用 `WORKFLOWS.register_module` 装饰器注册。
+为了让 Trinity-RFT 能够通过配置文件中的名称自动找到你的工作流，你需要在 `trinity/common/workflows/__init__.py` 中的 `default_mapping` 中注册。
 
 ```python
-# import some packages
-from trinity.common.workflows.workflow import WORKFLOWS
-
-@WORKFLOWS.register_module("example_workflow")
-class ExampleWorkflow(Workflow):
-    pass
-```
-
-对于准备贡献给 Trinity-RFT 项目的模块，你需要将上述代码放入 `trinity/common/workflows` 文件夹中，例如 `trinity/common/workflows/example_workflow.py`。并在 `trinity/common/workflows/__init__.py` 中添加以下行：
-
-```python
-# existing import lines
-from trinity.common.workflows.example_workflow import ExampleWorkflow
-
-__all__ = [
-    # existing __all__ lines
-    "ExampleWorkflow",
-]
+WORKFLOWS = Registry(
+    "workflows",
+    default_mapping={
+        "example_workflow": "trinity.common.workflows.workflow.ExampleWorkflow",
+    },
+)
 ```
 
 #### 性能调优
@@ -207,7 +196,6 @@ __all__ = [
 `reset` 方法接受一个新的 `Task` 实例，并使用该实例更新工作流的状态。
 
 ```python
-@WORKFLOWS.register_module("example_workflow")
 class ExampleWorkflow(Workflow):
     can_reset: bool = True
 
@@ -229,7 +217,6 @@ class ExampleWorkflow(Workflow):
 `set_repeat_times` 方法接受两个参数：`repeat_times` 指定了在 `run` 方法内需要执行的次数，`run_id_base` 是一个整数，用于标识多次运行中第一次的运行 ID，之后各次的 ID 基于此递增（该参数用于多轮交互场景，单次模型调用即可完成的任务可以忽略该项）。
 
 ```python
-@WORKFLOWS.register_module("example_workflow")
 class ExampleWorkflow(Workflow):
     can_repeat: bool = True
     # some code
@@ -270,7 +257,6 @@ class ExampleWorkflow(Workflow):
 #### 完整代码示例
 
 ```python
-@WORKFLOWS.register_module("example_workflow")
 class ExampleWorkflow(Workflow):
     can_reset: bool = True
     can_repeat: bool = True
@@ -354,7 +340,6 @@ trinity run --config <your_yaml_file>
 本节样例主要针对同步模式，如果你的工作流需要使用异步方法（例如异步 API）,你可以将 `is_async` 属性设置为 `True`，然后实现 `run_async` 方法，在这种情况下不再需要实现 `run` 方法，并且初始化参数 `auxiliary_models` 也会自动变为 `List[openai.AsyncOpenAI]` 类型，其余方法和属性保持不变。
 
 ```python
-@WORKFLOWS.register_module("example_workflow_async")
 class ExampleWorkflowAsync(Workflow):
 
     is_async: bool = True
@@ -384,7 +369,6 @@ explorer:
 ```
 
 ```python
-@WORKFLOWS.register_module("example_workflow")
 class ExampleWorkflow(Workflow):
 
     def __init__(self, task: Task, model: ModelWrapper, auxiliary_models: List):
@@ -454,10 +438,10 @@ class MyWorkflow(Workflow):
         *,
         task: Task,
         model: ModelWrapper,
-        auxiliary_models: Optional[List[openai.OpenAI]] = None,
+        auxiliary_models: Optional[List[ModelWrapper]] = None,
     ):
         super().__init__(task=task, model=model, auxiliary_models=auxiliary_models)
-        self.judge_model = self.auxiliary_models[0]  # 使用第一个辅助模型作为评判者
+        self.judge_model = self.auxiliary_models[0]  # 从 ModelWrapper 自动派生的 OpenAI client
 
     def run(self) -> List[Experience]:
         response = self.do_something()
@@ -495,7 +479,8 @@ class MyWorkflow(Workflow):
 ```{mermaid}
 flowchart LR
     A[启动推理模型] --> B[调试 Workflow]
-    B --> B
+    B --> C[检查 Experience]
+    C --> B
 ```
 
 启动推理模型的命令如下：
@@ -509,13 +494,21 @@ trinity debug --config <config_file_path> --module inference_model
 模型启动后会持续运行并等待调试指令，不会自动退出。此时，你可在另一个终端执行如下命令进行 Workflow 调试：
 
 ```bash
-trinity debug --config <config_file_path> --module workflow --output_file <output_file_path> --plugin_dir <plugin_dir>
+trinity debug --config <config_file_path> --module workflow --output-dir <output_dir> [--plugin-dir <plugin_dir>] [--enable-profiling] [--disable-overwrite]
 ```
 
-- `config_file_path`：YAML 配置文件路径，通常与启动推理模型时使用的配置文件相同。
-- `output_file_path`：性能分析结果输出路径。调试模式会使用 [viztracer](https://github.com/gaogaotiantian/viztracer) 对 Workflow 运行过程进行性能分析，并将结果保存为 HTML 文件，便于在浏览器中查看。
-- `plugin_dir`（可选）：插件目录路径。如果你的 Workflow 或奖励函数等模块未内置于 Trinity-RFT，可通过该参数加载自定义模块。
+- `<config_file_path>`：YAML 配置文件路径，通常与启动推理模型时使用的配置文件相同。
+- `<output_dir>`：调试输出保存目录。如果未指定，调试输出将保存在当前工作目录下的 `debug_output` 目录中。
+- `<plugin_dir>`（可选）：插件目录路径。如果你的 Workflow 或奖励函数等模块未内置于 Trinity-RFT，可通过该参数加载自定义模块。
+- `--enable-profiling`（可选）：启用性能分析，使用 [viztracer](https://github.com/gaogaotiantian/viztracer) 对 Workflow 运行过程进行性能分析。
+- `--disable-overwrite`（可选）：禁用输出目录覆盖功能。如果指定的文件夹非空，程序将自动创建一个带有时间戳后缀的新目录（例如 `debug_output_20251203211200`）以避免覆盖现有数据。
 
-调试过程中，配置文件中的 `buffer.explorer_input.taskset` 字段会被加载，用于初始化 Workflow 所需的任务数据集和实例。需注意，调试模式仅会读取数据集中的第一条数据进行测试。运行上述命令后，Workflow 的返回值会自动格式化并打印在终端，方便查看运行结果。
+调试过程中，配置文件中的 `buffer.explorer_input.taskset` 字段会被加载，用于初始化 Workflow 所需的任务数据集和实例。需注意，调试模式仅会读取数据集中的第一条数据进行测试。运行上述命令后，工作流的返回 Experience 会被写入指定输出目录下的 `experiences.db` 文件中，而运行过程中记录的指标会打印在终端以便检查。
+
+```bash
+trinity debug --config <config_file_path> --module viewer --output-dir <output_dir> --port 8502
+```
+
+该命令会在 `http://localhost:8502` 启动 Experience Viewer，用于可视化调试过程中生成的 Experience。你可以在用户友好的界面中检查生成的 Experience。需注意，Viewer 会从指定输出目录下的 `experiences.db` 文件中读取 Experience，因此请确保你已成功运行过 Workflow 调试命令，且替换 `<output_dir>` 为实际的输出目录。
 
 调试完成后，可在推理模型终端输入 `Ctrl+C` 以终止模型运行。

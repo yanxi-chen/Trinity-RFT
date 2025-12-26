@@ -3,14 +3,11 @@
 
 from typing import List, Optional
 
-import openai
-
 from trinity.common.experience import Experience
 from trinity.common.models.model import ModelWrapper
-from trinity.common.workflows.workflow import WORKFLOWS, SimpleWorkflow, Task
+from trinity.common.workflows.workflow import SimpleWorkflow, Task
 
 
-@WORKFLOWS.register_module("math_rm_workflow")
 class MathRMWorkflow(SimpleWorkflow):
     """A workflow for math tasks as introduced in DeepSeek-R1."""
 
@@ -19,7 +16,7 @@ class MathRMWorkflow(SimpleWorkflow):
         *,
         task: Task,
         model: ModelWrapper,
-        auxiliary_models: Optional[List[openai.OpenAI]] = None,
+        auxiliary_models: Optional[List[ModelWrapper]] = None,
     ):
         self.reset(task)
         super().__init__(
@@ -53,7 +50,6 @@ class MathRMWorkflow(SimpleWorkflow):
         return responses
 
 
-@WORKFLOWS.register_module("async_math_rm_workflow")
 class AsyncMathRMWorkflow(MathRMWorkflow):
     is_async: bool = True
 

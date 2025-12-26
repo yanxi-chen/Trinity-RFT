@@ -4,15 +4,15 @@ from typing import List, Optional
 
 from trinity.common.experience import Experience
 from trinity.common.models.model import ModelWrapper
-from trinity.common.workflows.workflow import WORKFLOWS, MultiTurnWorkflow, Task
+from trinity.common.workflows.workflow import MultiTurnWorkflow, Task
 
 SCIWORLD_SYSTEM_PROMPT = """
-You are an agent, you job is to do some scientific experiment in a virtual test-based environments.
+You are an agent, your job is to do some scientific experiment in a virtual text-based environment.
 
 ## Notes:
 At each step, you should first think then perform action to fulfill the instruction. You should ALWAYS wrap your thinking with the <think> </think> tag and wrap your action with the <action> </action> tag.
 You should ALWAYS take one action each step.
-DONOT try to interact with the user at anytime. Finish the task by yourself.
+DO NOT try to interact with the user at anytime. Finish the task by yourself.
 
 ## Action Format:
 Below are the available commands you can use:
@@ -55,7 +55,6 @@ def parse_action(response):
         return ""
 
 
-@WORKFLOWS.register_module("sciworld_workflow")
 class SciWorldWorkflow(MultiTurnWorkflow):
     """A workflow for sciworld task."""
 

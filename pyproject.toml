@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name =  "trinity-rft"
-version = "0.3.2"
+version = "0.3.3"
 authors = [
     {name="Trinity-RFT Team", email="trinity-rft@outlook.com"},
 ]
@@ -22,8 +22,8 @@ classifiers = [
 requires-python = ">=3.10,<3.13"
 dependencies = [
     "verl==0.5.0",
-    "ray[default]>=2.48.0",
-    "vllm>=0.9.1,<=0.11.0",
+    "ray[default]>=2.50.0",
+    "vllm>=0.10.2,<=0.11.0",
     "tensordict",
     "wandb",
     "omegaconf",
@@ -53,7 +53,7 @@ data = [
     "py-data-juicer>=1.4.3"
 ]
 agent = [
-    "agentscope>=1.0.5"
+    "agentscope>=1.0.9"
 ]
 rm_gallery = [
     "rm-gallery>=0.1.5"

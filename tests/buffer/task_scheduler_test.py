@@ -5,10 +5,20 @@ from typing import Dict, List
 
 from parameterized import parameterized
 
-from tests.tools import get_template_config
-from trinity.buffer.task_scheduler import TasksetScheduler
+from tests.tools import get_template_config, get_unittest_dataset_config
+from trinity.buffer.reader import READER
+from trinity.buffer.reader.file_reader import TaskFileReader
+from trinity.buffer.task_scheduler import TasksetScheduler, get_taskset_scheduler
 from trinity.common.config import FormatConfig, TaskSelectorConfig, TasksetConfig
 from trinity.common.workflows.workflow import Task
+
+
+@READER.register_module("custom_reader")
+class CustomReader(TaskFileReader):
+    """A custom reader for testing."""
+
+    def __init__(self, config):
+        super().__init__(config)
 
 
 class TestTaskScheduler(unittest.IsolatedAsyncioTestCase):
@@ -41,6 +51,54 @@ class TestTaskScheduler(unittest.IsolatedAsyncioTestCase):
     @parameterized.expand(
         [
             (
+                {"batch_size": 5, "total_steps": 3},
+                {"selector_type": "sequential"},
+                [
+                    {"index": 0, "taskset_id": 1},
+                    {"index": 1, "taskset_id": 1},
+                    {"index": 2, "taskset_id": 1},
+                    {"index": 0, "taskset_id": 0},
+                    {"index": 1, "taskset_id": 0},
+                    {"index": 3, "taskset_id": 1},
+                    {"index": 4, "taskset_id": 1},
+                    {"index": 5, "taskset_id": 1},
+                    {"index": 2, "taskset_id": 0},
+                    {"index": 3, "taskset_id": 0},
+                    {"index": 6, "taskset_id": 1},
+                    {"index": 0, "taskset_id": 1},
+                    {"index": 1, "taskset_id": 1},
+                    {"index": 4, "taskset_id": 0},
+                    {"index": 0, "taskset_id": 0},
+                ],
+            ),
+            (
+                {"batch_size": 5, "total_epochs": 2},
+                {"selector_type": "sequential"},
+                [
+                    {"index": 0, "taskset_id": 1},
+                    {"index": 1, "taskset_id": 1},
+                    {"index": 2, "taskset_id": 1},
+                    {"index": 0, "taskset_id": 0},
+                    {"index": 1, "taskset_id": 0},
+                    {"index": 3, "taskset_id": 1},
+                    {"index": 4, "taskset_id": 1},
+                    {"index": 5, "taskset_id": 1},
+                    {"index": 2, "taskset_id": 0},
+                    {"index": 3, "taskset_id": 0},
+                    {"index": 6, "taskset_id": 1},
+                    {"index": 0, "taskset_id": 1},
+                    {"index": 1, "taskset_id": 1},
+                    {"index": 4, "taskset_id": 0},
+                    {"index": 0, "taskset_id": 0},
+                    {"index": 2, "taskset_id": 1},
+                    {"index": 3, "taskset_id": 1},
+                    {"index": 4, "taskset_id": 1},
+                    {"index": 1, "taskset_id": 0},
+                    {"index": 2, "taskset_id": 0},
+                ],
+            ),
+            (
+                {"batch_size": 2, "total_epochs": 2},
                 {"selector_type": "sequential"},
                 [
                     {"index": 0, "taskset_id": 1},
@@ -70,6 +128,7 @@ class TestTaskScheduler(unittest.IsolatedAsyncioTestCase):
                 ],
             ),
             (
+                {"batch_size": 2, "total_epochs": 2},
                 {"selector_type": "shuffle", "seed": 42},
                 [
                     {"index": 3, "taskset_id": 1},
@@ -99,6 +158,7 @@ class TestTaskScheduler(unittest.IsolatedAsyncioTestCase):
                 ],
             ),
             (
+                {"batch_size": 2, "total_epochs": 2},
                 {"selector_type": "random", "seed": 42},
                 [
                     {"index": 0, "taskset_id": 1},
@@ -128,6 +188,7 @@ class TestTaskScheduler(unittest.IsolatedAsyncioTestCase):
                 ],
             ),
             (
+                {"batch_size": 2, "total_epochs": 2},
                 {"selector_type": "offline_easy2hard", "feature_keys": ["feature_offline"]},
                 [
                     {"index": 3, "taskset_id": 1},
@@ -157,6 +218,7 @@ class TestTaskScheduler(unittest.IsolatedAsyncioTestCase):
                 ],
             ),
             (
+                {"batch_size": 2, "total_epochs": 2},
                 {"selector_type": "difficulty_based", "feature_keys": ["feat_1", "feat_2"]},
                 [
                     {"index": 3, "taskset_id": 1},
@@ -187,10 +249,13 @@ class TestTaskScheduler(unittest.IsolatedAsyncioTestCase):
             ),
         ]
     )
-    async def test_task_scheduler(self, task_selector_kwargs, batch_tasks_orders) -> None:
+    async def test_task_scheduler(
+        self, buffer_config_kwargs, task_selector_kwargs, batch_tasks_orders
+    ) -> None:
         config = get_template_config()
-        config.buffer.batch_size = 2
-        config.buffer.total_epochs = 2
+        config.mode = "explore"
+        for key, value in buffer_config_kwargs.items():
+            setattr(config.buffer, key, value)
         config.buffer.explorer_input.taskset = None
         config.buffer.explorer_input.tasksets = [
             TasksetConfig(
@@ -258,3 +323,36 @@ class TestTaskScheduler(unittest.IsolatedAsyncioTestCase):
 
         with self.assertRaises(StopAsyncIteration):
             batch_tasks = await task_scheduler.read_async()
+
+    async def test_task_scheduler_simple(self):
+        config = get_template_config()
+        config.mode = "explore"
+        config.buffer.batch_size = 4
+        config.buffer.explorer_input.taskset = get_unittest_dataset_config("countdown", "train")
+        config.buffer.explorer_input.taskset.storage_type = "custom_reader"
+        config.check_and_update()
+
+        task_scheduler = get_taskset_scheduler({}, config)
+
+        batch_tasks = await task_scheduler.read_async()
+        self.assertEqual(len(batch_tasks), 4)
+        task_scheduler_state = task_scheduler.state_dict()
+        self.assertEqual(len(task_scheduler_state), 1)
+        self.assertEqual(task_scheduler_state[0]["current_index"], 4)
+        # no effect
+        task_scheduler.update({"metric1": 0.5})
+
+        task_scheduler = get_taskset_scheduler(
+            {
+                "latest_iteration": 1,
+                "taskset_states": [
+                    {"current_index": 8},
+                ],
+            },
+            config,
+        )
+        batch_tasks = await task_scheduler.read_async()
+        self.assertEqual(len(batch_tasks), 4)
+        task_scheduler_state = task_scheduler.state_dict()
+        self.assertEqual(len(task_scheduler_state), 1)
+        self.assertEqual(task_scheduler_state[0]["current_index"], 12)

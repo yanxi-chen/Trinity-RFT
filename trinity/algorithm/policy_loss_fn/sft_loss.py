@@ -4,11 +4,10 @@ from typing import Dict, Tuple
 
 import torch
 
-from trinity.algorithm.policy_loss_fn.policy_loss_fn import POLICY_LOSS_FN, PolicyLossFn
-from trinity.algorithm.utils import masked_loss
+from trinity.algorithm.policy_loss_fn.policy_loss_fn import PolicyLossFn
+from trinity.algorithm.utils import aggregate_loss
 
 
-@POLICY_LOSS_FN.register_module("sft")
 class SFTLossFn(PolicyLossFn):
     def __init__(self, backend: str = "verl", loss_agg_mode: str = "token-mean") -> None:
         super().__init__(backend=backend)
@@ -20,7 +19,7 @@ class SFTLossFn(PolicyLossFn):
         action_mask: torch.Tensor,
         **kwargs,
     ) -> Tuple[torch.Tensor, Dict]:
-        sft_loss = masked_loss(-logprob, action_mask, loss_agg_mode=self.loss_agg_mode)
+        sft_loss = aggregate_loss(-logprob, action_mask, loss_agg_mode=self.loss_agg_mode)
 
         return sft_loss, {"sft_loss": sft_loss.detach().item()}
 

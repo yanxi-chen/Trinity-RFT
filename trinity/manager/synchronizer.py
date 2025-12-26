@@ -44,7 +44,10 @@ class Synchronizer:
         self._modules = {module_ref}
         self._modules_lock = asyncio.Lock()
         asyncio.create_task(self._check_modules())
-        if self.config.synchronizer.sync_method == SyncMethod.CHECKPOINT:
+        if (
+            self.config.mode != "bench"
+            and self.config.synchronizer.sync_method == SyncMethod.CHECKPOINT
+        ):
             asyncio.create_task(self._find_latest_state_dict())
 
     async def add_module(self, module_ref: ray.actor.ActorHandle) -> None:
@@ -269,6 +272,16 @@ class Synchronizer:
                 await self.set_explorer_status(
                     RunningStatus.RUNNING, old_status=RunningStatus.REQUIRE_SYNC
                 )
+            return self.model_version
+
+    async def get_latest_model_version(self) -> int:
+        """
+        Get the latest model version available in the synchronizer.
+
+        Returns:
+            The current model version.
+        """
+        async with self._ready_condition:
             return self.model_version
 
     async def ready_to_nccl_sync(

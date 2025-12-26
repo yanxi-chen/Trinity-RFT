@@ -1,4 +1,4 @@
-"""Patch for vllm OpenAI API server.
+"""Patch for vllm OpenAI API server. Only for vllm versions >=0.8.5, <=0.11.0.
 
 1. Mocks the `add_signal_handler` method to do nothing.
 2. Adds `token_ids` and `prompt_token_ids` to the `ChatCompletionResponse`.
@@ -10,7 +10,6 @@ import time
 from typing import Optional, Union
 
 import vllm
-from packaging.version import InvalidVersion
 from packaging.version import parse as parse_version
 from pydantic import Field, TypeAdapter
 from vllm.entrypoints.launcher import serve_http
@@ -39,6 +38,7 @@ from vllm.outputs import RequestOutput
 from vllm.transformers_utils.tokenizer import MistralTokenizer
 from vllm.utils import FlexibleArgumentParser, set_ulimit
 
+from trinity.common.models.vllm_patch import get_vllm_version
 from trinity.utils.log import get_logger
 
 
@@ -51,7 +51,6 @@ class PatchedChatCompletionResponse(ChatCompletionResponse):
     choices: list[PatchedChatCompletionResponseChoice] = list[ChatCompletionResponseChoice]
 
 
-# TODO: add patch to stream generator
 async def chat_completion_full_generator(  # noqa C901
     self,
     request,
@@ -304,7 +303,11 @@ async def patch_and_serve_http(app, sock, args):
     loop = asyncio.get_event_loop()
     original_add_signal_handler = loop.add_signal_handler
     loop.add_signal_handler = functools.partial(dummy_add_signal_handler, loop)
-    OpenAIServingChat.chat_completion_full_generator = chat_completion_full_generator
+    vllm_version = get_vllm_version()
+
+    # from 0.10.2, vllm added token_ids to ChatCompletionResponseChoice, so no need to patch
+    if vllm_version < parse_version("0.10.2"):
+        OpenAIServingChat.chat_completion_full_generator = chat_completion_full_generator
 
     try:
         shutdown_task = await serve_http(
@@ -327,16 +330,6 @@ async def patch_and_serve_http(app, sock, args):
         sock.close()
 
 
-def get_vllm_version():
-    try:
-        vllm_version = parse_version(vllm.__version__)
-    except InvalidVersion:
-        # for self-compiled vllm,
-        # we cannot parse the version, trait it as the lowest version we support
-        vllm_version = parse_version("0.8.5")
-    return vllm_version
-
-
 async def run_api_server_in_ray_actor(
     async_llm,
     host: str,
@@ -345,6 +338,7 @@ async def run_api_server_in_ray_actor(
     enable_auto_tool_choice: bool = False,
     tool_call_parser: Optional[str] = None,
     reasoning_parser: Optional[str] = None,
+    enable_log_requests: bool = False,
 ):
     vllm_version = get_vllm_version()
     if vllm_version < parse_version("0.8.5") or vllm_version > parse_version("0.11.0"):
@@ -364,6 +358,8 @@ async def run_api_server_in_ray_actor(
         model_path,
         "--enable-server-load-tracking",  # enable tracking for load balancing
     ]
+    if enable_log_requests:
+        cli_args.append("--enable-log-requests")
     if enable_auto_tool_choice:
         cli_args.append("--enable-auto-tool-choice")
     if tool_call_parser:

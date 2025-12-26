@@ -4,11 +4,10 @@ from typing import Optional
 
 import torch
 
-from trinity.common.rewards.reward_fn import REWARD_FUNCTIONS, RewardFn
-from trinity.utils.eval_utils import compute_score
+from trinity.common.rewards.naive_dapo_score import compute_score
+from trinity.common.rewards.reward_fn import RewardFn
 
 
-@REWARD_FUNCTIONS.register_module("math_dapo_reward")
 class MathDAPORewardFn(RewardFn):
     """A reward function that follows the definition in DAPO for math task."""
 
@@ -28,7 +27,7 @@ class MathDAPORewardFn(RewardFn):
         self,
         response: str,
         response_token: torch.Tensor,
-        truth: Optional[str] = None,
+        truth: str,
         **kwargs,
     ) -> dict[str, float]:
         accuracy_score = compute_score(response, truth)
@@ -54,11 +53,11 @@ class MathDAPORewardFn(RewardFn):
         ), "max_response_length must be greater than cache_length"
 
         response_len = len(response_token)
-        excepted_len = self.max_response_length - self.cache_length
+        expected_len = self.max_response_length - self.cache_length
 
-        if response_len < excepted_len:
+        if response_len < expected_len:
             return 0.0
         elif response_len > self.max_response_length:
             return -self.penalty_factor
         else:
-            return (excepted_len - response_len) / self.cache_length * self.penalty_factor
+            return (expected_len - response_len) / self.cache_length * self.penalty_factor

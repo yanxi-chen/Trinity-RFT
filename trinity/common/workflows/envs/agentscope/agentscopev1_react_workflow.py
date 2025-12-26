@@ -3,14 +3,11 @@
 
 from typing import List, Optional
 
-import openai
-
 from trinity.common.models.model import ModelWrapper
 from trinity.common.rewards.math_reward import MathBoxedRewardFn
-from trinity.common.workflows.workflow import WORKFLOWS, Task, Workflow
+from trinity.common.workflows.workflow import Task, Workflow
 
 
-@WORKFLOWS.register_module("agentscope_react_math_workflow")
 class AgentScopeReactMathWorkflow(Workflow):
     """
     This workflow serves as an example of how to use the agentscope framework within the trinity workflow.
@@ -25,7 +22,7 @@ class AgentScopeReactMathWorkflow(Workflow):
         *,
         task: Task,
         model: ModelWrapper,
-        auxiliary_models: Optional[List[openai.OpenAI]] = None,
+        auxiliary_models: Optional[List[ModelWrapper]] = None,
     ):
         super().__init__(
             task=task,

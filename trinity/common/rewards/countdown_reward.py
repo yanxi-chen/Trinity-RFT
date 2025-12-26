@@ -2,15 +2,14 @@
 import json
 from typing import Optional
 
-from trinity.common.rewards.reward_fn import REWARD_FUNCTIONS, RewardFn
-from trinity.utils.eval_utils import (
+from trinity.common.rewards.eval_utils import (
     evaluate_equation,
     extract_solution,
     validate_equation,
 )
+from trinity.common.rewards.reward_fn import RewardFn
 
 
-@REWARD_FUNCTIONS.register_module("countdown_reward")
 class CountDownRewardFn(RewardFn):
     """A reward function that rewards for countdown task.
     Ref: Jiayi-Pan/TinyZero verl/utils/reward_score/countdown.py

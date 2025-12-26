@@ -4,16 +4,13 @@
 from dataclasses import asdict
 from typing import List, Optional
 
-import openai
-
 from trinity.common.config import GenerationConfig
 from trinity.common.experience import Experience
 from trinity.common.models.model import ModelWrapper
-from trinity.common.workflows.workflow import WORKFLOWS, Task, Workflow
-from trinity.utils.math_eval_utils import verify_math_answer
+from trinity.common.rewards.qwen25_eval import verify_math_answer
+from trinity.common.workflows.workflow import Task, Workflow
 
 
-@WORKFLOWS.register_module("math_eval_workflow")
 class MathEvalWorkflow(Workflow):
     """
     A workflow for standard math evaluation.
@@ -28,7 +25,7 @@ class MathEvalWorkflow(Workflow):
         *,
         task: Task,
         model: ModelWrapper,
-        auxiliary_models: Optional[List[openai.OpenAI]] = None,
+        auxiliary_models: Optional[List[ModelWrapper]] = None,
     ):
         super().__init__(
             task=task,
@@ -79,7 +76,6 @@ class MathEvalWorkflow(Workflow):
         return responses
 
 
-@WORKFLOWS.register_module("async_math_eval_workflow")
 class AsyncMathEvalWorkflow(MathEvalWorkflow):
     is_async: bool = True
 

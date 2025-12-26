@@ -9,8 +9,8 @@ from datasets import Dataset
 from sqlalchemy import asc, desc
 from sqlalchemy.orm import sessionmaker
 
-from trinity.buffer.schema import init_engine
-from trinity.buffer.schema.formatter import FORMATTER, TaskFormatter
+from trinity.buffer.schema import FORMATTER, init_engine
+from trinity.buffer.schema.formatter import TaskFormatter
 from trinity.buffer.utils import retry_session
 from trinity.common.config import StorageConfig
 from trinity.common.experience import Experience
@@ -34,6 +34,9 @@ class SQLStorage:
         self.logger = get_logger(f"sql_{config.name}", in_ray_actor=True)
         if not config.path:
             raise ValueError("`path` is required for SQL storage type.")
+        self.logger.info(
+            f"Init engine {config.path} with table {config.name} with schema {config.schema_type}"
+        )
         self.engine, self.table_model_cls = init_engine(
             db_url=config.path,
             table_name=config.name,
@@ -94,6 +97,7 @@ class SQLExperienceStorage(SQLStorage):
         super().__init__(config)
         self.max_timeout = config.max_read_timeout
         self.batch_size = config.batch_size
+        self.enable_replay = config.replay_buffer is not None and config.replay_buffer.enable
         # TODO: optimize the following logic
         if config.schema_type == "experience":
             # NOTE: consistent with the old version of experience buffer
@@ -140,7 +144,7 @@ class SQLExperienceStorage(SQLStorage):
                 time.sleep(1)
         return exp_list
 
-    def _read_priority(self, batch_size: int) -> List[Experience]:
+    def _read_priority(self, batch_size: int, min_model_version: int = 0) -> List[Experience]:
         exp_list = []
         start_time = time.time()
         latest_size = 0
@@ -155,9 +159,15 @@ class SQLExperienceStorage(SQLStorage):
             with retry_session(
                 self.session, self.max_retry_times, self.max_retry_interval
             ) as session:
+                query = session.query(self.table_model_cls)
+                if min_model_version > 0:
+                    query = query.filter(self.table_model_cls.model_version >= min_model_version)
+                if not self.enable_replay:
+                    query = query.filter(self.table_model_cls.consumed == 0)
                 experiences = (
-                    session.query(self.table_model_cls)
-                    .order_by(asc(self.table_model_cls.consumed), desc(self.table_model_cls.id))
+                    query.order_by(
+                        asc(self.table_model_cls.consumed), desc(self.table_model_cls.id)
+                    )
                     .limit(batch_size)
                     .with_for_update()
                     .all()
@@ -183,12 +193,12 @@ class SQLExperienceStorage(SQLStorage):
             time.sleep(1)
         return exp_list
 
-    def read(self, batch_size: Optional[int] = None) -> List[Experience]:
+    def read(self, batch_size: Optional[int] = None, **kwargs) -> List[Experience]:
         if self.stopped:
             raise StopIteration()
 
         batch_size = batch_size or self.batch_size
-        return self._read_method(batch_size)
+        return self._read_method(batch_size, **kwargs)
 
     @classmethod
     def load_from_dataset(cls, dataset: Dataset, config: StorageConfig) -> "SQLExperienceStorage":

@@ -4,19 +4,17 @@
 from __future__ import annotations
 
 from dataclasses import asdict, dataclass, field
-from typing import Any, List, Optional, Type, Union
-
-import openai
+from typing import TYPE_CHECKING, List, Optional, Type, Union
 
 from trinity.common.config import FormatConfig, GenerationConfig
 from trinity.common.experience import Experience
-from trinity.common.models.model import ModelWrapper
-from trinity.common.rewards.math_reward import MathRewardFn
 from trinity.common.rewards.reward_fn import RewardFn
 from trinity.utils.log import get_logger
-from trinity.utils.registry import Registry
 
-WORKFLOWS = Registry("workflows")
+if TYPE_CHECKING:
+    import openai
+
+    from trinity.common.models.model import ModelWrapper
 
 
 @dataclass
@@ -40,16 +38,17 @@ class Task(dict):
     index: dict = field(default_factory=dict)
 
     def to_workflow(
-        self, model: Any, auxiliary_models: Optional[List[openai.OpenAI]] = None
+        self,
+        model: ModelWrapper,
+        auxiliary_models: Optional[List[ModelWrapper]] = None,
     ) -> Workflow:
         """Convert the task to a workflow.
 
         Args:
             model (ModelWrapper): The rollout model for the workflow.
-            auxiliary_models (List[openai.OpenAI]): The auxiliary models for the workflow.
-
-        Note:
-            `model_path` attribute is added to the `auxiliary_models` for use within the workflow.
+            auxiliary_models (List[ModelWrapper]): The auxiliary model wrappers.
+                Workflows can access both the ModelWrapper and OpenAI client via
+                self.auxiliary_model_wrappers and self.auxiliary_models respectively.
 
         Returns:
             Workflow: The generated workflow object.
@@ -80,6 +79,10 @@ class Workflow:
     """The base workflow class.
 
     A workflow is a runnable object which generates a list of experiences.
+
+    Attributes:
+        auxiliary_model_wrappers: List of ModelWrapper instances for auxiliary models.
+        auxiliary_models: List of OpenAI clients (sync or async based on is_async) for auxiliary models.
     """
 
     can_reset: bool = False  # whether the workflow can be reset with a new task. If true, `reset()` must be implemented.
@@ -91,11 +94,19 @@ class Workflow:
         *,
         task: Task,
         model: ModelWrapper,
-        auxiliary_models: Optional[List[openai.OpenAI]] = None,
+        auxiliary_models: Optional[List[ModelWrapper]] = None,
     ):
         self.task = task
         self.model = model
-        self.auxiliary_models = auxiliary_models
+        # Store ModelWrapper instances
+        self.auxiliary_model_wrappers = auxiliary_models
+        # Get OpenAI clients from ModelWrapper (async or sync based on workflow type)
+        self.auxiliary_models: Optional[Union[List[openai.OpenAI], List[openai.AsyncOpenAI]]] = None
+        if auxiliary_models:
+            if self.__class__.is_async:
+                self.auxiliary_models = [m.get_openai_async_client() for m in auxiliary_models]
+            else:
+                self.auxiliary_models = [m.get_openai_client() for m in auxiliary_models]
         self.run_id_base = 0
         self.logger = get_logger(__name__)
 
@@ -153,7 +164,7 @@ class MultiTurnWorkflow(Workflow):
         *,
         task: Task,
         model: ModelWrapper,
-        auxiliary_models: Optional[List[openai.OpenAI]] = None,
+        auxiliary_models: Optional[List[ModelWrapper]] = None,
     ):
         super().__init__(
             task=task,
@@ -165,8 +176,13 @@ class MultiTurnWorkflow(Workflow):
         self.repeat_times = repeat_times
         self.run_id_base = run_id_base
 
-    def process_messages_to_experience(self, messages, reward, info={}) -> Experience:
+    def process_messages_to_experience(
+        self, messages, reward, info={}, truncate_status=None
+    ) -> Experience:
         converted_experience = self.model.convert_messages_to_experience(messages)
+
+        if converted_experience.truncate_status == "response_truncated":
+            reward = 0.0
 
         tokens = converted_experience.tokens
         log_probs = converted_experience.logprobs
@@ -182,6 +198,10 @@ class MultiTurnWorkflow(Workflow):
         experience = Experience(
             tokens=tokens,
             action_mask=generation_mask,
+            prompt_length=converted_experience.prompt_length,
+            prompt_text=converted_experience.prompt_text,
+            response_text=converted_experience.response_text,
+            truncate_status=converted_experience.truncate_status or truncate_status,
             reward=reward,
             logprobs=log_probs,
             info=info,
@@ -196,7 +216,7 @@ class BaseSimpleWorkflow(Workflow):
         *,
         task: Task,
         model: ModelWrapper,
-        auxiliary_models: Optional[List[openai.OpenAI]] = None,
+        auxiliary_models: Optional[List[ModelWrapper]] = None,
     ):
         self.reset(task)
         super().__init__(
@@ -241,7 +261,6 @@ class BaseSimpleWorkflow(Workflow):
         return messages
 
 
-@WORKFLOWS.register_module("simple_workflow")
 class SimpleWorkflow(BaseSimpleWorkflow):
     """A workflow for simple single-round task."""
 
@@ -273,7 +292,6 @@ class SimpleWorkflow(BaseSimpleWorkflow):
         return responses
 
 
-@WORKFLOWS.register_module("async_simple_workflow")
 class AsyncSimpleWorkflow(BaseSimpleWorkflow):
     is_async: bool = True
 
@@ -302,7 +320,6 @@ class AsyncSimpleWorkflow(BaseSimpleWorkflow):
         return responses
 
 
-@WORKFLOWS.register_module("math_workflow")
 class MathWorkflow(SimpleWorkflow):
     """A workflow for math tasks as introduced in DeepSeek-R1."""
 
@@ -311,7 +328,7 @@ class MathWorkflow(SimpleWorkflow):
         *,
         task: Task,
         model: ModelWrapper,
-        auxiliary_models: Optional[List[openai.OpenAI]] = None,
+        auxiliary_models: Optional[List[ModelWrapper]] = None,
     ):
         self.reset(task)
         super().__init__(
@@ -321,6 +338,8 @@ class MathWorkflow(SimpleWorkflow):
         )
 
     def reset(self, task: Task):
+        from trinity.common.rewards.math_reward import MathRewardFn
+
         if task.reward_fn is None:
             task.reward_fn = MathRewardFn
         if task.reward_fn == MathRewardFn and task.format_args.system_prompt is None:
@@ -332,6 +351,5 @@ class MathWorkflow(SimpleWorkflow):
         super().reset(task)
 
 
-@WORKFLOWS.register_module("async_math_workflow")
 class AsyncMathWorkflow(AsyncSimpleWorkflow, MathWorkflow):
     pass

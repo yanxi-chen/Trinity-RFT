@@ -6,11 +6,10 @@ from typing import Dict, Tuple
 
 import torch
 
-from trinity.algorithm.policy_loss_fn.policy_loss_fn import POLICY_LOSS_FN, PolicyLossFn
-from trinity.algorithm.utils import masked_loss, masked_mean
+from trinity.algorithm.policy_loss_fn.policy_loss_fn import PolicyLossFn
+from trinity.algorithm.utils import aggregate_loss, masked_mean
 
 
-@POLICY_LOSS_FN.register_module("sppo")
 class sPPOPolicyLossFn(PolicyLossFn):
     def __init__(
         self,
@@ -41,7 +40,7 @@ class sPPOPolicyLossFn(PolicyLossFn):
         is_in_range = (ratio >= (1 / (1 + self.epsilon))) * (ratio <= (1 + self.epsilon))
         is_clipped_mask = ~is_in_range
         pg_losses = -advantages * (logprob - old_logprob) * is_in_range.float()
-        pg_loss = masked_loss(pg_losses, action_mask, loss_agg_mode=self.loss_agg_mode)
+        pg_loss = aggregate_loss(pg_losses, action_mask, loss_agg_mode=self.loss_agg_mode)
         pg_clipfrac = masked_mean(is_clipped_mask.float(), action_mask)
         metrics = {
             "pg_clipfrac": pg_clipfrac.item(),

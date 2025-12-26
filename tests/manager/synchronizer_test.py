@@ -21,7 +21,7 @@ from tests.tools import (
     get_template_config,
     get_unittest_dataset_config,
 )
-from trinity.algorithm.algorithm import ALGORITHM_TYPE
+from trinity.algorithm import ALGORITHM_TYPE
 from trinity.cli.launcher import both, explore, train
 from trinity.common.config import Config, ExperienceBufferConfig
 from trinity.common.constants import StorageType, SyncMethod, SyncStyle
@@ -80,32 +80,23 @@ def explorer_monkey_patch(config: Config, max_steps: int, intervals: List[int]):
 
 def run_trainer(config: Config, max_steps: int, intervals: List[int]) -> None:
     ray.init(ignore_reinit_error=True, namespace=config.ray_namespace)
-    try:
-        trainer_monkey_patch(config, max_steps, intervals)
-        train(config)
-    finally:
-        ray.shutdown(_exiting_interpreter=True)
+    trainer_monkey_patch(config, max_steps, intervals)
+    train(config)
 
 
 def run_explorer(config: Config, max_steps: int, intervals: List[int]) -> None:
     ray.init(ignore_reinit_error=True, namespace=config.ray_namespace)
-    try:
-        explorer_monkey_patch(config, max_steps, intervals)
-        explore(config)
-    finally:
-        ray.shutdown(_exiting_interpreter=True)
+    explorer_monkey_patch(config, max_steps, intervals)
+    explore(config)
 
 
 def run_both(
     config: Config, max_steps: int, trainer_intervals: List[int], explorer_intervals: List[int]
 ) -> None:
     ray.init(ignore_reinit_error=True, namespace=config.ray_namespace)
-    try:
-        trainer_monkey_patch(config, max_steps, trainer_intervals)
-        explorer_monkey_patch(config, max_steps, explorer_intervals)
-        both(config)
-    finally:
-        ray.shutdown(_exiting_interpreter=True)
+    trainer_monkey_patch(config, max_steps, trainer_intervals)
+    explorer_monkey_patch(config, max_steps, explorer_intervals)
+    both(config)
 
 
 class BaseTestSynchronizer(unittest.TestCase):
@@ -115,6 +106,7 @@ class BaseTestSynchronizer(unittest.TestCase):
 
     def tearDown(self):
         checkpoint_path = get_checkpoint_path()
+        ray.shutdown(_exiting_interpreter=True)
         shutil.rmtree(os.path.join(checkpoint_path, "unittest"))
 
 
@@ -132,7 +124,7 @@ class TestSynchronizerExit(BaseTestSynchronizer):
         config.buffer.explorer_input.taskset = get_unittest_dataset_config("countdown")
         config.buffer.trainer_input.experience_buffer = ExperienceBufferConfig(
             name="exp_buffer",
-            storage_type=StorageType.QUEUE,
+            storage_type=StorageType.QUEUE.value,
         )
         config.synchronizer.sync_method = SyncMethod.CHECKPOINT
         config.synchronizer.sync_style = SyncStyle.DYNAMIC_BY_EXPLORER
@@ -151,7 +143,7 @@ class TestSynchronizerExit(BaseTestSynchronizer):
         explorer1_config.explorer.rollout_model.tensor_parallel_size = 1
         explorer1_config.buffer.explorer_output = ExperienceBufferConfig(
             name="exp_buffer",
-            storage_type=StorageType.QUEUE,
+            storage_type=StorageType.QUEUE.value,
         )
         explorer1_config.check_and_update()
 
@@ -255,7 +247,7 @@ class TestStateDictBasedSynchronizer(BaseTestSynchronizer):
         config.buffer.explorer_input.taskset = get_unittest_dataset_config("countdown")
         config.buffer.trainer_input.experience_buffer = ExperienceBufferConfig(
             name="exp_buffer",
-            storage_type=StorageType.QUEUE,
+            storage_type=StorageType.QUEUE.value,
         )
         config.synchronizer.sync_method = self.sync_method
         config.synchronizer.sync_style = self.sync_style
@@ -275,7 +267,7 @@ class TestStateDictBasedSynchronizer(BaseTestSynchronizer):
         explorer1_config.explorer.rollout_model.tensor_parallel_size = 1
         explorer1_config.buffer.explorer_output = ExperienceBufferConfig(
             name="exp_buffer",
-            storage_type=StorageType.QUEUE,
+            storage_type=StorageType.QUEUE.value,
         )
         explorer2_config = deepcopy(explorer1_config)
         explorer2_config.explorer.name = "explorer2"
@@ -356,7 +348,7 @@ class TestNCCLBasedSynchronizer(BaseTestSynchronizer):
         config.buffer.explorer_input.taskset = get_unittest_dataset_config("countdown")
         config.buffer.trainer_input.experience_buffer = ExperienceBufferConfig(
             name="exp_buffer",
-            storage_type=StorageType.QUEUE,
+            storage_type=StorageType.QUEUE.value,
         )
         config.synchronizer.sync_method = SyncMethod.NCCL
         config.synchronizer.sync_style = self.sync_style

@@ -20,8 +20,8 @@ model:
   max_response_tokens: 2048
   max_model_len: 4096
 cluster:  # 2 for explorer, 2 for trainer
-  node_num: 2
-  gpu_per_node: 2
+  node_num: ${oc.env:NODE_NUM,2}
+  gpu_per_node: ${oc.env:GPU_PER_NODE,2}
 buffer:
   total_epochs: 1
   batch_size: 4
@@ -38,13 +38,12 @@ explorer:
   rollout_model:
     engine_num: 2
     tensor_parallel_size: 1
-    enable_prefix_caching: false
-    enforce_eager: true
     dtype: bfloat16
     seed: 42
 trainer:
   trainer_type: verl
   save_interval: 100
+  save_hf_checkpoint: never
   grad_clip: 1.0
   use_dynamic_bsz: true
   max_token_len_per_gpu: 16384

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import asyncio
+import math
 import os
 import time
 import traceback
@@ -15,7 +16,7 @@ from ray.util.scheduling_strategies import NodeAffinitySchedulingStrategy
 
 from trinity.buffer.buffer import get_buffer_reader
 from trinity.buffer.pipelines.experience_pipeline import ExperiencePipeline
-from trinity.buffer.task_scheduler import TasksetScheduler
+from trinity.buffer.task_scheduler import get_taskset_scheduler
 from trinity.common.config import Config
 from trinity.common.constants import (
     ROLLOUT_WEIGHT_SYNC_GROUP_NAME,
@@ -24,7 +25,6 @@ from trinity.common.constants import (
     SyncStyle,
 )
 from trinity.common.models import create_inference_models
-from trinity.common.models.utils import get_checkpoint_dir_with_step_num
 from trinity.explorer.scheduler import Scheduler
 from trinity.manager.state_manager import StateManager
 from trinity.manager.synchronizer import Synchronizer
@@ -46,13 +46,16 @@ class Explorer:
         )
         explorer_state = self.state.load_explorer()
         self.explore_step_num = explorer_state.get("latest_iteration", 0)
-        self.last_sync_step = self.explore_step_num if self.explore_step_num > 0 else -1
+        self.last_sync_step = self.explore_step_num
+        self.last_monitored_step = self.explore_step_num
         self.synchronizer = Synchronizer.get_actor(config)
         self.config = config
         self.models, self.auxiliary_models = create_inference_models(config)
         self.experience_pipeline = self._init_experience_pipeline()
         self.taskset = (
-            TasksetScheduler(explorer_state, config) if self.config.mode != "serve" else None
+            get_taskset_scheduler(explorer_state=explorer_state, config=config)
+            if self.config.mode not in {"bench", "serve"}
+            else None
         )
         self.scheduler = None
         self.monitor = MONITOR.get(self.config.monitor.monitor_type)(
@@ -62,10 +65,15 @@ class Explorer:
             role=self.config.explorer.name,
             config=config,
         )
-        self.batch_size = config.buffer.batch_size
-        self.update_interval = (
-            self.config.synchronizer.sync_interval * self.config.buffer.batch_size
-        )
+        if config.explorer.over_rollout.ratio > 0.0:
+            self.min_wait_num = math.ceil(
+                config.buffer.batch_size * (1 - config.explorer.over_rollout.ratio)
+            )
+            self.logger.info(
+                f"Over rollout is enabled. Explorer will only wait for {self.min_wait_num} tasks in each step."
+            )
+        else:
+            self.min_wait_num = None
         self.use_nccl_sync = self.config.synchronizer.sync_method == SyncMethod.NCCL
         self.pending_eval_tasks = deque()
 
@@ -82,7 +90,6 @@ class Explorer:
     async def setup_weight_sync_group(
         self, master_address: str, master_port: int, state_dict_meta: List = None
     ):
-        # In checkpoint mode, we use explorer to store the model weights which has no rank
         base_offset = 1 if self.use_nccl_sync else 0
         world_size = (
             len(self.models) * self.config.explorer.rollout_model.tensor_parallel_size + base_offset
@@ -109,9 +116,35 @@ class Explorer:
         ]
         await asyncio.gather(*refs)
 
+    async def setup_model_level_weight_sync_group(self):
+        """Setup process group for each model, only used in serve mode."""
+        refs = []
+        world_size = self.config.explorer.rollout_model.tensor_parallel_size
+        for model in self.models:
+            master_address, master_port = await model.get_available_address.remote()
+            self.logger.info(
+                f"Initialize process group for model weight synchronization, "
+                f"master_address={master_address}, master_port={master_port}, "
+                f"world_size={world_size}"
+            )
+            refs.append(
+                model.init_process_group.remote(
+                    master_address=master_address,
+                    master_port=master_port,
+                    rank_offset=0,
+                    world_size=world_size,
+                    group_name=ROLLOUT_WEIGHT_SYNC_GROUP_NAME,
+                    explorer_name=self.config.explorer.name,
+                    timeout=self.config.synchronizer.sync_timeout,
+                )
+            )
+        await asyncio.gather(*refs)
+
     async def _checkpoint_weights_update(self, step_num: Optional[int] = None) -> int:
+        self.logger.info(f"Start to update model weights from checkpoint at step {step_num}.")
         step_num = await self.synchronizer.set_model_state_dict_with_step_num.remote(step_num)
         await asyncio.gather(*[model.sync_model.remote(step_num) for model in self.models])
+        self.logger.info(f"Model weights updated to checkpoint at step {step_num}.")
         return step_num  # type: ignore
 
     async def _pull_latest_weights(self):
@@ -151,21 +184,26 @@ class Explorer:
         """Preparation before running."""
         try:
             # prepare experience pipeline
-            await self.experience_pipeline.prepare.remote()
+            if self.experience_pipeline:
+                await self.experience_pipeline.prepare.remote()
             self.logger.info("Experience pipeline is ready.")
             # make sure all rollout models are ready
-            run_api_ref = [model.run_api_server.remote() for model in self.models]
+            run_api_ref = [model.prepare.remote() for model in self.models]
             run_api_ref.extend(
-                model.run_api_server.remote()
-                for models in self.auxiliary_models
-                for model in models
+                model.prepare.remote() for models in self.auxiliary_models for model in models
             )
             await asyncio.gather(*run_api_ref)
             self.logger.info("All models are ready.")
 
             if not self.use_nccl_sync:
-                master_address, master_port = await self.models[0].get_available_address.remote()
-                await self.setup_weight_sync_group(master_address, master_port)
+                if self.config.mode == "serve":
+                    # In serving mode, each engine will setup its own process group
+                    await self.setup_model_level_weight_sync_group()
+                else:
+                    master_address, master_port = await self.models[
+                        0
+                    ].get_available_address.remote()
+                    await self.setup_weight_sync_group(master_address, master_port)
             if self.config.mode != "serve":
                 self.scheduler = Scheduler(self.config, self.models, self.auxiliary_models)
                 await self.scheduler.start()
@@ -223,9 +261,11 @@ class Explorer:
             await self.save_checkpoint(sync_weight=False)
             await self.synchronizer.set_explorer_status.remote(
                 RunningStatus.STOPPED,
-                old_status=RunningStatus.RUNNING
-                if self.last_sync_successful
-                else RunningStatus.REQUIRE_SYNC,
+                old_status=(
+                    RunningStatus.RUNNING
+                    if self.last_sync_successful
+                    else RunningStatus.REQUIRE_SYNC
+                ),
             )
             await self.shutdown()
             return False
@@ -277,8 +317,8 @@ class Explorer:
                 f"Evaluation on {eval_taskset_config.name} at step {self.explore_step_num} started."
             )
             eval_taskset = get_buffer_reader(eval_taskset_config)
-            eval_batch_id = f"{self.explore_step_num}/{eval_taskset.name}"
-            self.pending_eval_tasks.append((self.explore_step_num, eval_taskset.name))
+            eval_batch_id = f"{self.explore_step_num}/{eval_taskset_config.name}"
+            self.pending_eval_tasks.append((self.explore_step_num, eval_taskset_config.name))
             while True:
                 try:
                     data = await eval_taskset.read_async()
@@ -309,6 +349,8 @@ class Explorer:
             ]
         )
         for step_num in all_ckp_steps:
+            if step_num <= self.explore_step_num:
+                continue
             self.explore_step_num = await self._checkpoint_weights_update(step_num=step_num)
             await self.eval()
             await self._finish_eval_step(prefix="bench")
@@ -316,9 +358,13 @@ class Explorer:
 
     async def save_checkpoint(self, sync_weight: bool = False) -> None:
         if self.scheduler:
-            await self._finish_steps(
-                self.last_sync_step + 1, self.explore_step_num, self.model_version
-            )
+            if self.explore_step_num == 0:
+                await self._finish_eval_step(step=0)
+            else:
+                await self._finish_steps(
+                    self.last_monitored_step + 1, self.explore_step_num, self.model_version
+                )
+            self.last_monitored_step = self.explore_step_num
 
         if sync_weight:
             # sync weights
@@ -344,7 +390,7 @@ class Explorer:
 
     async def _finish_steps(self, start_step: int, end_step: int, model_version: int) -> None:
         for step in range(start_step, end_step + 1):
-            self.logger.info(f"Log metrics of step {step}")
+            self.logger.info(f"Waiting for step {step}")
             await self._finish_explore_step(step=step, model_version=model_version)
             await self._finish_eval_step(step=step)
 
@@ -357,12 +403,15 @@ class Explorer:
     async def _finish_explore_step(self, step: int, model_version: int) -> None:
         metric = {"rollout/model_version": model_version}
         with Timer(metric, "time/wait_explore_step"):
-            statuses, exps = await self.scheduler.get_results(batch_id=step)
+            statuses, exps = await self.scheduler.get_results(
+                batch_id=step, min_num=self.min_wait_num
+            )
         pipeline_metrics = await self.experience_pipeline.process.remote(exps)
         self.taskset.update(pipeline_metrics)
         metric.update(pipeline_metrics)
         if statuses:
-            metric.update(gather_metrics([status.metric for status in statuses], "rollout"))
+            metric.update(gather_metrics([status.metrics[0] for status in statuses], "rollout"))
+            metric["rollout/finished_task_count"] = len(statuses)
             self.monitor.log(metric, step=step)
 
     async def _finish_eval_step(self, step: Optional[int] = None, prefix: str = "eval") -> None:
@@ -375,10 +424,13 @@ class Explorer:
             if eval_step != step:
                 return
             self.pending_eval_tasks.popleft()
-            eval_results, _ = await self.scheduler.get_results(f"{step}/{eval_task_name}")
+            statuses, _ = await self.scheduler.get_results(batch_id=f"{step}/{eval_task_name}")
+            metric[f"{prefix}/{eval_task_name}/finished_task_count"] = len(statuses)
             metric.update(
                 gather_metrics(
-                    [status.metric for status in eval_results], f"{prefix}/{eval_task_name}"
+                    [status.metrics[0] for status in statuses],
+                    f"{prefix}/{eval_task_name}",
+                    output_stats=["mean", "std"],
                 )
             )
         if self.eval_start_time is not None:
@@ -406,6 +458,8 @@ class Explorer:
 
     def _init_experience_pipeline(self) -> ray.actor.ActorHandle:
         """Init experience pipeline for the explorer."""
+        if self.config.mode == "bench":
+            return None
         node_id = ray.get_runtime_context().get_node_id()
         return (
             ray.remote(ExperiencePipeline)
@@ -442,32 +496,26 @@ class Explorer:
                 messages=[{"role": "user", "content": "Hello!"}]
             )
         """
-        from trinity.explorer.api.service import ExplorerService
+        from trinity.explorer.proxy.service import ExplorerService
 
         self.service = ExplorerService(
             self,
             listen_address=self.config.explorer.listen_address,
-            port=self.config.explorer.api_port,
+            port=self.config.explorer.proxy_port,
         )
         await self.service.serve()
         self.server_url = f"http://{ray.util.get_node_ip_address()}:{self.service.port}"
         self.logger.info(
-            f"Explorer API Server is started on {self.server_url} and listening to {self.service.listen_address}."
+            "======================================================\n"
+            f"Starting Trinity Service on {self.server_url}\n"
+            "======================================================"
         )
         self.state.save_explorer_server_url(self.server_url)
         while True:
-            self.explore_step_num += 1
             await asyncio.sleep(self.config.explorer.service_status_check_interval)
-            # process experiences generated in the last interval
-            exps = await self.service.get_all_experiences()
-            metrics = await self.experience_pipeline.process.remote(exps)
-            metrics.update(self.service.collect_metrics())
-            self.monitor.log(metrics, self.explore_step_num)
             # get the latest checkpoint
-            _, step_num = get_checkpoint_dir_with_step_num(
-                self.config.checkpoint_job_dir, raise_error=False
-            )
-            self.service.set_latest_model_version(step_num)
+            model_version = await self.synchronizer.get_latest_model_version.remote()
+            self.service.set_latest_model_version(model_version)
 
     @classmethod
     def get_actor(cls, config: Config):

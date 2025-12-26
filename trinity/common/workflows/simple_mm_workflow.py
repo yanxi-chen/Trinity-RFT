@@ -1,14 +1,11 @@
 from typing import List, Optional
 
-import openai
-
 from trinity.common.experience import Experience
 from trinity.common.models.model import ModelWrapper
 from trinity.common.rewards.reward_fn import RewardFn
-from trinity.common.workflows.workflow import WORKFLOWS, SimpleWorkflow, Task
+from trinity.common.workflows.workflow import SimpleWorkflow, Task
 
 
-@WORKFLOWS.register_module("simple_mm_workflow")
 class SimpleMMWorkflow(SimpleWorkflow):
     """A workflow for simple single-round task."""
 
@@ -17,7 +14,7 @@ class SimpleMMWorkflow(SimpleWorkflow):
         *,
         task: Task,
         model: ModelWrapper,
-        auxiliary_models: Optional[List[openai.OpenAI]] = None,
+        auxiliary_models: Optional[List[ModelWrapper]] = None,
     ):
         self.reset(task)
         super().__init__(
@@ -80,7 +77,6 @@ class SimpleMMWorkflow(SimpleWorkflow):
         return responses
 
 
-@WORKFLOWS.register_module("async_simple_mm_workflow")
 class AsyncSimpleMMWorkflow(SimpleMMWorkflow):
     is_async: bool = True
 
