@@ -9,10 +9,10 @@ import torch
 
 from trinity.algorithm.policy_loss_fn.policy_loss_fn import PolicyLossFn
 from trinity.algorithm.utils import aggregate_loss, masked_mean
-
 from trinity.utils.log import get_logger
 
 logger = get_logger(__name__)
+
 
 class GSPOLossFn(PolicyLossFn):
     def __init__(
@@ -35,7 +35,9 @@ class GSPOLossFn(PolicyLossFn):
         self.clip_range_high = _clip_range_high
 
         if loss_agg_mode != "seq-mean-token-mean":
-            logger.warning(f"The original GSPO paper requires loss_agg_mode to be 'seq-mean-token-mean', but the current setting is '{loss_agg_mode}'.")
+            logger.warning(
+                f"The original GSPO paper requires loss_agg_mode to be 'seq-mean-token-mean', but the current setting is '{loss_agg_mode}'."
+            )
             # loss_agg_mode = "seq-mean-token-mean"
         self.loss_agg_mode = loss_agg_mode
 

@@ -6,7 +6,7 @@ from typing import Dict, Tuple
 import torch
 
 from trinity.algorithm.policy_loss_fn.policy_loss_fn import PolicyLossFn
-from trinity.algorithm.utils import masked_mean
+from trinity.algorithm.utils import aggregate_loss, masked_mean
 
 
 class RECPolicyLossFn(PolicyLossFn):
@@ -123,7 +123,7 @@ class RECPolicyLossFn(PolicyLossFn):
 
         if self.clip_mode == "gspo-one-side":
             # [EXPERIMENTAL] specialized for gspo-style rec variant for now
-            pg_loss = masked_loss(
+            pg_loss = aggregate_loss(
                 values=pg_losses,
                 mask=action_mask,
                 loss_agg_mode="seq-mean-token-mean",
