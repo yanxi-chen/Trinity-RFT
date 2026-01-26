@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Quick Start &#8212; Trinity-RFT 0.4.0 documentation</title>
+    <title>Quick Start &#8212; Trinity-RFT 0.4.1 documentation</title>
   
   
   
@@ -36,7 +36,7 @@
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script src="../_static/documentation_options.js?v=183391d5"></script>
+    <script src="../_static/documentation_options.js?v=a3cf13c8"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
@@ -44,7 +44,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Off-Policy RFT" href="example_reasoning_advanced.html" />
-    <link rel="prev" title="Align configuration with veRL" href="align_with_verl.html" />
+    <link rel="prev" title="Monitor Metrics Reference" href="metrics_reference.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -136,8 +136,8 @@
       
     
     
-    <img src="../_static/logo.svg" class="logo__image only-light" alt="Trinity-RFT 0.4.0 documentation - Home"/>
-    <script>document.write(`<img src="../_static/logo.svg" class="logo__image only-dark" alt="Trinity-RFT 0.4.0 documentation - Home"/>`);</script>
+    <img src="../_static/logo.svg" class="logo__image only-light" alt="Trinity-RFT 0.4.1 documentation - Home"/>
+    <script>document.write(`<img src="../_static/logo.svg" class="logo__image only-dark" alt="Trinity-RFT 0.4.1 documentation - Home"/>`);</script>
   
   
 </a></div>
@@ -188,6 +188,7 @@
 <li class="toctree-l1"><a class="reference internal" href="trinity_gpu_configs.html">GPU Configuration Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="synchronizer.html">Synchronizer in Trinity-RFT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="align_with_verl.html">Align configuration with veRL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metrics_reference.html">Monitor Metrics Reference</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples</span></p>
 <ul class="current nav bd-sidenav">
@@ -355,6 +356,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.manager.config_registry.trainer_config_manager.html">trinity.manager.config_registry.trainer_config_manager module</a></li>
 </ul>
 </details></li>
+<li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.manager.checkpoint_converter.html">trinity.manager.checkpoint_converter module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.manager.config_manager.html">trinity.manager.config_manager module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.manager.state_manager.html">trinity.manager.state_manager module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.manager.synchronizer.html">trinity.manager.synchronizer module</a></li>
@@ -404,6 +406,7 @@
 </ul>
 </details></li>
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.common.config.html">trinity.common.config module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.common.config_validator.html">trinity.common.config_validator module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.common.constants.html">trinity.common.constants module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.common.experience.html">trinity.common.experience module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.common.verl_config.html">trinity.common.verl_config module</a></li>
@@ -502,7 +505,7 @@
 <div class="article-header-buttons">
 
 
-<a href="https://github.com/modelscope/Trinity-RFT" target="_blank"
+<a href="https://github.com/agentscope-ai/Trinity-RFT" target="_blank"
    class="btn btn-sm btn-source-repository-button"
    title="Source repository"
    data-bs-placement="bottom" data-bs-toggle="tooltip"
@@ -630,6 +633,18 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#run-the-experiment">Run the Experiment</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-convert-checkpoints-to-hugging-face-format">Optional: Convert Checkpoints to Hugging Face Format</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-is-conversion-needed">When Is Conversion Needed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conversion-tool-trinity-convert">Conversion Tool: <code class="docutils literal notranslate"><span class="pre">trinity</span> <span class="pre">convert</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#batch-conversion-recommended">✅ Batch Conversion (Recommended)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#single-step-conversion">✅ Single-step Conversion</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#path-tolerance">✅ Path Tolerance</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#special-case-missing-base-model-configuration">Special Case: Missing Base Model Configuration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#notes">Notes</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-rft-with-sft-warmup">Optional: RFT with SFT Warmup</a></li>
 </ul>
             </nav>
@@ -681,7 +696,7 @@ The dataset downloaded from ModelScope may lack the <code class="docutils litera
 </section>
 <section id="use-grpo-algorithm">
 <h3>Use GRPO Algorithm<a class="headerlink" href="#use-grpo-algorithm" title="Link to this heading">#</a></h3>
-<p>We use the configurations in <a class="reference external" href="https://github.com/modelscope/Trinity-RFT/tree/main/examples/grpo_gsm8k/gsm8k.yaml"><code class="docutils literal notranslate"><span class="pre">gsm8k.yaml</span></code></a> for this experiment. Some important setups of <code class="docutils literal notranslate"><span class="pre">gsm8k.yaml</span></code> are listed in the following:</p>
+<p>We use the configurations in <a class="reference external" href="https://github.com/agentscope-ai/Trinity-RFT/tree/main/examples/grpo_gsm8k/gsm8k.yaml"><code class="docutils literal notranslate"><span class="pre">gsm8k.yaml</span></code></a> for this experiment. Some important setups of <code class="docutils literal notranslate"><span class="pre">gsm8k.yaml</span></code> are listed in the following:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">project</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;project_name&gt;</span>
 <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;experiment_name&gt;</span>
 <span class="nt">checkpoint_root_dir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${oc.env:TRINITY_CHECKPOINT_ROOT_DIR,./checkpoints}</span>
@@ -749,6 +764,104 @@ The dataset downloaded from ModelScope may lack the <code class="docutils litera
 </div>
 </section>
 </section>
+<section id="optional-convert-checkpoints-to-hugging-face-format">
+<h2>Optional: Convert Checkpoints to Hugging Face Format<a class="headerlink" href="#optional-convert-checkpoints-to-hugging-face-format" title="Link to this heading">#</a></h2>
+<p>After running Trinity-RFT experiments, the system automatically saves training checkpoints to the following path:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>${checkpoint_root_dir}/${project}/${name}
+</pre></div>
+</div>
+<p>The directory structure is as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>${checkpoint_root_dir}/${project}/${name}
+├── buffer
+│   ├── experience_buffer.jsonl          # Stores experience data generated during training
+│   └── explorer_output.db               # Database file output by the Explorer module
+├── log                                  # Contains logs from multiple Ray Actors
+│   ├── checkpoint_monitor.log
+│   ├── explorer.log
+│   ├── explorer_experience_pipeline.log
+│   ├── explorer_runner_0.log  ...  explorer_runner_31.log
+│   ├── queue_experience_buffer.log
+│   └── synchronizer.log
+├── monitor                              # Monitoring-related files (may be empty)
+├── global_step_58                       # Example: Full checkpoint at step 58
+│   └── actor
+│       ├── huggingface                  # (Optional) Hugging Face formatted model files
+│       │   ├── added_tokens.json
+│       │   ├── chat_template.jinja
+│       │   ├── config.json
+│       │   ├── generation_config.json
+│       │   ├── merges.txt
+│       │   ├── model.safetensors        # ← Key model weights file
+│       │   ├── special_tokens_map.json
+│       │   ├── tokenizer.json
+│       │   ├── tokenizer_config.json
+│       │   └── vocab.json
+│       ├── extra_state_world_size_4_rank_0.pt  # Additional state (e.g., random seeds)
+│       ├── ...
+│       ├── fsdp_config.json             # FSDP configuration file
+│       ├── model_world_size_4_rank_0.pt ... model_world_size_4_rank_3.pt  # Sharded model parameters
+│       ├── optim_world_size_4_rank_0.pt ... optim_world_size_4_rank_3.pt  # Sharded optimizer states
+│       └── ...
+├── explorer_meta.json                   # Metadata for the Explorer module
+├── trainer_meta.json                    # Metadata for the Trainer module
+├── latest_checkpointed_iteration.txt    # Training step of the most recent full checkpoint
+└── latest_state_dict_iteration.txt      # Training step of the most recent model parameter save (used for checkpoint synchronization)
+</pre></div>
+</div>
+<section id="when-is-conversion-needed">
+<h3>When Is Conversion Needed?<a class="headerlink" href="#when-is-conversion-needed" title="Link to this heading">#</a></h3>
+<p>If you wish to use the model in <strong>Hugging Face format</strong> (e.g., for inference or deployment), but find that the <code class="docutils literal notranslate"><span class="pre">model.safetensors</span></code> file is <strong>missing</strong> from the <code class="docutils literal notranslate"><span class="pre">global_step_*/actor/huggingface/</span></code> directory, you need to manually perform the conversion.</p>
+</section>
+<section id="conversion-tool-trinity-convert">
+<h3>Conversion Tool: <code class="docutils literal notranslate"><span class="pre">trinity</span> <span class="pre">convert</span></code><a class="headerlink" href="#conversion-tool-trinity-convert" title="Link to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">trinity</span> <span class="pre">convert</span></code> command provides flexible model conversion capabilities and supports the following usage patterns:</p>
+<section id="batch-conversion-recommended">
+<h4>✅ Batch Conversion (Recommended)<a class="headerlink" href="#batch-conversion-recommended" title="Link to this heading">#</a></h4>
+<p>Point <code class="docutils literal notranslate"><span class="pre">--checkpoint-dir</span></code> to your project root directory (i.e., the path containing multiple <code class="docutils literal notranslate"><span class="pre">global_step_*</span></code> subdirectories). The tool will <strong>automatically recursively scan for all <code class="docutils literal notranslate"><span class="pre">global_step_*</span></code> directories</strong> and convert each checkpoint accordingly.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>trinity<span class="w"> </span>convert<span class="w"> </span>--checkpoint-dir<span class="w"> </span><span class="si">${</span><span class="nv">checkpoint_root_dir</span><span class="si">}</span>/<span class="si">${</span><span class="nv">project</span><span class="si">}</span>/<span class="si">${</span><span class="nv">name</span><span class="si">}</span>
+</pre></div>
+</div>
+<p>This command will:</p>
+<ul class="simple">
+<li><p>Automatically detect all subdirectories matching the pattern <code class="docutils literal notranslate"><span class="pre">global_step_&lt;number&gt;</span></code>;</p></li>
+<li><p>Convert the <code class="docutils literal notranslate"><span class="pre">actor</span></code> model within each subdirectory;</p></li>
+<li><p>Save the resulting Hugging Face–formatted files (including <code class="docutils literal notranslate"><span class="pre">model.safetensors</span></code>, etc.) into the corresponding <code class="docutils literal notranslate"><span class="pre">actor/huggingface/</span></code> subdirectory.</p></li>
+</ul>
+</section>
+<section id="single-step-conversion">
+<h4>✅ Single-step Conversion<a class="headerlink" href="#single-step-conversion" title="Link to this heading">#</a></h4>
+<p>If you only want to convert a model from a specific training step, directly point <code class="docutils literal notranslate"><span class="pre">--checkpoint-dir</span></code> to the corresponding <code class="docutils literal notranslate"><span class="pre">global_step_XXX</span></code> folder:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>trinity<span class="w"> </span>convert<span class="w"> </span>--checkpoint-dir<span class="w"> </span><span class="si">${</span><span class="nv">checkpoint_root_dir</span><span class="si">}</span>/<span class="si">${</span><span class="nv">project</span><span class="si">}</span>/<span class="si">${</span><span class="nv">name</span><span class="si">}</span>/global_step_120
+</pre></div>
+</div>
+</section>
+<section id="path-tolerance">
+<h4>✅ Path Tolerance<a class="headerlink" href="#path-tolerance" title="Link to this heading">#</a></h4>
+<p>Even if you specify a subpath inside a <code class="docutils literal notranslate"><span class="pre">global_step_XXX</span></code> directory (e.g., <code class="docutils literal notranslate"><span class="pre">.../global_step_120/actor</span></code>), the tool can intelligently recognize the correct context and complete the conversion successfully—no need to strictly align the path to the <code class="docutils literal notranslate"><span class="pre">global_step_XXX</span></code> level.</p>
+</section>
+</section>
+<section id="special-case-missing-base-model-configuration">
+<h3>Special Case: Missing Base Model Configuration<a class="headerlink" href="#special-case-missing-base-model-configuration" title="Link to this heading">#</a></h3>
+<p>If a <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file is <strong>missing</strong> from any <code class="docutils literal notranslate"><span class="pre">global_step_*/actor/huggingface/</span></code> directory (typically because the configuration wasn’t fully saved during training), the conversion process requires the original base model’s configuration. In this case, use <code class="docutils literal notranslate"><span class="pre">--base-model-dir</span></code> to specify the path to your base model:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>trinity<span class="w"> </span>convert<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--checkpoint-dir<span class="w"> </span><span class="si">${</span><span class="nv">checkpoint_root_dir</span><span class="si">}</span>/<span class="si">${</span><span class="nv">project</span><span class="si">}</span>/<span class="si">${</span><span class="nv">name</span><span class="si">}</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--base-model-dir<span class="w"> </span>/path/to/your/base/model
+</pre></div>
+</div>
+<blockquote>
+<div><p>💡 This parameter applies to <strong>all scanned checkpoints</strong>. If any checkpoint lacks <code class="docutils literal notranslate"><span class="pre">config.json</span></code>, you must provide this argument.</p>
+</div></blockquote>
+</section>
+<section id="notes">
+<h3>Notes<a class="headerlink" href="#notes" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Actor Model Only</strong>: The current <code class="docutils literal notranslate"><span class="pre">trinity</span> <span class="pre">convert</span></code> command only processes model parameters in the <code class="docutils literal notranslate"><span class="pre">actor</span></code> folder and <strong>does not handle <code class="docutils literal notranslate"><span class="pre">critic</span></code> models</strong> (even if they exist). Converting Critic models requires separate operations.</p></li>
+<li><p><strong>Automatic Training Format Detection</strong>: <code class="docutils literal notranslate"><span class="pre">trinity</span> <span class="pre">convert</span></code> natively supports checkpoints from both <strong>FSDP</strong> and <strong>Megatron</strong> distributed training formats. <strong>No additional parameters are required</strong>—the tool automatically detects the format and correctly merges the sharded weights.</p></li>
+<li><p><strong>Idempotency</strong>: If a <code class="docutils literal notranslate"><span class="pre">global_step_*</span></code> checkpoint already contains a complete set of Hugging Face files (especially <code class="docutils literal notranslate"><span class="pre">model.safetensors</span></code>) in its <code class="docutils literal notranslate"><span class="pre">huggingface/</span></code> directory, the conversion will be skipped to avoid redundant processing.</p></li>
+<li><p><strong>Performance Tip</strong>: The conversion process can be time-consuming, especially when dealing with many checkpoints or large models. It’s recommended to run this during off-peak hours.</p></li>
+</ul>
+</section>
+</section>
 <section id="optional-rft-with-sft-warmup">
 <h2>Optional: RFT with SFT Warmup<a class="headerlink" href="#optional-rft-with-sft-warmup" title="Link to this heading">#</a></h2>
 <p>Before RFT, we may use SFT as a warmup step. Trinity-RFT supports adding SFT warmup stage before RFT by setting <code class="docutils literal notranslate"><span class="pre">stages</span></code> in the config file. The <code class="docutils literal notranslate"><span class="pre">experience_buffer</span></code> specifies the dataset used for SFT warmup, and <code class="docutils literal notranslate"><span class="pre">total_steps</span></code> specifies the number of training steps for SFT warmup.</p>
@@ -787,12 +900,12 @@ The dataset downloaded from ModelScope may lack the <code class="docutils litera
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="align_with_verl.html"
+       href="metrics_reference.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Align configuration with veRL</p>
+        <p class="prev-next-title">Monitor Metrics Reference</p>
       </div>
     </a>
     <a class="right-next"
@@ -826,6 +939,18 @@ The dataset downloaded from ModelScope may lack the <code class="docutils litera
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#synchronous-mode-of-trinity-rft">Synchronous Mode of Trinity-RFT</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-grpo-algorithm">Use GRPO Algorithm</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#run-the-experiment">Run the Experiment</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-convert-checkpoints-to-hugging-face-format">Optional: Convert Checkpoints to Hugging Face Format</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-is-conversion-needed">When Is Conversion Needed?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conversion-tool-trinity-convert">Conversion Tool: <code class="docutils literal notranslate"><span class="pre">trinity</span> <span class="pre">convert</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#batch-conversion-recommended">✅ Batch Conversion (Recommended)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#single-step-conversion">✅ Single-step Conversion</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#path-tolerance">✅ Path Tolerance</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#special-case-missing-base-model-configuration">Special Case: Missing Base Model Configuration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#notes">Notes</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-rft-with-sft-warmup">Optional: RFT with SFT Warmup</a></li>

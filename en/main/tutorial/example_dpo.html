@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Offline DPO and SFT &#8212; Trinity-RFT 0.4.0 documentation</title>
+    <title>Offline DPO and SFT &#8212; Trinity-RFT 0.4.1 documentation</title>
   
   
   
@@ -36,7 +36,7 @@
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script src="../_static/documentation_options.js?v=183391d5"></script>
+    <script src="../_static/documentation_options.js?v=a3cf13c8"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
@@ -136,8 +136,8 @@
       
     
     
-    <img src="../_static/logo.svg" class="logo__image only-light" alt="Trinity-RFT 0.4.0 documentation - Home"/>
-    <script>document.write(`<img src="../_static/logo.svg" class="logo__image only-dark" alt="Trinity-RFT 0.4.0 documentation - Home"/>`);</script>
+    <img src="../_static/logo.svg" class="logo__image only-light" alt="Trinity-RFT 0.4.1 documentation - Home"/>
+    <script>document.write(`<img src="../_static/logo.svg" class="logo__image only-dark" alt="Trinity-RFT 0.4.1 documentation - Home"/>`);</script>
   
   
 </a></div>
@@ -188,6 +188,7 @@
 <li class="toctree-l1"><a class="reference internal" href="trinity_gpu_configs.html">GPU Configuration Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="synchronizer.html">Synchronizer in Trinity-RFT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="align_with_verl.html">Align configuration with veRL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metrics_reference.html">Monitor Metrics Reference</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples</span></p>
 <ul class="current nav bd-sidenav">
@@ -355,6 +356,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.manager.config_registry.trainer_config_manager.html">trinity.manager.config_registry.trainer_config_manager module</a></li>
 </ul>
 </details></li>
+<li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.manager.checkpoint_converter.html">trinity.manager.checkpoint_converter module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.manager.config_manager.html">trinity.manager.config_manager module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.manager.state_manager.html">trinity.manager.state_manager module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.manager.synchronizer.html">trinity.manager.synchronizer module</a></li>
@@ -404,6 +406,7 @@
 </ul>
 </details></li>
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.common.config.html">trinity.common.config module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.common.config_validator.html">trinity.common.config_validator module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.common.constants.html">trinity.common.constants module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.common.experience.html">trinity.common.experience module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.common.verl_config.html">trinity.common.verl_config module</a></li>
@@ -502,7 +505,7 @@
 <div class="article-header-buttons">
 
 
-<a href="https://github.com/modelscope/Trinity-RFT" target="_blank"
+<a href="https://github.com/agentscope-ai/Trinity-RFT" target="_blank"
    class="btn btn-sm btn-source-repository-button"
    title="Source repository"
    data-bs-placement="bottom" data-bs-toggle="tooltip"
@@ -688,7 +691,7 @@ huggingface-cli<span class="w"> </span>download<span class="w"> </span>HumanLLMs
 <h2>Step 2: Setup Configuration<a class="headerlink" href="#step-2-setup-configuration" title="Link to this heading">#</a></h2>
 <section id="configuration-for-dpo">
 <h3>Configuration for DPO<a class="headerlink" href="#configuration-for-dpo" title="Link to this heading">#</a></h3>
-<p>We use the configurations in <a class="reference external" href="https://github.com/modelscope/Trinity-RFT/tree/main/examples/dpo_humanlike/dpo.yaml"><code class="docutils literal notranslate"><span class="pre">dpo.yaml</span></code></a> for this experiment. Some important setups are listed in the following:</p>
+<p>We use the configurations in <a class="reference external" href="https://github.com/agentscope-ai/Trinity-RFT/tree/main/examples/dpo_humanlike/dpo.yaml"><code class="docutils literal notranslate"><span class="pre">dpo.yaml</span></code></a> for this experiment. Some important setups are listed in the following:</p>
 <p>We run the experiment in a train mode, as there is no Explorer. To enable this mode, we config <code class="docutils literal notranslate"><span class="pre">mode</span></code> to <code class="docutils literal notranslate"><span class="pre">train</span></code> and pass the data path to the trainer.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">project</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;project_name&gt;</span>
 <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;experiment_name&gt;</span>
@@ -742,7 +745,7 @@ huggingface-cli<span class="w"> </span>download<span class="w"> </span>HumanLLMs
 </section>
 <section id="configuration-for-sft">
 <h3>Configuration for SFT<a class="headerlink" href="#configuration-for-sft" title="Link to this heading">#</a></h3>
-<p>We set the <code class="docutils literal notranslate"><span class="pre">algorithm_type</span></code> as <code class="docutils literal notranslate"><span class="pre">sft</span></code> to run SFT process and then modify the config file <a class="reference external" href="https://github.com/modelscope/Trinity-RFT/tree/main/examples/sft_mot/sft.yaml"><code class="docutils literal notranslate"><span class="pre">examples/sft_mot/sft.yaml</span></code></a> with the following changes:</p>
+<p>We set the <code class="docutils literal notranslate"><span class="pre">algorithm_type</span></code> as <code class="docutils literal notranslate"><span class="pre">sft</span></code> to run SFT process and then modify the config file <a class="reference external" href="https://github.com/agentscope-ai/Trinity-RFT/tree/main/examples/sft_mot/sft.yaml"><code class="docutils literal notranslate"><span class="pre">examples/sft_mot/sft.yaml</span></code></a> with the following changes:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">project</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;project_name&gt;</span>
 <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;experiment_name&gt;</span>
 <span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">train</span>

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Align configuration with veRL &#8212; Trinity-RFT 0.4.0 documentation</title>
+    <title>Align configuration with veRL &#8212; Trinity-RFT 0.4.1 documentation</title>
   
   
   
@@ -36,14 +36,14 @@
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script src="../_static/documentation_options.js?v=183391d5"></script>
+    <script src="../_static/documentation_options.js?v=a3cf13c8"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'tutorial/align_with_verl';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Quick Start" href="example_reasoning_basic.html" />
+    <link rel="next" title="Monitor Metrics Reference" href="metrics_reference.html" />
     <link rel="prev" title="Synchronizer in Trinity-RFT" href="synchronizer.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -136,8 +136,8 @@
       
     
     
-    <img src="../_static/logo.svg" class="logo__image only-light" alt="Trinity-RFT 0.4.0 documentation - Home"/>
-    <script>document.write(`<img src="../_static/logo.svg" class="logo__image only-dark" alt="Trinity-RFT 0.4.0 documentation - Home"/>`);</script>
+    <img src="../_static/logo.svg" class="logo__image only-light" alt="Trinity-RFT 0.4.1 documentation - Home"/>
+    <script>document.write(`<img src="../_static/logo.svg" class="logo__image only-dark" alt="Trinity-RFT 0.4.1 documentation - Home"/>`);</script>
   
   
 </a></div>
@@ -188,6 +188,7 @@
 <li class="toctree-l1"><a class="reference internal" href="trinity_gpu_configs.html">GPU Configuration Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="synchronizer.html">Synchronizer in Trinity-RFT</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Align configuration with veRL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metrics_reference.html">Monitor Metrics Reference</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples</span></p>
 <ul class="nav bd-sidenav">
@@ -355,6 +356,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.manager.config_registry.trainer_config_manager.html">trinity.manager.config_registry.trainer_config_manager module</a></li>
 </ul>
 </details></li>
+<li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.manager.checkpoint_converter.html">trinity.manager.checkpoint_converter module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.manager.config_manager.html">trinity.manager.config_manager module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.manager.state_manager.html">trinity.manager.state_manager module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.manager.synchronizer.html">trinity.manager.synchronizer module</a></li>
@@ -404,6 +406,7 @@
 </ul>
 </details></li>
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.common.config.html">trinity.common.config module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.common.config_validator.html">trinity.common.config_validator module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.common.constants.html">trinity.common.constants module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.common.experience.html">trinity.common.experience module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.common.verl_config.html">trinity.common.verl_config module</a></li>
@@ -502,7 +505,7 @@
 <div class="article-header-buttons">
 
 
-<a href="https://github.com/modelscope/Trinity-RFT" target="_blank"
+<a href="https://github.com/agentscope-ai/Trinity-RFT" target="_blank"
    class="btn btn-sm btn-source-repository-button"
    title="Source repository"
    data-bs-placement="bottom" data-bs-toggle="tooltip"
@@ -701,7 +704,7 @@ Trinity-RFT divides massive parameters of reinforcement fine-tuning into several
 </tbody>
 </table>
 </div>
-<p>In the following, we show how to map the parameters in veRL to the ones in Trinity-RFT. Please refer to the <a class="reference external" href="https://modelscope.github.io/Trinity-RFT/en/main/tutorial/trinity_configs.html">documentation</a> for the detailed parameter configuration of Trinity-RFT.</p>
+<p>In the following, we show how to map the parameters in veRL to the ones in Trinity-RFT. Please refer to the <a class="reference external" href="https://agentscope-ai.github.io/Trinity-RFT/en/main/tutorial/trinity_configs.html">documentation</a> for the detailed parameter configuration of Trinity-RFT.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>To match the default training setup of veRL, we set <code class="docutils literal notranslate"><span class="pre">synchronizer.sync_style=fixed</span></code> and <code class="docutils literal notranslate"><span class="pre">synchronizer.sync_offset=0</span></code> in Trinity-RFT.</p>
@@ -940,7 +943,7 @@ Trinity-RFT divides massive parameters of reinforcement fine-tuning into several
 <span class="w">      </span><span class="nt">max_model_len</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20480</span>
 </pre></div>
 </div>
-<p>Please refer to the <a class="reference external" href="https://github.com/modelscope/Trinity-RFT/blob/main/examples/grpo_rubric_as_reward/rubric.yaml">configuration</a> and <a class="reference external" href="https://github.com/modelscope/Trinity-RFT/blob/main/trinity/common/workflows/rubric_judge_workflow.py">workflow</a> with LLM-as-a-judge for more details.</p>
+<p>Please refer to the <a class="reference external" href="https://github.com/agentscope-ai/Trinity-RFT/blob/main/examples/grpo_rubric_as_reward/rubric.yaml">configuration</a> and <a class="reference external" href="https://github.com/agentscope-ai/Trinity-RFT/blob/main/trinity/common/workflows/rubric_judge_workflow.py">workflow</a> with LLM-as-a-judge for more details.</p>
 </section>
 <section id="trainer">
 <h3>Trainer<a class="headerlink" href="#trainer" title="Link to this heading">#</a></h3>
@@ -1381,11 +1384,11 @@ python3<span class="w"> </span>-m<span class="w"> </span>verl.trainer.main_ppo<s
       </div>
     </a>
     <a class="right-next"
-       href="example_reasoning_basic.html"
+       href="metrics_reference.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Quick Start</p>
+        <p class="prev-next-title">Monitor Metrics Reference</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

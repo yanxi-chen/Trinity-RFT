@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>trinity.manager package &#8212; Trinity-RFT 0.4.0 documentation</title>
+    <title>trinity.manager package &#8212; Trinity-RFT 0.4.1 documentation</title>
   
   
   
@@ -36,7 +36,7 @@
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script src="../_static/documentation_options.js?v=183391d5"></script>
+    <script src="../_static/documentation_options.js?v=a3cf13c8"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
@@ -136,8 +136,8 @@
       
     
     
-    <img src="../_static/logo.svg" class="logo__image only-light" alt="Trinity-RFT 0.4.0 documentation - Home"/>
-    <script>document.write(`<img src="../_static/logo.svg" class="logo__image only-dark" alt="Trinity-RFT 0.4.0 documentation - Home"/>`);</script>
+    <img src="../_static/logo.svg" class="logo__image only-light" alt="Trinity-RFT 0.4.1 documentation - Home"/>
+    <script>document.write(`<img src="../_static/logo.svg" class="logo__image only-dark" alt="Trinity-RFT 0.4.1 documentation - Home"/>`);</script>
   
   
 </a></div>
@@ -188,6 +188,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/trinity_gpu_configs.html">GPU Configuration Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/synchronizer.html">Synchronizer in Trinity-RFT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/align_with_verl.html">Align configuration with veRL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/metrics_reference.html">Monitor Metrics Reference</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples</span></p>
 <ul class="nav bd-sidenav">
@@ -355,6 +356,7 @@
 <li class="toctree-l4"><a class="reference internal" href="trinity.manager.config_registry.trainer_config_manager.html">trinity.manager.config_registry.trainer_config_manager module</a></li>
 </ul>
 </details></li>
+<li class="toctree-l3"><a class="reference internal" href="trinity.manager.checkpoint_converter.html">trinity.manager.checkpoint_converter module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.manager.config_manager.html">trinity.manager.config_manager module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.manager.state_manager.html">trinity.manager.state_manager module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.manager.synchronizer.html">trinity.manager.synchronizer module</a></li>
@@ -404,6 +406,7 @@
 </ul>
 </details></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.common.config.html">trinity.common.config module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="trinity.common.config_validator.html">trinity.common.config_validator module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.common.constants.html">trinity.common.constants module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.common.experience.html">trinity.common.experience module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.common.verl_config.html">trinity.common.verl_config module</a></li>
@@ -502,7 +505,7 @@
 <div class="article-header-buttons">
 
 
-<a href="https://github.com/modelscope/Trinity-RFT" target="_blank"
+<a href="https://github.com/agentscope-ai/Trinity-RFT" target="_blank"
    class="btn btn-sm btn-source-repository-button"
    title="Source repository"
    data-bs-placement="bottom" data-bs-toggle="tooltip"
@@ -843,12 +846,12 @@ document.write(`
 <li class="toctree-l4"><a class="reference internal" href="trinity.manager.config_registry.trainer_config_manager.html#trinity.manager.config_registry.trainer_config_manager.set_actor_entropy_from_logits_with_chunking"><code class="docutils literal notranslate"><span class="pre">set_actor_entropy_from_logits_with_chunking()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.manager.config_registry.trainer_config_manager.html#trinity.manager.config_registry.trainer_config_manager.set_actor_entropy_checkpointing"><code class="docutils literal notranslate"><span class="pre">set_actor_entropy_checkpointing()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.manager.config_registry.trainer_config_manager.html#trinity.manager.config_registry.trainer_config_manager.set_actor_lr"><code class="docutils literal notranslate"><span class="pre">set_actor_lr()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="trinity.manager.config_registry.trainer_config_manager.html#trinity.manager.config_registry.trainer_config_manager.set_actor_warmup_style"><code class="docutils literal notranslate"><span class="pre">set_actor_warmup_style()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.manager.config_registry.trainer_config_manager.html#trinity.manager.config_registry.trainer_config_manager.set_actor_lr_scheduler_type"><code class="docutils literal notranslate"><span class="pre">set_actor_lr_scheduler_type()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.manager.config_registry.trainer_config_manager.html#trinity.manager.config_registry.trainer_config_manager.set_actor_lr_warmup_steps_ratio"><code class="docutils literal notranslate"><span class="pre">set_actor_lr_warmup_steps_ratio()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.manager.config_registry.trainer_config_manager.html#trinity.manager.config_registry.trainer_config_manager.set_actor_save_checkpoint"><code class="docutils literal notranslate"><span class="pre">set_actor_save_checkpoint()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.manager.config_registry.trainer_config_manager.html#trinity.manager.config_registry.trainer_config_manager.set_actor_load_checkpoint"><code class="docutils literal notranslate"><span class="pre">set_actor_load_checkpoint()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.manager.config_registry.trainer_config_manager.html#trinity.manager.config_registry.trainer_config_manager.set_critic_lr"><code class="docutils literal notranslate"><span class="pre">set_critic_lr()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="trinity.manager.config_registry.trainer_config_manager.html#trinity.manager.config_registry.trainer_config_manager.set_critic_warmup_style"><code class="docutils literal notranslate"><span class="pre">set_critic_warmup_style()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.manager.config_registry.trainer_config_manager.html#trinity.manager.config_registry.trainer_config_manager.set_critic_lr_scheduler_type"><code class="docutils literal notranslate"><span class="pre">set_critic_lr_scheduler_type()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.manager.config_registry.trainer_config_manager.html#trinity.manager.config_registry.trainer_config_manager.set_critic_lr_warmup_steps_ratio"><code class="docutils literal notranslate"><span class="pre">set_critic_lr_warmup_steps_ratio()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.manager.config_registry.trainer_config_manager.html#trinity.manager.config_registry.trainer_config_manager.set_critic_grad_clip"><code class="docutils literal notranslate"><span class="pre">set_critic_grad_clip()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.manager.config_registry.trainer_config_manager.html#trinity.manager.config_registry.trainer_config_manager.set_critic_cliprange_value"><code class="docutils literal notranslate"><span class="pre">set_critic_cliprange_value()</span></code></a></li>
@@ -870,6 +873,17 @@ document.write(`
 <h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">#</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="trinity.manager.checkpoint_converter.html">trinity.manager.checkpoint_converter module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="trinity.manager.checkpoint_converter.html#trinity.manager.checkpoint_converter.Converter"><code class="docutils literal notranslate"><span class="pre">Converter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="trinity.manager.checkpoint_converter.html#trinity.manager.checkpoint_converter.Converter.__init__"><code class="docutils literal notranslate"><span class="pre">Converter.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trinity.manager.checkpoint_converter.html#trinity.manager.checkpoint_converter.Converter.init_base_model"><code class="docutils literal notranslate"><span class="pre">Converter.init_base_model()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trinity.manager.checkpoint_converter.html#trinity.manager.checkpoint_converter.Converter.init_process_group"><code class="docutils literal notranslate"><span class="pre">Converter.init_process_group()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trinity.manager.checkpoint_converter.html#trinity.manager.checkpoint_converter.Converter.init_checkpoint_converter"><code class="docutils literal notranslate"><span class="pre">Converter.init_checkpoint_converter()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trinity.manager.checkpoint_converter.html#trinity.manager.checkpoint_converter.Converter.convert"><code class="docutils literal notranslate"><span class="pre">Converter.convert()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="trinity.manager.config_manager.html">trinity.manager.config_manager module</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="trinity.manager.config_manager.html#trinity.manager.config_manager.ConfigManager"><code class="docutils literal notranslate"><span class="pre">ConfigManager</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="trinity.manager.config_manager.html#trinity.manager.config_manager.ConfigManager.__init__"><code class="docutils literal notranslate"><span class="pre">ConfigManager.__init__()</span></code></a></li>
@@ -1103,14 +1117,14 @@ the trainer and one or more explorers in a distributed training setup.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="trinity.manager.Synchronizer.ready_to_nccl_sync">
-<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ready_to_nccl_sync</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trainer_step</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/trinity/manager/synchronizer.html#Synchronizer.ready_to_nccl_sync"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trinity.manager.Synchronizer.ready_to_nccl_sync" title="Link to this definition">#</a></dt>
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ready_to_nccl_sync</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trainer_step</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/trinity/manager/synchronizer.html#Synchronizer.ready_to_nccl_sync"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trinity.manager.Synchronizer.ready_to_nccl_sync" title="Link to this definition">#</a></dt>
 <dd><p>Prepare for NCCL-based synchronization between modules.</p>
 <p>Only supports one explorer currently.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>module</strong> – Either ‘trainer’ or ‘explorer’.</p></li>
-<li><p><strong>trainer_step</strong> – Optional step number from the trainer.</p></li>
+<li><p><strong>trainer_step</strong> – Step number from the trainer.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>

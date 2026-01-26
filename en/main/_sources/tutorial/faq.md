@@ -105,7 +105,7 @@ ray start --head
 - For trainer, adjust `trainer.max_token_len_per_gpu` when `trainer.use_dynamic_bsz=false`; adjust `trainer.ppo_max_token_len_per_gpu` and `trainer.ulysses_sequence_parallel_size` when `trainer.use_dynamic_bsz=true`. Setting `trainer.trainer_config.actor_rollout_ref.actor.entropy_from_logits_with_chunking=true` may also help.
 - For explorer, adjust `explorer.rollout_model.tensor_parallel_size`.
 
-Besides, Trinity-RFT provides [GPU related configuration guide](https://modelscope.github.io/Trinity-RFT/en/main/tutorial/trinity_gpu_configs.html), which you may refer to for suggestions on adjusting the configurations.
+Besides, Trinity-RFT provides [GPU related configuration guide](https://agentscope-ai.github.io/Trinity-RFT/en/main/tutorial/trinity_gpu_configs.html), which you may refer to for suggestions on adjusting the configurations.
 
 ## Part 3: Debugging Methods
 
@@ -190,9 +190,14 @@ for exp in exp_list:
 
 **Q:** How to load the checkpoints outside of the Trinity-RFT framework?
 
-**A:** You need to specify model path and checkpoint path. The following code snippet gives an example with transformers.
+**A:** Currently, two loading methods are supported:
 
-Here is an example of loading from fsdp trainer checkpoints:
+1. **Recommended approach**: Use the `trinity convert` command to convert the original checkpoint into the standard Hugging Face format.
+   After conversion, you can load and use it directly just like any ordinary Hugging Face model.
+   For detailed instructions, please refer to the tutorial: [Optional: Converting Checkpoints to Hugging Face Format](https://agentscope-ai.github.io/Trinity-RFT/zh/main/tutorial/example_reasoning_basic.html#optional-convert-checkpoints-to-hugging-face-format)
+
+2. **Direct loading (for actor checkpoints trained with FSDP)**:
+   If you prefer to load the checkpoint directly without converting its format, you can use the following code example:
 
 ```python
 import os
@@ -216,4 +221,4 @@ model.load_state_dict(load_fsdp_state_dict_from_verl_checkpoint(ckp_path))
 - **Separation of Explorer and Trainer**: Trinity-RFT replaces the rollout model in veRL with a separate Explorer module, which handles agent-environment interactions. This separation allows for more flexible workflow designs and rollout-training scheduling.
 - **Full-lifecycle Data Pipeline**: Trinity-RFT adds a Buffer module between Explorer and Trainer, providing a complete data pipeline for experience storage, processing, and sampling. This design enables advanced data handling strategies, such as experience replay and prioritized sampling.
 
-We also provide benchmarks comparing Trinity-RFT with veRL and systems built on veRL (e.g., [rLLM](https://github.com/rllm-org/rllm)), which show comparable or better performance and efficiency. Please refer to [Benchmark](https://github.com/modelscope/Trinity-RFT/tree/main/benchmark) for more details.
+We also provide benchmarks comparing Trinity-RFT with veRL and systems built on veRL (e.g., [rLLM](https://github.com/rllm-org/rllm)), which show comparable or better performance and efficiency. Please refer to [Benchmark](https://github.com/agentscope-ai/Trinity-RFT/tree/main/benchmark) for more details.

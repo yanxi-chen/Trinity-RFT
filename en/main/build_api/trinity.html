@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>trinity package &#8212; Trinity-RFT 0.4.0 documentation</title>
+    <title>trinity package &#8212; Trinity-RFT 0.4.1 documentation</title>
   
   
   
@@ -36,7 +36,7 @@
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script src="../_static/documentation_options.js?v=183391d5"></script>
+    <script src="../_static/documentation_options.js?v=a3cf13c8"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
@@ -134,8 +134,8 @@
       
     
     
-    <img src="../_static/logo.svg" class="logo__image only-light" alt="Trinity-RFT 0.4.0 documentation - Home"/>
-    <script>document.write(`<img src="../_static/logo.svg" class="logo__image only-dark" alt="Trinity-RFT 0.4.0 documentation - Home"/>`);</script>
+    <img src="../_static/logo.svg" class="logo__image only-light" alt="Trinity-RFT 0.4.1 documentation - Home"/>
+    <script>document.write(`<img src="../_static/logo.svg" class="logo__image only-dark" alt="Trinity-RFT 0.4.1 documentation - Home"/>`);</script>
   
   
 </a></div>
@@ -186,6 +186,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/trinity_gpu_configs.html">GPU Configuration Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/synchronizer.html">Synchronizer in Trinity-RFT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/align_with_verl.html">Align configuration with veRL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/metrics_reference.html">Monitor Metrics Reference</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples</span></p>
 <ul class="nav bd-sidenav">
@@ -353,6 +354,7 @@
 <li class="toctree-l4"><a class="reference internal" href="trinity.manager.config_registry.trainer_config_manager.html">trinity.manager.config_registry.trainer_config_manager module</a></li>
 </ul>
 </details></li>
+<li class="toctree-l3"><a class="reference internal" href="trinity.manager.checkpoint_converter.html">trinity.manager.checkpoint_converter module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.manager.config_manager.html">trinity.manager.config_manager module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.manager.state_manager.html">trinity.manager.state_manager module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.manager.synchronizer.html">trinity.manager.synchronizer module</a></li>
@@ -402,6 +404,7 @@
 </ul>
 </details></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.common.config.html">trinity.common.config module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="trinity.common.config_validator.html">trinity.common.config_validator module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.common.constants.html">trinity.common.constants module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.common.experience.html">trinity.common.experience module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.common.verl_config.html">trinity.common.verl_config module</a></li>
@@ -500,7 +503,7 @@
 <div class="article-header-buttons">
 
 
-<a href="https://github.com/modelscope/Trinity-RFT" target="_blank"
+<a href="https://github.com/agentscope-ai/Trinity-RFT" target="_blank"
    class="btn btn-sm btn-source-repository-button"
    title="Source repository"
    data-bs-placement="bottom" data-bs-toggle="tooltip"
@@ -912,6 +915,21 @@ document.write(`
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.config.html#trinity.common.config.load_config"><code class="docutils literal notranslate"><span class="pre">load_config()</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="trinity.common.config_validator.html">trinity.common.config_validator module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.config_validator.html#trinity.common.config_validator.ConfigValidator"><code class="docutils literal notranslate"><span class="pre">ConfigValidator</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.config_validator.html#trinity.common.config_validator.DeprecatedConfigValidator"><code class="docutils literal notranslate"><span class="pre">DeprecatedConfigValidator</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.config_validator.html#trinity.common.config_validator.GlobalConfigValidator"><code class="docutils literal notranslate"><span class="pre">GlobalConfigValidator</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.config_validator.html#trinity.common.config_validator.RayClusterConfigValidator"><code class="docutils literal notranslate"><span class="pre">RayClusterConfigValidator</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.config_validator.html#trinity.common.config_validator.AlgorithmConfigValidator"><code class="docutils literal notranslate"><span class="pre">AlgorithmConfigValidator</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.config_validator.html#trinity.common.config_validator.ModelConfigValidator"><code class="docutils literal notranslate"><span class="pre">ModelConfigValidator</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.config_validator.html#trinity.common.config_validator.ExplorerConfigValidator"><code class="docutils literal notranslate"><span class="pre">ExplorerConfigValidator</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.config_validator.html#trinity.common.config_validator.SynchronizerConfigValidator"><code class="docutils literal notranslate"><span class="pre">SynchronizerConfigValidator</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.config_validator.html#trinity.common.config_validator.IntervalConfigValidator"><code class="docutils literal notranslate"><span class="pre">IntervalConfigValidator</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.config_validator.html#trinity.common.config_validator.MonitorConfigValidator"><code class="docutils literal notranslate"><span class="pre">MonitorConfigValidator</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.config_validator.html#trinity.common.config_validator.BufferConfigValidator"><code class="docutils literal notranslate"><span class="pre">BufferConfigValidator</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.config_validator.html#trinity.common.config_validator.TrainerConfigValidator"><code class="docutils literal notranslate"><span class="pre">TrainerConfigValidator</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.common.constants.html">trinity.common.constants module</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.constants.html#trinity.common.constants.CaseInsensitiveEnumMeta"><code class="docutils literal notranslate"><span class="pre">CaseInsensitiveEnumMeta</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.constants.html#trinity.common.constants.CaseInsensitiveEnum"><code class="docutils literal notranslate"><span class="pre">CaseInsensitiveEnum</span></code></a></li>
@@ -962,6 +980,7 @@ document.write(`
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.verl_config.html#trinity.common.verl_config.RewardModel"><code class="docutils literal notranslate"><span class="pre">RewardModel</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.verl_config.html#trinity.common.verl_config.CustomRewardFunction"><code class="docutils literal notranslate"><span class="pre">CustomRewardFunction</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.verl_config.html#trinity.common.verl_config.KL_Ctrl"><code class="docutils literal notranslate"><span class="pre">KL_Ctrl</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.verl_config.html#trinity.common.verl_config.RolloutCorrection"><code class="docutils literal notranslate"><span class="pre">RolloutCorrection</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.verl_config.html#trinity.common.verl_config.Algorithm"><code class="docutils literal notranslate"><span class="pre">Algorithm</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.verl_config.html#trinity.common.verl_config.Trainer"><code class="docutils literal notranslate"><span class="pre">Trainer</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.verl_config.html#trinity.common.verl_config.veRLConfig"><code class="docutils literal notranslate"><span class="pre">veRLConfig</span></code></a></li>
@@ -989,6 +1008,7 @@ document.write(`
 </li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.explorer.scheduler.html">trinity.explorer.scheduler module</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="trinity.explorer.scheduler.html#trinity.explorer.scheduler.TaskWrapper"><code class="docutils literal notranslate"><span class="pre">TaskWrapper</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.explorer.scheduler.html#trinity.explorer.scheduler.bootstrap_metric"><code class="docutils literal notranslate"><span class="pre">bootstrap_metric()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.explorer.scheduler.html#trinity.explorer.scheduler.calculate_task_level_metrics"><code class="docutils literal notranslate"><span class="pre">calculate_task_level_metrics()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.explorer.scheduler.html#trinity.explorer.scheduler.RunnerWrapper"><code class="docutils literal notranslate"><span class="pre">RunnerWrapper</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.explorer.scheduler.html#trinity.explorer.scheduler.sort_batch_id"><code class="docutils literal notranslate"><span class="pre">sort_batch_id()</span></code></a></li>
@@ -1039,6 +1059,10 @@ document.write(`
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="trinity.manager.html#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="trinity.manager.checkpoint_converter.html">trinity.manager.checkpoint_converter module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="trinity.manager.checkpoint_converter.html#trinity.manager.checkpoint_converter.Converter"><code class="docutils literal notranslate"><span class="pre">Converter</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.manager.config_manager.html">trinity.manager.config_manager module</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="trinity.manager.config_manager.html#trinity.manager.config_manager.ConfigManager"><code class="docutils literal notranslate"><span class="pre">ConfigManager</span></code></a></li>
 </ul>
@@ -1216,6 +1240,7 @@ document.write(`
 </li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.utils.monitor.html">trinity.utils.monitor module</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="trinity.utils.monitor.html#trinity.utils.monitor.gather_metrics"><code class="docutils literal notranslate"><span class="pre">gather_metrics()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.utils.monitor.html#trinity.utils.monitor.gather_eval_metrics"><code class="docutils literal notranslate"><span class="pre">gather_eval_metrics()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.utils.monitor.html#trinity.utils.monitor.Monitor"><code class="docutils literal notranslate"><span class="pre">Monitor</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.utils.monitor.html#trinity.utils.monitor.TensorboardMonitor"><code class="docutils literal notranslate"><span class="pre">TensorboardMonitor</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.utils.monitor.html#trinity.utils.monitor.WandbMonitor"><code class="docutils literal notranslate"><span class="pre">WandbMonitor</span></code></a></li>

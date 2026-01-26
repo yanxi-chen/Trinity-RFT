@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>trinity.buffer.task_scheduler module &#8212; Trinity-RFT 0.4.0 documentation</title>
+    <title>trinity.buffer.task_scheduler module &#8212; Trinity-RFT 0.4.1 documentation</title>
   
   
   
@@ -36,7 +36,7 @@
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script src="../_static/documentation_options.js?v=183391d5"></script>
+    <script src="../_static/documentation_options.js?v=a3cf13c8"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
@@ -136,8 +136,8 @@
       
     
     
-    <img src="../_static/logo.svg" class="logo__image only-light" alt="Trinity-RFT 0.4.0 documentation - Home"/>
-    <script>document.write(`<img src="../_static/logo.svg" class="logo__image only-dark" alt="Trinity-RFT 0.4.0 documentation - Home"/>`);</script>
+    <img src="../_static/logo.svg" class="logo__image only-light" alt="Trinity-RFT 0.4.1 documentation - Home"/>
+    <script>document.write(`<img src="../_static/logo.svg" class="logo__image only-dark" alt="Trinity-RFT 0.4.1 documentation - Home"/>`);</script>
   
   
 </a></div>
@@ -188,6 +188,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/trinity_gpu_configs.html">GPU Configuration Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/synchronizer.html">Synchronizer in Trinity-RFT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/align_with_verl.html">Align configuration with veRL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/metrics_reference.html">Monitor Metrics Reference</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples</span></p>
 <ul class="nav bd-sidenav">
@@ -355,6 +356,7 @@
 <li class="toctree-l4"><a class="reference internal" href="trinity.manager.config_registry.trainer_config_manager.html">trinity.manager.config_registry.trainer_config_manager module</a></li>
 </ul>
 </details></li>
+<li class="toctree-l3"><a class="reference internal" href="trinity.manager.checkpoint_converter.html">trinity.manager.checkpoint_converter module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.manager.config_manager.html">trinity.manager.config_manager module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.manager.state_manager.html">trinity.manager.state_manager module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.manager.synchronizer.html">trinity.manager.synchronizer module</a></li>
@@ -404,6 +406,7 @@
 </ul>
 </details></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.common.config.html">trinity.common.config module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="trinity.common.config_validator.html">trinity.common.config_validator module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.common.constants.html">trinity.common.constants module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.common.experience.html">trinity.common.experience module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.common.verl_config.html">trinity.common.verl_config module</a></li>
@@ -502,7 +505,7 @@
 <div class="article-header-buttons">
 
 
-<a href="https://github.com/modelscope/Trinity-RFT" target="_blank"
+<a href="https://github.com/agentscope-ai/Trinity-RFT" target="_blank"
    class="btn btn-sm btn-source-repository-button"
    title="Source repository"
    data-bs-placement="bottom" data-bs-toggle="tooltip"
@@ -627,14 +630,14 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.buffer.task_scheduler.TasksetSchedulerBase.__init__"><code class="docutils literal notranslate"><span class="pre">TasksetSchedulerBase.__init__()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.buffer.task_scheduler.TasksetSchedulerBase.read_async"><code class="docutils literal notranslate"><span class="pre">TasksetSchedulerBase.read_async()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.buffer.task_scheduler.TasksetSchedulerBase.state_dict"><code class="docutils literal notranslate"><span class="pre">TasksetSchedulerBase.state_dict()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.buffer.task_scheduler.TasksetSchedulerBase.update"><code class="docutils literal notranslate"><span class="pre">TasksetSchedulerBase.update()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.buffer.task_scheduler.TasksetSchedulerBase.feedback"><code class="docutils literal notranslate"><span class="pre">TasksetSchedulerBase.feedback()</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.buffer.task_scheduler.SimpleTasksetScheduler"><code class="docutils literal notranslate"><span class="pre">SimpleTasksetScheduler</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.buffer.task_scheduler.SimpleTasksetScheduler.__init__"><code class="docutils literal notranslate"><span class="pre">SimpleTasksetScheduler.__init__()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.buffer.task_scheduler.SimpleTasksetScheduler.read_async"><code class="docutils literal notranslate"><span class="pre">SimpleTasksetScheduler.read_async()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.buffer.task_scheduler.SimpleTasksetScheduler.state_dict"><code class="docutils literal notranslate"><span class="pre">SimpleTasksetScheduler.state_dict()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.buffer.task_scheduler.SimpleTasksetScheduler.update"><code class="docutils literal notranslate"><span class="pre">SimpleTasksetScheduler.update()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.buffer.task_scheduler.SimpleTasksetScheduler.feedback"><code class="docutils literal notranslate"><span class="pre">SimpleTasksetScheduler.feedback()</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.buffer.task_scheduler.TasksetScheduler"><code class="docutils literal notranslate"><span class="pre">TasksetScheduler</span></code></a><ul class="nav section-nav flex-column">
@@ -642,7 +645,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.buffer.task_scheduler.TasksetScheduler.build_orders"><code class="docutils literal notranslate"><span class="pre">TasksetScheduler.build_orders()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.buffer.task_scheduler.TasksetScheduler.read_async"><code class="docutils literal notranslate"><span class="pre">TasksetScheduler.read_async()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.buffer.task_scheduler.TasksetScheduler.state_dict"><code class="docutils literal notranslate"><span class="pre">TasksetScheduler.state_dict()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.buffer.task_scheduler.TasksetScheduler.update"><code class="docutils literal notranslate"><span class="pre">TasksetScheduler.update()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.buffer.task_scheduler.TasksetScheduler.feedback"><code class="docutils literal notranslate"><span class="pre">TasksetScheduler.feedback()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -709,8 +712,8 @@ document.write(`
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="trinity.buffer.task_scheduler.TasksetSchedulerBase.update">
-<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pipeline_metrics</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/trinity/buffer/task_scheduler.html#TasksetSchedulerBase.update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trinity.buffer.task_scheduler.TasksetSchedulerBase.update" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="trinity.buffer.task_scheduler.TasksetSchedulerBase.feedback">
+<span class="sig-name descname"><span class="pre">feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pipeline_metrics</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/trinity/buffer/task_scheduler.html#TasksetSchedulerBase.feedback"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trinity.buffer.task_scheduler.TasksetSchedulerBase.feedback" title="Link to this definition">#</a></dt>
 <dd><p>Update selectors using feedback from the training pipeline.</p>
 </dd></dl>
 
@@ -747,8 +750,8 @@ document.write(`
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="trinity.buffer.task_scheduler.SimpleTasksetScheduler.update">
-<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pipeline_metrics</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/trinity/buffer/task_scheduler.html#SimpleTasksetScheduler.update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trinity.buffer.task_scheduler.SimpleTasksetScheduler.update" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="trinity.buffer.task_scheduler.SimpleTasksetScheduler.feedback">
+<span class="sig-name descname"><span class="pre">feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pipeline_metrics</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/trinity/buffer/task_scheduler.html#SimpleTasksetScheduler.feedback"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trinity.buffer.task_scheduler.SimpleTasksetScheduler.feedback" title="Link to this definition">#</a></dt>
 <dd><p>Update selectors using feedback from the training pipeline.</p>
 </dd></dl>
 
@@ -838,7 +841,7 @@ ensuring balanced exposure while introducing randomness in selection order.</p>
 <dd><p>Save persistent state for checkpointing.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>State dicts for all selectors (one per taskset)</p>
+<dd class="field-odd"><p>State dicts for all tasksets</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>List[Dict]</p>
@@ -847,9 +850,9 @@ ensuring balanced exposure while introducing randomness in selection order.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="trinity.buffer.task_scheduler.TasksetScheduler.update">
-<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pipeline_metrics</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/trinity/buffer/task_scheduler.html#TasksetScheduler.update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trinity.buffer.task_scheduler.TasksetScheduler.update" title="Link to this definition">#</a></dt>
-<dd><p>Update selectors using feedback from the training pipeline.</p>
+<dt class="sig sig-object py" id="trinity.buffer.task_scheduler.TasksetScheduler.feedback">
+<span class="sig-name descname"><span class="pre">feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pipeline_metrics</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/trinity/buffer/task_scheduler.html#TasksetScheduler.feedback"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trinity.buffer.task_scheduler.TasksetScheduler.feedback" title="Link to this definition">#</a></dt>
+<dd><p>Update selectors in tasksets using feedback from the training pipeline.</p>
 <dl>
 <dt>Expected format:</dt><dd><dl>
 <dt>pipeline_metrics = {</dt><dd><dl class="simple">
@@ -926,14 +929,14 @@ ensuring balanced exposure while introducing randomness in selection order.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.buffer.task_scheduler.TasksetSchedulerBase.__init__"><code class="docutils literal notranslate"><span class="pre">TasksetSchedulerBase.__init__()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.buffer.task_scheduler.TasksetSchedulerBase.read_async"><code class="docutils literal notranslate"><span class="pre">TasksetSchedulerBase.read_async()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.buffer.task_scheduler.TasksetSchedulerBase.state_dict"><code class="docutils literal notranslate"><span class="pre">TasksetSchedulerBase.state_dict()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.buffer.task_scheduler.TasksetSchedulerBase.update"><code class="docutils literal notranslate"><span class="pre">TasksetSchedulerBase.update()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.buffer.task_scheduler.TasksetSchedulerBase.feedback"><code class="docutils literal notranslate"><span class="pre">TasksetSchedulerBase.feedback()</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.buffer.task_scheduler.SimpleTasksetScheduler"><code class="docutils literal notranslate"><span class="pre">SimpleTasksetScheduler</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.buffer.task_scheduler.SimpleTasksetScheduler.__init__"><code class="docutils literal notranslate"><span class="pre">SimpleTasksetScheduler.__init__()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.buffer.task_scheduler.SimpleTasksetScheduler.read_async"><code class="docutils literal notranslate"><span class="pre">SimpleTasksetScheduler.read_async()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.buffer.task_scheduler.SimpleTasksetScheduler.state_dict"><code class="docutils literal notranslate"><span class="pre">SimpleTasksetScheduler.state_dict()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.buffer.task_scheduler.SimpleTasksetScheduler.update"><code class="docutils literal notranslate"><span class="pre">SimpleTasksetScheduler.update()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.buffer.task_scheduler.SimpleTasksetScheduler.feedback"><code class="docutils literal notranslate"><span class="pre">SimpleTasksetScheduler.feedback()</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.buffer.task_scheduler.TasksetScheduler"><code class="docutils literal notranslate"><span class="pre">TasksetScheduler</span></code></a><ul class="nav section-nav flex-column">
@@ -941,7 +944,7 @@ ensuring balanced exposure while introducing randomness in selection order.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.buffer.task_scheduler.TasksetScheduler.build_orders"><code class="docutils literal notranslate"><span class="pre">TasksetScheduler.build_orders()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.buffer.task_scheduler.TasksetScheduler.read_async"><code class="docutils literal notranslate"><span class="pre">TasksetScheduler.read_async()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.buffer.task_scheduler.TasksetScheduler.state_dict"><code class="docutils literal notranslate"><span class="pre">TasksetScheduler.state_dict()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.buffer.task_scheduler.TasksetScheduler.update"><code class="docutils literal notranslate"><span class="pre">TasksetScheduler.update()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.buffer.task_scheduler.TasksetScheduler.feedback"><code class="docutils literal notranslate"><span class="pre">TasksetScheduler.feedback()</span></code></a></li>
 </ul>
 </li>
 </ul>

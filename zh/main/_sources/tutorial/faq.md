@@ -104,7 +104,7 @@ ray start --head
 - 对于 trainer，当 `trainer.use_dynamic_bsz=false` 时，调整 `trainer.max_token_len_per_gpu`；当 `trainer.use_dynamic_bsz=true` 时，调整 `trainer.ppo_max_token_len_per_gpu` 和 `trainer.ulysses_sequence_parallel_size`。设置 `trainer.trainer_config.actor_rollout_ref.actor.entropy_from_logits_with_chunking=true` 也可能有帮助。
 - 对于 explorer，调整 `explorer.rollout_model.tensor_parallel_size`。
 
-此外，Trinity-RFT 提供了[GPU 相关配置指南](https://modelscope.github.io/Trinity-RFT/en/main/tutorial/trinity_gpu_configs.html)，可参考其中建议。
+此外，Trinity-RFT 提供了[GPU 相关配置指南](https://agentscope-ai.github.io/Trinity-RFT/en/main/tutorial/trinity_gpu_configs.html)，可参考其中建议。
 
 ## 第三部分：调试方法
 
@@ -183,9 +183,14 @@ for exp in exp_list:
 
 **Q:** 如何在 Trinity-RFT 框架外加载 checkpoints？
 
-**A:** 你需要指定模型路径和检查点路径。以下代码片段展示了如何使用 transformers 库进行加载。
+**A:** 目前支持两种加载方式：
 
-以下是加载 FSDP trainer 检查点的示例：
+1. **推荐方式**：使用 `trinity convert` 命令将原始检查点转换为标准的 Hugging Face 格式。
+   转换后，你就可以像加载普通 Hugging Face 模型一样直接使用它。
+   详细操作请参考教程：[可选：将检查点转换为 Hugging Face 格式](https://agentscope-ai.github.io/Trinity-RFT/zh/main/tutorial/example_reasoning_basic.html#hugging-face)
+
+2. **直接加载（适用于 FSDP 训练的 actor 检查点）**：
+   如果你希望不转换格式而直接加载，可以使用以下代码示例：
 
 ```python
 import os
@@ -209,4 +214,4 @@ model.load_state_dict(load_fsdp_state_dict_from_verl_checkpoint(ckp_path))
 - **Explorer 与 Trainer 分离**：Trinity-RFT 用独立 Explorer 模块替代 veRL 的 rollout model，专门负责 agent 与环境交互，支持更灵活的 workflow 设计和 rollout-training 调度。
 - **全生命周期数据通路**：Trinity-RFT 在 Explorer 和 Trainer 之间增加 Buffer 模块，提供完整的数据存储、处理和采样通路，支持经验回放、优先采样等高级数据处理策略。
 
-我们还提供了 Trinity-RFT 与 veRL 及其衍生系统（如 [rLLM](https://github.com/rllm-org/rllm)）的基准对比，详见 [Benchmark](https://github.com/modelscope/Trinity-RFT/tree/main/benchmark)。
+我们还提供了 Trinity-RFT 与 veRL 及其衍生系统（如 [rLLM](https://github.com/rllm-org/rllm)）的基准对比，详见 [Benchmark](https://github.com/agentscope-ai/Trinity-RFT/tree/main/benchmark)。
