@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Installation &#8212; Trinity-RFT 0.4.1 documentation</title>
+    <title>Installation &#8212; Trinity-RFT 0.5.1 documentation</title>
   
   
   
@@ -36,7 +36,7 @@
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script src="../_static/documentation_options.js?v=a3cf13c8"></script>
+    <script src="../_static/documentation_options.js?v=5f152624"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
@@ -136,8 +136,8 @@
       
     
     
-    <img src="../_static/logo.svg" class="logo__image only-light" alt="Trinity-RFT 0.4.1 documentation - Home"/>
-    <script>document.write(`<img src="../_static/logo.svg" class="logo__image only-dark" alt="Trinity-RFT 0.4.1 documentation - Home"/>`);</script>
+    <img src="../_static/logo.svg" class="logo__image only-light" alt="Trinity-RFT 0.5.1 documentation - Home"/>
+    <script>document.write(`<img src="../_static/logo.svg" class="logo__image only-dark" alt="Trinity-RFT 0.5.1 documentation - Home"/>`);</script>
   
   
 </a></div>
@@ -299,6 +299,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.algorithm.advantage_fn.advantage_fn.html">trinity.algorithm.advantage_fn.advantage_fn module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.algorithm.advantage_fn.asymre_advantage.html">trinity.algorithm.advantage_fn.asymre_advantage module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.algorithm.advantage_fn.grpo_advantage.html">trinity.algorithm.advantage_fn.grpo_advantage module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.algorithm.advantage_fn.jsd_advantage.html">trinity.algorithm.advantage_fn.jsd_advantage module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.algorithm.advantage_fn.multi_step_grpo_advantage.html">trinity.algorithm.advantage_fn.multi_step_grpo_advantage module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.algorithm.advantage_fn.on_policy_distill_advantage.html">trinity.algorithm.advantage_fn.on_policy_distill_advantage module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.algorithm.advantage_fn.opmd_advantage.html">trinity.algorithm.advantage_fn.opmd_advantage module</a></li>
@@ -358,6 +359,7 @@
 </details></li>
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.manager.checkpoint_converter.html">trinity.manager.checkpoint_converter module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.manager.config_manager.html">trinity.manager.config_manager module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.manager.log_manager.html">trinity.manager.log_manager module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.manager.state_manager.html">trinity.manager.state_manager module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.manager.synchronizer.html">trinity.manager.synchronizer module</a></li>
 </ul>
@@ -371,6 +373,10 @@
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.common.models.utils.html">trinity.common.models.utils module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.common.models.vllm_model.html">trinity.common.models.vllm_model module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.common.models.vllm_worker.html">trinity.common.models.vllm_worker module</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../build_api/trinity.common.patch.html">trinity.common.patch package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.common.patch.kimi.html">trinity.common.patch.kimi module</a></li>
 </ul>
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../build_api/trinity.common.rewards.html">trinity.common.rewards package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -637,12 +643,12 @@ document.write(`
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#via-pypi">Via PyPI</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-docker">Using Docker</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pull-from-github-container-registry-recommended-for-beginners">Pull from GitHub Container Registry (Recommended for beginners)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#build-locally">Build Locally</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#via-pypi">Via PyPI</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a></li>
 </ul>
             </nav>
@@ -665,7 +671,7 @@ document.write(`
 <ul class="simple">
 <li><p><strong>Python</strong>: 3.10 – 3.12</p></li>
 <li><p><strong>CUDA</strong>: 12.8 or higher</p></li>
-<li><p><strong>GPUs</strong>: At least 2 available</p></li>
+<li><p><strong>GPUs</strong>: At least one NVIDIA GPU with <a class="reference external" href="https://developer.nvidia.com/cuda/gpus">compute capability</a> 8.0 or higher (e.g., RTX 30 series, A100, H100)</p></li>
 </ul>
 </section>
 <section id="if-you-dont-have-gpus-or-prefer-not-to-use-them">
@@ -737,20 +743,6 @@ pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </s
 </section>
 </section>
 <hr class="docutils" />
-<section id="via-pypi">
-<h2>Via PyPI<a class="headerlink" href="#via-pypi" title="Link to this heading">#</a></h2>
-<p>If you just want to use the package without modifying the code:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>trinity-rft
-pip<span class="w"> </span>install<span class="w"> </span>flash-attn<span class="o">==</span><span class="m">2</span>.8.1
-</pre></div>
-</div>
-<p>Or with <code class="docutils literal notranslate"><span class="pre">uv</span></code>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>uv<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>trinity-rft
-uv<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>flash-attn<span class="o">==</span><span class="m">2</span>.8.1
-</pre></div>
-</div>
-</section>
-<hr class="docutils" />
 <section id="using-docker">
 <h2>Using Docker<a class="headerlink" href="#using-docker" title="Link to this heading">#</a></h2>
 <p>You can download the Trinity-RFT Docker image from Github Container Registry or build it locally.</p>
@@ -759,7 +751,7 @@ uv<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </s
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/agentscope-ai/Trinity-RFT
 <span class="nb">cd</span><span class="w"> </span>Trinity-RFT
 
-docker<span class="w"> </span>pull<span class="w"> </span>ghcr.io/modelscope/trinity-rft:latest
+docker<span class="w"> </span>pull<span class="w"> </span>ghcr.io/agentscope-ai/trinity-rft:latest
 
 docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--gpus<span class="w"> </span>all<span class="w"> </span><span class="se">\</span>
@@ -767,7 +759,7 @@ docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </s
 <span class="w">  </span>--rm<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-v<span class="w"> </span><span class="nv">$PWD</span>:/workspace<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-v<span class="w"> </span>&lt;path_to_your_data_and_checkpoints&gt;:/data<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>ghcr.io/modelscope/trinity-rft:latest
+<span class="w">  </span>ghcr.io/agentscope-ai/trinity-rft:latest
 </pre></div>
 </div>
 <div class="admonition note">
@@ -795,12 +787,26 @@ docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </s
 <span class="w">  </span>trinity-rft:latest
 </pre></div>
 </div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="via-pypi">
+<h2>Via PyPI<a class="headerlink" href="#via-pypi" title="Link to this heading">#</a></h2>
+<p>If you just want to use the package without modifying the code:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>trinity-rft
+pip<span class="w"> </span>install<span class="w"> </span>flash-attn<span class="o">==</span><span class="m">2</span>.8.1<span class="w">  </span>--no-build-isolation
+</pre></div>
+</div>
+<p>Or with <code class="docutils literal notranslate"><span class="pre">uv</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>uv<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>trinity-rft
+uv<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>flash-attn<span class="o">==</span><span class="m">2</span>.8.1<span class="w">  </span>--no-build-isolation
+</pre></div>
+</div>
 <hr class="docutils" />
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>For training with <strong>Megatron-LM</strong>, please refer to <a class="reference internal" href="example_megatron.html#megatron-lm"><span class="std std-ref">Megatron-LM Backend</span></a>.</p>
 </div>
-</section>
 </section>
 <section id="troubleshooting">
 <h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">#</a></h2>
@@ -865,12 +871,12 @@ docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </s
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#via-pypi">Via PyPI</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-docker">Using Docker</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pull-from-github-container-registry-recommended-for-beginners">Pull from GitHub Container Registry (Recommended for beginners)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#build-locally">Build Locally</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#via-pypi">Via PyPI</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a></li>
 </ul>
   </nav></div>

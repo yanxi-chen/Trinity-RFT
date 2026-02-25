@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Operator Development Guide &#8212; Trinity-RFT 0.4.1 documentation</title>
+    <title>Operator Development Guide &#8212; Trinity-RFT 0.5.1 documentation</title>
   
   
   
@@ -36,7 +36,7 @@
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script src="../_static/documentation_options.js?v=a3cf13c8"></script>
+    <script src="../_static/documentation_options.js?v=5f152624"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
@@ -136,8 +136,8 @@
       
     
     
-    <img src="../_static/logo.svg" class="logo__image only-light" alt="Trinity-RFT 0.4.1 documentation - Home"/>
-    <script>document.write(`<img src="../_static/logo.svg" class="logo__image only-dark" alt="Trinity-RFT 0.4.1 documentation - Home"/>`);</script>
+    <img src="../_static/logo.svg" class="logo__image only-light" alt="Trinity-RFT 0.5.1 documentation - Home"/>
+    <script>document.write(`<img src="../_static/logo.svg" class="logo__image only-dark" alt="Trinity-RFT 0.5.1 documentation - Home"/>`);</script>
   
   
 </a></div>
@@ -299,6 +299,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.algorithm.advantage_fn.advantage_fn.html">trinity.algorithm.advantage_fn.advantage_fn module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.algorithm.advantage_fn.asymre_advantage.html">trinity.algorithm.advantage_fn.asymre_advantage module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.algorithm.advantage_fn.grpo_advantage.html">trinity.algorithm.advantage_fn.grpo_advantage module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.algorithm.advantage_fn.jsd_advantage.html">trinity.algorithm.advantage_fn.jsd_advantage module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.algorithm.advantage_fn.multi_step_grpo_advantage.html">trinity.algorithm.advantage_fn.multi_step_grpo_advantage module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.algorithm.advantage_fn.on_policy_distill_advantage.html">trinity.algorithm.advantage_fn.on_policy_distill_advantage module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.algorithm.advantage_fn.opmd_advantage.html">trinity.algorithm.advantage_fn.opmd_advantage module</a></li>
@@ -358,6 +359,7 @@
 </details></li>
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.manager.checkpoint_converter.html">trinity.manager.checkpoint_converter module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.manager.config_manager.html">trinity.manager.config_manager module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.manager.log_manager.html">trinity.manager.log_manager module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.manager.state_manager.html">trinity.manager.state_manager module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.manager.synchronizer.html">trinity.manager.synchronizer module</a></li>
 </ul>
@@ -371,6 +373,10 @@
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.common.models.utils.html">trinity.common.models.utils module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.common.models.vllm_model.html">trinity.common.models.vllm_model module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.common.models.vllm_worker.html">trinity.common.models.vllm_worker module</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../build_api/trinity.common.patch.html">trinity.common.patch package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.common.patch.kimi.html">trinity.common.patch.kimi module</a></li>
 </ul>
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../build_api/trinity.common.rewards.html">trinity.common.rewards package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -643,7 +649,7 @@ document.write(`
 <span id="operators"></span><h1>Operator Development Guide<a class="headerlink" href="#operator-development-guide" title="Link to this heading">#</a></h1>
 <section id="step-0-basic-concepts-of-operator-module">
 <h2>Step 0: Basic Concepts of Operator Module<a class="headerlink" href="#step-0-basic-concepts-of-operator-module" title="Link to this heading">#</a></h2>
-<p>In Trinity-RFT, the operator module is responsible for processing experience data in the buffer module. It supports existing data processing capabilities from <a class="reference external" href="https://github.com/modelscope/data-juicer">Data-Juicer</a> naturally, and allows developers to implement their own operators as well.
+<p>In Trinity-RFT, the operator module is responsible for processing experience data in the buffer module. It supports existing data processing capabilities from <a class="reference external" href="https://github.com/datajuicer/data-juicer">Data-Juicer</a> naturally, and allows developers to implement their own operators as well.
 By customizing operators, developers can implement various data processing functionalities, such as data augmentation, filtering, and transformation. You can even implement advantages/returns calculation as operators, as shown in <a class="reference internal" href="develop_algorithm.html#algorithms"><span class="std std-ref">Algorithms</span></a> section.</p>
 <ul class="simple">
 <li><p><strong>DataJuicerOperator</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">trinity.buffer.operators.DataJuicerOperator</span></code>): The operator that wraps the data processing operators from Data-Juicer. It provides a simple interface for developers to list the Data-Juicer operators they want to use. The full list of Data-Juicer operators can be found <a class="reference external" href="https://agentscope-ai.github.io/data-juicer/en/main/docs/Operators.html">here</a>.</p></li>
@@ -705,7 +711,7 @@ In the current version, the <code class="docutils literal notranslate"><span cla
 <span class="w">          </span><span class="nt">threshold</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.1</span>
 <span class="nt">synchronizer</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">sync_method</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nccl</span>
-<span class="w">  </span><span class="nt">sync_style</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dynamic_by_explorer</span>
+<span class="w">  </span><span class="nt">sync_style</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explorer_driven</span>
 <span class="w">  </span><span class="nt">sync_interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
 <span class="c1"># some other configs</span>
 </pre></div>

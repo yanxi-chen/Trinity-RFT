@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Configuration Guide &#8212; Trinity-RFT 0.4.1 documentation</title>
+    <title>Configuration Guide &#8212; Trinity-RFT 0.5.1 documentation</title>
   
   
   
@@ -36,7 +36,7 @@
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script src="../_static/documentation_options.js?v=a3cf13c8"></script>
+    <script src="../_static/documentation_options.js?v=5f152624"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
@@ -136,8 +136,8 @@
       
     
     
-    <img src="../_static/logo.svg" class="logo__image only-light" alt="Trinity-RFT 0.4.1 documentation - Home"/>
-    <script>document.write(`<img src="../_static/logo.svg" class="logo__image only-dark" alt="Trinity-RFT 0.4.1 documentation - Home"/>`);</script>
+    <img src="../_static/logo.svg" class="logo__image only-light" alt="Trinity-RFT 0.5.1 documentation - Home"/>
+    <script>document.write(`<img src="../_static/logo.svg" class="logo__image only-dark" alt="Trinity-RFT 0.5.1 documentation - Home"/>`);</script>
   
   
 </a></div>
@@ -299,6 +299,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.algorithm.advantage_fn.advantage_fn.html">trinity.algorithm.advantage_fn.advantage_fn module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.algorithm.advantage_fn.asymre_advantage.html">trinity.algorithm.advantage_fn.asymre_advantage module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.algorithm.advantage_fn.grpo_advantage.html">trinity.algorithm.advantage_fn.grpo_advantage module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.algorithm.advantage_fn.jsd_advantage.html">trinity.algorithm.advantage_fn.jsd_advantage module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.algorithm.advantage_fn.multi_step_grpo_advantage.html">trinity.algorithm.advantage_fn.multi_step_grpo_advantage module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.algorithm.advantage_fn.on_policy_distill_advantage.html">trinity.algorithm.advantage_fn.on_policy_distill_advantage module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.algorithm.advantage_fn.opmd_advantage.html">trinity.algorithm.advantage_fn.opmd_advantage module</a></li>
@@ -358,6 +359,7 @@
 </details></li>
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.manager.checkpoint_converter.html">trinity.manager.checkpoint_converter module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.manager.config_manager.html">trinity.manager.config_manager module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.manager.log_manager.html">trinity.manager.log_manager module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.manager.state_manager.html">trinity.manager.state_manager module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.manager.synchronizer.html">trinity.manager.synchronizer module</a></li>
 </ul>
@@ -371,6 +373,10 @@
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.common.models.utils.html">trinity.common.models.utils module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.common.models.vllm_model.html">trinity.common.models.vllm_model module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.common.models.vllm_worker.html">trinity.common.models.vllm_worker module</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../build_api/trinity.common.patch.html">trinity.common.patch package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.common.patch.kimi.html">trinity.common.patch.kimi module</a></li>
 </ul>
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../build_api/trinity.common.rewards.html">trinity.common.rewards package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -728,6 +734,7 @@ Users can use these features to simplify configuration.</p>
 <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">example</span>
 <span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">both</span>
 <span class="nt">checkpoint_root_dir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${oc.env:TRINITY_CHECKPOINT_ROOT_DIR,./checkpoints}</span><span class="w">   </span><span class="c1"># TRINITY_CHECKPOINT_ROOT_DIR is an environment variable set in advance</span>
+<span class="nt">ignore_validator_suggestions</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -739,11 +746,13 @@ Users can use these features to simplify configuration.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">train</span></code>: Only launches the trainer.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">explore</span></code>: Only launches the explorer.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">bench</span></code>: Used for benchmarking.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">colocate</span></code>: Only for single GPU scenarios, launches both trainer and explorer on the same GPU.</p></li>
 </ul>
 </li>
 <li><p><code class="docutils literal notranslate"><span class="pre">checkpoint_root_dir</span></code>: Root directory where all checkpoints and logs will be saved. Checkpoints for this experiment will be stored in <code class="docutils literal notranslate"><span class="pre">&lt;checkpoint_root_dir&gt;/&lt;project&gt;/&lt;name&gt;/</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">continue_from_checkpoint</span></code>: If set to <code class="docutils literal notranslate"><span class="pre">true</span></code>, the experiment will continue from the latest checkpoint in the checkpoint path (if any); otherwise, it will rename the current experiment to <code class="docutils literal notranslate"><span class="pre">&lt;name&gt;_&lt;timestamp&gt;</span></code> and start a new experiment. Due to our decoupled design, during recovery from a checkpoint, we can only guarantee that the Trainer’s model parameters and its optional auxiliary buffers (<code class="docutils literal notranslate"><span class="pre">auxiliary_buffers</span></code>) are restored to their latest checkpointed states, while the Explorer and Experience Buffer cannot be guaranteed to be restored to the same point in time.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">ray_namespace</span></code>: Namespace for the modules launched in the current experiment. If not specified, it will be set to <code class="docutils literal notranslate"><span class="pre">&lt;project&gt;/&lt;name&gt;</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ignore_validator_suggestions</span></code>: When set to <code class="docutils literal notranslate"><span class="pre">false</span></code> (the default), the config validator checks GPU memory usage and suggests configuration changes if needed. When set to <code class="docutils literal notranslate"><span class="pre">true</span></code>, the validator skips GPU memory usage check.</p></li>
 </ul>
 </section>
 <hr class="docutils" />
@@ -1091,6 +1100,8 @@ Users can use these features to simplify configuration.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">explorer</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explorer</span>
 <span class="w">  </span><span class="nt">runner_per_model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8</span>
+<span class="w">  </span><span class="nt">concurrent_mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sequential</span>
+<span class="w">  </span><span class="nt">max_repeat_times_per_runner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span>
 <span class="w">  </span><span class="nt">max_timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">900</span>
 <span class="w">  </span><span class="nt">max_retry_times</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
 <span class="w">  </span><span class="nt">env_vars</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
@@ -1116,6 +1127,14 @@ Users can use these features to simplify configuration.</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">name</span></code>: Name of the explorer. This name will be used as the Ray actor’s name, so it must be unique.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">runner_per_model</span></code>: Number of parallel workflow runners per each rollout model.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">concurrent_mode</span></code>: Concurrency mode for executing a set of tasks (e.g., multiple repeats of a task in GRPO algorithm). Supported options:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">sequential</span></code>: Executes tasks sequentially (default). One task is executed at a time, waiting for its completion before executing the next. This requires the least from the workflow implementation but has the worst throughput.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">asynchronous</span></code>: Executes tasks asynchronously. All tasks are submitted at once, and results are collected as they complete. Requires the workflow to correctly implement asynchronous call interfaces and have no shared state between workflows to avoid race conditions. Throughput is better than sequential execution, but the performance depends on the workflow implementation.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">multi-threading</span></code>: Executes tasks using multi-threading. Multiple tasks are executed simultaneously using threads. Requires the workflow implementation to be thread-safe to avoid race conditions. Throughput is usually better than sequential execution but may be lower than asynchronous execution, depending on the workflow implementation and system resources.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">max_repeat_times_per_runner</span></code>: Splits tasks that originally need to be repeated <code class="docutils literal notranslate"><span class="pre">algorithm.repeat_times</span></code> times into multiple subtasks, where each subtask’s <code class="docutils literal notranslate"><span class="pre">repeat_times</span></code> does not exceed this value. This parameter is only applicable to GRPO-like algorithms. If not set, there is no limit on the number of repeats. It is recommended to use this parameter when <code class="docutils literal notranslate"><span class="pre">concurrent_mode</span></code> is <code class="docutils literal notranslate"><span class="pre">sequential</span></code> to reduce the end to end latency and improve throughput.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">max_timeout</span></code>: Maximum time (in seconds) for a workflow to complete.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">max_retry_times</span></code>: Maximum number of retries for a workflow.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">env_vars</span></code>: Environment variables to be set for every workflow runners.</p></li>
@@ -1166,7 +1185,8 @@ Users can use these features to simplify configuration.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">sync_style</span></code>: Style of synchronization. Options:</p>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">fixed</span></code>: The explorer and trainer synchronize weights every <code class="docutils literal notranslate"><span class="pre">sync_interval</span></code> steps.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">dynamic_by_explorer</span></code>: The explorer notifies the trainer to synchronize weights after completing <code class="docutils literal notranslate"><span class="pre">sync_interval</span></code> steps, regardless of how many steps the trainer has completed at this point.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">explorer_driven</span></code>: The explorer notifies the trainer to synchronize weights after completing <code class="docutils literal notranslate"><span class="pre">sync_interval</span></code> steps, regardless of how many steps the trainer has completed at this point.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">trainer_driven</span></code>: The trainer notifies the explorer to synchronize weights after completing <code class="docutils literal notranslate"><span class="pre">sync_interval</span></code> steps, regardless of how many steps the explorer has completed at this point.</p></li>
 </ul>
 </li>
 </ul>

@@ -72,6 +72,7 @@ project: Trinity-RFT
 name: example
 mode: both
 checkpoint_root_dir: ${oc.env:TRINITY_CHECKPOINT_ROOT_DIR,./checkpoints}   # TRINITY_CHECKPOINT_ROOT_DIR 是预先设置的环境变量
+ignore_validator_suggestions: false
 ```
 
 - `project`: 项目名称。
@@ -81,9 +82,11 @@ checkpoint_root_dir: ${oc.env:TRINITY_CHECKPOINT_ROOT_DIR,./checkpoints}   # TRI
   - `train`: 仅启动 trainer。
   - `explore`: 仅启动 explorer。
   - `bench`: 用于 benchmark 测试。
+  - `colocate`: 仅适用于单 GPU 场景，在同一 GPU 上启动 trainer 和 explorer。
 - `checkpoint_root_dir`: 所有检查点和日志的根目录。该实验的检查点将存储在 `<checkpoint_root_dir>/<project>/<name>/` 路径下。
 - `continue_from_checkpoint`: 若设置为 `true`，实验将从检查点路径中的最新检查点继续；否则，会将当前实验重命名为 `<name>_<timestamp>` 并启动新实验。由于我们的分离式设计，从检查点恢复的时候，我们只能保证Trainer的模型参数以及其使用的可选缓冲区（`auxiliary_buffers`）可以恢复到最新检查点的状态，而Explorer和Experience Buffer不能保证恢复到同一时点。
 - `ray_namespace`: 当前实验中启动模块的命名空间。若未指定，则默认为 `<project>/<name>`。
+- `ignore_validator_suggestions`：如果设置为`false`，配置验证器将检查GPU内存使用情况，并提出配置更改建议。如果设置为`true`，验证器将不检查GPU内存使用情况。默认值为`false`。
 
 ---
 
@@ -387,6 +390,8 @@ buffer:
 explorer:
   name: explorer
   runner_per_model: 8
+  concurrent_mode: sequential
+  max_repeat_times_per_runner: null
   max_timeout: 900
   max_retry_times: 2
   env_vars: {}
@@ -411,6 +416,11 @@ explorer:
 
 - `name`: explorer 的名称。该名称将用作 Ray actor 的名称，因此必须唯一。
 - `runner_per_model`: 每个推理引擎实例所服务的 WorkflowRunner 数量。
+- `concurrent_mode`: 执行一组任务（例如 GRPO 算法中对一个任务的多次重复执行）的并发模式。支持如下选项：
+  - `sequential`: 顺序执行（默认）。每次执行一个任务，等待其完成后再执行下一个任务。对 workflow 的实现要求最低，但吞吐量也最差。
+  - `asynchronous`: 异步执行。使用异步模式一次性提交所有任务，并在任务完成后收集结果。要求 workflow 正确地实现了异步调用接口，并且 workflow 之间没有共享状态，以避免竞态条件。吞吐量优于顺序执行，但具体性能受限于 workflow 的实现。
+  - `multi-threading`: 多线程执行。使用多线程同时执行多个任务。需要确保 workflow 的实现是线程安全的，以避免竞态条件。吞吐量通常优于顺序执行，但可能低于异步执行，具体取决于工作流的实现和系统资源。
+- `max_repeat_times_per_runner`: 将本来需要重复执行 `algorithm.repeat_times` 次的任务切分为多个子任务，每个子任务的 `repeat_times` 不超过该值，仅适用于 GRPO 类算法。如果未设置，则不限制重复次数。推荐在 `concurrent_mode` 为 `sequential` 时使用此参数，以避免单个 WorkflowRunner 长时间占用资源。
 - `max_timeout`: 等待 Workflow 完成的最大时间（秒）。
 - `max_retry_times`: Workflow 失败或超时情况下的最大重试次数。
 - `env_vars`: 为每个 WorkflowRunner 设置的环境变量。
@@ -452,7 +462,8 @@ synchronizer:
 - `sync_timeout`: 同步超时时间。
 - `sync_style`: 同步风格。选项：
   - `fixed`: explorer 和 trainer 每隔 `sync_interval` 步同步一次权重。
-  - `dynamic_by_explorer`: explorer 在完成 `sync_interval` 步后通知 trainer 同步权重，而不管此时 trainer 已完成多少步。
+  - `explorer_driven`: explorer 在完成 `sync_interval` 步后通知 trainer 同步权重，而不管此时 trainer 已完成多少步。
+  - `trainer_driven`: trainer 在完成 `sync_interval` 步后通知 explorer 同步权重，而不管此时 explorer 已完成多少步。
 
 ---
 

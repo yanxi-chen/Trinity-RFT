@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Welcome to Trinity-RFT’s documentation! &#8212; Trinity-RFT 0.4.1 documentation</title>
+    <title>Welcome to Trinity-RFT’s documentation! &#8212; Trinity-RFT 0.5.1 documentation</title>
   
   
   
@@ -36,7 +36,7 @@
 <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script src="_static/documentation_options.js?v=a3cf13c8"></script>
+    <script src="_static/documentation_options.js?v=5f152624"></script>
     <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
@@ -137,8 +137,8 @@
       
     
     
-    <img src="_static/logo.svg" class="logo__image only-light" alt="Trinity-RFT 0.4.1 documentation - Home"/>
-    <script>document.write(`<img src="_static/logo.svg" class="logo__image only-dark" alt="Trinity-RFT 0.4.1 documentation - Home"/>`);</script>
+    <img src="_static/logo.svg" class="logo__image only-light" alt="Trinity-RFT 0.5.1 documentation - Home"/>
+    <script>document.write(`<img src="_static/logo.svg" class="logo__image only-dark" alt="Trinity-RFT 0.5.1 documentation - Home"/>`);</script>
   
   
 </a></div>
@@ -300,6 +300,7 @@
 <li class="toctree-l4"><a class="reference internal" href="build_api/trinity.algorithm.advantage_fn.advantage_fn.html">trinity.algorithm.advantage_fn.advantage_fn module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="build_api/trinity.algorithm.advantage_fn.asymre_advantage.html">trinity.algorithm.advantage_fn.asymre_advantage module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="build_api/trinity.algorithm.advantage_fn.grpo_advantage.html">trinity.algorithm.advantage_fn.grpo_advantage module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="build_api/trinity.algorithm.advantage_fn.jsd_advantage.html">trinity.algorithm.advantage_fn.jsd_advantage module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="build_api/trinity.algorithm.advantage_fn.multi_step_grpo_advantage.html">trinity.algorithm.advantage_fn.multi_step_grpo_advantage module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="build_api/trinity.algorithm.advantage_fn.on_policy_distill_advantage.html">trinity.algorithm.advantage_fn.on_policy_distill_advantage module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="build_api/trinity.algorithm.advantage_fn.opmd_advantage.html">trinity.algorithm.advantage_fn.opmd_advantage module</a></li>
@@ -359,6 +360,7 @@
 </details></li>
 <li class="toctree-l3"><a class="reference internal" href="build_api/trinity.manager.checkpoint_converter.html">trinity.manager.checkpoint_converter module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="build_api/trinity.manager.config_manager.html">trinity.manager.config_manager module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build_api/trinity.manager.log_manager.html">trinity.manager.log_manager module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="build_api/trinity.manager.state_manager.html">trinity.manager.state_manager module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="build_api/trinity.manager.synchronizer.html">trinity.manager.synchronizer module</a></li>
 </ul>
@@ -372,6 +374,10 @@
 <li class="toctree-l4"><a class="reference internal" href="build_api/trinity.common.models.utils.html">trinity.common.models.utils module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="build_api/trinity.common.models.vllm_model.html">trinity.common.models.vllm_model module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="build_api/trinity.common.models.vllm_worker.html">trinity.common.models.vllm_worker module</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="build_api/trinity.common.patch.html">trinity.common.patch package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="build_api/trinity.common.patch.kimi.html">trinity.common.patch.kimi module</a></li>
 </ul>
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="build_api/trinity.common.rewards.html">trinity.common.rewards package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -671,7 +677,7 @@ It decouples RFT into three components that work in coordination:</p>
 </thead>
 <tbody>
 <tr class="row-even"><td><p><em>Run diverse RFT modes</em></p></td>
-<td><p>+ <a class="reference internal" href="tutorial/example_reasoning_basic.html"><span class="std std-doc">Quick start: GRPO on GSM8k</span></a><br>+ <a class="reference internal" href="tutorial/example_reasoning_advanced.html"><span class="std std-doc">Off-policy RFT</span></a><br>+ <a class="reference internal" href="tutorial/example_async_mode.html"><span class="std std-doc">Fully asynchronous RFT</span></a><br>+ <a class="reference internal" href="tutorial/example_dpo.html"><span class="std std-doc">Offline learning by DPO or SFT</span></a></p></td>
+<td><p>+ <a class="reference internal" href="tutorial/example_reasoning_basic.html"><span class="std std-doc">Quick start: GRPO on GSM8k</span></a><br>+ <a class="reference internal" href="tutorial/example_reasoning_advanced.html"><span class="std std-doc">Off-policy RFT</span></a><br>+ <a class="reference internal" href="tutorial/example_async_mode.html"><span class="std std-doc">Fully asynchronous RFT</span></a><br>+ <a class="reference internal" href="tutorial/example_dpo.html"><span class="std std-doc">Offline learning by DPO or SFT</span></a><br>+ <a class="reference external" href="https://github.com/agentscope-ai/Trinity-RFT/tree/main/examples/tinker">RFT without local GPU (Tinker Backend)</a></p></td>
 </tr>
 <tr class="row-odd"><td><p><em>Multi-step agentic RL</em></p></td>
 <td><p>+ <a class="reference internal" href="tutorial/example_multi_turn.html"><span class="std std-doc">Concatenated multi-turn workflow</span></a><br>+ <a class="reference internal" href="tutorial/example_step_wise.html"><span class="std std-doc">General multi-step workflow</span></a><br>+ <a class="reference internal" href="tutorial/example_react.html"><span class="std std-doc">ReAct workflow with an agent framework</span></a>  <br>+ <a class="reference external" href="https://github.com/agentscope-ai/Trinity-RFT/tree/main/examples/agentscope_websearch">Example: train a web-search agent</a></p></td>
@@ -686,7 +692,7 @@ It decouples RFT into three components that work in coordination:</p>
 <td><p>+ <a class="reference external" href="https://github.com/agentscope-ai/Trinity-RFT/tree/main/benchmark/README.md">Benchmark toolkit (quick verification &amp; experimentation)</a><br>+ <a class="reference external" href="https://github.com/agentscope-ai/Trinity-RFT/tree/main/benchmark/reports/guru_math.md">Guru-Math benchmark &amp; comparison with veRL</a><br>+ <a class="reference external" href="https://github.com/agentscope-ai/Trinity-RFT/tree/main/benchmark/reports/frozenlake.md">FrozenLake benchmark &amp; comparison with rLLM</a><br>+ <a class="reference external" href="https://github.com/agentscope-ai/Trinity-RFT/tree/main/benchmark/reports/alfworld.md">Alfworld benchmark &amp; comparison with rLLM</a></p></td>
 </tr>
 <tr class="row-odd"><td><p><em>Going deeper into Trinity-RFT</em></p></td>
-<td><p>+ <a class="reference external" href="https://agentscope-ai.github.io/Trinity-RFT/en/main/tutorial/trinity_configs.html">Full configurations</a><br>+ <a class="reference external" href="https://agentscope-ai.github.io/Trinity-RFT/en/main/tutorial/trinity_gpu_configs.html">GPU resource and training configuration guide</a><br>+ <a class="reference external" href="https://agentscope-ai.github.io/Trinity-RFT/en/main/tutorial/synchronizer.html">Understand the coordination between explorer and trainer</a><br>+ <a class="reference external" href="https://agentscope-ai.github.io/Trinity-RFT/en/main/tutorial/align_with_verl.html">How to align configuration with veRL</a></p></td>
+<td><p>+ <a class="reference external" href="https://agentscope-ai.github.io/Trinity-RFT/en/main/tutorial/trinity_configs.html">Full configurations</a><br>+ <a class="reference external" href="https://agentscope-ai.github.io/Trinity-RFT/en/main/tutorial/trinity_gpu_configs.html">GPU resource and training configuration guide</a><br>+ <a class="reference external" href="https://github.com/agentscope-ai/Trinity-RFT/tree/main/examples/grpo_vlm">Training VLM</a><br>+ <a class="reference external" href="https://agentscope-ai.github.io/Trinity-RFT/en/main/tutorial/synchronizer.html">Understand the coordination between explorer and trainer</a><br>+ <a class="reference external" href="https://agentscope-ai.github.io/Trinity-RFT/en/main/tutorial/align_with_verl.html">How to align configuration with veRL</a></p></td>
 </tr>
 </tbody>
 </table>
@@ -749,6 +755,16 @@ It decouples RFT into three components that work in coordination:</p>
 <td class="text-left"><p>[<a class="reference external" href="https://github.com/agentscope-ai/Trinity-RFT/tree/main/trinity/algorithm/advantage_fn/grpo_advantage.py">Code</a>]</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">algorithm_type:</span> <span class="pre">grpo</span></code></p></td>
 </tr>
+<tr class="row-even"><td class="text-left"><p>SFT</p></td>
+<td class="text-left"><p>[<a class="reference external" href="https://github.com/agentscope-ai/Trinity-RFT/tree/main/examples/sft_mot">Mixture-of-Thoughts Example</a>]</p></td>
+<td class="text-left"><p>[<a class="reference external" href="https://github.com/agentscope-ai/Trinity-RFT/tree/main/trinity/algorithm/policy_loss_fn/sft_loss.py">Code</a>]</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">algorithm_type:</span> <span class="pre">sft</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>DPO [<a class="reference external" href="https://arxiv.org/pdf/2305.18290">Paper</a>]</p></td>
+<td class="text-left"><p>[<a class="reference external" href="https://github.com/agentscope-ai/Trinity-RFT/tree/main/examples/dpo_humanlike">HumanLike Example</a>]</p></td>
+<td class="text-left"><p>[<a class="reference external" href="https://github.com/agentscope-ai/Trinity-RFT/tree/main/trinity/algorithm/policy_loss_fn/dpo_loss.py">Code</a>]</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">algorithm_type:</span> <span class="pre">dpo</span></code></p></td>
+</tr>
 <tr class="row-even"><td class="text-left"><p>CHORD 💡 [<a class="reference external" href="https://arxiv.org/pdf/2508.11408">Paper</a>]</p></td>
 <td class="text-left"><p>[<a class="reference external" href="https://agentscope-ai.github.io/Trinity-RFT/en/main/tutorial/example_mix_algo.html">Doc</a>] [<a class="reference external" href="https://github.com/agentscope-ai/Trinity-RFT/blob/main/examples/mix_chord/mix_chord_toolace.yaml">ToolACE Example</a>]</p></td>
 <td class="text-left"><p>[<a class="reference external" href="https://github.com/agentscope-ai/Trinity-RFT/tree/main/trinity/algorithm/policy_loss_fn/chord_policy_loss.py">Code</a>]</p></td>
@@ -800,9 +816,14 @@ It decouples RFT into three components that work in coordination:</p>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">algorithm_type:</span> <span class="pre">sapo</span></code></p></td>
 </tr>
 <tr class="row-even"><td class="text-left"><p>On-Policy Distillation [<a class="reference external" href="https://thinkingmachines.ai/blog/on-policy-distillation/">Blog</a>] [<a class="reference external" href="https://arxiv.org/pdf/2306.13649">Paper</a>]</p></td>
-<td class="text-left"><p>[<a class="reference external" href="https://github.com/agentscope-ai/Trinity-RFT/tree/main/examples/on_policy_distill">GSM8K Example</a>]</p></td>
+<td class="text-left"><p>[<a class="reference external" href="https://github.com/agentscope-ai/Trinity-RFT/tree/main/examples/opd_gsm8k">GSM8K Example</a>]</p></td>
 <td class="text-left"><p>[<a class="reference external" href="https://github.com/agentscope-ai/Trinity-RFT/tree/main/trinity/common/workflows/on_policy_distill_workflow.py">Code</a>]</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">algorithm_type:</span> <span class="pre">on_policy_distill</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>JSD (Jensen-Shannon Divergence)</p></td>
+<td class="text-left"><p>[<a class="reference external" href="https://github.com/agentscope-ai/Trinity-RFT/tree/main/examples/opd_gsm8k/opd_gsm8k_jsd.yaml">GSM8K Example</a>]</p></td>
+<td class="text-left"><p>[<a class="reference external" href="https://github.com/agentscope-ai/Trinity-RFT/tree/main/trinity/algorithm/advantage_fn/jsd_advantage.py">Code</a>]</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">algorithm_type:</span> <span class="pre">jsd</span></code></p></td>
 </tr>
 </tbody>
 </table>
@@ -812,12 +833,12 @@ It decouples RFT into three components that work in coordination:</p>
 <h2>Acknowledgements<a class="headerlink" href="#acknowledgements" title="Link to this heading">#</a></h2>
 <p>This project is built upon many excellent open-source projects, including:</p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://github.com/volcengine/verl">verl</a> and <a class="reference external" href="https://pytorch.org/docs/stable/fsdp.html">PyTorch’s FSDP</a> for LLM training;</p></li>
+<li><p><a class="reference external" href="https://github.com/volcengine/verl">verl</a>, <a class="reference external" href="https://pytorch.org/docs/stable/fsdp.html">FSDP</a> and <a class="reference external" href="https://github.com/NVIDIA/Megatron-LM">Megatron-LM</a> for LLM training;</p></li>
 <li><p><a class="reference external" href="https://github.com/vllm-project/vllm">vLLM</a> for LLM inference;</p></li>
-<li><p><a class="reference external" href="https://github.com/modelscope/data-juicer?tab=readme-ov-file">Data-Juicer</a> for data processing pipelines;</p></li>
+<li><p><a class="reference external" href="https://github.com/datajuicer/data-juicer">Data-Juicer</a> for data processing pipelines;</p></li>
 <li><p><a class="reference external" href="https://github.com/agentscope-ai/agentscope">AgentScope</a> for agentic workflow;</p></li>
 <li><p><a class="reference external" href="https://github.com/ray-project/ray">Ray</a> for distributed systems;</p></li>
-<li><p>we have also drawn inspirations from RL frameworks like <a class="reference external" href="https://github.com/OpenRLHF/OpenRLHF">OpenRLHF</a>, <a class="reference external" href="https://github.com/huggingface/trl">TRL</a> and <a class="reference external" href="https://github.com/alibaba/ChatLearn">ChatLearn</a>;</p></li>
+<li><p>we have also drawn inspirations from RL frameworks like <a class="reference external" href="https://github.com/OpenRLHF/OpenRLHF">OpenRLHF</a>, <a class="reference external" href="https://github.com/huggingface/trl">TRL</a>, <a class="reference external" href="https://github.com/alibaba/ChatLearn">ChatLearn</a> and <a class="reference external" href="https://github.com/rllm-org/rllm">rLLM</a>;</p></li>
 <li><p>……</p></li>
 </ul>
 </section>

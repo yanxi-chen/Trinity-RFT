@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Data Processing &#8212; Trinity-RFT 0.4.1 documentation</title>
+    <title>Data Processing &#8212; Trinity-RFT 0.5.1 documentation</title>
   
   
   
@@ -36,7 +36,7 @@
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script src="../_static/documentation_options.js?v=a3cf13c8"></script>
+    <script src="../_static/documentation_options.js?v=5f152624"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
@@ -136,8 +136,8 @@
       
     
     
-    <img src="../_static/logo.svg" class="logo__image only-light" alt="Trinity-RFT 0.4.1 documentation - Home"/>
-    <script>document.write(`<img src="../_static/logo.svg" class="logo__image only-dark" alt="Trinity-RFT 0.4.1 documentation - Home"/>`);</script>
+    <img src="../_static/logo.svg" class="logo__image only-light" alt="Trinity-RFT 0.5.1 documentation - Home"/>
+    <script>document.write(`<img src="../_static/logo.svg" class="logo__image only-dark" alt="Trinity-RFT 0.5.1 documentation - Home"/>`);</script>
   
   
 </a></div>
@@ -299,6 +299,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.algorithm.advantage_fn.advantage_fn.html">trinity.algorithm.advantage_fn.advantage_fn module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.algorithm.advantage_fn.asymre_advantage.html">trinity.algorithm.advantage_fn.asymre_advantage module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.algorithm.advantage_fn.grpo_advantage.html">trinity.algorithm.advantage_fn.grpo_advantage module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.algorithm.advantage_fn.jsd_advantage.html">trinity.algorithm.advantage_fn.jsd_advantage module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.algorithm.advantage_fn.multi_step_grpo_advantage.html">trinity.algorithm.advantage_fn.multi_step_grpo_advantage module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.algorithm.advantage_fn.on_policy_distill_advantage.html">trinity.algorithm.advantage_fn.on_policy_distill_advantage module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.algorithm.advantage_fn.opmd_advantage.html">trinity.algorithm.advantage_fn.opmd_advantage module</a></li>
@@ -358,6 +359,7 @@
 </details></li>
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.manager.checkpoint_converter.html">trinity.manager.checkpoint_converter module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.manager.config_manager.html">trinity.manager.config_manager module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.manager.log_manager.html">trinity.manager.log_manager module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.manager.state_manager.html">trinity.manager.state_manager module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.manager.synchronizer.html">trinity.manager.synchronizer module</a></li>
 </ul>
@@ -371,6 +373,10 @@
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.common.models.utils.html">trinity.common.models.utils module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.common.models.vllm_model.html">trinity.common.models.vllm_model module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.common.models.vllm_worker.html">trinity.common.models.vllm_worker module</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../build_api/trinity.common.patch.html">trinity.common.patch package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.common.patch.kimi.html">trinity.common.patch.kimi module</a></li>
 </ul>
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../build_api/trinity.common.rewards.html">trinity.common.rewards package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -659,7 +665,7 @@ document.write(`
 <h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
 <p>Trinity-RFT provides a unified data processor to process the raw dataset and experiences for the task pipeline and the experience pipeline.</p>
 <ul class="simple">
-<li><p>For tasks, the data processing capabilities come from <a class="reference external" href="https://github.com/modelscope/data-juicer">Data-Juicer</a>. You can use data processing operators from Data-Juicer. The full list of Data-Juicer operators can be found <a class="reference external" href="https://agentscope-ai.github.io/data-juicer/en/main/docs/Operators.html">here</a></p></li>
+<li><p>For tasks, the data processing capabilities come from <a class="reference external" href="https://github.com/datajuicer/data-juicer">Data-Juicer</a>. You can use data processing operators from Data-Juicer. The full list of Data-Juicer operators can be found <a class="reference external" href="https://agentscope-ai.github.io/data-juicer/en/main/docs/Operators.html">here</a></p></li>
 <li><p>For experiences, in addition to Data-Juicer operators, Trinity-RFT provides several RFT-related operators and allows developers to implement their own operators.</p></li>
 </ul>
 <p>For implementing your own data processor, you can refer to this <a class="reference internal" href="#trinity_programming_guide.md#operators-for-data-developers"><span class="xref myst">document</span></a>.</p>
@@ -753,10 +759,10 @@ and store the base url and api key in the environment variables <code class="doc
 <p>As the overall framework of Trinity-RFT shows, the data processor is one of the high-level functions. Trinity-RFT also encapsulates the data processor as an independent service to avoid implicit dependency conflict issues.
 Thus you can prepare a split environment for it and start the server manually using the prepared scripts.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># prepare split environments, including the one of data processor</span>
-python<span class="w"> </span>scripts/install.py
+python<span class="w"> </span>scripts/data/install.py
 
 <span class="c1"># start all split servers</span>
-python<span class="w"> </span>scripts/start_servers.py
+python<span class="w"> </span>scripts/data/start_servers.py
 </pre></div>
 </div>
 <p>These scripts will create split environments for Trinity-RFT and Data-Juicer-based data processor.
@@ -840,7 +846,7 @@ It will watch the explorer output buffer. Once there is a new batch of experienc
 <section id="example-human-in-the-loop">
 <h2>Example: Human in the Loop<a class="headerlink" href="#example-human-in-the-loop" title="Link to this heading">#</a></h2>
 <p>Sometimes, you might need to involve human feedbacks for some raw data. In this example, you will learn how to annotate raw data to get a better dataset before training. This example takes an example Q&amp;A dataset and tries to select the chosen and rejected ones for DPO method.</p>
-<p>Before getting started, you need to prepare the main environment of Trinity-RFT according to the installation section of the README file, and <a class="reference external" href="https://github.com/modelscope/data-juicer/tree/main/tools/humanops">start a label-studio server</a> from Data-Juicer from source.</p>
+<p>Before getting started, you need to prepare the main environment of Trinity-RFT according to the installation section of the README file, and <a class="reference external" href="https://github.com/datajuicer/data-juicer/tree/main/tools/humanops">start a label-studio server</a> from Data-Juicer from source.</p>
 <p>In this example, we start the data processor server manually. Thus, you need to install the dependencies in the <code class="docutils literal notranslate"><span class="pre">data</span></code> split.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;.[data]&quot;</span>
 </pre></div>
@@ -886,7 +892,7 @@ It will watch the explorer output buffer. Once there is a new batch of experienc
 </div>
 <p>Here you can set the basic information for the example dataset and some other items about the input dataset, which is similar to the example above.</p>
 <p>The difference is that we use the data-juicer OP <code class="docutils literal notranslate"><span class="pre">human_preference_annotation_mapper</span></code> here. This OP helps you to annotate the data with human preference on a UI.</p>
-<p>You can set more config items for this OP (e.g. notification when annotation is finished). For more details, please refer to this <a class="reference external" href="https://github.com/modelscope/data-juicer/tree/main/configs/annotation">doc</a>.</p>
+<p>You can set more config items for this OP (e.g. notification when annotation is finished). For more details, please refer to this <a class="reference external" href="https://github.com/datajuicer/data-juicer/tree/main/configs/annotation">doc</a>.</p>
 <p>All config items in the <code class="docutils literal notranslate"><span class="pre">data_processor</span></code> section can be found <a class="reference internal" href="trinity_configs.html"><span class="std std-doc">here</span></a>. A prepared config file for this example can be found in <a class="reference external" href="https://github.com/agentscope-ai/Trinity-RFT/tree/main/examples/dpo_human_in_the_loop/dpo.yaml">the config file</a>.</p>
 </section>
 <section id="start-running">

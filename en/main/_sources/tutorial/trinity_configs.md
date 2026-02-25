@@ -72,6 +72,7 @@ project: Trinity-RFT
 name: example
 mode: both
 checkpoint_root_dir: ${oc.env:TRINITY_CHECKPOINT_ROOT_DIR,./checkpoints}   # TRINITY_CHECKPOINT_ROOT_DIR is an environment variable set in advance
+ignore_validator_suggestions: false
 ```
 
 - `project`: The name of the project.
@@ -81,9 +82,11 @@ checkpoint_root_dir: ${oc.env:TRINITY_CHECKPOINT_ROOT_DIR,./checkpoints}   # TRI
   - `train`: Only launches the trainer.
   - `explore`: Only launches the explorer.
   - `bench`: Used for benchmarking.
+  - `colocate`: Only for single GPU scenarios, launches both trainer and explorer on the same GPU.
 - `checkpoint_root_dir`: Root directory where all checkpoints and logs will be saved. Checkpoints for this experiment will be stored in `<checkpoint_root_dir>/<project>/<name>/`.
 - `continue_from_checkpoint`: If set to `true`, the experiment will continue from the latest checkpoint in the checkpoint path (if any); otherwise, it will rename the current experiment to `<name>_<timestamp>` and start a new experiment. Due to our decoupled design, during recovery from a checkpoint, we can only guarantee that the Trainer's model parameters and its optional auxiliary buffers (`auxiliary_buffers`) are restored to their latest checkpointed states, while the Explorer and Experience Buffer cannot be guaranteed to be restored to the same point in time.
 - `ray_namespace`: Namespace for the modules launched in the current experiment. If not specified, it will be set to `<project>/<name>`.
+- `ignore_validator_suggestions`: When set to `false` (the default), the config validator checks GPU memory usage and suggests configuration changes if needed. When set to `true`, the validator skips GPU memory usage check.
 
 ---
 
@@ -390,6 +393,8 @@ Controls the rollout models and workflow execution.
 explorer:
   name: explorer
   runner_per_model: 8
+  concurrent_mode: sequential
+  max_repeat_times_per_runner: null
   max_timeout: 900
   max_retry_times: 2
   env_vars: {}
@@ -414,6 +419,11 @@ explorer:
 
 - `name`: Name of the explorer. This name will be used as the Ray actor's name, so it must be unique.
 - `runner_per_model`: Number of parallel workflow runners per each rollout model.
+- `concurrent_mode`: Concurrency mode for executing a set of tasks (e.g., multiple repeats of a task in GRPO algorithm). Supported options:
+  - `sequential`: Executes tasks sequentially (default). One task is executed at a time, waiting for its completion before executing the next. This requires the least from the workflow implementation but has the worst throughput.
+  - `asynchronous`: Executes tasks asynchronously. All tasks are submitted at once, and results are collected as they complete. Requires the workflow to correctly implement asynchronous call interfaces and have no shared state between workflows to avoid race conditions. Throughput is better than sequential execution, but the performance depends on the workflow implementation.
+  - `multi-threading`: Executes tasks using multi-threading. Multiple tasks are executed simultaneously using threads. Requires the workflow implementation to be thread-safe to avoid race conditions. Throughput is usually better than sequential execution but may be lower than asynchronous execution, depending on the workflow implementation and system resources.
+- `max_repeat_times_per_runner`: Splits tasks that originally need to be repeated `algorithm.repeat_times` times into multiple subtasks, where each subtask's `repeat_times` does not exceed this value. This parameter is only applicable to GRPO-like algorithms. If not set, there is no limit on the number of repeats. It is recommended to use this parameter when `concurrent_mode` is `sequential` to reduce the end to end latency and improve throughput.
 - `max_timeout`: Maximum time (in seconds) for a workflow to complete.
 - `max_retry_times`: Maximum number of retries for a workflow.
 - `env_vars`: Environment variables to be set for every workflow runners.
@@ -455,7 +465,8 @@ synchronizer:
 - `sync_timeout`: Timeout duration for synchronization.
 - `sync_style`: Style of synchronization. Options:
   - `fixed`: The explorer and trainer synchronize weights every `sync_interval` steps.
-  - `dynamic_by_explorer`: The explorer notifies the trainer to synchronize weights after completing `sync_interval` steps, regardless of how many steps the trainer has completed at this point.
+  - `explorer_driven`: The explorer notifies the trainer to synchronize weights after completing `sync_interval` steps, regardless of how many steps the trainer has completed at this point.
+  - `trainer_driven`: The trainer notifies the explorer to synchronize weights after completing `sync_interval` steps, regardless of how many steps the explorer has completed at this point.
 
 ---
 

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Monitor Metrics Reference &#8212; Trinity-RFT 0.4.1 documentation</title>
+    <title>Monitor Metrics Reference &#8212; Trinity-RFT 0.5.1 documentation</title>
   
   
   
@@ -36,7 +36,7 @@
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script src="../_static/documentation_options.js?v=a3cf13c8"></script>
+    <script src="../_static/documentation_options.js?v=5f152624"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
@@ -136,8 +136,8 @@
       
     
     
-    <img src="../_static/logo.svg" class="logo__image only-light" alt="Trinity-RFT 0.4.1 documentation - Home"/>
-    <script>document.write(`<img src="../_static/logo.svg" class="logo__image only-dark" alt="Trinity-RFT 0.4.1 documentation - Home"/>`);</script>
+    <img src="../_static/logo.svg" class="logo__image only-light" alt="Trinity-RFT 0.5.1 documentation - Home"/>
+    <script>document.write(`<img src="../_static/logo.svg" class="logo__image only-dark" alt="Trinity-RFT 0.5.1 documentation - Home"/>`);</script>
   
   
 </a></div>
@@ -299,6 +299,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.algorithm.advantage_fn.advantage_fn.html">trinity.algorithm.advantage_fn.advantage_fn module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.algorithm.advantage_fn.asymre_advantage.html">trinity.algorithm.advantage_fn.asymre_advantage module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.algorithm.advantage_fn.grpo_advantage.html">trinity.algorithm.advantage_fn.grpo_advantage module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.algorithm.advantage_fn.jsd_advantage.html">trinity.algorithm.advantage_fn.jsd_advantage module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.algorithm.advantage_fn.multi_step_grpo_advantage.html">trinity.algorithm.advantage_fn.multi_step_grpo_advantage module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.algorithm.advantage_fn.on_policy_distill_advantage.html">trinity.algorithm.advantage_fn.on_policy_distill_advantage module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.algorithm.advantage_fn.opmd_advantage.html">trinity.algorithm.advantage_fn.opmd_advantage module</a></li>
@@ -358,6 +359,7 @@
 </details></li>
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.manager.checkpoint_converter.html">trinity.manager.checkpoint_converter module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.manager.config_manager.html">trinity.manager.config_manager module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.manager.log_manager.html">trinity.manager.log_manager module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.manager.state_manager.html">trinity.manager.state_manager module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.manager.synchronizer.html">trinity.manager.synchronizer module</a></li>
 </ul>
@@ -371,6 +373,10 @@
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.common.models.utils.html">trinity.common.models.utils module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.common.models.vllm_model.html">trinity.common.models.vllm_model module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.common.models.vllm_worker.html">trinity.common.models.vllm_worker module</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../build_api/trinity.common.patch.html">trinity.common.patch package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.common.patch.kimi.html">trinity.common.patch.kimi module</a></li>
 </ul>
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../build_api/trinity.common.rewards.html">trinity.common.rewards package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -686,6 +692,7 @@ document.write(`
 <p><strong>Metric Aggregation Process</strong>:</p>
 <p>Consider an exploration step with <code class="docutils literal notranslate"><span class="pre">batch_size</span></code> tasks, where each task has <code class="docutils literal notranslate"><span class="pre">repeat_times</span></code> runs. Rollout metrics (e.g., <code class="docutils literal notranslate"><span class="pre">rollout/</span></code>) are computed and aggregated at different levels:</p>
 <ul class="simple">
+<li><p>From <em>experiences</em> to <em>run level</em> (only effective for workflows with <code class="docutils literal notranslate"><span class="pre">can_repeat=False</span></code>): In <code class="docutils literal notranslate"><span class="pre">calculate_run_level_metrics</span></code> function, metrics are aggregated across all experiences generated by each run. This usually accounts for the general multi-turn workflow scenario where a single run may produce multiple experiences.</p></li>
 <li><p>From <em>run level</em> to <em>task level</em>: In <code class="docutils literal notranslate"><span class="pre">calculate_task_level_metrics</span></code> function, metrics are aggregated across <code class="docutils literal notranslate"><span class="pre">repeat_times</span></code> runs of the same task. For example, <code class="docutils literal notranslate"><span class="pre">rollout/accuracy</span></code> is the average accuracy of all runs of the task.</p></li>
 <li><p>From <em>task level</em> to <em>step level</em>: In <code class="docutils literal notranslate"><span class="pre">gather_metrics</span></code> function, metrics are aggregated across all tasks in the step. For example, <code class="docutils literal notranslate"><span class="pre">rollout/accuracy/mean</span></code>, <code class="docutils literal notranslate"><span class="pre">rollout/accuracy/max</span></code>, <code class="docutils literal notranslate"><span class="pre">rollout/accuracy/min</span></code> are the average, max, and min accuracy (<code class="docutils literal notranslate"><span class="pre">rollout/accuracy</span></code>) of all tasks in the step.</p></li>
 </ul>
@@ -740,6 +747,7 @@ document.write(`
 <p><strong>Metric Aggregation Process</strong>:</p>
 <p>Consider an evaluation step with <code class="docutils literal notranslate"><span class="pre">len(eval_taskset)</span></code> tasks, where each task has <code class="docutils literal notranslate"><span class="pre">repeat_times</span></code> runs. Evaluation metrics (e.g., <code class="docutils literal notranslate"><span class="pre">eval/</span></code>, <code class="docutils literal notranslate"><span class="pre">bench/</span></code>) are computed and aggregated at different levels:</p>
 <ul class="simple">
+<li><p>From <em>experiences</em> to <em>run level</em> (only effective for workflows with <code class="docutils literal notranslate"><span class="pre">can_repeat=False</span></code>): In <code class="docutils literal notranslate"><span class="pre">calculate_run_level_metrics</span></code> function, metrics are aggregated across all experiences generated by each run. This usually accounts for the general multi-turn workflow scenario where a single run may produce multiple experiences.</p></li>
 <li><p>From <em>run level</em> to <em>task level</em>: In <code class="docutils literal notranslate"><span class="pre">calculate_task_level_metrics</span></code> function, metrics are aggregated across <code class="docutils literal notranslate"><span class="pre">repeat_times</span></code> runs of the same task. For example, <code class="docutils literal notranslate"><span class="pre">eval/dummy/accuracy/mean&#64;2</span></code> is the average accuracy of all runs of the task.</p></li>
 <li><p>From <em>task level</em> to <em>step level</em>: In <code class="docutils literal notranslate"><span class="pre">gather_eval_metrics</span></code> function, metrics are aggregated across all tasks in the step. For example, <code class="docutils literal notranslate"><span class="pre">eval/dummy/accuracy/mean&#64;2</span></code>, <code class="docutils literal notranslate"><span class="pre">eval/dummy/accuracy/std&#64;2</span></code>, <code class="docutils literal notranslate"><span class="pre">eval/dummy/accuracy/best&#64;2</span></code>, <code class="docutils literal notranslate"><span class="pre">eval/dummy/accuracy/worst&#64;2</span></code> are the average, std, best, and worst accuracy (<code class="docutils literal notranslate"><span class="pre">eval/dummy/accuracy</span></code>) of all tasks in the step.</p></li>
 </ul>

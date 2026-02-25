@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Workflow Development Guide &#8212; Trinity-RFT 0.4.1 documentation</title>
+    <title>Workflow Development Guide &#8212; Trinity-RFT 0.5.1 documentation</title>
   
   
   
@@ -36,7 +36,7 @@
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script src="../_static/documentation_options.js?v=a3cf13c8"></script>
+    <script src="../_static/documentation_options.js?v=5f152624"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
@@ -571,8 +571,8 @@ window.addEventListener("load", load);</script>
       
     
     
-    <img src="../_static/logo.svg" class="logo__image only-light" alt="Trinity-RFT 0.4.1 documentation - Home"/>
-    <script>document.write(`<img src="../_static/logo.svg" class="logo__image only-dark" alt="Trinity-RFT 0.4.1 documentation - Home"/>`);</script>
+    <img src="../_static/logo.svg" class="logo__image only-light" alt="Trinity-RFT 0.5.1 documentation - Home"/>
+    <script>document.write(`<img src="../_static/logo.svg" class="logo__image only-dark" alt="Trinity-RFT 0.5.1 documentation - Home"/>`);</script>
   
   
 </a></div>
@@ -734,6 +734,7 @@ window.addEventListener("load", load);</script>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.algorithm.advantage_fn.advantage_fn.html">trinity.algorithm.advantage_fn.advantage_fn module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.algorithm.advantage_fn.asymre_advantage.html">trinity.algorithm.advantage_fn.asymre_advantage module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.algorithm.advantage_fn.grpo_advantage.html">trinity.algorithm.advantage_fn.grpo_advantage module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.algorithm.advantage_fn.jsd_advantage.html">trinity.algorithm.advantage_fn.jsd_advantage module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.algorithm.advantage_fn.multi_step_grpo_advantage.html">trinity.algorithm.advantage_fn.multi_step_grpo_advantage module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.algorithm.advantage_fn.on_policy_distill_advantage.html">trinity.algorithm.advantage_fn.on_policy_distill_advantage module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.algorithm.advantage_fn.opmd_advantage.html">trinity.algorithm.advantage_fn.opmd_advantage module</a></li>
@@ -793,6 +794,7 @@ window.addEventListener("load", load);</script>
 </details></li>
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.manager.checkpoint_converter.html">trinity.manager.checkpoint_converter module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.manager.config_manager.html">trinity.manager.config_manager module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.manager.log_manager.html">trinity.manager.log_manager module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.manager.state_manager.html">trinity.manager.state_manager module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.manager.synchronizer.html">trinity.manager.synchronizer module</a></li>
 </ul>
@@ -806,6 +808,10 @@ window.addEventListener("load", load);</script>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.common.models.utils.html">trinity.common.models.utils module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.common.models.vllm_model.html">trinity.common.models.vllm_model module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.common.models.vllm_worker.html">trinity.common.models.vllm_worker module</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../build_api/trinity.common.patch.html">trinity.common.patch package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.common.patch.kimi.html">trinity.common.patch.kimi module</a></li>
 </ul>
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../build_api/trinity.common.rewards.html">trinity.common.rewards package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -1080,6 +1086,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-openai-api">Using OpenAI API</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#llm-as-a-judge-support">LLM-as-a-judge Support</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#debug-mode">Debug Mode</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#runtime-monitoring">Runtime Monitoring</a></li>
 </ul>
 </li>
 </ul>
@@ -1185,6 +1192,7 @@ To handle differences in <code class="docutils literal notranslate"><span class=
         <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">auxiliary_model_wrappers</span> <span class="o">=</span> <span class="n">auxiliary_models</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">auxiliary_models</span> <span class="o">=</span> <span class="o">...</span>  <span class="c1"># OpenAI clients auto-derived from ModelWrapper</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="n">get_logger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>  <span class="c1"># built-in logger for runtime monitoring</span>
 
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Experience</span><span class="p">]:</span>
@@ -1570,6 +1578,44 @@ For this case, you can implement the <code class="docutils literal notranslate">
 Note that the viewer reads experiences from the <code class="docutils literal notranslate"><span class="pre">experiences.db</span></code> file in the specified output directory, so ensure that you have successfully run the workflow debug command beforehand and use the same output directory.</p>
 <p>When debugging is complete, you can terminate the inference model by pressing <code class="docutils literal notranslate"><span class="pre">Ctrl+C</span></code> in its terminal.</p>
 </section>
+<section id="runtime-monitoring">
+<h3>Runtime Monitoring<a class="headerlink" href="#runtime-monitoring" title="Link to this heading">#</a></h3>
+<p>The debug mode above provides the ability to quickly test and validate workflow implementations. However, during actual training, you may want to monitor the workflow’s runtime behavior in real-time to ensure it operates as expected. To facilitate this, Trinity-RFT offers monitoring capabilities based on the logger system. The base <code class="docutils literal notranslate"><span class="pre">Workflow</span></code> class includes a built-in <code class="docutils literal notranslate"><span class="pre">logger</span></code> that you can use to log important runtime information.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Workflow</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">task</span><span class="p">:</span> <span class="n">Task</span><span class="p">,</span>
+        <span class="n">model</span><span class="p">:</span> <span class="n">ModelWrapper</span><span class="p">,</span>
+        <span class="n">auxiliary_models</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">ModelWrapper</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="c1"># ...</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="n">get_logger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>  <span class="c1"># built-in logger for runtime monitoring</span>
+</pre></div>
+</div>
+<p>Different from standard Python loggers, this built-in logger is configured to output logs to both the console and a file under the <code class="docutils literal notranslate"><span class="pre">&lt;checkpoint_root_dir&gt;/&lt;project&gt;/&lt;name&gt;/log</span></code> directory. This allows you to monitor the workflow’s runtime status during training conveniently. All workflow subclasses inherit this logger, so you can directly use it in your custom workflow implementations with <code class="docutils literal notranslate"><span class="pre">self.logger</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ExampleWorkflow</span><span class="p">(</span><span class="n">Workflow</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Experience</span><span class="p">]:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Starting workflow for task: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">task</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="c1"># your workflow logic</span>
+        <span class="k">if</span> <span class="n">some_error_condition</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;An error occurred during workflow execution.&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Completed workflow for task: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">task</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">experiences</span>
+</pre></div>
+</div>
+<p>Trinity-RFT will automatically create a group of workflow runners to execute the workflows in parallel during training.
+Each runner will log its output to a separate log file. The log file naming convention is <code class="docutils literal notranslate"><span class="pre">explorer_runner_&lt;runner_id&gt;.log</span></code>, where <code class="docutils literal notranslate"><span class="pre">&lt;runner_id&gt;</span></code> is the unique identifier of the workflow runner. Such design allows you to trace the execution of each workflow runner independently. And the log files are organized as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&lt;checkpoint_root_dir&gt;/&lt;project&gt;/&lt;name&gt;/log/
+    ├── explorer_runner_0.log
+    ├── explorer_runner_1.log
+    ├── explorer_runner_2.log
+    └── ...
+</pre></div>
+</div>
+<p>Trinity-RFT also provide a convenient command <code class="docutils literal notranslate"><span class="pre">log</span></code> to view these logs in real-time. You can use <code class="docutils literal notranslate"><span class="pre">trinity</span> <span class="pre">log</span> <span class="pre">--log-dir</span> <span class="pre">/path/to/log/dir</span> <span class="pre">-k</span> <span class="pre">explorer_runner</span></code> command to filter and view the logs of all runners at once or use <code class="docutils literal notranslate"><span class="pre">trinity</span> <span class="pre">log</span> <span class="pre">--log-dir</span> <span class="pre">/path/to/log/dir</span> <span class="pre">-k</span> <span class="pre">explorer_runner_0</span></code> to view the logs of a specific runner. If you encounter errors or blocking issues during training, you can check the corresponding log files for detailed information to help diagnose and resolve the problems.</p>
+</section>
 </section>
 </section>
 
@@ -1638,6 +1684,7 @@ Note that the viewer reads experiences from the <code class="docutils literal no
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-openai-api">Using OpenAI API</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#llm-as-a-judge-support">LLM-as-a-judge Support</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#debug-mode">Debug Mode</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#runtime-monitoring">Runtime Monitoring</a></li>
 </ul>
 </li>
 </ul>
