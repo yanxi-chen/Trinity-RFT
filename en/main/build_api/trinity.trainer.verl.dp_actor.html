@@ -41,6 +41,7 @@
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'build_api/trinity.trainer.verl.dp_actor';</script>
+    <link rel="icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="trinity.trainer.verl.fsdp_checkpoint_manager module" href="trinity.trainer.verl.fsdp_checkpoint_manager.html" />
@@ -276,6 +277,7 @@
 </details></li>
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="trinity.trainer.html">trinity.trainer package</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l3 has-children"><a class="reference internal" href="trinity.trainer.tinker.html">trinity.trainer.tinker package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="trinity.trainer.tinker.tinker_trainer.html">trinity.trainer.tinker.tinker_trainer module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.trainer.tinker.utils.html">trinity.trainer.tinker.utils module</a></li>
 </ul>
 </details></li>
@@ -286,18 +288,21 @@
 <li class="toctree-l4"><a class="reference internal" href="trinity.trainer.verl.megatron_actor.html">trinity.trainer.verl.megatron_actor module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.trainer.verl.megatron_checkpoint_manager.html">trinity.trainer.verl.megatron_checkpoint_manager module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.trainer.verl.megatron_workers.html">trinity.trainer.verl.megatron_workers module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.trainer.verl.monkey_patch.html">trinity.trainer.verl.monkey_patch module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.trainer.verl.utils.html">trinity.trainer.verl.utils module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.trainer.verl.verl_config.html">trinity.trainer.verl.verl_config module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.trainer.verl.verl_trainer.html">trinity.trainer.verl.verl_trainer module</a></li>
 </ul>
 </details></li>
-<li class="toctree-l3"><a class="reference internal" href="trinity.trainer.tinker_trainer.html">trinity.trainer.tinker_trainer module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.trainer.trainer.html">trinity.trainer.trainer module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="trinity.trainer.verl_trainer.html">trinity.trainer.verl_trainer module</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="trinity.algorithm.html">trinity.algorithm package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3 has-children"><a class="reference internal" href="trinity.algorithm.advantage_fn.html">trinity.algorithm.advantage_fn package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="trinity.algorithm.advantage_fn.advantage_fn.html">trinity.algorithm.advantage_fn.advantage_fn module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.algorithm.advantage_fn.asymre_advantage.html">trinity.algorithm.advantage_fn.asymre_advantage module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.algorithm.advantage_fn.clipb_advantage.html">trinity.algorithm.advantage_fn.clipb_advantage module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.algorithm.advantage_fn.clipv_advantage.html">trinity.algorithm.advantage_fn.clipv_advantage module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.algorithm.advantage_fn.grpo_advantage.html">trinity.algorithm.advantage_fn.grpo_advantage module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.algorithm.advantage_fn.jsd_advantage.html">trinity.algorithm.advantage_fn.jsd_advantage module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.algorithm.advantage_fn.multi_step_grpo_advantage.html">trinity.algorithm.advantage_fn.multi_step_grpo_advantage module</a></li>
@@ -376,6 +381,7 @@
 </ul>
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="trinity.common.patch.html">trinity.common.patch package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.patch.glm4v.html">trinity.common.patch.glm4v module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.patch.kimi.html">trinity.common.patch.kimi module</a></li>
 </ul>
 </details></li>
@@ -415,7 +421,6 @@
 <li class="toctree-l3"><a class="reference internal" href="trinity.common.config_validator.html">trinity.common.config_validator module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.common.constants.html">trinity.common.constants module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.common.experience.html">trinity.common.experience module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="trinity.common.verl_config.html">trinity.common.verl_config module</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="trinity.utils.html">trinity.utils package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -635,6 +640,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.trainer.verl.dp_actor.DataParallelPPOActor.__init__"><code class="docutils literal notranslate"><span class="pre">DataParallelPPOActor.__init__()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.trainer.verl.dp_actor.DataParallelPPOActor.set_algorithm"><code class="docutils literal notranslate"><span class="pre">DataParallelPPOActor.set_algorithm()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.trainer.verl.dp_actor.DataParallelPPOActor.update_policy"><code class="docutils literal notranslate"><span class="pre">DataParallelPPOActor.update_policy()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.trainer.verl.dp_actor.DataParallelPPOActor.compute_log_prob"><code class="docutils literal notranslate"><span class="pre">DataParallelPPOActor.compute_log_prob()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -682,6 +688,24 @@ such as <code class="docutils literal notranslate"><span class="pre">`loss`</spa
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="trinity.trainer.verl.dp_actor.DataParallelPPOActor.compute_log_prob">
+<span class="sig-name descname"><span class="pre">compute_log_prob</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#trinity.trainer.verl.dp_actor.DataParallelPPOActor.compute_log_prob" title="Link to this definition">#</a></dt>
+<dd><p>Compute logits given a batch of data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>DataProto</em>) – a batch of data represented by DataProto. It must contain key <code class="docutils literal notranslate"><span class="pre">`input_ids`</span></code>,
+<code class="docutils literal notranslate"><span class="pre">`attention_mask`</span></code> and <code class="docutils literal notranslate"><span class="pre">`position_ids`</span></code>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>a DataProto containing the key <code class="docutils literal notranslate"><span class="pre">`log_probs`</span></code></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>DataProto</p>
 </dd>
 </dl>
 </dd></dl>
@@ -739,6 +763,7 @@ such as <code class="docutils literal notranslate"><span class="pre">`loss`</spa
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.trainer.verl.dp_actor.DataParallelPPOActor.__init__"><code class="docutils literal notranslate"><span class="pre">DataParallelPPOActor.__init__()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.trainer.verl.dp_actor.DataParallelPPOActor.set_algorithm"><code class="docutils literal notranslate"><span class="pre">DataParallelPPOActor.set_algorithm()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.trainer.verl.dp_actor.DataParallelPPOActor.update_policy"><code class="docutils literal notranslate"><span class="pre">DataParallelPPOActor.update_policy()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.trainer.verl.dp_actor.DataParallelPPOActor.compute_log_prob"><code class="docutils literal notranslate"><span class="pre">DataParallelPPOActor.compute_log_prob()</span></code></a></li>
 </ul>
 </li>
 </ul>

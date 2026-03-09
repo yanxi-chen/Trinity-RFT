@@ -474,7 +474,8 @@ mermaid.initialize(
     }
 );
 
-window.addEventListener("load", load);</script>
+window.addEventListener("load", load);
+window.runMermaid = runMermaid;</script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/trinity/algorithm/algorithm';</script>
     <link rel="index" title="索引" href="../../../genindex.html" />
     <link rel="search" title="搜索" href="../../../search.html" />
@@ -711,6 +712,7 @@ window.addEventListener("load", load);</script>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../../build_api/trinity.trainer.html">trinity.trainer package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../../../build_api/trinity.trainer.tinker.html">trinity.trainer.tinker package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.trainer.tinker.tinker_trainer.html">trinity.trainer.tinker.tinker_trainer module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.trainer.tinker.utils.html">trinity.trainer.tinker.utils module</a></li>
 </ul>
 </details></li>
@@ -721,18 +723,21 @@ window.addEventListener("load", load);</script>
 <li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.trainer.verl.megatron_actor.html">trinity.trainer.verl.megatron_actor module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.trainer.verl.megatron_checkpoint_manager.html">trinity.trainer.verl.megatron_checkpoint_manager module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.trainer.verl.megatron_workers.html">trinity.trainer.verl.megatron_workers module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.trainer.verl.monkey_patch.html">trinity.trainer.verl.monkey_patch module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.trainer.verl.utils.html">trinity.trainer.verl.utils module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.trainer.verl.verl_config.html">trinity.trainer.verl.verl_config module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.trainer.verl.verl_trainer.html">trinity.trainer.verl.verl_trainer module</a></li>
 </ul>
 </details></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../build_api/trinity.trainer.tinker_trainer.html">trinity.trainer.tinker_trainer module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../build_api/trinity.trainer.trainer.html">trinity.trainer.trainer module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../build_api/trinity.trainer.verl_trainer.html">trinity.trainer.verl_trainer module</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../../build_api/trinity.algorithm.html">trinity.algorithm package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../../../build_api/trinity.algorithm.advantage_fn.html">trinity.algorithm.advantage_fn package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.algorithm.advantage_fn.advantage_fn.html">trinity.algorithm.advantage_fn.advantage_fn module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.algorithm.advantage_fn.asymre_advantage.html">trinity.algorithm.advantage_fn.asymre_advantage module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.algorithm.advantage_fn.clipb_advantage.html">trinity.algorithm.advantage_fn.clipb_advantage module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.algorithm.advantage_fn.clipv_advantage.html">trinity.algorithm.advantage_fn.clipv_advantage module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.algorithm.advantage_fn.grpo_advantage.html">trinity.algorithm.advantage_fn.grpo_advantage module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.algorithm.advantage_fn.jsd_advantage.html">trinity.algorithm.advantage_fn.jsd_advantage module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.algorithm.advantage_fn.multi_step_grpo_advantage.html">trinity.algorithm.advantage_fn.multi_step_grpo_advantage module</a></li>
@@ -811,6 +816,7 @@ window.addEventListener("load", load);</script>
 </ul>
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../../../build_api/trinity.common.patch.html">trinity.common.patch package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.common.patch.glm4v.html">trinity.common.patch.glm4v module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.common.patch.kimi.html">trinity.common.patch.kimi module</a></li>
 </ul>
 </details></li>
@@ -850,7 +856,6 @@ window.addEventListener("load", load);</script>
 <li class="toctree-l3"><a class="reference internal" href="../../../build_api/trinity.common.config_validator.html">trinity.common.config_validator module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../build_api/trinity.common.constants.html">trinity.common.constants module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../build_api/trinity.common.experience.html">trinity.common.experience module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../build_api/trinity.common.verl_config.html">trinity.common.verl_config module</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../../build_api/trinity.utils.html">trinity.utils package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -1701,6 +1706,34 @@ document.write(`
             <span class="s2">&quot;kl_penalty_fn&quot;</span><span class="p">:</span> <span class="s2">&quot;none&quot;</span><span class="p">,</span>
             <span class="s2">&quot;kl_loss_fn&quot;</span><span class="p">:</span> <span class="s2">&quot;none&quot;</span><span class="p">,</span>
             <span class="s2">&quot;entropy_loss_fn&quot;</span><span class="p">:</span> <span class="s2">&quot;none&quot;</span><span class="p">,</span>
+        <span class="p">}</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="GRPOverlAlgorithm">
+<a class="viewcode-back" href="../../../build_api/trinity.algorithm.algorithm.html#trinity.algorithm.GRPOverlAlgorithm">[文档]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">GRPOverlAlgorithm</span><span class="p">(</span><span class="n">AlgorithmType</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;GRPO algorithm, but advantage computation is done in trainer.&quot;&quot;&quot;</span>
+
+    <span class="n">use_critic</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">use_reference</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">compute_advantage_in_trainer</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">can_balance_batch</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">schema</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;experience&quot;</span>
+
+<div class="viewcode-block" id="GRPOverlAlgorithm.default_config">
+<a class="viewcode-back" href="../../../build_api/trinity.algorithm.algorithm.html#trinity.algorithm.GRPOverlAlgorithm.default_config">[文档]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">default_config</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;repeat_times&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="s2">&quot;advantage_fn&quot;</span><span class="p">:</span> <span class="s2">&quot;grpo&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;sample_strategy&quot;</span><span class="p">:</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;policy_loss_fn&quot;</span><span class="p">:</span> <span class="s2">&quot;ppo&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;kl_penalty_fn&quot;</span><span class="p">:</span> <span class="s2">&quot;none&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;kl_loss_fn&quot;</span><span class="p">:</span> <span class="s2">&quot;k2&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;entropy_loss_fn&quot;</span><span class="p">:</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
         <span class="p">}</span></div>
 </div>
 

@@ -473,8 +473,10 @@ mermaid.initialize(
     }
 );
 
-window.addEventListener("load", load);</script>
+window.addEventListener("load", load);
+window.runMermaid = runMermaid;</script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/trinity/algorithm/kl_fn/kl_fn';</script>
+    <link rel="icon" href="../../../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -710,6 +712,7 @@ window.addEventListener("load", load);</script>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../../../build_api/trinity.trainer.html">trinity.trainer package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../../../../build_api/trinity.trainer.tinker.html">trinity.trainer.tinker package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../build_api/trinity.trainer.tinker.tinker_trainer.html">trinity.trainer.tinker.tinker_trainer module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../../build_api/trinity.trainer.tinker.utils.html">trinity.trainer.tinker.utils module</a></li>
 </ul>
 </details></li>
@@ -720,18 +723,21 @@ window.addEventListener("load", load);</script>
 <li class="toctree-l4"><a class="reference internal" href="../../../../build_api/trinity.trainer.verl.megatron_actor.html">trinity.trainer.verl.megatron_actor module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../../build_api/trinity.trainer.verl.megatron_checkpoint_manager.html">trinity.trainer.verl.megatron_checkpoint_manager module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../../build_api/trinity.trainer.verl.megatron_workers.html">trinity.trainer.verl.megatron_workers module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../build_api/trinity.trainer.verl.monkey_patch.html">trinity.trainer.verl.monkey_patch module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../../build_api/trinity.trainer.verl.utils.html">trinity.trainer.verl.utils module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../build_api/trinity.trainer.verl.verl_config.html">trinity.trainer.verl.verl_config module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../build_api/trinity.trainer.verl.verl_trainer.html">trinity.trainer.verl.verl_trainer module</a></li>
 </ul>
 </details></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../../build_api/trinity.trainer.tinker_trainer.html">trinity.trainer.tinker_trainer module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../../build_api/trinity.trainer.trainer.html">trinity.trainer.trainer module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../../build_api/trinity.trainer.verl_trainer.html">trinity.trainer.verl_trainer module</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../../../build_api/trinity.algorithm.html">trinity.algorithm package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../../../../build_api/trinity.algorithm.advantage_fn.html">trinity.algorithm.advantage_fn package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="../../../../build_api/trinity.algorithm.advantage_fn.advantage_fn.html">trinity.algorithm.advantage_fn.advantage_fn module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../../build_api/trinity.algorithm.advantage_fn.asymre_advantage.html">trinity.algorithm.advantage_fn.asymre_advantage module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../build_api/trinity.algorithm.advantage_fn.clipb_advantage.html">trinity.algorithm.advantage_fn.clipb_advantage module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../build_api/trinity.algorithm.advantage_fn.clipv_advantage.html">trinity.algorithm.advantage_fn.clipv_advantage module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../../build_api/trinity.algorithm.advantage_fn.grpo_advantage.html">trinity.algorithm.advantage_fn.grpo_advantage module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../../build_api/trinity.algorithm.advantage_fn.jsd_advantage.html">trinity.algorithm.advantage_fn.jsd_advantage module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../../build_api/trinity.algorithm.advantage_fn.multi_step_grpo_advantage.html">trinity.algorithm.advantage_fn.multi_step_grpo_advantage module</a></li>
@@ -810,6 +816,7 @@ window.addEventListener("load", load);</script>
 </ul>
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../../../../build_api/trinity.common.patch.html">trinity.common.patch package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../build_api/trinity.common.patch.glm4v.html">trinity.common.patch.glm4v module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../../build_api/trinity.common.patch.kimi.html">trinity.common.patch.kimi module</a></li>
 </ul>
 </details></li>
@@ -849,7 +856,6 @@ window.addEventListener("load", load);</script>
 <li class="toctree-l3"><a class="reference internal" href="../../../../build_api/trinity.common.config_validator.html">trinity.common.config_validator module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../../build_api/trinity.common.constants.html">trinity.common.constants module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../../build_api/trinity.common.experience.html">trinity.common.experience module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../../build_api/trinity.common.verl_config.html">trinity.common.verl_config module</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../../../build_api/trinity.utils.html">trinity.utils package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
