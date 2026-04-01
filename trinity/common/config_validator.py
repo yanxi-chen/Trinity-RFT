@@ -591,7 +591,7 @@ class ExplorerConfigValidator(ConfigValidator):
             "enable_prompt_truncation",
         ]
         rope_args = ["rope_scaling", "rope_theta"]
-        model_args = rollout_args + length_args + rope_args
+        model_args = rollout_args + length_args + rope_args + ["enable_thinking"]
 
         # rollout model
         for args in model_args + ["model_path", "trust_remote_code"]:
@@ -767,7 +767,7 @@ class IntervalConfigValidator(ConfigValidator):
         """
         assert config.synchronizer.sync_interval > 0, "`sync_interval` must be positive."
 
-        if config.mode != "bench" and config.algorithm.algorithm_type != "dpo":  # TODO
+        if config.mode != "bench" and config.algorithm.algorithm_type not in {"dpo", "sft"}:  # TODO
             # check eval_interval
             if config.explorer.eval_interval % config.synchronizer.sync_interval != 0:
                 config.explorer.eval_interval = (
@@ -930,10 +930,16 @@ class BufferConfigValidator(ConfigValidator):
             _fill_taskset_config(taskset, i)
 
             # check if selector is supported
-            selector = SELECTORS.get(taskset.task_selector.selector_type)
+            if taskset.task_selector is not None:
+                taskset.data_selector = taskset.task_selector  # for backward compatibility
+                self.logger.warning(
+                    "[DEPRECATED] Please use `data_selector` instead of `task_selector`."
+                )
+            selector = SELECTORS.get(taskset.data_selector.selector_type)
             if selector is None:
                 raise ValueError(
-                    f"Selector {taskset.task_selector.selector_type} is not supported."
+                    f"Selector `{taskset.data_selector.selector_type}` "
+                    f"in {taskset.name} is not supported."
                 )
 
         for idx, taskset in enumerate(explorer_input.eval_tasksets):
@@ -998,6 +1004,7 @@ class BufferConfigValidator(ConfigValidator):
         experience_buffer.tokenizer_path = config.model.model_path
         set_if_none(experience_buffer, "ray_namespace", config.ray_namespace)
         set_if_none(experience_buffer.format, "chat_template", config.model.custom_chat_template)
+        set_if_none(experience_buffer.format, "enable_thinking", config.model.enable_thinking)
         for aux_name, aux_buffer in trainer_input.auxiliary_buffers.items():
             aux_buffer.batch_size = config.buffer.train_batch_size
             aux_buffer.tokenizer_path = config.model.model_path
@@ -1007,6 +1014,16 @@ class BufferConfigValidator(ConfigValidator):
                     f"`buffer.trainer_input.auxiliary_buffers[{aux_name}].path` is required, "
                     f"please set it to the path of the auxiliary buffer."
                 )
+
+        from trinity.buffer.selector import SELECTORS
+
+        # check if selector is supported
+        selector = SELECTORS.get(experience_buffer.data_selector.selector_type)
+        if selector is None:
+            raise ValueError(
+                f"Selector {experience_buffer.data_selector.selector_type} "
+                "in `experience_buffer` is not supported."
+            )
 
         if config.mode == "train":
             assert (

@@ -70,6 +70,7 @@ class FormatConfig:
 
     # for sft / dpo, if None, use model.custom_chat_template
     chat_template: Optional[str] = None
+    enable_thinking: Optional[bool] = None
 
 
 @dataclass
@@ -89,7 +90,7 @@ class OptimizerConfig:
     lr: float = 1e-6
     lr_warmup_steps: int = -1
     lr_warmup_steps_ratio: float = 0.0
-    min_lr_ratio: float = 0.0
+    min_lr_ratio: float = 0.01
     warmup_style: Optional[str] = None  # deprecated !
     lr_scheduler_type: str = "constant"
     optimizer_type: str = "adam"
@@ -115,7 +116,7 @@ class LoRAConfig:
 
 @Experimental
 @dataclass
-class TaskSelectorConfig:
+class DataSelectorConfig:
     """Data selector config."""
 
     selector_type: Optional[str] = "sequential"
@@ -190,7 +191,7 @@ class StorageConfig:
     rollout_args: GenerationConfig = field(default_factory=GenerationConfig)
     workflow_args: dict = field(default_factory=dict)
     reward_fn_args: dict = field(default_factory=dict)
-    task_selector: TaskSelectorConfig = field(default_factory=TaskSelectorConfig)
+    data_selector: DataSelectorConfig = field(default_factory=DataSelectorConfig)
 
     # enable progress bar (tqdm) for _HFBatchReader
     enable_progress_bar: Optional[bool] = False
@@ -231,7 +232,8 @@ class TasksetConfig:
     rollout_args: GenerationConfig = field(default_factory=GenerationConfig)
     workflow_args: dict = field(default_factory=dict)
     reward_fn_args: dict = field(default_factory=dict)
-    task_selector: TaskSelectorConfig = field(default_factory=TaskSelectorConfig)
+    task_selector: Optional[DataSelectorConfig] = None  # deprecated, use `data_selector` instead
+    data_selector: DataSelectorConfig = field(default_factory=DataSelectorConfig)
 
     # used for StorageType.FILE
     split: str = "train"
@@ -264,7 +266,7 @@ class TasksetConfig:
             name=self.name,
             storage_type=self.storage_type,
             path=self.path,
-            task_selector=self.task_selector,
+            data_selector=self.data_selector,
             repeat_times=self.repeat_times,
             split=self.split,
             subset_name=self.subset_name,
@@ -309,6 +311,7 @@ class ExperienceBufferConfig:
     subset_name: Optional[str] = None
     format: FormatConfig = field(default_factory=FormatConfig)
     enable_progress_bar: Optional[bool] = False
+    data_selector: DataSelectorConfig = field(default_factory=DataSelectorConfig)
 
     # ! DO NOT SET, automatically set
     schema_type: Optional[str] = None
@@ -330,6 +333,7 @@ class ExperienceBufferConfig:
             name=self.name,
             storage_type=self.storage_type,
             path=self.path,
+            data_selector=self.data_selector,
             capacity=self.capacity,
             max_read_timeout=self.max_read_timeout,
             replay_buffer=self.replay_buffer,
@@ -473,6 +477,7 @@ class ModelConfig:
     enable_prompt_truncation: bool = True
     # repetition penalty for response generation
     repetition_penalty: float = 1.0
+    enable_thinking: Optional[bool] = None
 
     # lora config
     lora_configs: Optional[List[LoRAConfig]] = None
