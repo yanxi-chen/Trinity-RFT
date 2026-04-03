@@ -15,30 +15,33 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-
-  
-  <link href="../../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+  <link href="../../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
-    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
   
+  <!-- So that users can add custom icons -->
+  <script src="../../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
-<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
-  <script src="../../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="../../../../_static/documentation_options.js?v=c79d47ac"></script>
     <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../../../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
     <script src="../../../../_static/translations.js?v=beaddf03"></script>
     <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
     <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";
@@ -481,6 +484,7 @@ window.runMermaid = runMermaid;</script>
     <link rel="search" title="搜索" href="../../../../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="zh-CN"/>
+  <meta name="docsearch:version" content="0.5.1" />
   </head>
   
   
@@ -488,27 +492,16 @@ window.runMermaid = runMermaid;</script>
 
   
   
-  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">跳转至主要内容</a></div>
   
   <div id="pst-scroll-pixel-helper"></div>
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+    <i class="fa-solid fa-arrow-up"></i>回到顶部</button>
 
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="../../../../search.html"
       method="get">
@@ -516,7 +509,6 @@ window.runMermaid = runMermaid;</script>
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search..."
          aria-label="Search..."
          autocomplete="off"
@@ -524,11 +516,11 @@ window.runMermaid = runMermaid;</script>
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
 
   <div class="pst-async-banner-revealer d-none">
-  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="版本警告"></aside>
 </div>
 
   
@@ -543,7 +535,8 @@ window.runMermaid = runMermaid;</script>
       
         
       
-      <div class="bd-sidebar-primary bd-sidebar">
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -573,7 +566,7 @@ window.runMermaid = runMermaid;</script>
     
     
     <img src="../../../../_static/logo.svg" class="logo__image only-light" alt="Trinity-RFT 0.5.1 文档 - Home"/>
-    <script>document.write(`<img src="../../../../_static/logo.svg" class="logo__image only-dark" alt="Trinity-RFT 0.5.1 文档 - Home"/>`);</script>
+    <img src="../../../../_static/logo.svg" class="logo__image only-dark pst-js-only" alt="Trinity-RFT 0.5.1 文档 - Home"/>
   
   
 </a></div>
@@ -600,15 +593,11 @@ window.runMermaid = runMermaid;</script>
 </div>
         <div class="sidebar-primary-item">
 
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="搜索" aria-label="搜索" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">搜索</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
+<button class="btn search-button-field search-button__button pst-js-only" title="搜索" aria-label="搜索" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">搜索</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">教程</span></p>
@@ -818,6 +807,7 @@ window.runMermaid = runMermaid;</script>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../../../../build_api/trinity.common.patch.html">trinity.common.patch package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="../../../../build_api/trinity.common.patch.glm4v.html">trinity.common.patch.glm4v module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../../build_api/trinity.common.patch.kimi.html">trinity.common.patch.kimi module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../build_api/trinity.common.patch.qwen3_5.html">trinity.common.patch.qwen3_5 module</a></li>
 </ul>
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../../../../build_api/trinity.common.rewards.html">trinity.common.rewards package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -880,9 +870,14 @@ window.runMermaid = runMermaid;</script>
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -968,7 +963,7 @@ window.runMermaid = runMermaid;</script>
 
 
 <button onclick="toggleFullScreen()"
-  class="btn btn-sm btn-fullscreen-button"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
   title="全屏模式"
   data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
@@ -982,24 +977,16 @@ window.runMermaid = runMermaid;</script>
 
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
-  </button>
-`);
-</script>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="亮色"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="暗色"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="搜索" aria-label="搜索" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="搜索" aria-label="搜索" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
+</button>
 
 </div></div>
       
@@ -1034,7 +1021,7 @@ document.write(`
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span> <span class="n">ProcessorMixin</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span> <span class="n">PreTrainedModel</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">verl</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataProto</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">verl.trainer.ppo.metric_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">_compute_response_info</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">verl.utils.checkpoint.checkpoint_manager</span><span class="w"> </span><span class="kn">import</span> <span class="n">find_latest_ckpt_path</span>
@@ -1053,7 +1040,7 @@ document.write(`
 <div class="viewcode-block" id="to_data_proto">
 <a class="viewcode-back" href="../../../../build_api/trinity.trainer.verl.utils.html#trinity.trainer.verl.utils.to_data_proto">[文档]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">to_data_proto</span><span class="p">(</span>
-    <span class="n">experiences</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Experience</span><span class="p">],</span> <span class="n">pad_token_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">processor</span><span class="p">:</span> <span class="n">ProcessorMixin</span><span class="p">,</span> <span class="n">logger</span><span class="p">:</span> <span class="n">Logger</span>
+    <span class="n">experiences</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Experience</span><span class="p">],</span> <span class="n">pad_token_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="n">PreTrainedModel</span><span class="p">,</span> <span class="n">logger</span><span class="p">:</span> <span class="n">Logger</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataProto</span><span class="p">:</span>  <span class="c1"># noqa: C901</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert List[Experience] to verl DataProto.&quot;&quot;&quot;</span>
     <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">experiences</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;No experiences provided.&quot;</span>
@@ -1114,7 +1101,8 @@ document.write(`
         <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">exp</span><span class="p">,</span> <span class="n">attr</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">for</span> <span class="n">exp</span> <span class="ow">in</span> <span class="n">experiences</span><span class="p">):</span>
             <span class="n">batch_dict</span><span class="p">[</span><span class="n">attr</span><span class="p">]</span> <span class="o">=</span> <span class="n">gather_response_attrs</span><span class="p">(</span><span class="n">experiences</span><span class="p">,</span> <span class="n">attr</span><span class="p">,</span> <span class="n">max_response_length</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">processor</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s2">&quot;get_rope_index&quot;</span><span class="p">):</span>
+        <span class="c1"># used for multi-modal model</span>
         <span class="kn">import</span><span class="w"> </span><span class="nn">inspect</span>
 
         <span class="c1"># Adapted from verl/experimental/agent_loop/agent_loop.py</span>
@@ -1124,13 +1112,23 @@ document.write(`
             <span class="n">input_ids</span> <span class="o">=</span> <span class="n">batch_dict</span><span class="p">[</span><span class="s2">&quot;input_ids&quot;</span><span class="p">][</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
             <span class="n">attention_mask</span> <span class="o">=</span> <span class="n">batch_dict</span><span class="p">[</span><span class="s2">&quot;attention_mask&quot;</span><span class="p">][</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
-            <span class="n">get_rope_index_sig</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">signature</span><span class="p">(</span><span class="n">processor</span><span class="o">.</span><span class="n">get_rope_index</span><span class="p">)</span>
+            <span class="n">get_rope_index_sig</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">signature</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">get_rope_index</span><span class="p">)</span>
             <span class="n">get_rope_index_kwargs</span> <span class="o">=</span> <span class="p">{}</span>
-            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">mm_inputs</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-                <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">get_rope_index_sig</span><span class="o">.</span><span class="n">parameters</span><span class="p">:</span>
-                    <span class="n">get_rope_index_kwargs</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">mm_inputs</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">get_rope_index_sig</span><span class="o">.</span><span class="n">parameters</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">{</span><span class="s2">&quot;self&quot;</span><span class="p">,</span> <span class="s2">&quot;input_ids&quot;</span><span class="p">,</span> <span class="s2">&quot;attention_mask&quot;</span><span class="p">,</span> <span class="s2">&quot;kwargs&quot;</span><span class="p">}:</span>
+                    <span class="k">continue</span>
+                <span class="k">elif</span> <span class="n">key</span> <span class="o">==</span> <span class="s2">&quot;mm_token_type_ids&quot;</span><span class="p">:</span>
+                    <span class="n">pad_data</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">input_ids</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">mm_inputs</span><span class="p">:</span>
+                        <span class="n">data</span> <span class="o">=</span> <span class="n">mm_inputs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+                        <span class="n">start</span> <span class="o">=</span> <span class="n">max_prompt_length</span> <span class="o">-</span> <span class="n">exp</span><span class="o">.</span><span class="n">prompt_length</span>
+                        <span class="n">end</span> <span class="o">=</span> <span class="n">start</span> <span class="o">+</span> <span class="n">data</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+                        <span class="n">pad_data</span><span class="p">[:,</span> <span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span>
+                    <span class="n">get_rope_index_kwargs</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">pad_data</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">get_rope_index_kwargs</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">mm_inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 
-            <span class="n">vision_position_ids</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">processor</span><span class="o">.</span><span class="n">get_rope_index</span><span class="p">(</span>
+            <span class="n">vision_position_ids</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">get_rope_index</span><span class="p">(</span>
                 <span class="n">input_ids</span><span class="o">=</span><span class="n">input_ids</span><span class="p">,</span>
                 <span class="n">attention_mask</span><span class="o">=</span><span class="n">attention_mask</span><span class="p">,</span>
                 <span class="o">**</span><span class="n">get_rope_index_kwargs</span><span class="p">,</span>
@@ -1290,70 +1288,6 @@ document.write(`
 
 
 
-<span class="c1"># modified from verl/utils/tokenizer.py:hf_processor</span>
-<span class="c1"># bug fix for processor</span>
-<div class="viewcode-block" id="hf_processor">
-<a class="viewcode-back" href="../../../../build_api/trinity.trainer.verl.utils.html#trinity.trainer.verl.utils.hf_processor">[文档]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">hf_processor</span><span class="p">(</span><span class="n">name_or_path</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a huggingface processor to process multimodal data.</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        name_or_path (str): The name of the processor.</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        transformers.ProcessorMixin: The pretrained processor.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">import</span><span class="w"> </span><span class="nn">types</span>
-    <span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
-
-    <span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span> <span class="n">AutoConfig</span><span class="p">,</span> <span class="n">AutoProcessor</span>
-
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">processor</span> <span class="o">=</span> <span class="n">AutoProcessor</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">name_or_path</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="n">config</span> <span class="o">=</span> <span class="n">AutoConfig</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">name_or_path</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-
-        <span class="c1"># Bind vlm model&#39;s get_rope_index method to processor</span>
-        <span class="n">processor</span><span class="o">.</span><span class="n">config</span> <span class="o">=</span> <span class="n">config</span>
-        <span class="k">match</span> <span class="n">processor</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">:</span>
-            <span class="k">case</span> <span class="s2">&quot;Qwen2VLProcessor&quot;</span><span class="p">:</span>
-                <span class="kn">from</span><span class="w"> </span><span class="nn">transformers.models.qwen2_vl</span><span class="w"> </span><span class="kn">import</span> <span class="n">Qwen2VLModel</span>
-
-                <span class="n">processor</span><span class="o">.</span><span class="n">get_rope_index</span> <span class="o">=</span> <span class="n">types</span><span class="o">.</span><span class="n">MethodType</span><span class="p">(</span><span class="n">Qwen2VLModel</span><span class="o">.</span><span class="n">get_rope_index</span><span class="p">,</span> <span class="n">processor</span><span class="p">)</span>
-            <span class="k">case</span> <span class="s2">&quot;Qwen2_5_VLProcessor&quot;</span><span class="p">:</span>
-                <span class="kn">from</span><span class="w"> </span><span class="nn">transformers.models.qwen2_5_vl</span><span class="w"> </span><span class="kn">import</span> <span class="n">Qwen2_5_VLModel</span>
-
-                <span class="n">processor</span><span class="o">.</span><span class="n">get_rope_index</span> <span class="o">=</span> <span class="n">types</span><span class="o">.</span><span class="n">MethodType</span><span class="p">(</span>
-                    <span class="n">Qwen2_5_VLModel</span><span class="o">.</span><span class="n">get_rope_index</span><span class="p">,</span> <span class="n">processor</span>
-                <span class="p">)</span>
-            <span class="k">case</span> <span class="s2">&quot;Qwen3VLProcessor&quot;</span><span class="p">:</span>
-                <span class="kn">from</span><span class="w"> </span><span class="nn">transformers.models.qwen3_vl</span><span class="w"> </span><span class="kn">import</span> <span class="n">Qwen3VLModel</span>
-
-                <span class="n">processor</span><span class="o">.</span><span class="n">get_rope_index</span> <span class="o">=</span> <span class="n">types</span><span class="o">.</span><span class="n">MethodType</span><span class="p">(</span><span class="n">Qwen3VLModel</span><span class="o">.</span><span class="n">get_rope_index</span><span class="p">,</span> <span class="n">processor</span><span class="p">)</span>
-            <span class="k">case</span> <span class="s2">&quot;Glm4vImageProcessor&quot;</span> <span class="o">|</span> <span class="s2">&quot;Glm4vProcessor&quot;</span><span class="p">:</span>
-                <span class="kn">from</span><span class="w"> </span><span class="nn">transformers.models.glm4v</span><span class="w"> </span><span class="kn">import</span> <span class="n">Glm4vModel</span>
-
-                <span class="n">processor</span><span class="o">.</span><span class="n">get_rope_index</span> <span class="o">=</span> <span class="n">types</span><span class="o">.</span><span class="n">MethodType</span><span class="p">(</span><span class="n">Glm4vModel</span><span class="o">.</span><span class="n">get_rope_index</span><span class="p">,</span> <span class="n">processor</span><span class="p">)</span>
-            <span class="k">case</span> <span class="s2">&quot;Glm46VProcessor&quot;</span><span class="p">:</span>
-                <span class="kn">from</span><span class="w"> </span><span class="nn">transformers.models.glm46v</span><span class="w"> </span><span class="kn">import</span> <span class="n">Glm46VModel</span>
-
-                <span class="n">processor</span><span class="o">.</span><span class="n">get_rope_index</span> <span class="o">=</span> <span class="n">types</span><span class="o">.</span><span class="n">MethodType</span><span class="p">(</span><span class="n">Glm46VModel</span><span class="o">.</span><span class="n">get_rope_index</span><span class="p">,</span> <span class="n">processor</span><span class="p">)</span>
-            <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unsupported processor type: </span><span class="si">{</span><span class="n">processor</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="n">processor</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="c1"># TODO(haibin.lin): try-catch should be removed after adding transformer version req to setup.py to avoid</span>
-        <span class="c1"># silent failure</span>
-        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;Failed to create processor: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">. This may affect multimodal processing&quot;</span><span class="p">,</span> <span class="n">stacklevel</span><span class="o">=</span><span class="mi">1</span>
-        <span class="p">)</span>
-    <span class="c1"># Avoid load tokenizer, see:</span>
-    <span class="c1"># https://github.com/huggingface/transformers/blob/v4.49.0/src/transformers/models/auto/processing_auto.py#L344</span>
-    <span class="k">if</span> <span class="n">processor</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="s2">&quot;Processor&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">processor</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">:</span>
-        <span class="n">processor</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="k">return</span> <span class="n">processor</span></div>
-
-
-
 <span class="c1"># modified from verl/utils/fsdp_utils.py:apply_fsdp2</span>
 <span class="c1"># bug fix for transformers v5</span>
 <div class="viewcode-block" id="apply_fsdp2">
@@ -1394,6 +1328,96 @@ document.write(`
 
     <span class="k">with</span> <span class="n">maybe_patch_fsdp_module</span><span class="p">(</span><span class="n">model</span><span class="p">):</span>
         <span class="n">fully_shard</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="o">**</span><span class="n">fsdp_kwargs</span><span class="p">)</span>  <span class="c1"># fsdp2 will not reshard_after_forward for root module</span></div>
+
+
+
+<span class="c1"># modified from verl/utils/seqlen_balancing.py:rearrange_micro_batches</span>
+<div class="viewcode-block" id="rearrange_micro_batches">
+<a class="viewcode-back" href="../../../../build_api/trinity.trainer.verl.utils.html#trinity.trainer.verl.utils.rearrange_micro_batches">[文档]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">rearrange_micro_batches</span><span class="p">(</span>
+    <span class="n">batch</span><span class="p">,</span>
+    <span class="n">max_token_len</span><span class="p">,</span>
+    <span class="n">dp_group</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">num_batches_divided_by</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">same_micro_num_in_dp</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">min_num_micro_batch</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">use_dynamic_bsz_balance</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Split a batch into micro-batches by total token count, with optional DP sync and padding.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        batch (TensorDict): must include &quot;attention_mask&quot; (B*S); other fields are sliced similarly.</span>
+<span class="sd">        max_token_len (int): max sum of attention_mask per micro-batch.</span>
+<span class="sd">        dp_group (optional): torch.distributed group for data-parallel sync.</span>
+<span class="sd">        num_batches_divided_by (optional): virtual pipeline parallel size, for megatron.</span>
+<span class="sd">        same_micro_num_in_dp (bool): if True and dp_group set, pad all ranks to the same count.</span>
+<span class="sd">        min_num_micro_batch (int, optional): force at least this many splits (pads empty ones).</span>
+<span class="sd">        use_dynamic_bsz_balance (bool, optional): balance the computational workload between micro-batches</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        List[TensorDict]: the micro-batches.</span>
+<span class="sd">        List[List[int]]: index lists mapping each micro-batch back to original positions.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">torch</span><span class="w"> </span><span class="kn">import</span> <span class="n">distributed</span> <span class="k">as</span> <span class="n">dist</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">verl.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">tensordict_utils</span> <span class="k">as</span> <span class="n">tu</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">verl.utils.device</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_device_name</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">verl.utils.seqlen_balancing</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+        <span class="n">calculate_workload</span><span class="p">,</span>
+        <span class="n">ceildiv</span><span class="p">,</span>
+        <span class="n">get_seqlen_balanced_partitions</span><span class="p">,</span>
+        <span class="n">roundup_divisible</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># this is per local micro_bsz</span>
+    <span class="n">input_ids</span> <span class="o">=</span> <span class="n">batch</span><span class="p">[</span><span class="s2">&quot;input_ids&quot;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">input_ids</span><span class="o">.</span><span class="n">is_nested</span><span class="p">:</span>
+        <span class="n">seq_len_effective</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span> <span class="o">=</span> <span class="n">input_ids</span><span class="o">.</span><span class="n">offsets</span><span class="p">()</span><span class="o">.</span><span class="n">diff</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">seq_len_effective</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span> <span class="o">=</span> <span class="n">batch</span><span class="p">[</span><span class="s2">&quot;attention_mask&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">max_seq_len</span> <span class="o">=</span> <span class="n">seq_len_effective</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+
+    <span class="k">assert</span> <span class="p">(</span>
+        <span class="n">max_token_len</span> <span class="o">&gt;=</span> <span class="n">max_seq_len</span>
+    <span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;max_token_len must be greater than the sequence length. Got </span><span class="si">{</span><span class="n">max_token_len</span><span class="si">=}</span><span class="s2"> and </span><span class="si">{</span><span class="n">max_seq_len</span><span class="si">=}</span><span class="s2">&quot;</span>
+    <span class="n">total_seqlen</span> <span class="o">=</span> <span class="n">seq_len_effective</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+    <span class="c1"># NOTE: num_microbatches &lt;= batch_size, so take the min of this two.</span>
+    <span class="n">num_micro_batches</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">seq_len_effective</span><span class="p">),</span> <span class="n">ceildiv</span><span class="p">(</span><span class="n">total_seqlen</span><span class="p">,</span> <span class="n">max_token_len</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">min_num_micro_batch</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># used to support pp</span>
+        <span class="n">num_micro_batches</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">min_num_micro_batch</span><span class="p">,</span> <span class="n">num_micro_batches</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">dist</span><span class="o">.</span><span class="n">is_initialized</span><span class="p">()</span> <span class="ow">and</span> <span class="n">same_micro_num_in_dp</span><span class="p">:</span>
+        <span class="n">num_micro_batches</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="n">num_micro_batches</span><span class="p">],</span> <span class="n">device</span><span class="o">=</span><span class="n">get_device_name</span><span class="p">())</span>
+        <span class="n">dist</span><span class="o">.</span><span class="n">all_reduce</span><span class="p">(</span><span class="n">num_micro_batches</span><span class="p">,</span> <span class="n">op</span><span class="o">=</span><span class="n">dist</span><span class="o">.</span><span class="n">ReduceOp</span><span class="o">.</span><span class="n">MAX</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="n">dp_group</span><span class="p">)</span>
+        <span class="n">num_micro_batches</span> <span class="o">=</span> <span class="n">num_micro_batches</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">num_batches_divided_by</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">num_micro_batches</span> <span class="o">=</span> <span class="n">roundup_divisible</span><span class="p">(</span><span class="n">num_micro_batches</span><span class="p">,</span> <span class="n">num_batches_divided_by</span><span class="p">)</span>
+
+    <span class="k">assert</span> <span class="n">num_micro_batches</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">seq_len_effective</span><span class="p">)</span>
+
+    <span class="c1"># note that seq_len_effective is a GPU tensor. We need to make it a list to avoid D2H!</span>
+    <span class="n">workloads</span> <span class="o">=</span> <span class="n">calculate_workload</span><span class="p">(</span><span class="n">seq_len_effective</span><span class="p">)</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="n">micro_bsz_idx</span> <span class="o">=</span> <span class="n">get_seqlen_balanced_partitions</span><span class="p">(</span><span class="n">workloads</span><span class="p">,</span> <span class="n">num_micro_batches</span><span class="p">,</span> <span class="n">equal_size</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">use_dynamic_bsz_balance</span><span class="p">:</span>
+        <span class="c1"># Use the sum of squared sequence lengths to approximate attention computation workload</span>
+        <span class="n">micro_bsz_idx</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span>
+            <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">partition</span><span class="p">:</span> <span class="p">(</span>
+                <span class="nb">sum</span><span class="p">(</span><span class="n">workloads</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">partition</span><span class="p">),</span>
+                <span class="n">partition</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">partition</span> <span class="k">else</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="p">),</span>
+            <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="c1"># Place smaller micro-batches at both ends to reduce the bubbles exposed during the warm-up and cool-down.</span>
+        <span class="n">micro_bsz_idx</span> <span class="o">=</span> <span class="n">micro_bsz_idx</span><span class="p">[::</span><span class="mi">2</span><span class="p">][::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">micro_bsz_idx</span><span class="p">[</span><span class="mi">1</span><span class="p">::</span><span class="mi">2</span><span class="p">]</span>
+
+    <span class="n">micro_batches</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">partition</span> <span class="ow">in</span> <span class="n">micro_bsz_idx</span><span class="p">:</span>
+        <span class="n">curr_micro_batch</span> <span class="o">=</span> <span class="n">tu</span><span class="o">.</span><span class="n">index_select_tensor_dict</span><span class="p">(</span><span class="n">batch</span><span class="p">,</span> <span class="n">partition</span><span class="p">)</span>
+        <span class="n">micro_batches</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">curr_micro_batch</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">micro_batches</span><span class="p">,</span> <span class="n">micro_bsz_idx</span></div>
 
 </pre></div>
 
@@ -1457,8 +1481,8 @@ document.write(`
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
-<script src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
   </footer>
