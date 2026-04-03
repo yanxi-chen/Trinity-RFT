@@ -54,8 +54,8 @@ class TinkerModel(BaseInferenceModel):
 
         returned_seq, is_valid = self._handle_prompt_truncation(prompt, **kwargs)
         if not is_valid:
-            return returned_seq # is_valid is False: returned_seq is a list of dummy experiences
-        token_ids = returned_seq # is_valid is True: returned_seq is prompt's token_ids
+            return returned_seq  # is_valid is False: returned_seq is a list of dummy experiences
+        token_ids = returned_seq  # is_valid is True: returned_seq is prompt's token_ids
 
         with_chat_completion = kwargs.get("with_chat_completion", False)
         if with_chat_completion:

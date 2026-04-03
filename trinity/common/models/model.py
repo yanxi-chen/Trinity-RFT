@@ -145,9 +145,11 @@ class BaseInferenceModel(InferenceModel):
             dummy_response_tokens = self.tokenizer(  # type: ignore
                 dummy_response, truncation=False, return_tensors="pt"
             )["input_ids"][0].tolist()
-            dummy_response_tokens = dummy_response_tokens[ : min(len(dummy_response_tokens), self.config.max_response_tokens)]
+            dummy_response_tokens = dummy_response_tokens[
+                : min(len(dummy_response_tokens), self.config.max_response_tokens)  # type: ignore
+            ]
 
-            token_ids = prompt_token_ids[:self.config.max_prompt_tokens] + dummy_response_tokens
+            token_ids = prompt_token_ids[: self.config.max_prompt_tokens] + dummy_response_tokens
             return [
                 Experience(
                     tokens=token_ids,
