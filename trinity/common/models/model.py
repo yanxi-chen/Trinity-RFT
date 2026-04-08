@@ -129,35 +129,40 @@ class BaseInferenceModel(InferenceModel):
     def _handle_prompt_truncation(self, prompt: str, **kwargs) -> Tuple[Sequence, bool]:
         """Handle prompt truncation if needed."""
         # Tokenize once without truncation to check if truncation is needed
-        token_ids = self.tokenizer(  # type: ignore
-            prompt,
-            truncation=False,
-            return_tensors="pt",
-        )[
-            "input_ids"
-        ][0].tolist()
+        prompt_token_ids = self.tokenizer(  # type: ignore
+            prompt, truncation=False, return_tensors="pt"
+        )["input_ids"][0].tolist()
 
         # Check if truncation is needed and apply it
         if (
             self.config.enable_prompt_truncation
             and self.config.max_prompt_tokens is not None
-            and len(token_ids) > self.config.max_prompt_tokens
+            and len(prompt_token_ids) > self.config.max_prompt_tokens
         ):
             self.logger.warning(f"Prompt was truncated to {self.config.max_prompt_tokens} tokens")
-            token_ids = token_ids[: self.config.max_prompt_tokens + 1]  # leave one for response
+
+            dummy_response = "[This experience is masked out due to overlong prompt]"
+            dummy_response_tokens = self.tokenizer(  # type: ignore
+                dummy_response, truncation=False, return_tensors="pt"
+            )["input_ids"][0].tolist()
+            dummy_response_tokens = dummy_response_tokens[
+                : min(len(dummy_response_tokens), self.config.max_response_tokens)  # type: ignore
+            ]
+
+            token_ids = prompt_token_ids[: self.config.max_prompt_tokens] + dummy_response_tokens
             return [
                 Experience(
                     tokens=token_ids,
-                    logprobs=torch.zeros(1, dtype=torch.float32),
-                    prompt_length=len(token_ids) - 1,
-                    prompt_text=self.tokenizer.decode(token_ids[:-1]),
-                    response_text=self.tokenizer.decode(token_ids[-1]),
+                    logprobs=torch.zeros(len(dummy_response_tokens), dtype=torch.float32),
+                    prompt_length=len(prompt_token_ids),
+                    prompt_text=self.tokenizer.decode(prompt_token_ids),
+                    response_text=dummy_response,
                     truncate_status="prompt_truncated",
                     reward=0.0,
                 )
                 for _ in range(kwargs.get("n", 1))
-            ], False
-        return token_ids, True
+            ], False  # If prompt truncation is activated, return a list of dummy experiences & False
+        return prompt_token_ids, True  # Otherwise, return prompt_token_ids & True
 
     async def convert_messages_to_experience(
         self,
