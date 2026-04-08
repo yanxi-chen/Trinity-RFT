@@ -13,13 +13,13 @@
 # limitations under the License.
 """
 The main entry point to run the PPO algorithm.
-Modified from https://github.com/volcengine/verl/blob/v0.7.0/verl/workers/megatron_workers.py
+Modified from https://github.com/volcengine/verl/blob/v0.7.1/verl/workers/megatron_workers.py
 """
 
 import datetime
 import os
-import sys
 import time
+from contextlib import nullcontext
 
 import psutil
 import ray
@@ -30,26 +30,10 @@ from codetiming import Timer
 from megatron.core import parallel_state as mpu
 from omegaconf import DictConfig, OmegaConf, open_dict
 
-from trinity.utils.log import get_logger
-
 try:
     from verl.workers.engine.mindspeed.transformer_impl import repatch
 except ImportError:
     repatch = None
-
-# start of patch for verl to support transformers v5
-if not hasattr(sys.modules["transformers"], "AutoModelForVision2Seq"):
-    setattr(
-        sys.modules["transformers"],
-        "AutoModelForVision2Seq",
-        sys.modules["transformers"].AutoModelForImageTextToText,
-    )
-    sys.modules["transformers"].__all__.append("AutoModelForVision2Seq")
-
-    import accelerate
-
-    setattr(accelerate, "init_empty_weights", lambda: torch.device("cpu"))
-# end of patch for verl to support transformers v5
 
 from verl import DataProto
 from verl.models.mcore import get_mcore_weight_converter
@@ -62,6 +46,7 @@ from verl.single_controller.base.decorator import (
 from verl.utils.config import omega_conf_to_dataclass
 from verl.utils.device import (
     get_device_id,
+    get_device_name,
     get_nccl_backend,
     get_torch_device,
     set_expandable_segments,
@@ -104,7 +89,9 @@ from trinity.common.constants import ROLLOUT_WEIGHT_SYNC_GROUP_NAME, SyncMethod
 from trinity.manager.synchronizer import Synchronizer
 from trinity.trainer.verl.megatron_actor import MegatronPPOActor
 from trinity.trainer.verl.megatron_checkpoint_manager import MegatronCheckpointManager
+from trinity.trainer.verl.utils import patch_rope_theta_in_hf_config
 from trinity.utils.distributed import init_process_group
+from trinity.utils.log import get_logger
 
 
 class MegatronWorker(Worker):
@@ -117,6 +104,7 @@ class MegatronWorker(Worker):
         override_transformer_config,
         trust_remote_code=False,
         megatron_config=None,
+        enable_mtp=False,
     ):
         from transformers import AutoConfig
         from verl.models.mcore import hf_to_mcore_config
@@ -163,13 +151,23 @@ class MegatronWorker(Worker):
             hf_config.rope_theta = self.config.model.rope_theta
 
         # start of patch for verl to support transformers v5
-        if not hasattr(hf_config, "rope_theta"):
-            rope_theta = hf_config.rope_parameters.get("rope_theta", None)
-            if rope_theta is not None:
-                setattr(hf_config, "rope_theta", rope_theta)
+        patch_rope_theta_in_hf_config(hf_config)
         # end of patch for verl to support transformers v5
 
         self.share_embeddings_and_output_weights = getattr(hf_config, "tie_word_embeddings", False)
+
+        if enable_mtp:
+            assert (
+                getattr(hf_config, "num_nextn_predict_layers", 0) > 0
+            ), "MTP requires at least one nextn_predict_layer"
+            assert megatron_config.use_mbridge, "MTP requires use_mbridge to be True"
+            override_transformer_config[
+                "mtp_loss_scaling_factor"
+            ] = self.config.model.mtp.mtp_loss_scaling_factor
+        elif hasattr(hf_config, "num_nextn_predict_layers"):
+            hf_config.num_nextn_predict_layers = 0
+
+        self.enable_mtp = enable_mtp
         update_model_config(hf_config, override_config_kwargs=override_config_kwargs)
         self.architectures = getattr(hf_config, "architectures", None)
         if self.rank == 0:
@@ -188,6 +186,44 @@ class MegatronWorker(Worker):
         self.vanilla_bridge = megatron_config.get("vanilla_mbridge", True)
         if megatron_config.use_mbridge:
             if self.vanilla_bridge:
+                # start of patch for mbridge
+                import json
+                from glob import glob
+
+                from mbridge.core.safetensor_io import SafeTensorIO
+                from safetensors import safe_open
+
+                if not getattr(SafeTensorIO, "_is_patched", False):
+
+                    def new_init(self, hf_dir: str):
+                        index_file = os.path.join(hf_dir, "model.safetensors.index.json")
+                        config = AutoConfig.from_pretrained(hf_dir, trust_remote_code=True)
+
+                        self.index = {}
+                        self.origin_index = {}
+                        if os.path.exists(index_file):
+                            with open(index_file, "r") as f:
+                                origin_index = json.load(f)
+                                self.index = origin_index["weight_map"]
+                                self.origin_index = origin_index
+                        else:
+                            src_files = glob(os.path.join(hf_dir, "*.safetensors"))
+                            if len(src_files) == 1:
+                                for file in src_files:
+                                    with safe_open(file, framework="pt", device="cpu") as f:
+                                        filename = os.path.basename(file)
+                                        for key in f.keys():
+                                            self.index[key] = filename
+                        if getattr(config, "tie_word_embeddings", False):
+                            if "lm_head.weight" in self.index.keys():
+                                self.index.pop("lm_head.weight")
+
+                        self.hf_dir = hf_dir
+
+                    SafeTensorIO.__init__ = new_init
+                    SafeTensorIO._is_patched = True
+                # end of patch for mbridge
+
                 from verl.models.mcore.mbridge import AutoBridge
 
                 bridge = AutoBridge.from_config(hf_config, dtype=dtype)
@@ -207,6 +243,10 @@ class MegatronWorker(Worker):
 
                 # In case of invalid overrides, we need to make sure some critical params are set correctly
                 provider.params_dtype = dtype
+
+                # Ensure dtype settings propagate to Megatron-Bridge/TE
+                provider.fp16 = fp16
+                provider.bf16 = bf16
 
                 # Pass distributed info
                 provider.tensor_model_parallel_size = megatron_config.tensor_model_parallel_size
@@ -282,7 +322,7 @@ class ActorRolloutRefWorker(MegatronWorker, DistProfilerExtension):
             set_numa_affinity()
             rank = int(os.environ["LOCAL_RANK"])
             torch.distributed.init_process_group(
-                backend=get_nccl_backend(),
+                backend=f"cpu:gloo,{get_device_name()}:{get_nccl_backend()}",
                 timeout=datetime.timedelta(seconds=self.config.get("nccl_timeout", 600)),
                 init_method=os.environ.get("DIST_INIT_METHOD", None),
             )
@@ -351,6 +391,7 @@ class ActorRolloutRefWorker(MegatronWorker, DistProfilerExtension):
         self._is_offload_param = False
         self._is_offload_grad = False
         self._is_offload_optimizer = False
+        self._hf_export_conversion_tasks = None
 
         # normalize config
         if self._is_actor:
@@ -409,6 +450,7 @@ class ActorRolloutRefWorker(MegatronWorker, DistProfilerExtension):
             override_transformer_config,
             self.config.model.get("trust_remote_code", False),
             self.config.actor.megatron if not self._is_ref else self.config.ref.megatron,
+            self.config.model.get("mtp", {}).get("enable", False),
         )
         self.generation_config = get_generation_config(
             self.local_path,
@@ -606,9 +648,15 @@ class ActorRolloutRefWorker(MegatronWorker, DistProfilerExtension):
                 tf_config=self.tf_config,
                 actor_module=self.actor_module,
                 actor_optimizer=self.actor_optimizer,
+                mtp_config=self.config.model.mtp if self.config.model.mtp.enable else None,
             )
             self.logger.info(f"routing replay layers: {len(RouterReplay.router_instances)}")
             log_gpu_memory_usage("After MegatronPPOActor init", logger=self.logger)
+
+            if self.bridge is not None and not self.vanilla_bridge:
+                self._hf_export_conversion_tasks = self.bridge.get_conversion_tasks(
+                    self.actor.actor_module
+                )
 
         if self._is_ref:
             self.ref_module, self.ref_model_config = self._build_model_optimizer(
@@ -679,7 +727,11 @@ class ActorRolloutRefWorker(MegatronWorker, DistProfilerExtension):
             if self.vanilla_bridge:
                 per_tensor_param = self.bridge.export_weights(self.actor.actor_module)
             else:
-                per_tensor_param = self.bridge.export_hf_weights(self.actor.actor_module)
+                per_tensor_param = self.bridge.export_hf_weights(
+                    self.actor.actor_module,
+                    show_progress=False,
+                    conversion_tasks=self._hf_export_conversion_tasks,
+                )
         else:
             per_tensor_param = per_tensor_generator(
                 self.actor.actor_module,
@@ -798,8 +850,9 @@ class ActorRolloutRefWorker(MegatronWorker, DistProfilerExtension):
             metrics = self.actor.update_policy(dataloader=dataloader)
         delta_time = timer.last
         global_num_tokens = data.meta_info["global_token_num"]
+        images_seqlens = data.meta_info.get("images_seqlens", None)
         estimated_flops, promised_flops = self.flops_counter.estimate_flops(
-            global_num_tokens, delta_time
+            global_num_tokens, delta_time, images_seqlens=images_seqlens
         )
         metrics["perf/mfu/actor"] = (
             estimated_flops * self.config.actor.ppo_epochs / promised_flops / self.world_size
@@ -838,6 +891,9 @@ class ActorRolloutRefWorker(MegatronWorker, DistProfilerExtension):
     @GPUMemoryLogger(role="compute_ref_log_prob", logger=logger)
     @DistProfiler.annotate(color="olive", role="ref_compute_log_prob")
     def compute_ref_log_prob(self, data: DataProto):
+        if self.peft_cls is not None:
+            data.meta_info["is_lora"] = True
+            return self.compute_log_prob(data)
         assert self._is_ref
         if self._ref_is_offload_param:
             load_megatron_model_to_gpu(self.ref_module, load_grad=False)
@@ -870,10 +926,12 @@ class ActorRolloutRefWorker(MegatronWorker, DistProfilerExtension):
             log_gpu_memory_usage(
                 "After load actor params and grad during compute_log_prob", logger=self.logger
             )
-        # we should always recompute old_log_probs when it is HybridEngine
-        data.meta_info["micro_batch_size"] = self.config.rollout.log_prob_micro_batch_size_per_gpu
-        data.meta_info["max_token_len"] = self.config.rollout.log_prob_max_token_len_per_gpu
-        data.meta_info["use_dynamic_bsz"] = self.config.rollout.log_prob_use_dynamic_bsz
+        is_lora = data.meta_info.pop("is_lora", False)
+        adapter_ctx = self.peft_cls.disable_adapter(self.actor_module) if is_lora else nullcontext()
+        config_source = self.config.ref if is_lora else self.config.rollout
+        data.meta_info["micro_batch_size"] = config_source.log_prob_micro_batch_size_per_gpu
+        data.meta_info["max_token_len"] = config_source.log_prob_max_token_len_per_gpu
+        data.meta_info["use_dynamic_bsz"] = config_source.log_prob_use_dynamic_bsz
         data.meta_info["temperature"] = self.config.rollout.temperature
 
         if self.enable_routing_replay and self.config.actor.router_replay.mode == "R2":
@@ -882,12 +940,15 @@ class ActorRolloutRefWorker(MegatronWorker, DistProfilerExtension):
         if self.enable_routing_replay and self.config.actor.router_replay.mode == "R3":
             RouterReplay.set_global_router_replay_action(RouterReplayAction.REPLAY_FORWARD)
 
-        output, entropys, layers_topk_idx = self.actor.compute_log_prob(
-            data=data, calculate_entropy=True
-        )
+        with adapter_ctx:
+            output, entropys, layers_topk_idx = self.actor.compute_log_prob(
+                data=data, calculate_entropy=not is_lora
+            )
+        tensors = {"ref_log_prob": output} if is_lora else {"old_log_probs": output}
+        if not is_lora:
+            tensors["entropys"] = entropys
         output = DataProto.from_dict(
-            tensors={"old_log_probs": output, "entropys": entropys},
-            meta_info={"temperature": self.config.rollout.temperature},
+            tensors=tensors, meta_info={"temperature": self.config.rollout.temperature}
         )
         if self.config.actor.router_replay.mode == "R2":
             output.batch["routed_experts"] = layers_topk_idx

@@ -4,7 +4,13 @@ from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional, Union
 
 from omegaconf import OmegaConf
-from verl.workers.config import PolicyLossConfig, RouterReplayConfig
+from verl.trainer.config import CheckpointConfig, RolloutCorrectionConfig
+from verl.workers.config import (
+    McoreEngineConfig,
+    MtpConfig,
+    PolicyLossConfig,
+    RouterReplayConfig,
+)
 
 from trinity.algorithm import ALGORITHM_TYPE
 from trinity.common.config import Config, SynchronizerConfig, set_if_none
@@ -46,6 +52,9 @@ class ActorModel:
     target_modules: Optional[str] = "all-linear"
     exclude_modules: Optional[str] = None
     lora_adapter_path: Optional[str] = None
+
+    # mtp configs
+    mtp: MtpConfig = field(default_factory=MtpConfig)
 
     # rope configs
     rope_scaling: Optional[dict] = None
@@ -100,10 +109,10 @@ class FSDPConfig:
 
 
 @dataclass
-class Checkpoint:
-    load_contents: List[str] = field(default_factory=lambda: ["model", "optimizer", "extra"])
-    save_contents: List[str] = field(default_factory=lambda: ["model", "optimizer", "extra"])
-    async_save: bool = False  # TODO: testing async save
+class _CheckpointConfig(CheckpointConfig):
+    mbridge_config: dict[str, Any] = field(
+        default_factory=lambda: dict(distributed_filesystem=True, memory_efficient=True)
+    )
 
 
 @dataclass
@@ -115,30 +124,16 @@ class OverrideTransformerConfig:
 
 
 @dataclass
-class MegatronConfig:
-    param_offload: bool = False
-    grad_offload: bool = False
-    optimizer_offload: bool = False
-    tensor_model_parallel_size: int = 1
-    expert_model_parallel_size: int = 1
-    expert_tensor_parallel_size: Optional[int] = None
-    pipeline_model_parallel_size: int = 1
-    virtual_pipeline_model_parallel_size: Optional[int] = None
-    context_parallel_size: int = 1
-    sequence_parallel: bool = True
-    use_distributed_optimizer: bool = True
-    use_dist_checkpointing: bool = False
-    dist_checkpointing_path: Optional[str] = None
-    dist_ckpt_optim_fully_reshardable: bool = False
-    distrib_optim_fully_reshardable_mem_efficient: bool = False
-    seed: int = 42
-    override_ddp_config: dict = field(default_factory=dict)
-    override_transformer_config: OverrideTransformerConfig = field(
-        default_factory=OverrideTransformerConfig
-    )
-    use_mbridge: bool = False
-    dtype: str = "bfloat16"
-    use_remove_padding: bool = True
+class _McoreEngineConfig(McoreEngineConfig):
+    # use_dist_checkpointing: bool = True
+    # whether to use the vanilla mbridge without verl-specific optimizations
+    # TODO: failed to run with vanilla_mbridge = False, need to investigate further
+    vanilla_mbridge: bool = True
+
+    max_token_len_per_gpu: Optional[int] = None
+    micro_batch_size_per_gpu: Optional[int] = None
+    infer_max_token_len_per_gpu: Optional[int] = None
+    infer_micro_batch_size_per_gpu: Optional[int] = None
 
 
 @dataclass
@@ -157,6 +152,9 @@ class Actor:
     ppo_micro_batch_size: Optional[int] = None
     ppo_micro_batch_size_per_gpu: int = 1
     use_dynamic_bsz: Optional[bool] = None
+    use_prefix_grouper: bool = False
+    calculate_sum_pi_squared: bool = False
+    sum_pi_squared_checkpointing: bool = False
     ppo_max_token_len_per_gpu: Optional[int] = None
     fix_actor_microbatch_loss_scale: Optional[bool] = None  # EXPERIMENTAL
     grad_clip: Optional[float] = None
@@ -165,10 +163,10 @@ class Actor:
     ulysses_sequence_parallel_size: Optional[int] = None
     entropy_from_logits_with_chunking: bool = False
     entropy_checkpointing: bool = False
-    checkpoint: Checkpoint = field(default_factory=Checkpoint)
+    checkpoint: _CheckpointConfig = field(default_factory=_CheckpointConfig)
     optim: Optim = field(default_factory=Optim)
     fsdp_config: FSDPConfig = field(default_factory=FSDPConfig)
-    megatron: MegatronConfig = field(default_factory=MegatronConfig)
+    megatron: _McoreEngineConfig = field(default_factory=_McoreEngineConfig)
     profile: ProfileConfig = field(default_factory=ProfileConfig)
     data_loader_seed: Optional[int] = None
     load_weight: bool = True
@@ -192,14 +190,15 @@ class Ref:
     log_prob_micro_batch_size: Optional[int] = None
     log_prob_micro_batch_size_per_gpu: int = 1
     log_prob_use_dynamic_bsz: Optional[bool] = None
+    use_prefix_grouper: bool = False
     log_prob_max_token_len_per_gpu: Optional[int] = None
     ulysses_sequence_parallel_size: Optional[int] = None
     entropy_from_logits_with_chunking: bool = False
     entropy_checkpointing: bool = False
-    checkpoint: Checkpoint = field(
-        default_factory=lambda: Checkpoint(load_contents=["model"], save_contents=["model"])
+    checkpoint: _CheckpointConfig = field(
+        default_factory=lambda: _CheckpointConfig(load_contents=["model"], save_contents=["model"])
     )
-    megatron: MegatronConfig = field(default_factory=MegatronConfig)
+    megatron: _McoreEngineConfig = field(default_factory=_McoreEngineConfig)
     profile: ProfileConfig = field(default_factory=ProfileConfig)
     load_weight: bool = True
     profiler: dict = field(default_factory=dict)
@@ -276,10 +275,10 @@ class Critic:
     shuffle: bool = False
     grad_clip: Optional[float] = None
     cliprange_value: float = 0.0
-    checkpoint: Checkpoint = field(default_factory=Checkpoint)
+    checkpoint: _CheckpointConfig = field(default_factory=_CheckpointConfig)
     rollout_n: int = 1
     loss_agg_mode: str = "token-mean"
-    megatron: MegatronConfig = field(default_factory=MegatronConfig)
+    megatron: _McoreEngineConfig = field(default_factory=_McoreEngineConfig)
     profile: ProfileConfig = field(default_factory=ProfileConfig)
     data_loader_seed: Optional[int] = None
     load_weight: bool = True
@@ -312,6 +311,11 @@ class RewardModel:
 
 
 @dataclass
+class Reward:
+    reward_model: RewardModel = field(default_factory=RewardModel)
+
+
+@dataclass
 class CustomRewardFunction:
     path: Optional[str] = None
     name: str = "compute_score"
@@ -326,23 +330,13 @@ class KL_Ctrl:
 
 
 @dataclass
-class RolloutCorrection:
-    rollout_is: Optional[str] = None
-    rollout_is_threshold: float = 2.0
-    rollout_rs: Optional[str] = None
-    rollout_rs_threshold: Optional[float] = None
-    rollout_rs_threshold_lower: Optional[float] = None
-    rollout_token_veto_threshold: Optional[float] = None
-    # Because rollout and training in Trinity runs separately,
-    # rollout_is_batch_normalize is default to True
+class _RolloutCorrectionConfig(RolloutCorrectionConfig):
     bypass_mode: bool = True
-    loss_type: str = "ppo_clip"
-    rollout_is_batch_normalize: bool = False
 
 
 @dataclass
 class Algorithm:
-    rollout_correction: RolloutCorrection = field(default_factory=RolloutCorrection)
+    rollout_correction: _RolloutCorrectionConfig = field(default_factory=_RolloutCorrectionConfig)
     # ! DO NOT SET gamma or lam below; they are kept here merely for compatibility with verl,
     # and their values will be overwritten by those in AlgorithmConfig.advantage_fn_args
     # if they are really needed (e.g., for GAE advantage/returns computation)
@@ -393,6 +387,7 @@ class veRLConfig:
     actor_rollout_ref: ActorRolloutRef = field(default_factory=ActorRolloutRef)
     critic: Critic = field(default_factory=Critic)
     reward_model: RewardModel = field(default_factory=RewardModel)
+    reward: Reward = field(default_factory=Reward)
     custom_reward_function: CustomRewardFunction = field(default_factory=CustomRewardFunction)
     algorithm: Algorithm = field(default_factory=Algorithm)
     trainer: Trainer = field(default_factory=Trainer)
