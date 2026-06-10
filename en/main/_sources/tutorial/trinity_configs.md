@@ -77,15 +77,16 @@ ignore_validator_suggestions: false
 
 - `project`: The name of the project.
 - `name`: The name of the current experiment.
+- `group`: Optional experiment group inserted between `<project>` and `<name>` in the checkpoint path, i.e. `<checkpoint_root_dir>/<project>/<group>/<name>/`. Empty by default, in which case it is omitted from the path.
 - `mode`: Running mode of Trinity-RFT. Options include:
   - `both`: Launches both the trainer and explorer (default).
   - `train`: Only launches the trainer.
   - `explore`: Only launches the explorer.
   - `bench`: Used for benchmarking.
   - `colocate`: Only for single GPU scenarios, launches both trainer and explorer on the same GPU.
-- `checkpoint_root_dir`: Root directory where all checkpoints and logs will be saved. Checkpoints for this experiment will be stored in `<checkpoint_root_dir>/<project>/<name>/`.
+- `checkpoint_root_dir`: Root directory where all checkpoints and logs will be saved. Checkpoints for this experiment will be stored in `<checkpoint_root_dir>/<project>/<group>/<name>/`.
 - `continue_from_checkpoint`: If set to `true`, the experiment will continue from the latest checkpoint in the checkpoint path (if any); otherwise, it will rename the current experiment to `<name>_<timestamp>` and start a new experiment. Due to our decoupled design, during recovery from a checkpoint, we can only guarantee that the Trainer's model parameters and its optional auxiliary buffers (`auxiliary_buffers`) are restored to their latest checkpointed states, while the Explorer and Experience Buffer cannot be guaranteed to be restored to the same point in time.
-- `ray_namespace`: Namespace for the modules launched in the current experiment. If not specified, it will be set to `<project>/<name>`.
+- `ray_namespace`: Namespace for the modules launched in the current experiment. If not specified, it will be set to `<project>/<group>/<name>`.
 - `ignore_validator_suggestions`: When set to `false` (the default), the config validator checks GPU memory usage and suggests configuration changes if needed. When set to `true`, the validator skips GPU memory usage check.
 
 ---
@@ -138,8 +139,8 @@ monitor:
 ```
 
 - `monitor_type`: Type of monitoring system. Options:
-  - `wandb`: Logs to [Weights & Biases](https://docs.wandb.ai/quickstart/). Requires logging in and setting `WANDB_API_KEY`. Project and run names match the `project` and `name` fields in global configs.
-  - `tensorboard`: Logs to [TensorBoard](https://www.tensorflow.org/tensorboard). Files are saved under `<checkpoint_root_dir>/<project>/<name>/monitor/tensorboard`.
+  - `wandb`: Logs to [Weights & Biases](https://docs.wandb.ai/quickstart/). Requires logging in and setting `WANDB_API_KEY`. Project and run names match the `project` and `name` fields in global configs; runs are grouped by the `group` field (defaulting to `name` when empty).
+  - `tensorboard`: Logs to [TensorBoard](https://www.tensorflow.org/tensorboard). Files are saved under `<checkpoint_root_dir>/<project>/<group>/<name>/monitor/tensorboard`.
   - `mlflow`: Logs to [MLFlow](https://mlflow.org/). If [MLFlow authentication](https://mlflow.org/docs/latest/ml/auth/) is setup, set `MLFLOW_TRACKING_USERNAME` and `MLFLOW_TRACKING_PASSWORD` as environment variables before running.
 - `monitor_args`: Dictionary of arguments for monitor initialization.
   - For `wandb`:
@@ -149,7 +150,7 @@ monitor:
     - `uri`: The URI of your MLFlow instance. Strongly recommended to set; defaults to `http://localhost:5000`.
     - `username`: Overrides `MLFLOW_TRACKING_USERNAME` if set.
     - `password`: Overrides `MLFLOW_TRACKING_PASSWORD` if set.
-- `enable_ray_timeline`: If `True`, exports a `timeline.json` file to `<checkpoint_root_dir>/<project>/<name>/monitor`. Viewable in Chrome at [chrome://tracing](chrome://tracing).
+- `enable_ray_timeline`: If `True`, exports a `timeline.json` file to `<checkpoint_root_dir>/<project>/<group>/<name>/monitor`. Viewable in Chrome at [chrome://tracing](chrome://tracing).
 
 ---
 
@@ -403,6 +404,8 @@ Controls the rollout models and workflow execution.
 explorer:
   name: explorer
   runner_per_model: 8
+  runner_prepare_concurrency: 8
+  runner_prepare_max_retries: 2
   concurrent_mode: sequential
   max_repeat_times_per_runner: null
   max_timeout: 900
@@ -412,23 +415,29 @@ explorer:
     engine_type: vllm
     engine_num: 1
     tensor_parallel_size: 1
-    enable_history: False
+    enable_history: false
+    enable_openai_api: false
+    nnodes: 1
   auxiliary_models:
   - model_path: Qwen/Qwen2.5-7B-Instruct
     tensor_parallel_size: 1
   eval_interval: 100
-  eval_on_startup: True
+  eval_on_startup: true
   over_rollout:
     ratio: 0.0
     wait_after_min: 30.0
+    return_partial_tasks: false
   dynamic_timeout:
     enable: false
+    warmup_min_steps: 1
     ratio: 3.0
   runner_state_report_interval: 0
 ```
 
 - `name`: Name of the explorer. This name will be used as the Ray actor's name, so it must be unique.
 - `runner_per_model`: Number of parallel workflow runners per each rollout model.
+- `runner_prepare_concurrency`: Max number of runners prepared concurrently at startup. Creating all runners at once makes many workers call `getenv()` simultaneously, which can race with library `setenv()` and segfault in glibc; this caps the concurrency (total runner count is unchanged).
+- `runner_prepare_max_retries`: How many times to retry a runner's prepare on a transient startup crash (e.g. the glibc getenv race). Retries happen within the same concurrency slot with backoff, so they never exceed `runner_prepare_concurrency`.
 - `concurrent_mode`: Concurrency mode for executing a set of tasks (e.g., multiple repeats of a task in GRPO algorithm). Supported options:
   - `sequential`: Executes tasks sequentially (default). One task is executed at a time, waiting for its completion before executing the next. This requires the least from the workflow implementation but has the worst throughput.
   - `asynchronous`: Executes tasks asynchronously. All tasks are submitted at once, and results are collected as they complete. Requires the workflow to correctly implement asynchronous call interfaces and have no shared state between workflows to avoid race conditions. Throughput is better than sequential execution, but the performance depends on the workflow implementation.
@@ -438,21 +447,26 @@ explorer:
 - `max_retry_times`: Maximum number of retries for a workflow.
 - `env_vars`: Environment variables to be set for every workflow runners.
 - `rollout_model.engine_type`: Type of inference engine. Supported options:
-  - `vllm`: Use vLLM asynchronous engine.
+  - `vllm`: Use vLLM engine.
+  - `sglang`: Use SGLang engine.
   - `tinker`: Use Tinker engine.
   - `external`: Use external API-based model engine.
 - `rollout_model.engine_num`: Number of inference engines.
 - `rollout_model.tensor_parallel_size`: Degree of tensor parallelism.
-- `rollout_model.enable_history`: Whether to enable model call history recording. If set to `True`, the model wrapper automatically records the return experiences of model calls. Please periodically extract the history via `extract_experience_from_history` to avoid out-of-memory issues. Default is `False`.
-- `auxiliary_models`: Additional models used for custom workflows.
+- `rollout_model.enable_history`: Whether to enable model call history recording. If set to `true`, the model wrapper automatically records the return experiences of model calls. Please periodically extract the history via `extract_experience_from_history` to avoid out-of-memory issues. Default is `false`.
+- `rollout_model.enable_openai_api`: Whether to enable the openai API provided by Explorer. Default is `false`.
+- `rollout_model.nnodes`: Number of nodes for each engine. Default is `1`. Only take effect when `rollout_model.engine_type` is `vllm` or `sglang`. When `nnodes` is greater than `1`, each engine instance will exclusively occupy the GPU resources of the full `nnodes` nodes (`nnodes * cluster.gpu_per_node`); sharing nodes with other instances is not supported.
+- `auxiliary_models`: Additional models used for custom workflows, which has the same configuration options as `rollout_model`.
 - `eval_interval`: Interval (in steps) for evaluating the model.
 - `eval_on_startup`: Whether to evaluate the model on startup. More precisely, at step 0 with the original model, so it will not be triggered when restarting.
 - `over_rollout`: [Experimental] Configurations for over-rollout mechanism, which allows the explorer to proceed with fewer tasks than the full batch size. It effectively increases throughput in scenarios where some tasks take significantly longer to complete than others. Only applicable when dynamic synchronization (`synchronizer.sync_style` is not `fixed`) is used.
   - `ratio`: Explorer will only wait for `(1 - ratio) * batch_size` of tasks at each step. Default is `0.0`, meaning waiting for all tasks.
   - `wait_after_min`: After reaching the minimum task threshold, wait for this many seconds before proceeding. Default is `30.0` seconds.
-- `dynamic_timeout`: [Experimental] Configurations for dynamic timeout mechanism, which adjusts the timeout for each task based on the average time taken for successful tasks.
+  - `return_partial_tasks`: Whether to return the results of tasks that have only completed partially (e.g., only some runs in GRPO). Default is `false`, meaning only return results of tasks that have completed all runs.
+- `dynamic_timeout`: [Experimental] Configurations for dynamic timeout mechanism, which adjusts the timeout for each scheduled execution unit based on historical runtime statistics.
   - `enable`: Whether to enable dynamic timeout. Default is `false`.
-  - `ratio`: The timeout for each task is dynamically set to `average_time_per_success_task * ratio`. Default is `3.0`.
+  - `warmup_min_steps`: The minimum number of fully observed non-eval steps required before dynamic timeout takes effect. Default is `1`. This is equivalent to a warmup batch/step count, and helps avoid enabling dynamic timeout based only on a few fast early completions.
+  - `ratio`: The timeout for each scheduled execution unit is dynamically set to `average_time_per_success_execution * ratio`. Default is `3.0`.
 - `runner_state_report_interval`: Workflow runner report interval (in seconds). If set to a value greater than `0`, the workflow runner will periodically report its status to the main explorer process and print it in the command line for monitoring. Default is `0`, meaning this feature is disabled. If you want to use this feature, it is recommended to set it to `10` seconds or longer to minimize performance impact.
 
 ---
@@ -591,7 +605,7 @@ log:
 ```
 
 - `level`: The logging level (supports `DEBUG`, `INFO`, `WARNING`, `ERROR`).
-- `group_by_node`: Whether to group logs by node IP. If set to `True`, an actor's logs will be save to `<checkpoint_root_dir>/<project>/<name>/log/<node_ip>/<actor_name>.log`, otherwise it will be saved to `<checkpoint_root_dir>/<project>/<name>/log/<actor_name>.log`.
+- `group_by_node`: Whether to group logs by node IP. If set to `True`, an actor's logs will be save to `<checkpoint_root_dir>/<project>/<group>/<name>/log/<node_ip>/<actor_name>.log`, otherwise it will be saved to `<checkpoint_root_dir>/<project>/<group>/<name>/log/<actor_name>.log`.
 
 ---
 

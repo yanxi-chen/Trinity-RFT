@@ -48,7 +48,7 @@
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
     <link rel="next" title="trinity.common.models.model module" href="trinity.common.models.model.html" />
-    <link rel="prev" title="trinity.common.models.external_model module" href="trinity.common.models.external_model.html" />
+    <link rel="prev" title="trinity.common.models.experience_extraction module" href="trinity.common.models.experience_extraction.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="zh-CN"/>
   <meta name="docsearch:version" content="0.5.2" />
@@ -260,6 +260,7 @@
 </ul>
 </details></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.explorer.explorer.html">trinity.explorer.explorer module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="trinity.explorer.rollout_coordinator.html">trinity.explorer.rollout_coordinator module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.explorer.scheduler.html">trinity.explorer.scheduler module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.explorer.workflow_runner.html">trinity.explorer.workflow_runner module</a></li>
 </ul>
@@ -271,16 +272,27 @@
 </ul>
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="trinity.trainer.verl.html">trinity.trainer.verl package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l4"><a class="reference internal" href="trinity.trainer.verl.dp_actor.html">trinity.trainer.verl.dp_actor module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="trinity.trainer.verl.fsdp_checkpoint_manager.html">trinity.trainer.verl.fsdp_checkpoint_manager module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="trinity.trainer.verl.fsdp_workers.html">trinity.trainer.verl.fsdp_workers module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="trinity.trainer.verl.megatron_actor.html">trinity.trainer.verl.megatron_actor module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="trinity.trainer.verl.megatron_checkpoint_manager.html">trinity.trainer.verl.megatron_checkpoint_manager module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="trinity.trainer.verl.megatron_workers.html">trinity.trainer.verl.megatron_workers module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="trinity.trainer.verl.monkey_patch.html">trinity.trainer.verl.monkey_patch module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.trainer.verl.checkpoint.html">trinity.trainer.verl.checkpoint module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.trainer.verl.config.html">trinity.trainer.verl.config module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.trainer.verl.fsdp_engine.html">trinity.trainer.verl.fsdp_engine module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.trainer.verl.losses.html">trinity.trainer.verl.losses module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.trainer.verl.megatron_engine.html">trinity.trainer.verl.megatron_engine module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.trainer.verl.trainer.html">trinity.trainer.verl.trainer module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.trainer.verl.utils.html">trinity.trainer.verl.utils module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="trinity.trainer.verl.verl_config.html">trinity.trainer.verl.verl_config module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="trinity.trainer.verl.verl_trainer.html">trinity.trainer.verl.verl_trainer module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.trainer.verl.workers.html">trinity.trainer.verl.workers module</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="trinity.trainer.verl_legacy.html">trinity.trainer.verl_legacy package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="trinity.trainer.verl_legacy.dp_actor.html">trinity.trainer.verl_legacy.dp_actor module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.trainer.verl_legacy.fsdp_checkpoint_manager.html">trinity.trainer.verl_legacy.fsdp_checkpoint_manager module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.trainer.verl_legacy.fsdp_workers.html">trinity.trainer.verl_legacy.fsdp_workers module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.trainer.verl_legacy.megatron_actor.html">trinity.trainer.verl_legacy.megatron_actor module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.trainer.verl_legacy.megatron_checkpoint_manager.html">trinity.trainer.verl_legacy.megatron_checkpoint_manager module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.trainer.verl_legacy.megatron_workers.html">trinity.trainer.verl_legacy.megatron_workers module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.trainer.verl_legacy.monkey_patch.html">trinity.trainer.verl_legacy.monkey_patch module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.trainer.verl_legacy.utils.html">trinity.trainer.verl_legacy.utils module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.trainer.verl_legacy.verl_config.html">trinity.trainer.verl_legacy.verl_config module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.trainer.verl_legacy.verl_trainer.html">trinity.trainer.verl_legacy.verl_trainer module</a></li>
 </ul>
 </details></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.trainer.trainer.html">trinity.trainer.trainer module</a></li>
@@ -292,6 +304,7 @@
 <li class="toctree-l4"><a class="reference internal" href="trinity.algorithm.advantage_fn.asymre_advantage.html">trinity.algorithm.advantage_fn.asymre_advantage module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.algorithm.advantage_fn.clipb_advantage.html">trinity.algorithm.advantage_fn.clipb_advantage module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.algorithm.advantage_fn.clipv_advantage.html">trinity.algorithm.advantage_fn.clipv_advantage module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.algorithm.advantage_fn.gigpo_advantage.html">trinity.algorithm.advantage_fn.gigpo_advantage module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.algorithm.advantage_fn.grpo_advantage.html">trinity.algorithm.advantage_fn.grpo_advantage module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.algorithm.advantage_fn.jsd_advantage.html">trinity.algorithm.advantage_fn.jsd_advantage module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.algorithm.advantage_fn.multi_step_grpo_advantage.html">trinity.algorithm.advantage_fn.multi_step_grpo_advantage module</a></li>
@@ -360,10 +373,13 @@
 </details></li>
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="trinity.common.html">trinity.common package</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l3 current active has-children"><a class="reference internal" href="trinity.common.models.html">trinity.common.models package</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.models.sglang_patch.html">trinity.common.models.sglang_patch package</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.models.vllm_patch.html">trinity.common.models.vllm_patch package</a></li>
-<li class="toctree-l4"><a class="reference internal" href="trinity.common.models.external_model.html">trinity.common.models.external_model module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.models.allocator.html">trinity.common.models.allocator module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.models.experience_extraction.html">trinity.common.models.experience_extraction module</a></li>
 <li class="toctree-l4 current active"><a class="current reference internal" href="#">trinity.common.models.mm_utils module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.models.model.html">trinity.common.models.model module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.models.sglang_model.html">trinity.common.models.sglang_model module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.models.tinker_model.html">trinity.common.models.tinker_model module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.models.utils.html">trinity.common.models.utils module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.models.vllm_model.html">trinity.common.models.vllm_model module</a></li>
@@ -389,7 +405,6 @@
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.rewards.qwen25_eval.html">trinity.common.rewards.qwen25_eval module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.rewards.reward_fn.html">trinity.common.rewards.reward_fn module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.rewards.tool_reward.html">trinity.common.rewards.tool_reward module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="trinity.common.rewards.utils.html">trinity.common.rewards.utils module</a></li>
 </ul>
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="trinity.common.workflows.html">trinity.common.workflows package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -412,6 +427,7 @@
 <li class="toctree-l3"><a class="reference internal" href="trinity.common.config_validator.html">trinity.common.config_validator module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.common.constants.html">trinity.common.constants module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.common.experience.html">trinity.common.experience module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="trinity.common.experience_visualizer.html">trinity.common.experience_visualizer module</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="trinity.utils.html">trinity.utils package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -420,6 +436,7 @@
 <li class="toctree-l3"><a class="reference internal" href="trinity.utils.dlc_utils.html">trinity.utils.dlc_utils module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.utils.log.html">trinity.utils.log module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.utils.lora_utils.html">trinity.utils.lora_utils module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="trinity.utils.metrics.html">trinity.utils.metrics module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.utils.monitor.html">trinity.utils.monitor module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.utils.plugin_loader.html">trinity.utils.plugin_loader module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.utils.registry.html">trinity.utils.registry module</a></li>
@@ -601,9 +618,7 @@
 <button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="搜索" aria-label="搜索" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
 </button>
-<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</button>
+
 </div></div>
       
     </div>
@@ -619,18 +634,6 @@
     <div id="print-main-content">
         <div id="jb-print-toc">
             
-            <div>
-                <h2> 目录 </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.common.models.mm_utils.is_qwen_like_processor"><code class="docutils literal notranslate"><span class="pre">is_qwen_like_processor()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.common.models.mm_utils.build_multi_modal_data"><code class="docutils literal notranslate"><span class="pre">build_multi_modal_data()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.common.models.mm_utils.build_mm_input_for_training"><code class="docutils literal notranslate"><span class="pre">build_mm_input_for_training()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.common.models.mm_utils.build_mm_message"><code class="docutils literal notranslate"><span class="pre">build_mm_message()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.common.models.mm_utils.has_multi_modal_content"><code class="docutils literal notranslate"><span class="pre">has_multi_modal_content()</span></code></a></li>
-</ul>
-            </nav>
         </div>
     </div>
 </div>
@@ -640,191 +643,8 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="module-trinity.common.models.mm_utils">
-<span id="trinity-common-models-mm-utils-module"></span><h1>trinity.common.models.mm_utils module<a class="headerlink" href="#module-trinity.common.models.mm_utils" title="Link to this heading">#</a></h1>
-<p>Utilities for processing multi-modal data (images/videos) for specific vision-language models.</p>
-<p>Supported models:
-- Qwen2.5-VL, Qwen3-VL series
-- Kimi VL series
-- GLM VL series</p>
-<p>Provides functions to:
-1. Parse prompts with media tags (&lt;image&gt;/&lt;video&gt;)
-2. Validate multi-modal content in conversations
-3. Preprocess media inputs for inference/training
-4. Construct model-compatible message formats</p>
-<div class="admonition note">
-<p class="admonition-title">备注</p>
-<p>Only processors with class names containing both (&quot;Qwen&quot;, &quot;Kimi&quot; OR &quot;Glm&quot;) AND &quot;Processor&quot; are supported.
-Relies on <cite>qwen_vl_utils.process_vision_info</cite> for media extraction.</p>
-</div>
-<dl class="py function">
-<dt class="sig sig-object py" id="trinity.common.models.mm_utils.is_qwen_like_processor">
-<span class="sig-prename descclassname"><span class="pre">trinity.common.models.mm_utils.</span></span><span class="sig-name descname"><span class="pre">is_qwen_like_processor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">processor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../_modules/trinity/common/models/mm_utils.html#is_qwen_like_processor"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#trinity.common.models.mm_utils.is_qwen_like_processor" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="trinity.common.models.mm_utils.build_multi_modal_data">
-<span class="sig-prename descclassname"><span class="pre">trinity.common.models.mm_utils.</span></span><span class="sig-name descname"><span class="pre">build_multi_modal_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">processor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">messages</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/trinity/common/models/mm_utils.html#build_multi_modal_data"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#trinity.common.models.mm_utils.build_multi_modal_data" title="Link to this definition">#</a></dt>
-<dd><p>Extract and preprocess vision inputs from multi-modal messages for vLLM inference.</p>
-<p>Processes messages containing image/video placeholders using model-specific vision utilities.
-Returns structured media inputs compatible with vLLM's multi-modal API.</p>
-<dl class="field-list simple">
-<dt class="field-odd">参数<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>processor</strong> -- Vision-language processor instance (must have class name containing
-(&quot;Qwen&quot;, &quot;Kimi&quot; OR &quot;Glm&quot;) AND &quot;Processor&quot;).</p></li>
-<li><p><strong>messages</strong> -- List of conversation messages in model-expected format. Each message's &quot;content&quot;
-may be a string or list of content items (text/image/video dictionaries).</p></li>
-</ul>
-</dd>
-<dt class="field-even">返回<span class="colon">:</span></dt>
-<dd class="field-even"><p><ul class="simple">
-<li><p>&quot;image&quot;: List of processed image objects (if images exist)</p></li>
-<li><p>&quot;video&quot;: List of processed video objects (if videos exist)</p></li>
-</ul>
-<p>Keys are omitted when no corresponding media is present.</p>
-</p>
-</dd>
-<dt class="field-odd">返回类型<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Dictionary containing processed media inputs with keys</p>
-</dd>
-<dt class="field-even">抛出<span class="colon">:</span></dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>NotImplementedError</strong> -- If processor class name doesn't match supported patterns.</p></li>
-<li><p><strong>ImportError</strong> -- If required <cite>qwen_vl_utils</cite> module is unavailable.</p></li>
-</ul>
-</dd>
-</dl>
-<p class="rubric">示例</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">messages</span> <span class="o">=</span> <span class="p">[{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;image&quot;</span><span class="p">,</span> <span class="s2">&quot;image&quot;</span><span class="p">:</span> <span class="s2">&quot;img.jpg&quot;</span><span class="p">},</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Describe this&quot;</span><span class="p">}]}]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">build_multi_modal_data</span><span class="p">(</span><span class="n">processor</span><span class="p">,</span> <span class="n">messages</span><span class="p">)</span>
-<span class="go">{&quot;image&quot;: [processed_image]}</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="trinity.common.models.mm_utils.build_mm_input_for_training">
-<span class="sig-prename descclassname"><span class="pre">trinity.common.models.mm_utils.</span></span><span class="sig-name descname"><span class="pre">build_mm_input_for_training</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">processor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prompt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multi_modal_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/trinity/common/models/mm_utils.html#build_mm_input_for_training"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#trinity.common.models.mm_utils.build_mm_input_for_training" title="Link to this definition">#</a></dt>
-<dd><p>Tokenize prompt and integrate processed media inputs for model training.</p>
-<p>Combines text prompt with preprocessed image/video data into model-ready tensor inputs.
-Handles padding and tensor conversion for training workflows.</p>
-<dl class="field-list simple">
-<dt class="field-odd">参数<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>processor</strong> -- Vision-language processor instance (must have class name containing
-(&quot;Qwen&quot;, &quot;Kimi&quot; OR &quot;Glm&quot;) AND &quot;Processor&quot;).</p></li>
-<li><p><strong>prompt</strong> -- Plain text prompt WITHOUT media tags (e.g., &quot;Describe this image&quot;).
-Media placement is handled via <cite>multi_modal_data</cite>, not prompt tags.</p></li>
-<li><p><strong>multi_modal_data</strong> -- Dictionary from <cite>build_multi_modal_data()</cite> containing:
-{&quot;image&quot;: [...], &quot;video&quot;: [...]} (keys optional)</p></li>
-</ul>
-</dd>
-<dt class="field-even">返回<span class="colon">:</span></dt>
-<dd class="field-even"><p><ul class="simple">
-<li><p>input_ids: Tokenized prompt IDs</p></li>
-<li><p>attention_mask: Attention mask tensor</p></li>
-<li><p>pixel_values: Processed image tensors (if images provided)</p></li>
-<li><p>pixel_values_videos: Processed video tensors (if videos provided)</p></li>
-</ul>
-<p>All tensors converted to PyTorch format (<cite>return_tensors=&quot;pt&quot;</cite>).</p>
-</p>
-</dd>
-<dt class="field-odd">返回类型<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Dictionary of model inputs including</p>
-</dd>
-<dt class="field-even">抛出<span class="colon">:</span></dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>NotImplementedError</strong> -- If processor class name doesn't match supported patterns.</p></li>
-<li><p><strong>ValueError</strong> -- If media counts mismatch prompt expectations (handled internally by processor).</p></li>
-</ul>
-</dd>
-</dl>
-<div class="admonition note">
-<p class="admonition-title">备注</p>
-<p>Prompt should NOT contain &lt;image&gt;/&lt;video&gt; tags here. Media association is managed
-through the structured <cite>multi_modal_data</cite> dictionary.</p>
-</div>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="trinity.common.models.mm_utils.build_mm_message">
-<span class="sig-prename descclassname"><span class="pre">trinity.common.models.mm_utils.</span></span><span class="sig-name descname"><span class="pre">build_mm_message</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prompt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">images</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">videos</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/trinity/common/models/mm_utils.html#build_mm_message"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#trinity.common.models.mm_utils.build_mm_message" title="Link to this definition">#</a></dt>
-<dd><p>Construct multi-modal message by injecting media references at tag positions in prompt.</p>
-<p>Parses prompt for &lt;image&gt;/&lt;video&gt; tags, replaces them with corresponding media references,
-and handles surplus media items. Extra media (beyond tag count) is prepended to content.</p>
-<dl class="field-list simple">
-<dt class="field-odd">参数<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>prompt</strong> -- Text containing optional &lt;image&gt; and &lt;video&gt; tags as media placeholders.
-Example: &quot;First &lt;image&gt; then &lt;video&gt; and finally &lt;image&gt;&quot;</p></li>
-<li><p><strong>images</strong> -- List of image references (file paths, URLs, or PIL images) in order of appearance.</p></li>
-<li><p><strong>videos</strong> -- List of video references (file paths, URLs) in order of appearance.</p></li>
-</ul>
-</dd>
-<dt class="field-even">返回<span class="colon">:</span></dt>
-<dd class="field-even"><p><dl>
-<dt>{</dt><dd><p>&quot;role&quot;: &quot;user&quot;,
-&quot;content&quot;: [</p>
-<blockquote>
-<div><p>{&quot;type&quot;: &quot;image&quot;, &quot;image&quot;: ...},  # Surplus media first
-{&quot;type&quot;: &quot;video&quot;, &quot;video&quot;: ...},
-{&quot;type&quot;: &quot;text&quot;, &quot;text&quot;: &quot;First &quot;},
-{&quot;type&quot;: &quot;image&quot;, &quot;image&quot;: ...},  # Tag-replaced media
-...</p>
-</div></blockquote>
-<p>]</p>
-</dd>
-</dl>
-<p>}</p>
-</p>
-</dd>
-<dt class="field-odd">返回类型<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Message dictionary formatted for VL models</p>
-</dd>
-<dt class="field-even">抛出<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> -- If prompt contains more &lt;image&gt; tags than provided images,
-    or more &lt;video&gt; tags than provided videos.</p>
-</dd>
-</dl>
-<dl class="simple">
-<dt>Behavior details:</dt><dd><ul class="simple">
-<li><p>Tags are case-sensitive and must be exact: &quot;&lt;image&gt;&quot;, &quot;&lt;video&gt;&quot;</p></li>
-<li><p>Empty text segments between tags are omitted</p></li>
-<li><p>Surplus media (images/videos beyond tag count) appears at START of content list</p></li>
-<li><p>Text segments preserve original prompt ordering around tags</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="trinity.common.models.mm_utils.has_multi_modal_content">
-<span class="sig-prename descclassname"><span class="pre">trinity.common.models.mm_utils.</span></span><span class="sig-name descname"><span class="pre">has_multi_modal_content</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">messages</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../_modules/trinity/common/models/mm_utils.html#has_multi_modal_content"><span class="viewcode-link"><span class="pre">[源代码]</span></span></a><a class="headerlink" href="#trinity.common.models.mm_utils.has_multi_modal_content" title="Link to this definition">#</a></dt>
-<dd><p>Check if any message contains non-text (image/video) content.</p>
-<p>Inspects message content structure to detect multi-modal elements. Handles both:
-- String content (text-only, returns False)
-- List content (multi-modal candidates)</p>
-<dl class="field-list simple">
-<dt class="field-odd">参数<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>messages</strong> -- List of conversation messages. Each message must contain a &quot;content&quot; field.
-Content may be:
-- str: Plain text message
-- List[Dict]: Multi-modal content items (each with &quot;type&quot; key)</p>
-</dd>
-<dt class="field-even">返回<span class="colon">:</span></dt>
-<dd class="field-even"><p>True if any message contains at least one non-text content item (type != &quot;text&quot;),
-False otherwise.</p>
-</dd>
-</dl>
-<p class="rubric">示例</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">msg</span> <span class="o">=</span> <span class="p">[{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Hi&quot;</span><span class="p">},</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;image&quot;</span><span class="p">,</span> <span class="s2">&quot;image&quot;</span><span class="p">:</span> <span class="s2">&quot;...&quot;</span><span class="p">}]}]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">has_multi_modal_content</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
-<span class="go">True</span>
-</pre></div>
-</div>
-</dd></dl>
-
+  <section id="trinity-common-models-mm-utils-module">
+<h1>trinity.common.models.mm_utils module<a class="headerlink" href="#trinity-common-models-mm-utils-module" title="Link to this heading">#</a></h1>
 </section>
 
 
@@ -839,12 +659,12 @@ False otherwise.</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="trinity.common.models.external_model.html"
+       href="trinity.common.models.experience_extraction.html"
        title="上一页">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">上一页</p>
-        <p class="prev-next-title">trinity.common.models.external_model module</p>
+        <p class="prev-next-title">trinity.common.models.experience_extraction module</p>
       </div>
     </a>
     <a class="right-next"
@@ -862,27 +682,6 @@ False otherwise.</p>
             </div>
             
             
-              
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item"><div
-    id="pst-page-navigation-heading-2"
-    class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> 目录
-  </div>
-  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.common.models.mm_utils.is_qwen_like_processor"><code class="docutils literal notranslate"><span class="pre">is_qwen_like_processor()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.common.models.mm_utils.build_multi_modal_data"><code class="docutils literal notranslate"><span class="pre">build_multi_modal_data()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.common.models.mm_utils.build_mm_input_for_training"><code class="docutils literal notranslate"><span class="pre">build_mm_input_for_training()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.common.models.mm_utils.build_mm_message"><code class="docutils literal notranslate"><span class="pre">build_mm_message()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.common.models.mm_utils.has_multi_modal_content"><code class="docutils literal notranslate"><span class="pre">has_multi_modal_content()</span></code></a></li>
-</ul>
-  </nav></div>
-
-</div></div>
               
             
           </div>

@@ -77,15 +77,16 @@ ignore_validator_suggestions: false
 
 - `project`: 项目名称。
 - `name`: 当前实验的名称。
+- `group`: 可选的实验分组，插入到检查点路径中 `<project>` 与 `<name>` 之间，即 `<checkpoint_root_dir>/<project>/<group>/<name>/`。默认为空，此时从路径中省略。
 - `mode`: Trinity-RFT 的运行模式。选项包括：
   - `both`: 同时启动 trainer 和 explorer（默认）。
   - `train`: 仅启动 trainer。
   - `explore`: 仅启动 explorer。
   - `bench`: 用于 benchmark 测试。
   - `colocate`: 仅适用于单 GPU 场景，在同一 GPU 上启动 trainer 和 explorer。
-- `checkpoint_root_dir`: 所有检查点和日志的根目录。该实验的检查点将存储在 `<checkpoint_root_dir>/<project>/<name>/` 路径下。
+- `checkpoint_root_dir`: 所有检查点和日志的根目录。该实验的检查点将存储在 `<checkpoint_root_dir>/<project>/<group>/<name>/` 路径下。
 - `continue_from_checkpoint`: 若设置为 `true`，实验将从检查点路径中的最新检查点继续；否则，会将当前实验重命名为 `<name>_<timestamp>` 并启动新实验。由于我们的分离式设计，从检查点恢复的时候，我们只能保证Trainer的模型参数以及其使用的可选缓冲区（`auxiliary_buffers`）可以恢复到最新检查点的状态，而Explorer和Experience Buffer不能保证恢复到同一时点。
-- `ray_namespace`: 当前实验中启动模块的命名空间。若未指定，则默认为 `<project>/<name>`。
+- `ray_namespace`: 当前实验中启动模块的命名空间。若未指定，则默认为 `<project>/<group>/<name>`。
 - `ignore_validator_suggestions`：如果设置为`false`，配置验证器将检查GPU内存使用情况，并提出配置更改建议。如果设置为`true`，验证器将不检查GPU内存使用情况。默认值为`false`。
 
 ---
@@ -138,8 +139,8 @@ monitor:
 ```
 
 - `monitor_type`: 监控系统类型。选项：
-  - `wandb`: 记录到 [Weights & Biases](https://docs.wandb.ai/quickstart/)。需要登录并设置 `WANDB_API_KEY`。项目和运行名称与全局配置中的 `project` 和 `name` 字段一致。
-  - `tensorboard`: 记录到 [TensorBoard](https://www.tensorflow.org/tensorboard)。文件保存在 `<checkpoint_root_dir>/<project>/<name>/monitor/tensorboard` 下。
+  - `wandb`: 记录到 [Weights & Biases](https://docs.wandb.ai/quickstart/)。需要登录并设置 `WANDB_API_KEY`。项目和运行名称与全局配置中的 `project` 和 `name` 字段一致；运行按 `group` 字段分组（为空时默认使用 `name`）。
+  - `tensorboard`: 记录到 [TensorBoard](https://www.tensorflow.org/tensorboard)。文件保存在 `<checkpoint_root_dir>/<project>/<group>/<name>/monitor/tensorboard` 下。
   - `mlflow`: 记录到 [MLFlow](https://mlflow.org/)。如果设置了 [MLFlow 认证](https://mlflow.org/docs/latest/ml/auth/)，请在运行前将 `MLFLOW_TRACKING_USERNAME` 和 `MLFLOW_TRACKING_PASSWORD` 设置为环境变量。
 - `monitor_args`: 初始化监控器的参数字典。
   - 对于 `wandb`：
@@ -149,7 +150,7 @@ monitor:
     - `uri`: MLFlow 实例的 URI。强烈建议设置；默认为 `http://localhost:5000`。
     - `username`: 若设置，将覆盖 `MLFLOW_TRACKING_USERNAME`。
     - `password`: 若设置，将覆盖 `MLFLOW_TRACKING_PASSWORD`。
-- `enable_ray_timeline`: 若为 `True`，将导出一个 `timeline.json` 文件到 `<checkpoint_root_dir>/<project>/<name>/monitor`。可在 Chrome 浏览器中访问 [chrome://tracing](chrome://tracing) 查看。
+- `enable_ray_timeline`: 若为 `True`，将导出一个 `timeline.json` 文件到 `<checkpoint_root_dir>/<project>/<group>/<name>/monitor`。可在 Chrome 浏览器中访问 [chrome://tracing](chrome://tracing) 查看。
 
 ---
 
@@ -400,6 +401,8 @@ buffer:
 explorer:
   name: explorer
   runner_per_model: 8
+  runner_prepare_concurrency: 8
+  runner_prepare_max_retries: 2
   concurrent_mode: sequential
   max_repeat_times_per_runner: null
   max_timeout: 900
@@ -409,23 +412,29 @@ explorer:
     engine_type: vllm
     engine_num: 1
     tensor_parallel_size: 1
-    enable_history: False
+    enable_history: false
+    enable_openai_api: false
+    nnodes: 1
   auxiliary_models:
   - model_path: Qwen/Qwen2.5-7B-Instruct
     tensor_parallel_size: 1
   eval_interval: 100
-  eval_on_startup: True
+  eval_on_startup: true
   over_rollout:
     ratio: 0.0
     wait_after_min: 30.0
+    return_partial_tasks: false
   dynamic_timeout:
     enable: false
+    warmup_min_steps: 1
     ratio: 3.0
   runner_state_report_interval: 0
 ```
 
 - `name`: explorer 的名称。该名称将用作 Ray actor 的名称，因此必须唯一。
 - `runner_per_model`: 每个推理引擎实例所服务的 WorkflowRunner 数量。
+- `runner_prepare_concurrency`: 启动时并发创建 runner 的最大数量。一次性创建所有 runner 会让大量 worker 同时调用 `getenv()`，可能与库的 `setenv()` 竞争导致 glibc 段错误；该参数限制并发数（runner 总数不变）。
+- `runner_prepare_max_retries`: 单个 runner 的 prepare 在偶发启动崩溃（例如 glibc getenv 竞争）时的重试次数。重试在同一并发槽内进行并带退避，因此不会超过 `runner_prepare_concurrency`。
 - `concurrent_mode`: 执行一组任务（例如 GRPO 算法中对一个任务的多次重复执行）的并发模式。支持如下选项：
   - `sequential`: 顺序执行（默认）。每次执行一个任务，等待其完成后再执行下一个任务。对 workflow 的实现要求最低，但吞吐量也最差。
   - `asynchronous`: 异步执行。使用异步模式一次性提交所有任务，并在任务完成后收集结果。要求 workflow 正确地实现了异步调用接口，并且 workflow 之间没有共享状态，以避免竞态条件。吞吐量优于顺序执行，但具体性能受限于 workflow 的实现。
@@ -441,15 +450,19 @@ explorer:
 - `rollout_model.engine_num`: 推理引擎实例的数量。
 - `rollout_model.tensor_parallel_size`: 每个实例的张量并行度。
 - `rollout_model.enable_history`: 是否启用模型调用历史记录功能。若设为 `True`，模型会自动记录调用返回的 experience。请定期通过 `extract_experience_from_history` 提取历史，以避免内存溢出。默认为 `False`。
-- `auxiliary_models`: 用于自定义工作流的辅助模型。
+- `rollout_model.enable_openai_api`: 是否启用 OpenAI API 推理服务。默认为 `False`。
+- `rollout_model.nnodes`: 部署每个推理引擎实例所需的节点数。默认为 `1`。仅在 `rollout_model.engine_type` 为 `vllm` 或 `sglang` 时生效。当 `nnodes` 大于 `1` 时，每个引擎实例将会占用完整的 `nnodes` 个节点的 GPU 资源 (`nnodes * cluster.gpu_per_node`)，不支持与其他实例共享节点。
+- `auxiliary_models`: 用于自定义工作流的辅助模型，配置与 `rollout_model` 相同。
 - `eval_interval`: 模型评估的间隔（以 step 为单位）。
 - `eval_on_startup`: 是否在启动时评估模型。更准确地说，是在第 0 步使用原始模型评估，因此中断训练后重启时不会触发该行为。
 - `over_rollout`: [实验性] 超量 rollout 机制的配置，允许 explorer 在每个步骤中使用少于完整批次大小的任务继续进行。这在某些任务显著耗时较长的场景中能有效地提高吞吐量。仅当使用动态同步（`synchronizer.sync_style` 不是 `fixed`）时适用。
   - `ratio`: explorer 在每个步骤中仅等待 `(1 - ratio) * batch_size` 的任务。默认为 `0.0`，表示等待所有任务。
   - `wait_after_min`: 达到最小任务阈值后，等待此秒数后再继续。
-- `dynamic_timeout`: [实验性] 动态超时机制的配置，根据成功任务的平均耗时调整每个任务的超时时间。
+  - `return_partial_tasks`: 是否返回仅部分完成的任务结果（例如，在 GRPO 中仅完成部分 run 的任务）。默认为 `false`，表示仅返回已完成组内所有 run 的任务结果。
+- `dynamic_timeout`: [实验性] 动态超时机制的配置，根据历史执行耗时动态调整每个调度执行单元的超时时间。
   - `enable`: 是否启用动态超时。默认为 `false`。
-  - `ratio`: 每个任务的超时时间动态设置为 `average_time_per_success_task * ratio`。默认为 `3.0`。
+  - `warmup_min_steps`: 动态超时生效前至少需要观测到多少个完整结束的非评估 step。默认为 `1`。它等价于预热所需的 batch/step 数，可以避免只根据少量较快完成的早期任务就提前启用动态超时。
+  - `ratio`: 每个调度执行单元的超时时间动态设置为 `average_time_per_success_execution * ratio`。默认为 `3.0`。
 - `runner_state_report_interval`: WorkflowRunner 报告自身状态的时间间隔（秒）。若设为大于 0 的值，工作流执行器会定期将其状态报告给 explorer 主进程并打印在命令行中，以便监控其运行状态。默认为 `0`，表示不启用此功能。推荐如需使用此功能，将其设置为 `10` 秒或更长时间以减少对性能的影响。
 
 ---
@@ -589,7 +602,7 @@ log:
 ```
 
 - `level`: 日志级别（支持 `DEBUG`、`INFO`、`WARNING`、`ERROR`）。
-- `group_by_node`: 是否按节点 IP 分组日志。若设为 `True`，actor 的日志将保存到 `<checkpoint_root_dir>/<project>/<name>/log/<node_ip>/<actor_name>.log`，否则保存到 `<checkpoint_root_dir>/<project>/<name>/log/<actor_name>.log`。
+- `group_by_node`: 是否按节点 IP 分组日志。若设为 `True`，actor 的日志将保存到 `<checkpoint_root_dir>/<project>/<group>/<name>/log/<node_ip>/<actor_name>.log`，否则保存到 `<checkpoint_root_dir>/<project>/<group>/<name>/log/<actor_name>.log`。
 
 ---
 
