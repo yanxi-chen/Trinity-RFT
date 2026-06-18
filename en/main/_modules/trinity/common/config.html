@@ -712,6 +712,7 @@ window.runMermaid = runMermaid;</script>
 <li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.trainer.verl.fsdp_engine.html">trinity.trainer.verl.fsdp_engine module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.trainer.verl.losses.html">trinity.trainer.verl.losses module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.trainer.verl.megatron_engine.html">trinity.trainer.verl.megatron_engine module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.trainer.verl.monkey_patch.html">trinity.trainer.verl.monkey_patch module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.trainer.verl.trainer.html">trinity.trainer.verl.trainer module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.trainer.verl.utils.html">trinity.trainer.verl.utils module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.trainer.verl.workers.html">trinity.trainer.verl.workers module</a></li>
@@ -817,6 +818,7 @@ window.runMermaid = runMermaid;</script>
 <li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.common.models.sglang_model.html">trinity.common.models.sglang_model module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.common.models.tinker_model.html">trinity.common.models.tinker_model module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.common.models.utils.html">trinity.common.models.utils module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.common.models.vllm_extension.html">trinity.common.models.vllm_extension module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.common.models.vllm_model.html">trinity.common.models.vllm_model module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../build_api/trinity.common.models.vllm_worker.html">trinity.common.models.vllm_worker module</a></li>
 </ul>
@@ -875,6 +877,7 @@ window.runMermaid = runMermaid;</script>
 <li class="toctree-l3"><a class="reference internal" href="../../../build_api/trinity.utils.monitor.html">trinity.utils.monitor module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../build_api/trinity.utils.plugin_loader.html">trinity.utils.plugin_loader module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../build_api/trinity.utils.registry.html">trinity.utils.registry module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../build_api/trinity.utils.stream_saver.html">trinity.utils.stream_saver module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../build_api/trinity.utils.timer.html">trinity.utils.timer module</a></li>
 </ul>
 </details></li>
@@ -1618,6 +1621,16 @@ window.runMermaid = runMermaid;</script>
     <span class="n">engine_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;vllm&quot;</span>
     <span class="n">engine_num</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span>
     <span class="n">tensor_parallel_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">data_parallel_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">pipeline_parallel_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">enable_expert_parallel</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="c1"># ! DO NOT SET</span>
+    <span class="c1"># It will be inferred as tensor_parallel_size * data_parallel_size * pipeline_parallel_size.</span>
+    <span class="n">gpu_per_engine</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="c1"># Extra engine-specific initialization args for inference backends.</span>
+    <span class="n">extra_engine_args</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
     <span class="n">use_v1</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="n">enforce_eager</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="n">enable_prefix_caching</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
@@ -1674,20 +1687,21 @@ window.runMermaid = runMermaid;</script>
     <span class="c1"># For external API-based engine</span>
     <span class="n">external_model_config</span><span class="p">:</span> <span class="n">ExternalModelConfig</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">ExternalModelConfig</span><span class="p">)</span>
 
-    <span class="c1"># for multi-node setup</span>
+    <span class="c1"># ! DO NOT SET, for multi node setup</span>
     <span class="n">nnodes</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="c1"># ! DO NOT SET</span>
     <span class="n">node_rank</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">enable_return_routed_experts</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
 
-    <span class="c1"># Buffer size (bytes) for batched NCCL weight sync. Controls peak GPU memory during sync.</span>
-    <span class="n">weight_sync_buffer_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span>  <span class="c1"># 4 GB</span>
+    <span class="c1"># Buffer size (MB) for batched NCCL weight sync. Controls peak GPU memory during sync.</span>
+    <span class="n">weight_sync_buffer_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1024</span>  <span class="c1"># MB</span>
 
     <span class="c1"># ! DO NOT SET</span>
     <span class="n">bundle_indices</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
     <span class="n">engine_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">ray_namespace</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">ray_actor_name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">sync_method</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">SyncMethod</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">checkpoint_job_dir</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">cuda_visible_devices</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="c1"># ! DO NOT SET, automatically set from model.lora_configs</span>

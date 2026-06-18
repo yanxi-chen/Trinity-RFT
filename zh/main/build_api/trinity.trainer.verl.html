@@ -277,6 +277,7 @@
 <li class="toctree-l4"><a class="reference internal" href="trinity.trainer.verl.fsdp_engine.html">trinity.trainer.verl.fsdp_engine module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.trainer.verl.losses.html">trinity.trainer.verl.losses module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.trainer.verl.megatron_engine.html">trinity.trainer.verl.megatron_engine module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.trainer.verl.monkey_patch.html">trinity.trainer.verl.monkey_patch module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.trainer.verl.trainer.html">trinity.trainer.verl.trainer module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.trainer.verl.utils.html">trinity.trainer.verl.utils module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.trainer.verl.workers.html">trinity.trainer.verl.workers module</a></li>
@@ -382,6 +383,7 @@
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.models.sglang_model.html">trinity.common.models.sglang_model module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.models.tinker_model.html">trinity.common.models.tinker_model module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.models.utils.html">trinity.common.models.utils module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.models.vllm_extension.html">trinity.common.models.vllm_extension module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.models.vllm_model.html">trinity.common.models.vllm_model module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.models.vllm_worker.html">trinity.common.models.vllm_worker module</a></li>
 </ul>
@@ -440,6 +442,7 @@
 <li class="toctree-l3"><a class="reference internal" href="trinity.utils.monitor.html">trinity.utils.monitor module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.utils.plugin_loader.html">trinity.utils.plugin_loader module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.utils.registry.html">trinity.utils.registry module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="trinity.utils.stream_saver.html">trinity.utils.stream_saver module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.utils.timer.html">trinity.utils.timer module</a></li>
 </ul>
 </details></li>
@@ -693,6 +696,11 @@
 <li class="toctree-l2"><a class="reference internal" href="trinity.trainer.verl.megatron_engine.html#trinity.trainer.verl.megatron_engine.megatron_save_state_dict"><code class="docutils literal notranslate"><span class="pre">megatron_save_state_dict()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="trinity.trainer.verl.megatron_engine.html#trinity.trainer.verl.megatron_engine.megatron_upload_state_dict"><code class="docutils literal notranslate"><span class="pre">megatron_upload_state_dict()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="trinity.trainer.verl.megatron_engine.html#trinity.trainer.verl.megatron_engine.megatron_sync_weight_nccl"><code class="docutils literal notranslate"><span class="pre">megatron_sync_weight_nccl()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="trinity.trainer.verl.monkey_patch.html">trinity.trainer.verl.monkey_patch module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="trinity.trainer.verl.monkey_patch.html#trinity.trainer.verl.monkey_patch.save_checkpoint"><code class="docutils literal notranslate"><span class="pre">save_checkpoint()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="trinity.trainer.verl.monkey_patch.html#trinity.trainer.verl.monkey_patch.patch_verl_engine"><code class="docutils literal notranslate"><span class="pre">patch_verl_engine()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="trinity.trainer.verl.trainer.html">trinity.trainer.verl.trainer module</a></li>
