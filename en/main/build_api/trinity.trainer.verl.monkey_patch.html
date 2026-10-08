@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>trinity.trainer.verl.monkey_patch module &#8212; Trinity-RFT 0.5.2 documentation</title>
+    <title>trinity.trainer.verl.monkey_patch module &#8212; Trinity-RFT 0.6.0 documentation</title>
   
   
   
@@ -27,23 +27,24 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=4418a689" />
   
   <!-- So that users can add custom icons -->
-  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <script defer src="../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
 
-    <script src="../_static/documentation_options.js?v=4861a642"></script>
+    <script src="../_static/documentation_options.js?v=3af6fc4c"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'build_api/trinity.trainer.verl.monkey_patch';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -51,21 +52,27 @@
     <link rel="prev" title="trinity.trainer.verl.megatron_engine module" href="trinity.trainer.verl.megatron_engine.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="0.5.2" />
+  <meta name="docsearch:version" content="0.6.0" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
   </head>
-  
-  
-  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
-
+  <body data-default-mode="">
   
   
   <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
   
   <div id="pst-scroll-pixel-helper"></div>
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
+  
+  
+  
   
   <dialog id="pst-search-dialog">
     
@@ -91,7 +98,51 @@
 </div>
 
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
     </header>
   
 
@@ -130,8 +181,8 @@
       
     
     
-    <img src="../_static/logo.svg" class="logo__image only-light" alt="Trinity-RFT 0.5.2 documentation - Home"/>
-    <img src="../_static/logo.svg" class="logo__image only-dark pst-js-only" alt="Trinity-RFT 0.5.2 documentation - Home"/>
+    <img src="../_static/logo.svg" class="logo__image only-light" alt="Trinity-RFT 0.6.0 documentation - Home"/>
+    <img src="../_static/logo.svg" class="logo__image only-dark pst-js-only" alt="Trinity-RFT 0.6.0 documentation - Home"/>
   
   
 </a></div>
@@ -267,6 +318,7 @@
 </details></li>
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="trinity.trainer.html">trinity.trainer package</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l3 has-children"><a class="reference internal" href="trinity.trainer.tinker.html">trinity.trainer.tinker package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="trinity.trainer.tinker.server_loss.html">trinity.trainer.tinker.server_loss module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.trainer.tinker.tinker_trainer.html">trinity.trainer.tinker.tinker_trainer module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.trainer.tinker.utils.html">trinity.trainer.tinker.utils module</a></li>
 </ul>
@@ -406,6 +458,7 @@
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.rewards.naive_dapo_score.html">trinity.common.rewards.naive_dapo_score module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.rewards.qwen25_eval.html">trinity.common.rewards.qwen25_eval module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.rewards.reward_fn.html">trinity.common.rewards.reward_fn module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.rewards.rlcr_reward.html">trinity.common.rewards.rlcr_reward module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.rewards.tool_reward.html">trinity.common.rewards.tool_reward module</a></li>
 </ul>
 </details></li>
@@ -422,18 +475,21 @@
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.workflows.rubric_judge_workflow.html">trinity.common.workflows.rubric_judge_workflow module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.workflows.simple_mm_workflow.html">trinity.common.workflows.simple_mm_workflow module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.workflows.step_wise_workflow.html">trinity.common.workflows.step_wise_workflow module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.workflows.thinking_budget_workflow.html">trinity.common.workflows.thinking_budget_workflow module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.workflows.workflow.html">trinity.common.workflows.workflow module</a></li>
 </ul>
 </details></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.common.config.html">trinity.common.config module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.common.config_validator.html">trinity.common.config_validator module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.common.constants.html">trinity.common.constants module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="trinity.common.dataclass_utils.html">trinity.common.dataclass_utils module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.common.experience.html">trinity.common.experience module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.common.experience_visualizer.html">trinity.common.experience_visualizer module</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="trinity.utils.html">trinity.utils package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="trinity.utils.annotations.html">trinity.utils.annotations module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="trinity.utils.device.html">trinity.utils.device module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.utils.distributed.html">trinity.utils.distributed module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.utils.dlc_utils.html">trinity.utils.dlc_utils module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.utils.log.html">trinity.utils.log module</a></li>
@@ -611,11 +667,18 @@
 
 
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button>
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div>
 
 
 <button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
@@ -643,8 +706,12 @@
                 <h2> Contents </h2>
             </div>
             <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.trainer.verl.monkey_patch.load_valuehead_model"><code class="docutils literal notranslate"><span class="pre">load_valuehead_model()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.trainer.verl.monkey_patch.left_right_2_no_padding"><code class="docutils literal notranslate"><span class="pre">left_right_2_no_padding()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.trainer.verl.monkey_patch.save_checkpoint"><code class="docutils literal notranslate"><span class="pre">save_checkpoint()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.trainer.verl.monkey_patch.get_seq_idx"><code class="docutils literal notranslate"><span class="pre">get_seq_idx()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.trainer.verl.monkey_patch.prepare_model_inputs"><code class="docutils literal notranslate"><span class="pre">prepare_model_inputs()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.trainer.verl.monkey_patch.patch_verl_engine"><code class="docutils literal notranslate"><span class="pre">patch_verl_engine()</span></code></a></li>
 </ul>
             </nav>
@@ -660,14 +727,71 @@
   <section id="module-trinity.trainer.verl.monkey_patch">
 <span id="trinity-trainer-verl-monkey-patch-module"></span><h1>trinity.trainer.verl.monkey_patch module<a class="headerlink" href="#module-trinity.trainer.verl.monkey_patch" title="Link to this heading">#</a></h1>
 <dl class="py function">
+<dt class="sig sig-object py" id="trinity.trainer.verl.monkey_patch.load_valuehead_model">
+<span class="sig-prename descclassname"><span class="pre">trinity.trainer.verl.monkey_patch.</span></span><span class="sig-name descname"><span class="pre">load_valuehead_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">local_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">torch_dtype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trust_remote_code</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_meta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trinity/trainer/verl/monkey_patch.html#load_valuehead_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trinity.trainer.verl.monkey_patch.load_valuehead_model" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="trinity.trainer.verl.monkey_patch.left_right_2_no_padding">
+<span class="sig-prename descclassname"><span class="pre">trinity.trainer.verl.monkey_patch.</span></span><span class="sig-name descname"><span class="pre">left_right_2_no_padding</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">TensorDict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">TensorDict</span></span></span><a class="reference internal" href="../_modules/trinity/trainer/verl/monkey_patch.html#left_right_2_no_padding"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trinity.trainer.verl.monkey_patch.left_right_2_no_padding" title="Link to this definition">#</a></dt>
+<dd><p>Convert TensorDict from left-right padding to no-padding format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> – TensorDict with “input_ids”, “attention_mask”, “response_mask”, “position_ids”</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>TensorDict with
+- Tensor includes NestedTensors like “input_ids”, “loss_mask”, “position_ids”
+- NonTensorData includes “max_seq_len”, “max_response_len”, “indices”</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>data</p>
+</dd>
+</dl>
+<p>Note:
+1. the return input_ids/position_ids/loss_mask are nested tensor.
+2. we will remove “attention_mask”, “response” in the return data, but “response_mask” is kept.</p>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="trinity.trainer.verl.monkey_patch.save_checkpoint">
 <span class="sig-prename descclassname"><span class="pre">trinity.trainer.verl.monkey_patch.</span></span><span class="sig-name descname"><span class="pre">save_checkpoint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">local_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hdfs_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">global_step</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_ckpt_to_keep</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/trinity/trainer/verl/monkey_patch.html#save_checkpoint"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trinity.trainer.verl.monkey_patch.save_checkpoint" title="Link to this definition">#</a></dt>
 <dd><p>Save FSDP checkpoint, handling parameter offload as needed.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="trinity.trainer.verl.monkey_patch.get_seq_idx">
+<span class="sig-prename descclassname"><span class="pre">trinity.trainer.verl.monkey_patch.</span></span><span class="sig-name descname"><span class="pre">get_seq_idx</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cu_seqlens</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">total_nnz</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="../_modules/trinity/trainer/verl/monkey_patch.html#get_seq_idx"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trinity.trainer.verl.monkey_patch.get_seq_idx" title="Link to this definition">#</a></dt>
+<dd><p>Build <code class="docutils literal notranslate"><span class="pre">seq_idx</span></code> from <code class="docutils literal notranslate"><span class="pre">cu_seqlens</span></code>, mapping each packed position to its
+original sequence id.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cu_seqlens</strong> – Shape <code class="docutils literal notranslate"><span class="pre">(batch</span> <span class="pre">+</span> <span class="pre">1,)</span></code>. Cumulative sequence lengths.</p></li>
+<li><p><strong>total_nnz</strong> – Total number of packed tokens, i.e. <code class="docutils literal notranslate"><span class="pre">cu_seqlens[-1]</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Shape <code class="docutils literal notranslate"><span class="pre">(total_nnz,)</span></code>, where each position is the original sequence id
+(0-indexed). For example, cu_seqlens=[0,3,7,10] -&gt; [0,0,0,1,1,1,1,2,2,2].</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="trinity.trainer.verl.monkey_patch.prepare_model_inputs">
+<span class="sig-prename descclassname"><span class="pre">trinity.trainer.verl.monkey_patch.</span></span><span class="sig-name descname"><span class="pre">prepare_model_inputs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">micro_batch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">TensorDict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trinity/trainer/verl/monkey_patch.html#prepare_model_inputs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trinity.trainer.verl.monkey_patch.prepare_model_inputs" title="Link to this definition">#</a></dt>
+<dd><p>Rewritten <code class="docutils literal notranslate"><span class="pre">FSDPEngineWithLMHead.prepare_model_inputs</span></code> that injects
+<code class="docutils literal notranslate"><span class="pre">seq_idx</span></code> and <code class="docutils literal notranslate"><span class="pre">cu_seqlens</span></code> into model_inputs for packed-sequence
+models (e.g. Qwen3.5 GateDeltaNet).</p>
+<p>This is a full rewrite (not a wrapper) so that the Ulysses SP pad_size
+adjustment on <code class="docutils literal notranslate"><span class="pre">seq_idx</span></code> / <code class="docutils literal notranslate"><span class="pre">cu_seqlens</span></code> is handled inline, right after
+<code class="docutils literal notranslate"><span class="pre">ulysses_pad_and_slice_inputs</span></code> returns <code class="docutils literal notranslate"><span class="pre">pad_size</span></code>.</p>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="trinity.trainer.verl.monkey_patch.patch_verl_engine">
-<span class="sig-prename descclassname"><span class="pre">trinity.trainer.verl.monkey_patch.</span></span><span class="sig-name descname"><span class="pre">patch_verl_engine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">engine</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trinity/trainer/verl/monkey_patch.html#patch_verl_engine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trinity.trainer.verl.monkey_patch.patch_verl_engine" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">trinity.trainer.verl.monkey_patch.</span></span><span class="sig-name descname"><span class="pre">patch_verl_engine</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trinity/trainer/verl/monkey_patch.html#patch_verl_engine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trinity.trainer.verl.monkey_patch.patch_verl_engine" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 </section>
@@ -718,8 +842,12 @@
     <i class="fa-solid fa-list"></i> Contents
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="visible nav section-nav flex-column">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.trainer.verl.monkey_patch.load_valuehead_model"><code class="docutils literal notranslate"><span class="pre">load_valuehead_model()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.trainer.verl.monkey_patch.left_right_2_no_padding"><code class="docutils literal notranslate"><span class="pre">left_right_2_no_padding()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.trainer.verl.monkey_patch.save_checkpoint"><code class="docutils literal notranslate"><span class="pre">save_checkpoint()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.trainer.verl.monkey_patch.get_seq_idx"><code class="docutils literal notranslate"><span class="pre">get_seq_idx()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.trainer.verl.monkey_patch.prepare_model_inputs"><code class="docutils literal notranslate"><span class="pre">prepare_model_inputs()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trinity.trainer.verl.monkey_patch.patch_verl_engine"><code class="docutils literal notranslate"><span class="pre">patch_verl_engine()</span></code></a></li>
 </ul>
   </nav></div>
@@ -769,8 +897,8 @@ By Trinity-RFT Team
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+  <script defer src="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
 
   <footer class="bd-footer">
   </footer>

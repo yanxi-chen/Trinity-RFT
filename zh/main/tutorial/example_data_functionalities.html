@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>数据处理 &#8212; Trinity-RFT 0.5.2 文档</title>
+    <title>数据处理 &#8212; Trinity-RFT 0.6.0 文档</title>
   
   
   
@@ -27,45 +27,52 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=4418a689" />
   
   <!-- So that users can add custom icons -->
-  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <script defer src="../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
 
-    <script src="../_static/documentation_options.js?v=e72cdd47"></script>
+    <script src="../_static/documentation_options.js?v=c38d4306"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
     <script src="../_static/translations.js?v=beaddf03"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'tutorial/example_data_functionalities';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
     <link rel="next" title="样例总览" href="example_dataset_perspective.html" />
     <link rel="prev" title="Megatron-LM 支持" href="example_megatron.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="zh-CN"/>
-  <meta name="docsearch:version" content="0.5.2" />
+  <meta name="docsearch:version" content="0.6.0" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
   </head>
-  
-  
-  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
-
+  <body data-default-mode="">
   
   
   <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">跳转至主要内容</a></div>
+
   
   <div id="pst-scroll-pixel-helper"></div>
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
     <i class="fa-solid fa-arrow-up"></i>回到顶部</button>
-
+  
+  
+  
   
   <dialog id="pst-search-dialog">
     
@@ -91,7 +98,51 @@
 </div>
 
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="网页导航">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="搜索" aria-label="搜索" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">搜索</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="搜索" aria-label="搜索" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">搜索</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="当前页面">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
     </header>
   
 
@@ -130,8 +181,8 @@
       
     
     
-    <img src="../_static/logo.svg" class="logo__image only-light" alt="Trinity-RFT 0.5.2 文档 - Home"/>
-    <img src="../_static/logo.svg" class="logo__image only-dark pst-js-only" alt="Trinity-RFT 0.5.2 文档 - Home"/>
+    <img src="../_static/logo.svg" class="logo__image only-light" alt="Trinity-RFT 0.6.0 文档 - Home"/>
+    <img src="../_static/logo.svg" class="logo__image only-dark pst-js-only" alt="Trinity-RFT 0.6.0 文档 - Home"/>
   
   
 </a></div>
@@ -267,6 +318,7 @@
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../build_api/trinity.trainer.html">trinity.trainer package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../build_api/trinity.trainer.tinker.html">trinity.trainer.tinker package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.trainer.tinker.server_loss.html">trinity.trainer.tinker.server_loss module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.trainer.tinker.tinker_trainer.html">trinity.trainer.tinker.tinker_trainer module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.trainer.tinker.utils.html">trinity.trainer.tinker.utils module</a></li>
 </ul>
@@ -406,6 +458,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.common.rewards.naive_dapo_score.html">trinity.common.rewards.naive_dapo_score module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.common.rewards.qwen25_eval.html">trinity.common.rewards.qwen25_eval module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.common.rewards.reward_fn.html">trinity.common.rewards.reward_fn module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.common.rewards.rlcr_reward.html">trinity.common.rewards.rlcr_reward module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.common.rewards.tool_reward.html">trinity.common.rewards.tool_reward module</a></li>
 </ul>
 </details></li>
@@ -422,18 +475,21 @@
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.common.workflows.rubric_judge_workflow.html">trinity.common.workflows.rubric_judge_workflow module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.common.workflows.simple_mm_workflow.html">trinity.common.workflows.simple_mm_workflow module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.common.workflows.step_wise_workflow.html">trinity.common.workflows.step_wise_workflow module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.common.workflows.thinking_budget_workflow.html">trinity.common.workflows.thinking_budget_workflow module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../build_api/trinity.common.workflows.workflow.html">trinity.common.workflows.workflow module</a></li>
 </ul>
 </details></li>
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.common.config.html">trinity.common.config module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.common.config_validator.html">trinity.common.config_validator module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.common.constants.html">trinity.common.constants module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.common.dataclass_utils.html">trinity.common.dataclass_utils module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.common.experience.html">trinity.common.experience module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.common.experience_visualizer.html">trinity.common.experience_visualizer module</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../build_api/trinity.utils.html">trinity.utils package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.utils.annotations.html">trinity.utils.annotations module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.utils.device.html">trinity.utils.device module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.utils.distributed.html">trinity.utils.distributed module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.utils.dlc_utils.html">trinity.utils.dlc_utils module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../build_api/trinity.utils.log.html">trinity.utils.log module</a></li>
@@ -611,11 +667,18 @@
 
 
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="亮色"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="暗色"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button>
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="亮色"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="暗色"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>亮色</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>暗色</button></li>
+  </ul>
+</div>
 
 
 <button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="搜索" aria-label="搜索" data-bs-placement="bottom" data-bs-toggle="tooltip">
@@ -643,7 +706,7 @@
                 <h2> 目录 </h2>
             </div>
             <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">概述</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task">示例：Task 流水线的数据处理器</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">配置数据处理器</a></li>
@@ -698,7 +761,7 @@
 </ol>
 <p>开始之前，请根据 <a class="reference internal" href="example_reasoning_basic.html#step-0-environment-preparation"><span class="std std-ref">快速入门中的安装部分</span></a> 配置 Trinity-RFT 的主环境，并在环境变量 <code class="docutils literal notranslate"><span class="pre">OPENAI_BASE_URL</span></code> 和 <code class="docutils literal notranslate"><span class="pre">OPENAI_API_KEY</span></code> 中设置基础 URL 和 API 密钥，以便在需要时支持智能体或 API 模型调用。</p>
 <p>此外，为了能够自动启动数据处理器服务，你还需要安装 <code class="docutils literal notranslate"><span class="pre">data</span></code> 分支的依赖项：</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;.[data]&quot;</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span><span class="s2">".[data]"</span>
 </pre></div>
 </div>
 <section id="id3">
@@ -710,15 +773,15 @@
 <span class="w">  </span><span class="nt">task_pipeline</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">num_process</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">32</span>
 <span class="w">    </span><span class="nt">operators</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;llm_difficulty_score_filter&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">"llm_difficulty_score_filter"</span>
 <span class="w">        </span><span class="nt">args</span><span class="p">:</span>
-<span class="w">          </span><span class="nt">api_or_hf_model</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;qwen2.5-7b-instruct&quot;</span>
+<span class="w">          </span><span class="nt">api_or_hf_model</span><span class="p">:</span><span class="w"> </span><span class="s">"qwen2.5-7b-instruct"</span>
 <span class="w">          </span><span class="nt">min_score</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
-<span class="w">          </span><span class="nt">input_keys</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;question&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;answer&quot;</span><span class="p p-Indicator">]</span>
-<span class="w">          </span><span class="nt">field_names</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;Question&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;Answer&quot;</span><span class="p p-Indicator">]</span>
+<span class="w">          </span><span class="nt">input_keys</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"question"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"answer"</span><span class="p p-Indicator">]</span>
+<span class="w">          </span><span class="nt">field_names</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"Question"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"Answer"</span><span class="p p-Indicator">]</span>
 <span class="w">    </span><span class="nt">inputs</span><span class="p">:</span><span class="w">  </span><span class="c1"># the output will be set to the explorer input automatically</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${oc.env:TRINITY_TASKSET_PATH}</span>
-<span class="w">    </span><span class="nt">target_fields</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;question&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;answer&quot;</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">target_fields</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"question"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"answer"</span><span class="p p-Indicator">]</span>
 <span class="nt">service</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">data_juicer</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">auto_start</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
@@ -781,7 +844,7 @@ python<span class="w"> </span>scripts/data/start_servers.py
 <p>在本示例中，假设你需要为 explorer 输出的 experience 数据添加额外的奖励项，以评估其质量得分。可将 <code class="docutils literal notranslate"><span class="pre">experience_pipeline</span></code> 配置设置如下：</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">service</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">data_juicer</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">server_url</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;http://127.0.0.1:5005&#39;</span>
+<span class="w">    </span><span class="nt">server_url</span><span class="p">:</span><span class="w"> </span><span class="s">'http://127.0.0.1:5005'</span>
 <span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5005</span>
 <span class="nt">data_processor</span><span class="p">:</span>
 <span class="w">  </span><span class="c1"># experience pipeline related</span>
@@ -789,11 +852,11 @@ python<span class="w"> </span>scripts/data/start_servers.py
 <span class="w">    </span><span class="nt">operators</span><span class="p">:</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">data_juicer</span>
 <span class="w">        </span><span class="nt">args</span><span class="p">:</span>
-<span class="w">          </span><span class="nt">config_path</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;examples/grpo_gsm8k_experience_pipeline/dj_scoring_exp.yaml&#39;</span>
+<span class="w">          </span><span class="nt">config_path</span><span class="p">:</span><span class="w"> </span><span class="s">'examples/grpo_gsm8k_experience_pipeline/dj_scoring_exp.yaml'</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">reward_shaping_mapper</span>
 <span class="w">        </span><span class="nt">args</span><span class="p">:</span>
 <span class="w">          </span><span class="nt">reward_shaping_configs</span><span class="p">:</span>
-<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">stats_key</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;llm_quality_score&#39;</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">stats_key</span><span class="p">:</span><span class="w"> </span><span class="s">'llm_quality_score'</span>
 <span class="w">              </span><span class="nt">op_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ADD</span>
 <span class="w">              </span><span class="nt">weight</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0</span>
 <span class="w">    </span><span class="nt">save_input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
@@ -817,16 +880,16 @@ python<span class="w"> </span>scripts/data/start_servers.py
 <p>默认情况下， experience 由 explorer 生成并送入 experience 流水线，处理后输出至 trainer。因此通常无需设置 experience 流水线的输入输出缓冲区。</p>
 <p>此外，<code class="docutils literal notranslate"><span class="pre">experience_pipeline</span></code> 中还包含若干针对 data-juicer 算子的配置项，用于计算奖励重塑所用的统计量。此处使用的 data-juicer 配置如下：</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># This is a Data-Juicer data processing recipe</span>
-<span class="nt">project_name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;gsm-8k-experience-quality&#39;</span>
+<span class="nt">project_name</span><span class="p">:</span><span class="w"> </span><span class="s">'gsm-8k-experience-quality'</span>
 
 <span class="nt">np</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">32</span>
 
 <span class="nt">process</span><span class="p">:</span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">llm_quality_score_filter</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">api_or_hf_model</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;qwen2.5-32b-instruct&quot;</span><span class="w">  </span><span class="c1"># use &quot;qwen2.5-32b-instruct&quot; to calculate the quality scores.</span>
+<span class="w">      </span><span class="nt">api_or_hf_model</span><span class="p">:</span><span class="w"> </span><span class="s">"qwen2.5-32b-instruct"</span><span class="w">  </span><span class="c1"># use "qwen2.5-32b-instruct" to calculate the quality scores.</span>
 <span class="w">      </span><span class="nt">min_score</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
-<span class="w">      </span><span class="nt">input_keys</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;prompt_text&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;response_text&quot;</span><span class="p p-Indicator">]</span><span class="w">  </span><span class="c1"># set input_keys and field_names to the existing key names in gsm-8k. Here calculating the difficulty scores according to both questions and answers.</span>
-<span class="w">      </span><span class="nt">field_names</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;prompt&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;response&quot;</span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="nt">input_keys</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"prompt_text"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"response_text"</span><span class="p p-Indicator">]</span><span class="w">  </span><span class="c1"># set input_keys and field_names to the existing key names in gsm-8k. Here calculating the difficulty scores according to both questions and answers.</span>
+<span class="w">      </span><span class="nt">field_names</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"prompt"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"response"</span><span class="p p-Indicator">]</span>
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">data_processor</span></code> 部分的所有配置项详见 <a class="reference internal" href="trinity_configs.html"><span class="std std-doc">此处</span></a>。本示例对应的 GSM8K 配置文件可在 <a class="reference external" href="https://github.com/agentscope-ai/Trinity-RFT/tree/main/examples/grpo_gsm8k_experience_pipeline/gsm8k.yaml">该配置文件</a> 中找到。</p>
@@ -852,7 +915,7 @@ trinity<span class="w"> </span>run<span class="w"> </span>--config<span class="w
 <p>有时你可能需要对原始数据引入人工反馈。本示例将介绍如何标注原始数据，以在训练前获得更高质量的数据集。本示例使用一个示例问答数据集，尝试为 DPO 方法选择“chosen”和“rejected”的回复。</p>
 <p>开始前，请根据 README 文件中的安装部分配置 Trinity-RFT 主环境，并从 Data-Juicer 源码 <a class="reference external" href="https://github.com/datajuicer/data-juicer/tree/main/tools/humanops">启动 label-studio 服务</a>。</p>
 <p>本示例中，我们手动启动数据处理器服务，因此需安装 <code class="docutils literal notranslate"><span class="pre">data</span></code> 分支的依赖项：</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;.[data]&quot;</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span><span class="s2">".[data]"</span>
 </pre></div>
 </div>
 <section id="id8">
@@ -865,10 +928,10 @@ trinity<span class="w"> </span>run<span class="w"> </span>--config<span class="w
 <span class="w">  </span><span class="nt">task_pipeline</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">num_process</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
 <span class="w">    </span><span class="nt">operators</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;human_preference_annotation_mapper&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">"human_preference_annotation_mapper"</span>
 <span class="w">        </span><span class="nt">args</span><span class="p">:</span>
 <span class="w">          </span><span class="c1"># general annotation project settings</span>
-<span class="w">          </span><span class="nt">project_name_prefix</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Human_Preference_Annotation_Demo&quot;</span>
+<span class="w">          </span><span class="nt">project_name_prefix</span><span class="p">:</span><span class="w"> </span><span class="s">"Human_Preference_Annotation_Demo"</span>
 <span class="w">          </span><span class="nt">wait_for_annotations</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">  </span><span class="c1"># Whether to wait for annotations to complete</span>
 <span class="w">          </span><span class="nt">timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3600</span><span class="w">  </span><span class="c1"># Maximum time to wait for annotations in seconds (1 hour)</span>
 <span class="w">          </span><span class="nt">poll_interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span><span class="w">  </span><span class="c1"># Time between annotation status checks in seconds</span>
@@ -877,18 +940,18 @@ trinity<span class="w"> </span>run<span class="w"> </span>--config<span class="w
 <span class="w">            </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 
 <span class="w">          </span><span class="c1"># label studio connection settings</span>
-<span class="w">          </span><span class="nt">api_url</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;http://localhost:7070&quot;</span><span class="w">  </span><span class="c1"># Default Label Studio URL</span>
-<span class="w">          </span><span class="nt">api_key</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;YOUR_API_KEY&quot;</span><span class="w">  </span><span class="c1"># Your API key for label studuio authentication, which can be set when starting the label-studio service</span>
+<span class="w">          </span><span class="nt">api_url</span><span class="p">:</span><span class="w"> </span><span class="s">"http://localhost:7070"</span><span class="w">  </span><span class="c1"># Default Label Studio URL</span>
+<span class="w">          </span><span class="nt">api_key</span><span class="p">:</span><span class="w"> </span><span class="s">"YOUR_API_KEY"</span><span class="w">  </span><span class="c1"># Your API key for label studuio authentication, which can be set when starting the label-studio service</span>
 
 <span class="w">          </span><span class="c1"># human preference annotation settings</span>
-<span class="w">          </span><span class="nt">prompt_key</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;prompt&quot;</span><span class="w">  </span><span class="c1"># Prompt field</span>
-<span class="w">          </span><span class="nt">answer1_key</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;answer1&quot;</span><span class="w">  </span><span class="c1"># First answer option</span>
-<span class="w">          </span><span class="nt">answer2_key</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;answer2&quot;</span><span class="w">  </span><span class="c1"># Second answer option</span>
-<span class="w">          </span><span class="nt">chosen_key</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;chosen&quot;</span><span class="w">  </span><span class="c1"># Chosen field</span>
-<span class="w">          </span><span class="nt">rejected_key</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;rejected&quot;</span><span class="w">  </span><span class="c1"># Rejected field</span>
+<span class="w">          </span><span class="nt">prompt_key</span><span class="p">:</span><span class="w"> </span><span class="s">"prompt"</span><span class="w">  </span><span class="c1"># Prompt field</span>
+<span class="w">          </span><span class="nt">answer1_key</span><span class="p">:</span><span class="w"> </span><span class="s">"answer1"</span><span class="w">  </span><span class="c1"># First answer option</span>
+<span class="w">          </span><span class="nt">answer2_key</span><span class="p">:</span><span class="w"> </span><span class="s">"answer2"</span><span class="w">  </span><span class="c1"># Second answer option</span>
+<span class="w">          </span><span class="nt">chosen_key</span><span class="p">:</span><span class="w"> </span><span class="s">"chosen"</span><span class="w">  </span><span class="c1"># Chosen field</span>
+<span class="w">          </span><span class="nt">rejected_key</span><span class="p">:</span><span class="w"> </span><span class="s">"rejected"</span><span class="w">  </span><span class="c1"># Rejected field</span>
 <span class="w">    </span><span class="nt">inputs</span><span class="p">:</span><span class="w">  </span><span class="c1"># the output will be set to the explorer input automatically</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;examples/dpo_human_in_the_loop/demo-data.jsonl&#39;</span>
-<span class="w">    </span><span class="nt">target_fields</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;prompt&quot;</span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">'examples/dpo_human_in_the_loop/demo-data.jsonl'</span>
+<span class="w">    </span><span class="nt">target_fields</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"prompt"</span><span class="p p-Indicator">]</span>
 <span class="nt">service</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">data_juicer</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">auto_start</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
@@ -960,7 +1023,7 @@ trinity<span class="w"> </span>run<span class="w"> </span>--config<span class="w
     <i class="fa-solid fa-list"></i> 目录
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="visible nav section-nav flex-column">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">概述</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task">示例：Task 流水线的数据处理器</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">配置数据处理器</a></li>
@@ -1026,8 +1089,8 @@ trinity<span class="w"> </span>run<span class="w"> </span>--config<span class="w
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+  <script defer src="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
 
   <footer class="bd-footer">
   </footer>

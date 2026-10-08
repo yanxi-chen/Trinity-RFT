@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>trinity.trainer.verl_legacy.monkey_patch &#8212; Trinity-RFT 0.5.2 文档</title>
+    <title>trinity.trainer.verl_legacy.monkey_patch &#8212; Trinity-RFT 0.6.0 文档</title>
   
   
   
@@ -26,24 +26,23 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
-<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+  <link href="../../../../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
-    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/sphinx-book-theme.css?v=4418a689" />
   
   <!-- So that users can add custom icons -->
-  <script src="../../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <script defer src="../../../../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
-<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
 
-    <script src="../../../../_static/documentation_options.js?v=e72cdd47"></script>
+    <script src="../../../../_static/documentation_options.js?v=c38d4306"></script>
     <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
     <script src="../../../../_static/translations.js?v=beaddf03"></script>
-    <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
     <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";
 
 
@@ -52,173 +51,11 @@
 
 const initStyles = () => {
     const defaultStyle = document.createElement('style');
-    defaultStyle.textContent = `pre.mermaid {
-    /* Same as .mermaid-container > pre */
-    display: block;
-    width: 100%;
-}
-
-pre.mermaid > svg {
-    /* Same as .mermaid-container > pre > svg */
-    height: 500px;
-    width: 100%;
-    max-width: 100% !important;
-}`;
+    defaultStyle.textContent = "pre.mermaid {\n    /* Same as .mermaid-container > pre */\n    display: block;\n    width: 100%;\n}\n\npre.mermaid > svg {\n    /* Same as .mermaid-container > pre > svg */\n    height: 500px;\n    width: 100%;\n    max-width: 100% !important;\n}";
     document.head.appendChild(defaultStyle);
 
     const fullscreenStyle = document.createElement('style');
-    fullscreenStyle.textContent = `.mermaid-container {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-}
-
-.mermaid-container > pre {
-    display: block;
-    width: 100%;
-}
-
-.mermaid-container > pre > svg {
-    height: 500px;
-    width: 100%;
-    max-width: 100% !important;
-}
-
-.mermaid-fullscreen-btn {
-    width: 28px;
-    height: 28px;
-    background: rgba(255, 255, 255, 0.95);
-    border: 1px solid rgba(0, 0, 0, 0.3);
-    border-radius: 4px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.2s;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-    font-size: 14px;
-    line-height: 1;
-    padding: 0;
-    color: #333;
-}
-
-.mermaid-fullscreen-btn:hover {
-    opacity: 100% !important;
-    background: rgba(255, 255, 255, 1);
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
-    transform: scale(1.1);
-}
-
-.mermaid-fullscreen-btn.dark-theme {
-    background: rgba(50, 50, 50, 0.95);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    color: #e0e0e0;
-}
-
-.mermaid-fullscreen-btn.dark-theme:hover {
-    background: rgba(60, 60, 60, 1);
-    box-shadow: 0 3px 10px rgba(255, 255, 255, 0.2);
-}
-
-.mermaid-fullscreen-modal {
-    display: none;
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 95vw;
-    height: 100vh;
-    background: rgba(255, 255, 255, 0.98);
-    z-index: 9999;
-    padding: 20px;
-    overflow: auto;
-}
-
-.mermaid-fullscreen-modal.dark-theme {
-    background: rgba(0, 0, 0, 0.98);
-}
-
-.mermaid-fullscreen-modal.active {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.mermaid-container-fullscreen {
-    position: relative;
-    width: 95vw;
-    height: 90vh;
-    max-width: 95vw;
-    max-height: 90vh;
-    background: white;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-    overflow: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.mermaid-container-fullscreen.dark-theme {
-    background: #1a1a1a;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
-}
-
-.mermaid-container-fullscreen pre.mermaid {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.mermaid-container-fullscreen .mermaid svg {
-    height: 100% !important;
-    width: 100% !important;
-    cursor: grab;
-}
-
-.mermaid-fullscreen-close {
-    position: fixed !important;
-    top: 20px !important;
-    right: 20px !important;
-    width: 40px;
-    height: 40px;
-    background: rgba(255, 255, 255, 0.95);
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    border-radius: 50%;
-    cursor: pointer;
-    z-index: 10000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    transition: all 0.2s;
-    font-size: 24px;
-    line-height: 1;
-    color: #333;
-}
-
-.mermaid-fullscreen-close:hover {
-    background: white;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
-    transform: scale(1.1);
-}
-
-.mermaid-fullscreen-close.dark-theme {
-    background: rgba(50, 50, 50, 0.95);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: #e0e0e0;
-}
-
-.mermaid-fullscreen-close.dark-theme:hover {
-    background: rgba(60, 60, 60, 1);
-    box-shadow: 0 6px 16px rgba(255, 255, 255, 0.2);
-}
-
-.mermaid-fullscreen-modal .mermaid-fullscreen-btn {
-    display: none !important;
-}`;
+    fullscreenStyle.textContent = ".mermaid-container {\n    position: relative;\n    display: flex;\n    flex-direction: row;\n    width: 100%;\n}\n\n.mermaid-container > pre {\n    display: block;\n    width: 100%;\n}\n\n.mermaid-container > pre > svg {\n    height: 500px;\n    width: 100%;\n    max-width: 100% !important;\n}\n\n.mermaid-fullscreen-btn {\n    position: absolute;\n    width: 28px;\n    height: 28px;\n    background: rgba(255, 255, 255, 0.95);\n    border: 1px solid rgba(0, 0, 0, 0.3);\n    border-radius: 4px;\n    cursor: pointer;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    transition: all 0.2s;\n    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);\n    font-size: 14px;\n    line-height: 1;\n    padding: 0;\n    color: #333;\n}\n\n.mermaid-fullscreen-btn:hover {\n    opacity: 100% !important;\n    background: rgba(255, 255, 255, 1);\n    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);\n    transform: scale(1.1);\n}\n\n.mermaid-fullscreen-btn.dark-theme {\n    background: rgba(50, 50, 50, 0.95);\n    border: 1px solid rgba(255, 255, 255, 0.3);\n    color: #e0e0e0;\n}\n\n.mermaid-fullscreen-btn.dark-theme:hover {\n    background: rgba(60, 60, 60, 1);\n    box-shadow: 0 3px 10px rgba(255, 255, 255, 0.2);\n}\n\n.mermaid-fullscreen-modal {\n    display: none;\n    position: fixed !important;\n    top: 0 !important;\n    left: 0 !important;\n    width: 95vw;\n    height: 100vh;\n    background: rgba(255, 255, 255, 0.98);\n    z-index: 9999;\n    padding: 20px;\n    overflow: auto;\n}\n\n.mermaid-fullscreen-modal.dark-theme {\n    background: rgba(0, 0, 0, 0.98);\n}\n\n.mermaid-fullscreen-modal.active {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.mermaid-container-fullscreen {\n    position: relative;\n    width: 95vw;\n    height: 90vh;\n    max-width: 95vw;\n    max-height: 90vh;\n    background: white;\n    border-radius: 8px;\n    padding: 20px;\n    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);\n    overflow: auto;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.mermaid-container-fullscreen.dark-theme {\n    background: #1a1a1a;\n    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);\n}\n\n.mermaid-container-fullscreen pre.mermaid {\n    width: 100%;\n    height: 100%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.mermaid-container-fullscreen .mermaid svg {\n    height: 100% !important;\n    width: 100% !important;\n    cursor: grab;\n}\n\n.mermaid-fullscreen-close {\n    position: fixed !important;\n    top: 20px !important;\n    right: 20px !important;\n    width: 40px;\n    height: 40px;\n    background: rgba(255, 255, 255, 0.95);\n    border: 1px solid rgba(0, 0, 0, 0.2);\n    border-radius: 50%;\n    cursor: pointer;\n    z-index: 10000;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);\n    transition: all 0.2s;\n    font-size: 24px;\n    line-height: 1;\n    color: #333;\n}\n\n.mermaid-fullscreen-close:hover {\n    background: white;\n    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);\n    transform: scale(1.1);\n}\n\n.mermaid-fullscreen-close.dark-theme {\n    background: rgba(50, 50, 50, 0.95);\n    border: 1px solid rgba(255, 255, 255, 0.2);\n    color: #e0e0e0;\n}\n\n.mermaid-fullscreen-close.dark-theme:hover {\n    background: rgba(60, 60, 60, 1);\n    box-shadow: 0 6px 16px rgba(255, 255, 255, 0.2);\n}\n\n.mermaid-fullscreen-modal .mermaid-fullscreen-btn {\n    display: none !important;\n}";
     document.head.appendChild(fullscreenStyle);
 }
 
@@ -263,6 +100,32 @@ let darkTheme = isDarkTheme();
 let modal = null;
 let modalContent = null;
 let previousScrollOffset = [window.scrollX, window.scrollY];
+let _lazyObserver = null;
+let _renderQueue = Promise.resolve();
+let closeModal = () => {};
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal?.classList.contains('active')) {
+        closeModal();
+    }
+});
+
+// Apply d3 zoom to each SVG. Idempotent: an SVG already wrapped is skipped,
+// so this is safe to call both for the initial batch and for diagrams that
+// render lazily once they become visible.
+const addZoomToSvgs = (svgs) => {
+    svgs.each(function() {
+        if (this.getAttribute('data-zoom-applied') === 'true') return;
+        var svg = d3.select(this);
+        svg.html("<g class='wrapper'>" + svg.html() + "</g>");
+        var inner = svg.select("g");
+        var zoom = d3.zoom().on("zoom", function(event) {
+            inner.attr("transform", event.transform);
+        });
+        svg.call(zoom);
+        this.setAttribute('data-zoom-applied', 'true');
+    });
+};
 
 const runMermaid = async (rerun) => {
     console.log("Running mermaid diagrams, rerun =", rerun);
@@ -270,7 +133,15 @@ const runMermaid = async (rerun) => {
     let all_mermaids = document.querySelectorAll(".mermaid");
 
     if (rerun) {
+        // Disconnect any previous lazy rendering observer
+        if (_lazyObserver) {
+            _lazyObserver.disconnect();
+            _lazyObserver = null;
+        }
+
         all_mermaids.forEach((el) => {
+            el.removeAttribute('data-mermaid-deferred');
+            el.removeAttribute('data-mermaid-render-failed');
             if(!el.hasAttribute("data-original-code")) {
                 // store original code
                 // console.log(`Storing original code for first run: `, el.innerHTML);
@@ -287,42 +158,100 @@ const runMermaid = async (rerun) => {
                 el.setAttribute('data-original-code', el.innerHTML);
             }
         });
-        await mermaid.run();
+
+        // Separate visible and hidden elements. Mermaid's layout engine measures
+        // text dimensions via the DOM, which fails for elements hidden by a parent
+        // (e.g., Reveal.js non-active slides, sphinx-design unopened tabs),
+        // producing broken SVGs. Render visible elements now, defer hidden ones.
+        const visible = [];
+        const hidden = [];
+        all_mermaids.forEach((el) => {
+            // offsetParent is null for display:none ancestors.
+            // getClientRects().length > 0 catches position:fixed elements
+            // (which also have null offsetParent but are still visible).
+            if (el.offsetParent !== null || el.getClientRects().length > 0) {
+                visible.push(el);
+            } else {
+                hidden.push(el);
+                el.setAttribute('data-mermaid-deferred', 'true');
+            }
+        });
+
+        if (visible.length > 0) {
+            try {
+                await mermaid.run({ nodes: visible });
+            } catch (e) {
+                console.error("Mermaid rendering failed:", e);
+            }
+        }
+
+        // Lazily render hidden elements when they become visible.
+        // Uses a promise chain (_renderQueue) to serialize rendering,
+        // since IntersectionObserver may report multiple entries at once
+        // and mermaid.run() is not safe to call concurrently.
+        if (hidden.length > 0) {
+            if (typeof IntersectionObserver === 'undefined') {
+                console.warn("IntersectionObserver not available; hidden mermaid diagrams will not render.");
+            } else {
+                _renderQueue = Promise.resolve();
+                _lazyObserver = new IntersectionObserver((entries) => {
+                    for (const entry of entries) {
+                        if (entry.isIntersecting && entry.target.getAttribute("data-processed") !== "true") {
+                            _lazyObserver.unobserve(entry.target);
+                            const el = entry.target;
+                            _renderQueue = _renderQueue.then(async () => {
+                                try {
+                                    await mermaid.run({ nodes: [el] });
+                                    el.removeAttribute('data-mermaid-deferred');
+                                    // Apply zoom to the now-rendered diagram, matching
+                                    // the decoration visible diagrams receive.
+                                    if (false) {
+                                        addZoomToSvgs(d3.selectAll("").select(function() {
+                                            return this.querySelector("svg");
+                                        }));
+                                    }
+                                } catch (e) {
+                                    console.error("Mermaid deferred rendering failed:", e);
+                                    el.removeAttribute('data-mermaid-deferred');
+                                    el.setAttribute('data-mermaid-render-failed', 'true');
+                                }
+                            });
+                        }
+                    }
+                });
+                hidden.forEach((el) => _lazyObserver.observe(el));
+            }
+        }
     }
 
     all_mermaids = document.querySelectorAll(".mermaid");
-    const mermaids_processed = document.querySelectorAll(".mermaid[data-processed='true']");
+    // Exclude deferred (hidden) and render-failed elements from completion checks
+    const mermaids_active = document.querySelectorAll(".mermaid:not([data-mermaid-deferred]):not([data-mermaid-render-failed])");
+    const mermaids_processed = document.querySelectorAll(".mermaid:not([data-mermaid-deferred]):not([data-mermaid-render-failed])[data-processed='true']");
 
-    if ("False" === "True") {
-        const mermaids_to_add_zoom = -1 === -1 ? all_mermaids.length : -1;
+    if (false) {
+        const mermaids_to_add_zoom = 0 === -1 ? mermaids_active.length : 0;
         if(mermaids_to_add_zoom > 0) {
-            var svgs = d3.selectAll("");
-            if(all_mermaids.length !== mermaids_processed.length) {
+            var svgs = d3.selectAll("").select(function() {
+                return this.querySelector("svg");
+            });
+            // Wait until every active (visible) diagram has rendered. Deferred
+            // diagrams are excluded, so a fixed d3_node_count that counts a
+            // hidden diagram no longer loops forever waiting for its SVG.
+            if(mermaids_active.length !== mermaids_processed.length) {
                 setTimeout(() => runMermaid(false), 200);
                 return;
-            } else if(svgs.size() !== mermaids_to_add_zoom) {
-                setTimeout(() => runMermaid(false), 200);
-                return;
-            } else {
-                svgs.each(function() {
-                    var svg = d3.select(this);
-                    svg.html("<g class='wrapper'>" + svg.html() + "</g>");
-                    var inner = svg.select("g");
-                    var zoom = d3.zoom().on("zoom", function(event) {
-                        inner.attr("transform", event.transform);
-                    });
-                    svg.call(zoom);
-                });
             }
+            addZoomToSvgs(svgs);
         }
-    } else if(all_mermaids.length !== mermaids_processed.length) {
+    } else if(mermaids_active.length !== mermaids_processed.length) {
         // Wait for mermaid to process all diagrams
         setTimeout(() => runMermaid(false), 200);
         return;
     }
 
     // Stop here if not adding fullscreen capability
-    if ("True" !== "True") return;
+    if (!true) return;
 
     if (modal !== null ) {
         // Destroy existing modal
@@ -345,7 +274,7 @@ const runMermaid = async (rerun) => {
     modalContent = modal.querySelector('.mermaid-container-fullscreen');
     const closeBtn = modal.querySelector('.mermaid-fullscreen-close');
 
-    const closeModal = () => {
+    closeModal = () => {
         modal.classList.remove('active');
         modalContent.innerHTML = '';
         document.body.style.overflow = ''
@@ -356,12 +285,6 @@ const runMermaid = async (rerun) => {
     modal.addEventListener('click', (e) => {
         if (e.target === modal) closeModal();
     });
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && modal.classList.contains('active')) {
-            closeModal();
-        }
-    });
-
     document.querySelectorAll('.mermaid').forEach((mermaidDiv) => {
         if (mermaidDiv.parentNode.classList.contains('mermaid-container') ||
             mermaidDiv.closest('.mermaid-fullscreen-modal')) {
@@ -381,8 +304,8 @@ const runMermaid = async (rerun) => {
         const fullscreenBtn = document.createElement('button');
         fullscreenBtn.className = 'mermaid-fullscreen-btn' + (darkTheme ? ' dark-theme' : '');
         fullscreenBtn.setAttribute('aria-label', 'View diagram in fullscreen');
-        fullscreenBtn.textContent = '⛶';
-        fullscreenBtn.style.opacity = '50%';
+        fullscreenBtn.textContent = "\u26f6";
+        fullscreenBtn.style.opacity = "50%";
 
         // Calculate dynamic position based on diagram's margin and padding
         const diagramStyle = window.getComputedStyle(mermaidDiv);
@@ -394,7 +317,7 @@ const runMermaid = async (rerun) => {
         fullscreenBtn.style.right = `${marginRight + paddingRight + 4}px`;
 
         fullscreenBtn.addEventListener('click', () => {
-            previousScrollOffset = [window.scroll, window.scrollY];
+            previousScrollOffset = [window.scrollX, window.scrollY];
             const clone = mermaidDiv.cloneNode(true);
             modalContent.innerHTML = '';
             modalContent.appendChild(clone);
@@ -406,9 +329,9 @@ const runMermaid = async (rerun) => {
                 svg.style.width = '100%';
                 svg.style.height = 'auto';
                 svg.style.maxWidth = '100%';
-                svg.style.sdisplay = 'block';
+                svg.style.display = 'block';
 
-                if ("False" === "True") {
+                if (false) {
                     setTimeout(() => {
                         const g = svg.querySelector('g');
                         if (g) {
@@ -431,8 +354,11 @@ const runMermaid = async (rerun) => {
     });
 };
 
+
+
 const load = async () => {
     initStyles();
+
 
     await runMermaid(true);
 
@@ -442,10 +368,8 @@ const load = async () => {
             darkTheme = newDarkTheme;
             console.log("Theme change detected, re-running mermaid with", darkTheme ? "dark" : "default", "theme");
             await mermaid.initialize(
-                {...JSON.parse(
-                    `{"startOnLoad": false}`
-                ),
-                ...{ darkMode: darkTheme, theme: darkTheme ? 'dark' : 'default' },
+                {...{"startOnLoad": false},
+                ...{ darkMode: darkTheme, theme: darkTheme ? "dark" : "default" },
                 }
             );
             await runMermaid(true);
@@ -470,35 +394,40 @@ const load = async () => {
 
 console.log("Initializing mermaid with", darkTheme ? "dark" : "default", "theme");
 mermaid.initialize(
-    {...JSON.parse(
-        `{"startOnLoad": false}`
-    ),
-    ...{ darkMode: darkTheme, theme: darkTheme ? 'dark' : 'default' },
+    {...{"startOnLoad": false},
+    ...{ darkMode: darkTheme, theme: darkTheme ? "dark" : "default" },
     }
 );
 
 window.addEventListener("load", load);
 window.runMermaid = runMermaid;</script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/trinity/trainer/verl_legacy/monkey_patch';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="索引" href="../../../../genindex.html" />
     <link rel="search" title="搜索" href="../../../../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="zh-CN"/>
-  <meta name="docsearch:version" content="0.5.2" />
+  <meta name="docsearch:version" content="0.6.0" />
+  
+    
+    <script src="../../../../_static/searchtools.js"></script>
+    <script src="../../../../_static/language_data.js"></script>
+    <script src="../../../../searchindex.js"></script>
+  
   </head>
-  
-  
-  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
-
+  <body data-default-mode="">
   
   
   <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">跳转至主要内容</a></div>
+
   
   <div id="pst-scroll-pixel-helper"></div>
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
     <i class="fa-solid fa-arrow-up"></i>回到顶部</button>
-
+  
+  
+  
   
   <dialog id="pst-search-dialog">
     
@@ -524,7 +453,47 @@ window.runMermaid = runMermaid;</script>
 </div>
 
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="网页导航">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="搜索" aria-label="搜索" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">搜索</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="搜索" aria-label="搜索" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">搜索</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
     </header>
   
 
@@ -565,8 +534,8 @@ window.runMermaid = runMermaid;</script>
       
     
     
-    <img src="../../../../_static/logo.svg" class="logo__image only-light" alt="Trinity-RFT 0.5.2 文档 - Home"/>
-    <img src="../../../../_static/logo.svg" class="logo__image only-dark pst-js-only" alt="Trinity-RFT 0.5.2 文档 - Home"/>
+    <img src="../../../../_static/logo.svg" class="logo__image only-light" alt="Trinity-RFT 0.6.0 文档 - Home"/>
+    <img src="../../../../_static/logo.svg" class="logo__image only-dark pst-js-only" alt="Trinity-RFT 0.6.0 文档 - Home"/>
   
   
 </a></div>
@@ -702,6 +671,7 @@ window.runMermaid = runMermaid;</script>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../../../build_api/trinity.trainer.html">trinity.trainer package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../../../../build_api/trinity.trainer.tinker.html">trinity.trainer.tinker package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../build_api/trinity.trainer.tinker.server_loss.html">trinity.trainer.tinker.server_loss module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../../build_api/trinity.trainer.tinker.tinker_trainer.html">trinity.trainer.tinker.tinker_trainer module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../../build_api/trinity.trainer.tinker.utils.html">trinity.trainer.tinker.utils module</a></li>
 </ul>
@@ -841,6 +811,7 @@ window.runMermaid = runMermaid;</script>
 <li class="toctree-l4"><a class="reference internal" href="../../../../build_api/trinity.common.rewards.naive_dapo_score.html">trinity.common.rewards.naive_dapo_score module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../../build_api/trinity.common.rewards.qwen25_eval.html">trinity.common.rewards.qwen25_eval module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../../build_api/trinity.common.rewards.reward_fn.html">trinity.common.rewards.reward_fn module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../build_api/trinity.common.rewards.rlcr_reward.html">trinity.common.rewards.rlcr_reward module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../../build_api/trinity.common.rewards.tool_reward.html">trinity.common.rewards.tool_reward module</a></li>
 </ul>
 </details></li>
@@ -857,18 +828,21 @@ window.runMermaid = runMermaid;</script>
 <li class="toctree-l4"><a class="reference internal" href="../../../../build_api/trinity.common.workflows.rubric_judge_workflow.html">trinity.common.workflows.rubric_judge_workflow module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../../build_api/trinity.common.workflows.simple_mm_workflow.html">trinity.common.workflows.simple_mm_workflow module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../../build_api/trinity.common.workflows.step_wise_workflow.html">trinity.common.workflows.step_wise_workflow module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../build_api/trinity.common.workflows.thinking_budget_workflow.html">trinity.common.workflows.thinking_budget_workflow module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../../build_api/trinity.common.workflows.workflow.html">trinity.common.workflows.workflow module</a></li>
 </ul>
 </details></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../../build_api/trinity.common.config.html">trinity.common.config module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../../build_api/trinity.common.config_validator.html">trinity.common.config_validator module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../../build_api/trinity.common.constants.html">trinity.common.constants module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../build_api/trinity.common.dataclass_utils.html">trinity.common.dataclass_utils module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../../build_api/trinity.common.experience.html">trinity.common.experience module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../../build_api/trinity.common.experience_visualizer.html">trinity.common.experience_visualizer module</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../../../build_api/trinity.utils.html">trinity.utils package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../../../build_api/trinity.utils.annotations.html">trinity.utils.annotations module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../build_api/trinity.utils.device.html">trinity.utils.device module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../../build_api/trinity.utils.distributed.html">trinity.utils.distributed module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../../build_api/trinity.utils.dlc_utils.html">trinity.utils.dlc_utils module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../../build_api/trinity.utils.log.html">trinity.utils.log module</a></li>
@@ -998,11 +972,18 @@ window.runMermaid = runMermaid;</script>
 
 
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="亮色"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="暗色"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button>
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="亮色"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="暗色"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>亮色</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>暗色</button></li>
+  </ul>
+</div>
 
 
 <button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="搜索" aria-label="搜索" data-bs-placement="bottom" data-bs-toggle="tooltip">
@@ -1039,41 +1020,129 @@ window.runMermaid = runMermaid;</script>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Set</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torch.distributed.tensor</span><span class="w"> </span><span class="kn">import</span> <span class="n">DTensor</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">transformers.modeling_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">PreTrainedModel</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">trinity.utils.log</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_logger</span>
 
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_patch_triton_kernel_shared_memory</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">"""Patch veRL Triton kernels to avoid shared-memory OOM on GPUs with limited SMEM.</span>
+
+<span class="sd">    veRL's ``efficient_entropy_kernel_general_mainloop`` (and the backward</span>
+<span class="sd">    ``d_logits`` variants) use ``BLOCK_SIZE_N=256`` by default, which requires</span>
+<span class="sd">    128 * 256 * 4 = 131072 bytes of shared memory per block.  Some GPUs (e.g.</span>
+<span class="sd">    L20 with 99 KB / 101376 bytes per block) cannot satisfy this, raising::</span>
+
+<span class="sd">        triton.runtime.errors.OutOfResources: out of resource: shared memory,</span>
+<span class="sd">        Required: 131072, Hardware limit: 101376.</span>
+
+<span class="sd">    This helper detects the hardware limit and, when insufficient, replaces the</span>
+<span class="sd">    autotune configs of the affected kernels with ``BLOCK_SIZE_N=128``</span>
+<span class="sd">    (65536 bytes) so the kernels can launch successfully.</span>
+<span class="sd">    """</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">verl.utils.kernel</span><span class="w"> </span><span class="kn">import</span> <span class="n">kernels</span>
+    <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+        <span class="k">return</span>  <span class="c1"># veRL not available; nothing to patch</span>
+
+    <span class="c1"># Only relevant on CUDA GPUs.</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">():</span>
+        <span class="k">return</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># max_shared_memory_per_block is in bytes.</span>
+        <span class="n">max_smem</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">get_device_properties</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">shared_memory_per_block</span>
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+        <span class="k">return</span>
+
+    <span class="c1"># 131072 bytes is the requirement for BLOCK_SIZE_N=256 (128 * 256 * 4).</span>
+    <span class="n">SMEM_THRESHOLD</span> <span class="o">=</span> <span class="mi">131072</span>
+    <span class="k">if</span> <span class="n">max_smem</span> <span class="o">&gt;=</span> <span class="n">SMEM_THRESHOLD</span><span class="p">:</span>
+        <span class="k">return</span>  <span class="c1"># Hardware is sufficient; no patch needed.</span>
+
+    <span class="n">logger</span> <span class="o">=</span> <span class="n">get_logger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">"GPU shared memory per block (</span><span class="si">{</span><span class="n">max_smem</span><span class="si">}</span><span class="s2"> bytes) is insufficient for "</span>
+        <span class="sa">f</span><span class="s2">"veRL Triton kernels with BLOCK_SIZE_N=256 (requires </span><span class="si">{</span><span class="n">SMEM_THRESHOLD</span><span class="si">}</span><span class="s2"> bytes). "</span>
+        <span class="sa">f</span><span class="s2">"Patching kernel configs to use BLOCK_SIZE_N=128."</span>
+    <span class="p">)</span>
+
+    <span class="kn">import</span><span class="w"> </span><span class="nn">triton</span>
+
+    <span class="c1"># Smaller config that fits within 65536 bytes of shared memory.</span>
+    <span class="n">safe_config_mainloop</span> <span class="o">=</span> <span class="n">triton</span><span class="o">.</span><span class="n">Config</span><span class="p">(</span>
+        <span class="p">{</span><span class="s2">"BLOCK_SIZE_M"</span><span class="p">:</span> <span class="mi">128</span><span class="p">,</span> <span class="s2">"BLOCK_SIZE_N"</span><span class="p">:</span> <span class="mi">128</span><span class="p">,</span> <span class="s2">"BLOCK_SIZE_K"</span><span class="p">:</span> <span class="mi">32</span><span class="p">},</span>
+        <span class="n">num_stages</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+        <span class="n">num_warps</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">safe_config_backward</span> <span class="o">=</span> <span class="n">triton</span><span class="o">.</span><span class="n">Config</span><span class="p">(</span>
+        <span class="p">{</span><span class="s2">"BLOCK_SIZE_M"</span><span class="p">:</span> <span class="mi">128</span><span class="p">,</span> <span class="s2">"BLOCK_SIZE_N"</span><span class="p">:</span> <span class="mi">128</span><span class="p">,</span> <span class="s2">"BLOCK_SIZE_K"</span><span class="p">:</span> <span class="mi">32</span><span class="p">,</span> <span class="s2">"GROUP_SIZE_M"</span><span class="p">:</span> <span class="mi">16</span><span class="p">},</span>
+        <span class="n">num_stages</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+        <span class="n">num_warps</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Forward kernel.</span>
+    <span class="n">_replace_autotune_configs</span><span class="p">(</span>
+        <span class="n">kernels</span><span class="p">,</span> <span class="s2">"efficient_entropy_kernel_general_mainloop"</span><span class="p">,</span> <span class="p">[</span><span class="n">safe_config_mainloop</span><span class="p">]</span>
+    <span class="p">)</span>
+    <span class="c1"># Backward kernels that also use BLOCK_SIZE_N=256.</span>
+    <span class="n">_replace_autotune_configs</span><span class="p">(</span>
+        <span class="n">kernels</span><span class="p">,</span>
+        <span class="s2">"efficient_entropy_backward_kernel_general_d_logits"</span><span class="p">,</span>
+        <span class="p">[</span><span class="n">safe_config_backward</span><span class="p">],</span>
+    <span class="p">)</span>
+    <span class="n">_replace_autotune_configs</span><span class="p">(</span>
+        <span class="n">kernels</span><span class="p">,</span>
+        <span class="s2">"efficient_entropy_backward_kernel_general_d_logits_split_N"</span><span class="p">,</span>
+        <span class="p">[</span><span class="n">safe_config_backward</span><span class="p">],</span>
+    <span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_replace_autotune_configs</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">kernel_name</span><span class="p">,</span> <span class="n">new_configs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Replace the autotune configs of a Triton kernel, if not already patched."""</span>
+    <span class="n">kernel</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">kernel_name</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">kernel</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span>
+    <span class="c1"># Guard against double-patching.</span>
+    <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">kernel</span><span class="p">,</span> <span class="s2">"_smem_patched"</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+        <span class="k">return</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">kernel</span><span class="p">,</span> <span class="s2">"configs"</span><span class="p">):</span>
+        <span class="n">kernel</span><span class="o">.</span><span class="n">configs</span> <span class="o">=</span> <span class="n">new_configs</span>
+        <span class="n">kernel</span><span class="o">.</span><span class="n">_smem_patched</span> <span class="o">=</span> <span class="kc">True</span>
+
+
 <span class="c1"># Map model types to their specific implementation modules.</span>
 <span class="c1"># To extend support for a new model, simply add an entry here.</span>
 <span class="n">MODEL_TYPE_TO_MODULE_MAP</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;qwen2_5_vl&quot;</span><span class="p">:</span> <span class="s2">&quot;verl.models.transformers.qwen2_vl&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;qwen2_vl&quot;</span><span class="p">:</span> <span class="s2">&quot;verl.models.transformers.qwen2_vl&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;qwen3_vl&quot;</span><span class="p">:</span> <span class="s2">&quot;verl.models.transformers.qwen3_vl&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;qwen3_vl_moe&quot;</span><span class="p">:</span> <span class="s2">&quot;verl.models.transformers.qwen3_vl&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;qwen3_5&quot;</span><span class="p">:</span> <span class="s2">&quot;trinity.common.patch.qwen3_5&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;qwen3_5_moe&quot;</span><span class="p">:</span> <span class="s2">&quot;trinity.common.patch.qwen3_5&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;glm4v&quot;</span><span class="p">:</span> <span class="s2">&quot;verl.models.transformers.glm4v&quot;</span><span class="p">,</span>
+    <span class="s2">"qwen2_5_vl"</span><span class="p">:</span> <span class="s2">"verl.models.transformers.qwen2_vl"</span><span class="p">,</span>
+    <span class="s2">"qwen2_vl"</span><span class="p">:</span> <span class="s2">"verl.models.transformers.qwen2_vl"</span><span class="p">,</span>
+    <span class="s2">"qwen3_vl"</span><span class="p">:</span> <span class="s2">"verl.models.transformers.qwen3_vl"</span><span class="p">,</span>
+    <span class="s2">"qwen3_vl_moe"</span><span class="p">:</span> <span class="s2">"verl.models.transformers.qwen3_vl"</span><span class="p">,</span>
+    <span class="s2">"qwen3_5"</span><span class="p">:</span> <span class="s2">"trinity.common.patch.qwen3_5"</span><span class="p">,</span>
+    <span class="s2">"qwen3_5_moe"</span><span class="p">:</span> <span class="s2">"trinity.common.patch.qwen3_5"</span><span class="p">,</span>
+    <span class="s2">"glm4v"</span><span class="p">:</span> <span class="s2">"verl.models.transformers.glm4v"</span><span class="p">,</span>
 <span class="p">}</span>
 
-<span class="n">DEFAULT_MODULE_PATH</span> <span class="o">=</span> <span class="s2">&quot;verl.models.transformers.dense_common&quot;</span>
-<span class="n">VALID_BACKENDS</span><span class="p">:</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;triton&quot;</span><span class="p">,</span> <span class="s2">&quot;torch&quot;</span><span class="p">}</span>
+<span class="n">DEFAULT_MODULE_PATH</span> <span class="o">=</span> <span class="s2">"verl.models.transformers.dense_common"</span>
+<span class="n">VALID_BACKENDS</span><span class="p">:</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"triton"</span><span class="p">,</span> <span class="s2">"torch"</span><span class="p">}</span>
 
 
 <div class="viewcode-block" id="patch_fused_kernels">
 <a class="viewcode-back" href="../../../../build_api/trinity.trainer.verl_legacy.monkey_patch.html#trinity.trainer.verl_legacy.monkey_patch.patch_fused_kernels">[文档]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">patch_fused_kernels</span><span class="p">(</span><span class="n">fused_kernels_backend</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Fix VLM sequence parallelism bug with optimized backend in veRL.&quot;&quot;&quot;</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">patch_fused_kernels</span><span class="p">(</span><span class="n">fused_kernels_backend</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>  <span class="c1"># noqa: C901</span>
+<span class="w">    </span><span class="sd">"""Fix VLM sequence parallelism bug with optimized backend in veRL."""</span>
 
     <span class="c1"># fix torch</span>
-    <span class="k">if</span> <span class="n">fused_kernels_backend</span> <span class="o">==</span> <span class="s2">&quot;torch&quot;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">fused_kernels_backend</span> <span class="o">==</span> <span class="s2">"torch"</span><span class="p">:</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">verl.utils.experimental.torch_functional</span><span class="w"> </span><span class="kn">import</span> <span class="n">FusedLinearForPPO</span>
 
         <span class="c1"># Make patch idempotent: store the original forward once and avoid re-wrapping.</span>
-        <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">FusedLinearForPPO</span><span class="p">,</span> <span class="s2">&quot;_is_patched&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">FusedLinearForPPO</span><span class="p">,</span> <span class="s2">"_is_patched"</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
             <span class="c1"># Already patched; nothing to do.</span>
             <span class="k">return</span>
 
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">FusedLinearForPPO</span><span class="p">,</span> <span class="s2">&quot;_original_forward&quot;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">FusedLinearForPPO</span><span class="p">,</span> <span class="s2">"_original_forward"</span><span class="p">):</span>
             <span class="n">FusedLinearForPPO</span><span class="o">.</span><span class="n">_original_forward</span> <span class="o">=</span> <span class="n">FusedLinearForPPO</span><span class="o">.</span><span class="n">forward</span>
         <span class="n">original_torch_backend_forward</span> <span class="o">=</span> <span class="n">FusedLinearForPPO</span><span class="o">.</span><span class="n">_original_forward</span>
 
@@ -1093,18 +1162,23 @@ window.runMermaid = runMermaid;</script>
                 <span class="n">ulysses_sp_size</span> <span class="o">=</span> <span class="n">get_ulysses_sequence_parallel_world_size</span><span class="p">()</span>
                 <span class="k">if</span> <span class="n">ulysses_sp_size</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
                     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                        <span class="sa">f</span><span class="s2">&quot;Expected Ulysses sequence parallel world size &gt; 1, &quot;</span>
-                        <span class="sa">f</span><span class="s2">&quot;but got </span><span class="si">{</span><span class="n">ulysses_sp_size</span><span class="si">}</span><span class="s2">.&quot;</span>
+                        <span class="sa">f</span><span class="s2">"Expected Ulysses sequence parallel world size &gt; 1, "</span>
+                        <span class="sa">f</span><span class="s2">"but got </span><span class="si">{</span><span class="n">ulysses_sp_size</span><span class="si">}</span><span class="s2">."</span>
                     <span class="p">)</span>
                 <span class="n">input_ids</span> <span class="o">=</span> <span class="n">slice_input_tensor</span><span class="p">(</span><span class="n">input_ids</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
             <span class="k">if</span> <span class="n">hidden_states</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">!=</span> <span class="n">input_ids</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">1</span><span class="p">):</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                    <span class="s2">&quot;hidden_states and input_ids must have the same sequence length &quot;</span>
-                    <span class="sa">f</span><span class="s2">&quot;along dimension 1, but got hidden_states.size(1) = &quot;</span>
-                    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">hidden_states</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="s2"> and input_ids.size(1) = &quot;</span>
-                    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">input_ids</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span>
+                    <span class="s2">"hidden_states and input_ids must have the same sequence length "</span>
+                    <span class="sa">f</span><span class="s2">"along dimension 1, but got hidden_states.size(1) = "</span>
+                    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">hidden_states</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="s2"> and input_ids.size(1) = "</span>
+                    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">input_ids</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="s2">."</span>
                 <span class="p">)</span>
+
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">vocab_weights</span><span class="p">,</span> <span class="n">DTensor</span><span class="p">):</span>
+                <span class="n">vocab_weights</span> <span class="o">=</span> <span class="n">vocab_weights</span><span class="o">.</span><span class="n">full_tensor</span><span class="p">()</span>
+            <span class="n">vocab_weights</span> <span class="o">=</span> <span class="n">vocab_weights</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">hidden_states</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+            <span class="n">hidden_states</span> <span class="o">=</span> <span class="n">hidden_states</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">vocab_weights</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
 
             <span class="k">return</span> <span class="n">original_torch_backend_forward</span><span class="p">(</span>
                 <span class="bp">self</span><span class="p">,</span>
@@ -1119,13 +1193,17 @@ window.runMermaid = runMermaid;</script>
     <span class="k">else</span><span class="p">:</span>  <span class="c1"># triton</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">verl.utils.kernel</span><span class="w"> </span><span class="kn">import</span> <span class="n">linear_cross_entropy</span>
 
+        <span class="c1"># Patch Triton kernel configs to avoid shared-memory OOM on GPUs with</span>
+        <span class="c1"># limited per-block shared memory (e.g. A100 with 99 KB).</span>
+        <span class="n">_patch_triton_kernel_shared_memory</span><span class="p">()</span>
+
         <span class="c1"># Make patch idempotent: store the original function once and avoid re-wrapping.</span>
-        <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">linear_cross_entropy</span><span class="p">,</span> <span class="s2">&quot;_is_patched&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">linear_cross_entropy</span><span class="p">,</span> <span class="s2">"_is_patched"</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
             <span class="c1"># Already patched; nothing to do.</span>
             <span class="k">return</span>
 
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">linear_cross_entropy</span><span class="p">,</span> <span class="s2">&quot;_linear_cross_entropy&quot;</span><span class="p">):</span>
-            <span class="c1"># This is the first time we&#39;re patching this function.</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">linear_cross_entropy</span><span class="p">,</span> <span class="s2">"_linear_cross_entropy"</span><span class="p">):</span>
+            <span class="c1"># This is the first time we're patching this function.</span>
             <span class="c1"># Store a reference to the original function.</span>
             <span class="n">linear_cross_entropy</span><span class="o">.</span><span class="n">_linear_cross_entropy</span> <span class="o">=</span> <span class="n">linear_cross_entropy</span><span class="o">.</span><span class="n">linear_cross_entropy</span>
         <span class="n">original_linear_cross_entropy</span> <span class="o">=</span> <span class="n">linear_cross_entropy</span><span class="o">.</span><span class="n">_linear_cross_entropy</span>
@@ -1146,19 +1224,23 @@ window.runMermaid = runMermaid;</script>
                 <span class="n">ulysses_sp_size</span> <span class="o">=</span> <span class="n">get_ulysses_sequence_parallel_world_size</span><span class="p">()</span>
                 <span class="k">if</span> <span class="n">ulysses_sp_size</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
                     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                        <span class="sa">f</span><span class="s2">&quot;Expected Ulysses sequence parallel world size &gt; 1, &quot;</span>
-                        <span class="sa">f</span><span class="s2">&quot;but got </span><span class="si">{</span><span class="n">ulysses_sp_size</span><span class="si">}</span><span class="s2">.&quot;</span>
+                        <span class="sa">f</span><span class="s2">"Expected Ulysses sequence parallel world size &gt; 1, "</span>
+                        <span class="sa">f</span><span class="s2">"but got </span><span class="si">{</span><span class="n">ulysses_sp_size</span><span class="si">}</span><span class="s2">."</span>
                     <span class="p">)</span>
                 <span class="n">labels</span> <span class="o">=</span> <span class="n">slice_input_tensor</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
             <span class="k">if</span> <span class="n">hidden</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">!=</span> <span class="n">labels</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">1</span><span class="p">):</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                    <span class="s2">&quot;hidden and labels must have the same sequence length &quot;</span>
-                    <span class="sa">f</span><span class="s2">&quot;along dimension 1, but got hidden.size(1) = &quot;</span>
-                    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">hidden</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="s2"> and labels.size(1) = &quot;</span>
-                    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">labels</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span>
+                    <span class="s2">"hidden and labels must have the same sequence length "</span>
+                    <span class="sa">f</span><span class="s2">"along dimension 1, but got hidden.size(1) = "</span>
+                    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">hidden</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="s2"> and labels.size(1) = "</span>
+                    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">labels</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="s2">."</span>
                 <span class="p">)</span>
 
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">weight</span><span class="p">,</span> <span class="n">DTensor</span><span class="p">):</span>
+                <span class="n">weight</span> <span class="o">=</span> <span class="n">weight</span><span class="o">.</span><span class="n">full_tensor</span><span class="p">()</span>
+            <span class="n">weight</span> <span class="o">=</span> <span class="n">weight</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">hidden</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+            <span class="n">hidden</span> <span class="o">=</span> <span class="n">hidden</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">weight</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">original_linear_cross_entropy</span><span class="p">(</span><span class="n">hidden</span><span class="p">,</span> <span class="n">weight</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
         <span class="n">linear_cross_entropy</span><span class="o">.</span><span class="n">linear_cross_entropy</span> <span class="o">=</span> <span class="n">triton_backend_forward</span>
@@ -1174,14 +1256,14 @@ window.runMermaid = runMermaid;</script>
     <span class="n">use_fused_kernels</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">fused_kernels_backend</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Monkey-patch the model&#39;s forward method with optimized backend implementations.</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Monkey-patch the model's forward method with optimized backend implementations.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        model: The model to patch.</span>
 <span class="sd">        use_fused_kernels: Whether to enable fused kernels.</span>
-<span class="sd">        fused_kernels_backend: The backend to use (&#39;triton&#39; or &#39;torch&#39;).</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">        fused_kernels_backend: The backend to use ('triton' or 'torch').</span>
+<span class="sd">    """</span>
     <span class="n">logger</span> <span class="o">=</span> <span class="n">get_logger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
     <span class="c1"># 1. Validation &amp; Early Exit</span>
@@ -1190,8 +1272,8 @@ window.runMermaid = runMermaid;</script>
 
     <span class="k">if</span> <span class="n">fused_kernels_backend</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">VALID_BACKENDS</span><span class="p">:</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;Skipping patch for </span><span class="si">{</span><span class="n">model</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">: &quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;Invalid backend &#39;</span><span class="si">{</span><span class="n">fused_kernels_backend</span><span class="si">}</span><span class="s2">&#39;. Choose from </span><span class="si">{</span><span class="n">VALID_BACKENDS</span><span class="si">}</span><span class="s2">.&quot;</span>
+            <span class="sa">f</span><span class="s2">"Skipping patch for </span><span class="si">{</span><span class="n">model</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">: "</span>
+            <span class="sa">f</span><span class="s2">"Invalid backend '</span><span class="si">{</span><span class="n">fused_kernels_backend</span><span class="si">}</span><span class="s2">'. Choose from </span><span class="si">{</span><span class="n">VALID_BACKENDS</span><span class="si">}</span><span class="s2">."</span>
         <span class="p">)</span>
         <span class="k">return</span>
 
@@ -1199,26 +1281,26 @@ window.runMermaid = runMermaid;</script>
     <span class="n">patch_fused_kernels</span><span class="p">(</span><span class="n">fused_kernels_backend</span><span class="p">)</span>
 
     <span class="c1"># 3. Resolve Module Path</span>
-    <span class="n">model_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">config</span><span class="p">,</span> <span class="s2">&quot;model_type&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">model_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">config</span><span class="p">,</span> <span class="s2">"model_type"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
     <span class="n">module_path</span> <span class="o">=</span> <span class="n">MODEL_TYPE_TO_MODULE_MAP</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">model_type</span><span class="p">,</span> <span class="n">DEFAULT_MODULE_PATH</span><span class="p">)</span>
 
     <span class="c1"># 4. Dynamic Import</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">backend_module</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="n">module_path</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">ImportError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to import </span><span class="si">{</span><span class="n">module_path</span><span class="si">}</span><span class="s2"> for </span><span class="si">{</span><span class="n">model</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Failed to import </span><span class="si">{</span><span class="n">module_path</span><span class="si">}</span><span class="s2"> for </span><span class="si">{</span><span class="n">model</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
         <span class="k">return</span>
 
     <span class="c1"># 5. Select and Apply Forward Function</span>
-    <span class="n">func_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;forward_with_</span><span class="si">{</span><span class="n">fused_kernels_backend</span><span class="si">}</span><span class="s2">_backend&quot;</span>
+    <span class="n">func_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"forward_with_</span><span class="si">{</span><span class="n">fused_kernels_backend</span><span class="si">}</span><span class="s2">_backend"</span>
     <span class="n">patched_forward</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">backend_module</span><span class="p">,</span> <span class="n">func_name</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">patched_forward</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Function &#39;</span><span class="si">{</span><span class="n">func_name</span><span class="si">}</span><span class="s2">&#39; not found in </span><span class="si">{</span><span class="n">module_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Function '</span><span class="si">{</span><span class="n">func_name</span><span class="si">}</span><span class="s2">' not found in </span><span class="si">{</span><span class="n">module_path</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
         <span class="k">return</span>
 
     <span class="n">model</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="n">forward</span> <span class="o">=</span> <span class="n">patched_forward</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Applied </span><span class="si">{</span><span class="n">fused_kernels_backend</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="si">}</span><span class="s2"> backend for </span><span class="si">{</span><span class="n">model</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Applied </span><span class="si">{</span><span class="n">fused_kernels_backend</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="si">}</span><span class="s2"> backend for </span><span class="si">{</span><span class="n">model</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span></div>
 
 
 
@@ -1235,7 +1317,7 @@ window.runMermaid = runMermaid;</script>
     <span class="n">use_tiled_mlp</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">tiled_mlp_shards</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Apply monkey patch to the models for ulysses sequence parallel, fused kernel, prefix grouper,</span>
 <span class="sd">    and tiled MLP.</span>
 
@@ -1250,7 +1332,7 @@ window.runMermaid = runMermaid;</script>
 <span class="sd">        fused_kernels_backend: The backend to use for fused kernels.</span>
 <span class="sd">        use_tiled_mlp: Whether to use TiledMLP for memory-efficient MLP computation.</span>
 <span class="sd">        tiled_mlp_shards: Number of shards for TiledMLP (higher = lower memory, slightly slower).</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">verl.models.transformers.monkey_patch</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
         <span class="n">_ulysses_flash_attention_forward</span><span class="p">,</span>
         <span class="n">apply_prefix_grouper_patch</span><span class="p">,</span>
@@ -1264,7 +1346,7 @@ window.runMermaid = runMermaid;</script>
     <span class="n">logger</span> <span class="o">=</span> <span class="n">get_logger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">in_ray_actor</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">patch_vlm_for_ulysses_input_slicing</span><span class="p">(</span><span class="n">model_class</span><span class="p">:</span> <span class="nb">type</span><span class="p">):</span>
-        <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">model_class</span><span class="p">,</span> <span class="s2">&quot;_patch_vlm_for_ulysses_input_slicing&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">model_class</span><span class="p">,</span> <span class="s2">"_patch_vlm_for_ulysses_input_slicing"</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
             <span class="k">return</span>
 
         <span class="n">verl_patch_vlm_for_ulysses_input_slicing</span><span class="p">(</span><span class="n">model_class</span><span class="p">)</span>
@@ -1274,13 +1356,13 @@ window.runMermaid = runMermaid;</script>
     <span class="k">if</span> <span class="n">use_tiled_mlp</span><span class="p">:</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">verl.models.transformers.tiled_mlp</span><span class="w"> </span><span class="kn">import</span> <span class="n">apply_tiled_mlp_monkey_patch</span>
 
-        <span class="n">model_type</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">config</span><span class="p">,</span> <span class="s2">&quot;model_type&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="n">model_type</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">config</span><span class="p">,</span> <span class="s2">"model_type"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
         <span class="n">apply_tiled_mlp_monkey_patch</span><span class="p">(</span><span class="n">num_shards</span><span class="o">=</span><span class="n">tiled_mlp_shards</span><span class="p">,</span> <span class="n">model_type</span><span class="o">=</span><span class="n">model_type</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">use_prefix_grouper</span><span class="p">:</span>
         <span class="n">apply_prefix_grouper_patch</span><span class="p">()</span>
 
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Replace _flash_attention_forward to _ulysses_flash_attention_forward&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Replace _flash_attention_forward to _ulysses_flash_attention_forward"""</span>
     <span class="n">module</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="n">model</span><span class="o">.</span><span class="vm">__module__</span><span class="p">]</span>
 
     <span class="k">try</span><span class="p">:</span>
@@ -1296,13 +1378,13 @@ window.runMermaid = runMermaid;</script>
 
     <span class="k">assert</span> <span class="p">(</span>
         <span class="n">num_attention_heads</span> <span class="o">%</span> <span class="n">ulysses_sp_size</span> <span class="o">==</span> <span class="mi">0</span>
-    <span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;num_attention_heads </span><span class="si">{</span><span class="n">num_attention_heads</span><span class="si">}</span><span class="s2"> must be divisible by ulysses_sp_size </span><span class="si">{</span><span class="n">ulysses_sp_size</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="p">),</span> <span class="sa">f</span><span class="s2">"num_attention_heads </span><span class="si">{</span><span class="n">num_attention_heads</span><span class="si">}</span><span class="s2"> must be divisible by ulysses_sp_size </span><span class="si">{</span><span class="n">ulysses_sp_size</span><span class="si">}</span><span class="s2">"</span>
     <span class="k">assert</span> <span class="p">(</span>
         <span class="n">num_key_value_heads</span> <span class="o">%</span> <span class="n">ulysses_sp_size</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">ulysses_sp_size</span> <span class="o">%</span> <span class="n">num_key_value_heads</span> <span class="o">==</span> <span class="mi">0</span>
     <span class="p">),</span> <span class="p">(</span>
-        <span class="sa">f</span><span class="s2">&quot;num_key_value_heads </span><span class="si">{</span><span class="n">num_key_value_heads</span><span class="si">}</span><span class="s2"> must be divisible by ulysses_sp_size &quot;</span>
-        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ulysses_sp_size</span><span class="si">}</span><span class="s2">or vise versa. Upon ulysses_sp_size % num_key_value_heads == 0,&quot;</span>
-        <span class="sa">f</span><span class="s2">&quot;kv heads are repeated to ensure correctness.&quot;</span>
+        <span class="sa">f</span><span class="s2">"num_key_value_heads </span><span class="si">{</span><span class="n">num_key_value_heads</span><span class="si">}</span><span class="s2"> must be divisible by ulysses_sp_size "</span>
+        <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">ulysses_sp_size</span><span class="si">}</span><span class="s2">or vise versa. Upon ulysses_sp_size % num_key_value_heads == 0,"</span>
+        <span class="sa">f</span><span class="s2">"kv heads are repeated to ensure correctness."</span>
     <span class="p">)</span>
 
     <span class="k">if</span> <span class="n">is_trl_available</span><span class="p">():</span>
@@ -1314,12 +1396,12 @@ window.runMermaid = runMermaid;</script>
             <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="o">.</span><span class="n">state_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
         <span class="n">AutoModelForCausalLMWithValueHead</span><span class="o">.</span><span class="n">state_dict</span> <span class="o">=</span> <span class="n">state_dict</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Monkey patch state_dict in AutoModelForCausalLMWithValueHead. &quot;</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Monkey patch state_dict in AutoModelForCausalLMWithValueHead. "</span><span class="p">)</span>
 
     <span class="c1"># TODO: VLM models only, unify monkey patch to LLM models.</span>
-    <span class="k">if</span> <span class="n">model</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">model_type</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;qwen2_5_vl&quot;</span><span class="p">,</span> <span class="s2">&quot;qwen2_vl&quot;</span><span class="p">]:</span>
+    <span class="k">if</span> <span class="n">model</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">model_type</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"qwen2_5_vl"</span><span class="p">,</span> <span class="s2">"qwen2_vl"</span><span class="p">]:</span>
         <span class="c1"># Step 1: patch model to support image-text mixed data</span>
-        <span class="k">if</span> <span class="n">is_transformers_version_in_range</span><span class="p">(</span><span class="n">min_version</span><span class="o">=</span><span class="s2">&quot;4.52.0&quot;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">is_transformers_version_in_range</span><span class="p">(</span><span class="n">min_version</span><span class="o">=</span><span class="s2">"4.52.0"</span><span class="p">):</span>
             <span class="kn">from</span><span class="w"> </span><span class="nn">transformers.models.qwen2_5_vl.modeling_qwen2_5_vl</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
                 <span class="n">Qwen2_5_VLTextModel</span><span class="p">,</span>
             <span class="p">)</span>
@@ -1332,15 +1414,15 @@ window.runMermaid = runMermaid;</script>
                 <span class="n">Qwen2VLModel</span> <span class="k">as</span> <span class="n">Qwen2VLTextModel</span><span class="p">,</span>
             <span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">is_transformers_version_in_range</span><span class="p">(</span><span class="n">min_version</span><span class="o">=</span><span class="s2">&quot;4.53.0&quot;</span><span class="p">,</span> <span class="n">max_version</span><span class="o">=</span><span class="s2">&quot;4.53.3&quot;</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Transformers 4.53.* is bugged. Use transformers 4.54.0 or later.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">is_transformers_version_in_range</span><span class="p">(</span><span class="n">min_version</span><span class="o">=</span><span class="s2">"4.53.0"</span><span class="p">,</span> <span class="n">max_version</span><span class="o">=</span><span class="s2">"4.53.3"</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">"Transformers 4.53.* is bugged. Use transformers 4.54.0 or later."</span><span class="p">)</span>
 
         <span class="c1"># Step 2: patch input for multimodal sequence parallelism</span>
         <span class="k">if</span> <span class="n">ulysses_sp_size</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
             <span class="n">patch_vlm_for_ulysses_input_slicing</span><span class="p">(</span><span class="n">Qwen2_5_VLTextModel</span><span class="p">)</span>
             <span class="n">patch_vlm_for_ulysses_input_slicing</span><span class="p">(</span><span class="n">Qwen2VLTextModel</span><span class="p">)</span>
 
-    <span class="k">elif</span> <span class="n">model</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">model_type</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;qwen3_vl&quot;</span><span class="p">,</span> <span class="s2">&quot;qwen3_vl_moe&quot;</span><span class="p">]:</span>
+    <span class="k">elif</span> <span class="n">model</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">model_type</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"qwen3_vl"</span><span class="p">,</span> <span class="s2">"qwen3_vl_moe"</span><span class="p">]:</span>
         <span class="c1"># Step 1: patch model to support image-text mixed data</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">transformers.models.qwen3_vl.modeling_qwen3_vl</span><span class="w"> </span><span class="kn">import</span> <span class="n">Qwen3VLTextModel</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">transformers.models.qwen3_vl_moe.modeling_qwen3_vl_moe</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
@@ -1351,8 +1433,8 @@ window.runMermaid = runMermaid;</script>
         <span class="p">)</span>
 
         <span class="c1"># Step 1.5: patch Qwen3VLMoeTextSparseMoeBlock to fix transformers 4.57.3 bug</span>
-        <span class="k">if</span> <span class="n">model</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">model_type</span> <span class="o">==</span> <span class="s2">&quot;qwen3_vl_moe&quot;</span> <span class="ow">and</span> <span class="n">is_transformers_version_in_range</span><span class="p">(</span>
-            <span class="n">max_version</span><span class="o">=</span><span class="s2">&quot;4.57.3&quot;</span>
+        <span class="k">if</span> <span class="n">model</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">model_type</span> <span class="o">==</span> <span class="s2">"qwen3_vl_moe"</span> <span class="ow">and</span> <span class="n">is_transformers_version_in_range</span><span class="p">(</span>
+            <span class="n">max_version</span><span class="o">=</span><span class="s2">"4.57.3"</span>
         <span class="p">):</span>
             <span class="n">patch_qwen3_vl_moe_sparse_moe_block_forward</span><span class="p">()</span>
 
@@ -1361,36 +1443,17 @@ window.runMermaid = runMermaid;</script>
             <span class="n">patch_vlm_for_ulysses_input_slicing</span><span class="p">(</span><span class="n">Qwen3VLTextModel</span><span class="p">)</span>
             <span class="n">patch_vlm_for_ulysses_input_slicing</span><span class="p">(</span><span class="n">Qwen3VLMoeTextModel</span><span class="p">)</span>
 
-    <span class="k">elif</span> <span class="n">model</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">model_type</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;qwen3_5&quot;</span><span class="p">,</span> <span class="s2">&quot;qwen3_5_moe&quot;</span><span class="p">]:</span>
+    <span class="k">elif</span> <span class="n">model</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">model_type</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"qwen3_5"</span><span class="p">,</span> <span class="s2">"qwen3_5_moe"</span><span class="p">]:</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">transformers.models.qwen3_5.modeling_qwen3_5</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-            <span class="n">Qwen3_5DecoderLayer</span><span class="p">,</span>
-            <span class="n">Qwen3_5GatedDeltaNet</span><span class="p">,</span>
             <span class="n">Qwen3_5Model</span><span class="p">,</span>
             <span class="n">Qwen3_5TextModel</span><span class="p">,</span>
-            <span class="n">Qwen3_5VisionModel</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">transformers.models.qwen3_5_moe.modeling_qwen3_5_moe</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-            <span class="n">Qwen3_5MoeDecoderLayer</span><span class="p">,</span>
-            <span class="n">Qwen3_5MoeGatedDeltaNet</span><span class="p">,</span>
             <span class="n">Qwen3_5MoeModel</span><span class="p">,</span>
             <span class="n">Qwen3_5MoeTextModel</span><span class="p">,</span>
-            <span class="n">Qwen3_5MoeVisionModel</span><span class="p">,</span>
         <span class="p">)</span>
 
-        <span class="kn">from</span><span class="w"> </span><span class="nn">trinity.common.patch.qwen3_5</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-            <span class="n">decoder_layer_forward</span><span class="p">,</span>
-            <span class="n">gate_delta_net_forward</span><span class="p">,</span>
-            <span class="n">qwen35_model_forward</span><span class="p">,</span>
-            <span class="n">qwen35_vision_fast_pos_embed_interpolate</span><span class="p">,</span>
-        <span class="p">)</span>
-
-        <span class="n">Qwen3_5DecoderLayer</span><span class="o">.</span><span class="n">forward</span> <span class="o">=</span> <span class="n">decoder_layer_forward</span>
-        <span class="n">Qwen3_5MoeDecoderLayer</span><span class="o">.</span><span class="n">forward</span> <span class="o">=</span> <span class="n">decoder_layer_forward</span>
-        <span class="n">Qwen3_5GatedDeltaNet</span><span class="o">.</span><span class="n">forward</span> <span class="o">=</span> <span class="n">gate_delta_net_forward</span>
-        <span class="n">Qwen3_5MoeGatedDeltaNet</span><span class="o">.</span><span class="n">forward</span> <span class="o">=</span> <span class="n">gate_delta_net_forward</span>
-
-        <span class="n">Qwen3_5VisionModel</span><span class="o">.</span><span class="n">fast_pos_embed_interpolate</span> <span class="o">=</span> <span class="n">qwen35_vision_fast_pos_embed_interpolate</span>
-        <span class="n">Qwen3_5MoeVisionModel</span><span class="o">.</span><span class="n">fast_pos_embed_interpolate</span> <span class="o">=</span> <span class="n">qwen35_vision_fast_pos_embed_interpolate</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">trinity.common.patch.qwen3_5</span><span class="w"> </span><span class="kn">import</span> <span class="n">qwen35_model_forward</span>
 
         <span class="n">Qwen3_5Model</span><span class="o">.</span><span class="n">forward</span> <span class="o">=</span> <span class="n">qwen35_model_forward</span>
         <span class="n">Qwen3_5MoeModel</span><span class="o">.</span><span class="n">forward</span> <span class="o">=</span> <span class="n">qwen35_model_forward</span>
@@ -1402,8 +1465,10 @@ window.runMermaid = runMermaid;</script>
 
             <span class="kn">from</span><span class="w"> </span><span class="nn">trinity.common.patch.qwen3_5</span><span class="w"> </span><span class="kn">import</span> <span class="n">ulysses_gate_delta_net_decorator</span>
 
-            <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">language_model</span><span class="o">.</span><span class="n">layers</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">layer</span><span class="o">.</span><span class="n">layer_type</span> <span class="o">==</span> <span class="s2">&quot;linear_attention&quot;</span><span class="p">:</span>
+            <span class="n">language_model</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">language_model</span>
+            <span class="k">for</span> <span class="n">layer_idx</span><span class="p">,</span> <span class="n">layer</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">language_model</span><span class="o">.</span><span class="n">layers</span><span class="p">):</span>
+                <span class="n">layer_type</span> <span class="o">=</span> <span class="n">language_model</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">layer_types</span><span class="p">[</span><span class="n">layer_idx</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">layer_type</span> <span class="o">==</span> <span class="s2">"linear_attention"</span><span class="p">:</span>
                     <span class="n">ulysses_gate_delta_net_decorator</span><span class="p">(</span><span class="n">layer</span><span class="o">.</span><span class="n">linear_attn</span><span class="p">,</span> <span class="n">ulysses_sp_size</span><span class="p">)</span>
 
         <span class="c1"># Step 3: patch verl.utils.flops_counter</span>
@@ -1415,12 +1480,12 @@ window.runMermaid = runMermaid;</script>
 
         <span class="n">ESTIMATE_FUNC</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
             <span class="p">{</span>
-                <span class="s2">&quot;qwen3_5&quot;</span><span class="p">:</span> <span class="n">_estimate_qwen3_vl_flops</span><span class="p">,</span>
-                <span class="s2">&quot;qwen3_5_moe&quot;</span><span class="p">:</span> <span class="n">_estimate_qwen3_vl_moe_flops</span><span class="p">,</span>
+                <span class="s2">"qwen3_5"</span><span class="p">:</span> <span class="n">_estimate_qwen3_vl_flops</span><span class="p">,</span>
+                <span class="s2">"qwen3_5_moe"</span><span class="p">:</span> <span class="n">_estimate_qwen3_vl_moe_flops</span><span class="p">,</span>
             <span class="p">}</span>
         <span class="p">)</span>
 
-    <span class="k">elif</span> <span class="n">model</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">model_type</span> <span class="o">==</span> <span class="s2">&quot;glm4v&quot;</span><span class="p">:</span>
+    <span class="k">elif</span> <span class="n">model</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">model_type</span> <span class="o">==</span> <span class="s2">"glm4v"</span><span class="p">:</span>
         <span class="c1"># Step 1: patch model to support image-text mixed data</span>
 
         <span class="kn">from</span><span class="w"> </span><span class="nn">transformers.models.glm4v.modeling_glm4v</span><span class="w"> </span><span class="kn">import</span> <span class="n">Glm4vTextModel</span>
@@ -1433,22 +1498,22 @@ window.runMermaid = runMermaid;</script>
         <span class="k">if</span> <span class="n">ulysses_sp_size</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
             <span class="n">patch_vlm_for_ulysses_input_slicing</span><span class="p">(</span><span class="n">Glm4vTextModel</span><span class="p">)</span>
 
-    <span class="k">elif</span> <span class="n">model</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">model_type</span> <span class="o">==</span> <span class="s2">&quot;kimi_vl&quot;</span><span class="p">:</span>
+    <span class="k">elif</span> <span class="n">model</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">model_type</span> <span class="o">==</span> <span class="s2">"kimi_vl"</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">ulysses_sp_size</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
             <span class="n">patch_vlm_for_ulysses_input_slicing</span><span class="p">(</span><span class="n">module</span><span class="o">.</span><span class="n">DeepseekV3ForCausalLM</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">use_fused_kernels</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Not support fused kernels for KimiVL&quot;</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Not support fused kernels for KimiVL"</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">use_remove_padding</span> <span class="ow">or</span> <span class="n">ulysses_sp_size</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="s2">&quot;_flash_attention_forward&quot;</span><span class="p">):</span>  <span class="c1"># transformers &lt;= 4.47.1 or legacy models</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="s2">"_flash_attention_forward"</span><span class="p">):</span>  <span class="c1"># transformers &lt;= 4.47.1 or legacy models</span>
             <span class="n">module</span><span class="o">.</span><span class="n">_flash_attention_forward</span> <span class="o">=</span> <span class="n">_ulysses_flash_attention_forward</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Monkey patch _flash_attention_forward in </span><span class="si">{</span><span class="n">model</span><span class="o">.</span><span class="vm">__module__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Monkey patch _flash_attention_forward in </span><span class="si">{</span><span class="n">model</span><span class="o">.</span><span class="vm">__module__</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="kn">from</span><span class="w"> </span><span class="nn">transformers.integrations</span><span class="w"> </span><span class="kn">import</span> <span class="n">flash_attention</span>
 
             <span class="n">flash_attention</span><span class="o">.</span><span class="n">_flash_attention_forward</span> <span class="o">=</span> <span class="n">_ulysses_flash_attention_forward</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Monkey patch _flash_attention_forward in </span><span class="si">{</span><span class="n">flash_attention</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Monkey patch _flash_attention_forward in </span><span class="si">{</span><span class="n">flash_attention</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
     <span class="n">patch_forward_with_backends</span><span class="p">(</span>
         <span class="n">model</span><span class="p">,</span> <span class="n">use_fused_kernels</span><span class="o">=</span><span class="n">use_fused_kernels</span><span class="p">,</span> <span class="n">fused_kernels_backend</span><span class="o">=</span><span class="n">fused_kernels_backend</span>
@@ -1516,8 +1581,8 @@ window.runMermaid = runMermaid;</script>
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
-<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
 
   <footer class="bd-footer">
   </footer>

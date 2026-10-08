@@ -71,7 +71,7 @@ File ".../flash_attn/flash_attn_interface.py", line 15, in ‹module>
 ImportError: ...
 ```
 
-**A:** The `flash-attn` module is not properly installed. Try to fix it by running `pip install flash-attn==2.8.1` or `pip install flash-attn==2.8.1 -v --no-build-isolation`.
+**A:** The `flash-attn` module is not properly installed. Try to fix it by running `pip install "flash-attn>=2.8.3"` or `pip install "flash-attn>=2.8.3" -v --no-build-isolation`.
 
 ---
 
@@ -151,6 +151,36 @@ trinity run --config grpo_gsm8k/gsm8k.yaml 2>&1 | tee debug.log
 
 Please refer to {ref}`Workflow Development Guide <Workflows>` section for details.
 
+---
+
+**Q:** How to inspect the experiences generated during training?
+
+**A:** You can use the `trinity view` command to launch a Streamlit-based viewer that lets you browse the experience data produced during exploration, including the prompt, response, reward, metrics, and token-level details (with per-token log-probs).
+
+This requires the experience pipeline to actually write a SQL database. Just enable `save_input` — when `input_save_path` is left unset, the pipeline automatically writes to a SQLite database at `<checkpoint_job_dir>/buffer/explorer_output.db`:
+
+```yaml
+data_processor:
+  experience_pipeline:
+    save_input: true
+    # input_save_path is optional; defaults to
+    # <checkpoint_job_dir>/buffer/explorer_output.db
+```
+
+Then run the viewer, pointing it at the config file (the database URL, table name, and tokenizer are inferred automatically):
+
+```bash
+trinity view --config examples/grpo_gsm8k/gsm8k.yaml --port 8502
+```
+
+You can also point directly at the database file and specify the components manually (the table name produced by the experience pipeline is `pipeline_input`):
+
+```bash
+trinity view --url /path/to/debug_buffer.db --table pipeline_input --tokenizer /path/to/model --port 8502
+```
+
+Note: `--url` accepts either a DB URL (`sqlite:////abs/path.db`) or a plain path to a `.db` file (relative or absolute), which is converted to a sqlite URL automatically. Explicit CLI arguments override values inferred from `--config`.
+
 
 ## Part 4: Other Questions
 **Q:** What's the purpose of `buffer.trainer_input.experience_buffer.path`?
@@ -194,7 +224,25 @@ for exp in exp_list:
 
 1. **Recommended approach**: Use the `trinity convert` command to convert the original checkpoint into the standard Hugging Face format.
    After conversion, you can load and use it directly just like any ordinary Hugging Face model.
-   For detailed instructions, please refer to the tutorial: [Optional: Converting Checkpoints to Hugging Face Format](https://agentscope-ai.github.io/Trinity-RFT/zh/main/tutorial/example_reasoning_basic.html#optional-convert-checkpoints-to-hugging-face-format)
+
+   Convert a single checkpoint (pointing at a `global_step_*` directory or any of its subdirectories):
+
+   ```bash
+   trinity convert -c /path/to/checkpoint_root/project/name/global_step_100
+   ```
+
+   Batch-convert specific steps (comma-separated step numbers):
+
+   ```bash
+   trinity convert -c /path/to/checkpoint_root/project/name -s 100,200,300
+   ```
+
+   If a step directory does not exist or conversion fails, the command will skip it and continue with the remaining steps, then print a summary report of successes and failures.
+
+   > **Special case**: If `config.json` is missing from `global_step_*/actor/huggingface/` (typically because the configuration wasn't fully saved during training), use `--base-model-dir` to specify the path to your base model:
+   > ```bash
+   > trinity convert -c /path/to/checkpoint_root/project/name -b /path/to/your/base/model
+   > ```
 
 2. **Direct loading (for actor checkpoints trained with FSDP)**:
    If you prefer to load the checkpoint directly without converting its format, you can use the following code example:

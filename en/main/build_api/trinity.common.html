@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>trinity.common package &#8212; Trinity-RFT 0.5.2 documentation</title>
+    <title>trinity.common package &#8212; Trinity-RFT 0.6.0 documentation</title>
   
   
   
@@ -27,23 +27,24 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=4418a689" />
   
   <!-- So that users can add custom icons -->
-  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <script defer src="../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
 
-    <script src="../_static/documentation_options.js?v=4861a642"></script>
+    <script src="../_static/documentation_options.js?v=3af6fc4c"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'build_api/trinity.common';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -51,21 +52,27 @@
     <link rel="prev" title="trinity.manager.synchronizer module" href="trinity.manager.synchronizer.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="0.5.2" />
+  <meta name="docsearch:version" content="0.6.0" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
   </head>
-  
-  
-  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
-
+  <body data-default-mode="">
   
   
   <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
   
   <div id="pst-scroll-pixel-helper"></div>
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
+  
+  
+  
   
   <dialog id="pst-search-dialog">
     
@@ -91,7 +98,51 @@
 </div>
 
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
     </header>
   
 
@@ -130,8 +181,8 @@
       
     
     
-    <img src="../_static/logo.svg" class="logo__image only-light" alt="Trinity-RFT 0.5.2 documentation - Home"/>
-    <img src="../_static/logo.svg" class="logo__image only-dark pst-js-only" alt="Trinity-RFT 0.5.2 documentation - Home"/>
+    <img src="../_static/logo.svg" class="logo__image only-light" alt="Trinity-RFT 0.6.0 documentation - Home"/>
+    <img src="../_static/logo.svg" class="logo__image only-dark pst-js-only" alt="Trinity-RFT 0.6.0 documentation - Home"/>
   
   
 </a></div>
@@ -267,6 +318,7 @@
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="trinity.trainer.html">trinity.trainer package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3 has-children"><a class="reference internal" href="trinity.trainer.tinker.html">trinity.trainer.tinker package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="trinity.trainer.tinker.server_loss.html">trinity.trainer.tinker.server_loss module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.trainer.tinker.tinker_trainer.html">trinity.trainer.tinker.tinker_trainer module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.trainer.tinker.utils.html">trinity.trainer.tinker.utils module</a></li>
 </ul>
@@ -406,6 +458,7 @@
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.rewards.naive_dapo_score.html">trinity.common.rewards.naive_dapo_score module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.rewards.qwen25_eval.html">trinity.common.rewards.qwen25_eval module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.rewards.reward_fn.html">trinity.common.rewards.reward_fn module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.rewards.rlcr_reward.html">trinity.common.rewards.rlcr_reward module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.rewards.tool_reward.html">trinity.common.rewards.tool_reward module</a></li>
 </ul>
 </details></li>
@@ -422,18 +475,21 @@
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.workflows.rubric_judge_workflow.html">trinity.common.workflows.rubric_judge_workflow module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.workflows.simple_mm_workflow.html">trinity.common.workflows.simple_mm_workflow module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.workflows.step_wise_workflow.html">trinity.common.workflows.step_wise_workflow module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.workflows.thinking_budget_workflow.html">trinity.common.workflows.thinking_budget_workflow module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.workflows.workflow.html">trinity.common.workflows.workflow module</a></li>
 </ul>
 </details></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.common.config.html">trinity.common.config module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.common.config_validator.html">trinity.common.config_validator module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.common.constants.html">trinity.common.constants module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="trinity.common.dataclass_utils.html">trinity.common.dataclass_utils module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.common.experience.html">trinity.common.experience module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.common.experience_visualizer.html">trinity.common.experience_visualizer module</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="trinity.utils.html">trinity.utils package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="trinity.utils.annotations.html">trinity.utils.annotations module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="trinity.utils.device.html">trinity.utils.device module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.utils.distributed.html">trinity.utils.distributed module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.utils.dlc_utils.html">trinity.utils.dlc_utils module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.utils.log.html">trinity.utils.log module</a></li>
@@ -611,11 +667,18 @@
 
 
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button>
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div>
 
 
 <button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
@@ -643,7 +706,7 @@
                 <h2> Contents </h2>
             </div>
             <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#subpackages">Subpackages</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submodules">Submodules</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-trinity.common">Module contents</a></li>
@@ -679,11 +742,43 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="trinity.common.models.html#submodules">Submodules</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="trinity.common.models.allocator.html">trinity.common.models.allocator module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="trinity.common.models.experience_extraction.html">trinity.common.models.experience_extraction module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="trinity.common.models.mm_utils.html">trinity.common.models.mm_utils module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="trinity.common.models.model.html">trinity.common.models.model module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="trinity.common.models.sglang_model.html">trinity.common.models.sglang_model module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="trinity.common.models.allocator.html">trinity.common.models.allocator module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.models.allocator.html#trinity.common.models.allocator.BundleResult"><code class="docutils literal notranslate"><span class="pre">BundleResult</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.models.allocator.html#trinity.common.models.allocator.Allocator"><code class="docutils literal notranslate"><span class="pre">Allocator</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.models.allocator.html#trinity.common.models.allocator.get_model_wrapper"><code class="docutils literal notranslate"><span class="pre">get_model_wrapper()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.models.allocator.html#trinity.common.models.allocator.get_external_model_wrapper"><code class="docutils literal notranslate"><span class="pre">get_external_model_wrapper()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="trinity.common.models.experience_extraction.html">trinity.common.models.experience_extraction module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.models.experience_extraction.html#trinity.common.models.experience_extraction.get_routed_experts_layout"><code class="docutils literal notranslate"><span class="pre">get_routed_experts_layout()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.models.experience_extraction.html#trinity.common.models.experience_extraction.decode_sglang_routed_experts"><code class="docutils literal notranslate"><span class="pre">decode_sglang_routed_experts()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.models.experience_extraction.html#trinity.common.models.experience_extraction.decode_vllm_routed_experts"><code class="docutils literal notranslate"><span class="pre">decode_vllm_routed_experts()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.models.experience_extraction.html#trinity.common.models.experience_extraction.convert_api_output_to_experience"><code class="docutils literal notranslate"><span class="pre">convert_api_output_to_experience()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.models.experience_extraction.html#trinity.common.models.experience_extraction.HistoryRecordingStream"><code class="docutils literal notranslate"><span class="pre">HistoryRecordingStream</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.models.experience_extraction.html#trinity.common.models.experience_extraction.extract_logprobs"><code class="docutils literal notranslate"><span class="pre">extract_logprobs()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="trinity.common.models.mm_utils.html">trinity.common.models.mm_utils module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.models.mm_utils.html#trinity.common.models.mm_utils.should_use_processor"><code class="docutils literal notranslate"><span class="pre">should_use_processor()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.models.mm_utils.html#trinity.common.models.mm_utils.processor_or_tokenizer_cls"><code class="docutils literal notranslate"><span class="pre">processor_or_tokenizer_cls()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.models.mm_utils.html#trinity.common.models.mm_utils.build_mm_message"><code class="docutils literal notranslate"><span class="pre">build_mm_message()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.models.mm_utils.html#trinity.common.models.mm_utils.has_multi_modal_content"><code class="docutils literal notranslate"><span class="pre">has_multi_modal_content()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.models.mm_utils.html#trinity.common.models.mm_utils.combine_output_token_ids"><code class="docutils literal notranslate"><span class="pre">combine_output_token_ids()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.models.mm_utils.html#trinity.common.models.mm_utils.MultiModalRender"><code class="docutils literal notranslate"><span class="pre">MultiModalRender</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.models.mm_utils.html#trinity.common.models.mm_utils.vLLMMultiModalRender"><code class="docutils literal notranslate"><span class="pre">vLLMMultiModalRender</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="trinity.common.models.model.html">trinity.common.models.model module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.models.model.html#trinity.common.models.model.InferenceModel"><code class="docutils literal notranslate"><span class="pre">InferenceModel</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.models.model.html#trinity.common.models.model.BaseInferenceModel"><code class="docutils literal notranslate"><span class="pre">BaseInferenceModel</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.models.model.html#trinity.common.models.model.ModelWrapper"><code class="docutils literal notranslate"><span class="pre">ModelWrapper</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="trinity.common.models.sglang_model.html">trinity.common.models.sglang_model module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.models.sglang_model.html#trinity.common.models.sglang_model.SGLangClient"><code class="docutils literal notranslate"><span class="pre">SGLangClient</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.models.sglang_model.html#trinity.common.models.sglang_model.SGLangRolloutModel"><code class="docutils literal notranslate"><span class="pre">SGLangRolloutModel</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.common.models.tinker_model.html">trinity.common.models.tinker_model module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.common.models.utils.html">trinity.common.models.utils module</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.models.utils.html#trinity.common.models.utils.tokenize_and_mask_messages_hf"><code class="docutils literal notranslate"><span class="pre">tokenize_and_mask_messages_hf()</span></code></a></li>
@@ -721,9 +816,6 @@
 <li class="toctree-l3"><a class="reference internal" href="trinity.common.patch.qwen3_5.html">trinity.common.patch.qwen3_5 module</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.patch.qwen3_5.html#trinity.common.patch.qwen3_5.Slice"><code class="docutils literal notranslate"><span class="pre">Slice</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.patch.qwen3_5.html#trinity.common.patch.qwen3_5.ulysses_gate_delta_net_decorator"><code class="docutils literal notranslate"><span class="pre">ulysses_gate_delta_net_decorator()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="trinity.common.patch.qwen3_5.html#trinity.common.patch.qwen3_5.gate_delta_net_forward"><code class="docutils literal notranslate"><span class="pre">gate_delta_net_forward()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="trinity.common.patch.qwen3_5.html#trinity.common.patch.qwen3_5.decoder_layer_forward"><code class="docutils literal notranslate"><span class="pre">decoder_layer_forward()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="trinity.common.patch.qwen3_5.html#trinity.common.patch.qwen3_5.qwen35_vision_fast_pos_embed_interpolate"><code class="docutils literal notranslate"><span class="pre">qwen35_vision_fast_pos_embed_interpolate()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.patch.qwen3_5.html#trinity.common.patch.qwen3_5.qwen35_model_forward"><code class="docutils literal notranslate"><span class="pre">qwen35_model_forward()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.patch.qwen3_5.html#trinity.common.patch.qwen3_5.Qwen3_5CausalLMOutputForPPO"><code class="docutils literal notranslate"><span class="pre">Qwen3_5CausalLMOutputForPPO</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.patch.qwen3_5.html#trinity.common.patch.qwen3_5.forward_with_torch_backend"><code class="docutils literal notranslate"><span class="pre">forward_with_torch_backend()</span></code></a></li>
@@ -808,6 +900,10 @@
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.rewards.reward_fn.html#trinity.common.rewards.reward_fn.RewardFn"><code class="docutils literal notranslate"><span class="pre">RewardFn</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="trinity.common.rewards.rlcr_reward.html">trinity.common.rewards.rlcr_reward module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.rewards.rlcr_reward.html#trinity.common.rewards.rlcr_reward.RLCRRewardFn"><code class="docutils literal notranslate"><span class="pre">RLCRRewardFn</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.common.rewards.tool_reward.html">trinity.common.rewards.tool_reward module</a></li>
 </ul>
 </li>
@@ -830,7 +926,11 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="trinity.common.workflows.html#submodules">Submodules</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="trinity.common.workflows.agentscope_workflow.html">trinity.common.workflows.agentscope_workflow module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="trinity.common.workflows.agentscope_workflow.html">trinity.common.workflows.agentscope_workflow module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.workflows.agentscope_workflow.html#trinity.common.workflows.agentscope_workflow.AgentScopeWorkflowAdapter"><code class="docutils literal notranslate"><span class="pre">AgentScopeWorkflowAdapter</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.workflows.agentscope_workflow.html#trinity.common.workflows.agentscope_workflow.AgentScopeWorkflowAdapterV1"><code class="docutils literal notranslate"><span class="pre">AgentScopeWorkflowAdapterV1</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.common.workflows.customized_math_workflows.html">trinity.common.workflows.customized_math_workflows module</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.workflows.customized_math_workflows.html#trinity.common.workflows.customized_math_workflows.MathBoxedWorkflow"><code class="docutils literal notranslate"><span class="pre">MathBoxedWorkflow</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.workflows.customized_math_workflows.html#trinity.common.workflows.customized_math_workflows.AsyncMathBoxedWorkflow"><code class="docutils literal notranslate"><span class="pre">AsyncMathBoxedWorkflow</span></code></a></li>
@@ -846,14 +946,51 @@
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.workflows.customized_toolcall_workflows.html#trinity.common.workflows.customized_toolcall_workflows.ToolCallWorkflow"><code class="docutils literal notranslate"><span class="pre">ToolCallWorkflow</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="trinity.common.workflows.eval_workflow.html">trinity.common.workflows.eval_workflow module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="trinity.common.workflows.math_rm_workflow.html">trinity.common.workflows.math_rm_workflow module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="trinity.common.workflows.math_ruler_workflow.html">trinity.common.workflows.math_ruler_workflow module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="trinity.common.workflows.math_trainable_ruler_workflow.html">trinity.common.workflows.math_trainable_ruler_workflow module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="trinity.common.workflows.on_policy_distill_workflow.html">trinity.common.workflows.on_policy_distill_workflow module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="trinity.common.workflows.rubric_judge_workflow.html">trinity.common.workflows.rubric_judge_workflow module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="trinity.common.workflows.simple_mm_workflow.html">trinity.common.workflows.simple_mm_workflow module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="trinity.common.workflows.step_wise_workflow.html">trinity.common.workflows.step_wise_workflow module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="trinity.common.workflows.eval_workflow.html">trinity.common.workflows.eval_workflow module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.workflows.eval_workflow.html#trinity.common.workflows.eval_workflow.MathEvalWorkflow"><code class="docutils literal notranslate"><span class="pre">MathEvalWorkflow</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.workflows.eval_workflow.html#trinity.common.workflows.eval_workflow.AsyncMathEvalWorkflow"><code class="docutils literal notranslate"><span class="pre">AsyncMathEvalWorkflow</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="trinity.common.workflows.math_rm_workflow.html">trinity.common.workflows.math_rm_workflow module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.workflows.math_rm_workflow.html#trinity.common.workflows.math_rm_workflow.MathRMWorkflow"><code class="docutils literal notranslate"><span class="pre">MathRMWorkflow</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.workflows.math_rm_workflow.html#trinity.common.workflows.math_rm_workflow.AsyncMathRMWorkflow"><code class="docutils literal notranslate"><span class="pre">AsyncMathRMWorkflow</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="trinity.common.workflows.math_ruler_workflow.html">trinity.common.workflows.math_ruler_workflow module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.workflows.math_ruler_workflow.html#trinity.common.workflows.math_ruler_workflow.MathRULERWorkflow"><code class="docutils literal notranslate"><span class="pre">MathRULERWorkflow</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.workflows.math_ruler_workflow.html#trinity.common.workflows.math_ruler_workflow.AsyncMathRULERWorkflow"><code class="docutils literal notranslate"><span class="pre">AsyncMathRULERWorkflow</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="trinity.common.workflows.math_trainable_ruler_workflow.html">trinity.common.workflows.math_trainable_ruler_workflow module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.workflows.math_trainable_ruler_workflow.html#trinity.common.workflows.math_trainable_ruler_workflow.MathTrainableRULERWorkflow"><code class="docutils literal notranslate"><span class="pre">MathTrainableRULERWorkflow</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="trinity.common.workflows.on_policy_distill_workflow.html">trinity.common.workflows.on_policy_distill_workflow module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.workflows.on_policy_distill_workflow.html#trinity.common.workflows.on_policy_distill_workflow.OnPolicyDistillWorkflow"><code class="docutils literal notranslate"><span class="pre">OnPolicyDistillWorkflow</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.workflows.on_policy_distill_workflow.html#trinity.common.workflows.on_policy_distill_workflow.OnPolicyDistillMathWorkflow"><code class="docutils literal notranslate"><span class="pre">OnPolicyDistillMathWorkflow</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="trinity.common.workflows.rubric_judge_workflow.html">trinity.common.workflows.rubric_judge_workflow module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.workflows.rubric_judge_workflow.html#trinity.common.workflows.rubric_judge_workflow.RubricJudgeWorkflow"><code class="docutils literal notranslate"><span class="pre">RubricJudgeWorkflow</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.workflows.rubric_judge_workflow.html#trinity.common.workflows.rubric_judge_workflow.RubricJudgeWorkflowWithAPI"><code class="docutils literal notranslate"><span class="pre">RubricJudgeWorkflowWithAPI</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="trinity.common.workflows.simple_mm_workflow.html">trinity.common.workflows.simple_mm_workflow module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.workflows.simple_mm_workflow.html#trinity.common.workflows.simple_mm_workflow.SimpleMMWorkflow"><code class="docutils literal notranslate"><span class="pre">SimpleMMWorkflow</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.workflows.simple_mm_workflow.html#trinity.common.workflows.simple_mm_workflow.AsyncSimpleMMWorkflow"><code class="docutils literal notranslate"><span class="pre">AsyncSimpleMMWorkflow</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="trinity.common.workflows.step_wise_workflow.html">trinity.common.workflows.step_wise_workflow module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.workflows.step_wise_workflow.html#trinity.common.workflows.step_wise_workflow.StepWiseRewardWorkflow"><code class="docutils literal notranslate"><span class="pre">StepWiseRewardWorkflow</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.workflows.step_wise_workflow.html#trinity.common.workflows.step_wise_workflow.AsyncStepWiseRewardWorkflow"><code class="docutils literal notranslate"><span class="pre">AsyncStepWiseRewardWorkflow</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.workflows.step_wise_workflow.html#trinity.common.workflows.step_wise_workflow.RewardPropagationWorkflow"><code class="docutils literal notranslate"><span class="pre">RewardPropagationWorkflow</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.workflows.step_wise_workflow.html#trinity.common.workflows.step_wise_workflow.AsyncRewardPropagationWorkflow"><code class="docutils literal notranslate"><span class="pre">AsyncRewardPropagationWorkflow</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="trinity.common.workflows.thinking_budget_workflow.html">trinity.common.workflows.thinking_budget_workflow module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.workflows.thinking_budget_workflow.html#trinity.common.workflows.thinking_budget_workflow.ThinkingBudgetWorkflow"><code class="docutils literal notranslate"><span class="pre">ThinkingBudgetWorkflow</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.common.workflows.workflow.html">trinity.common.workflows.workflow module</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.workflows.workflow.html#trinity.common.workflows.workflow.Task"><code class="docutils literal notranslate"><span class="pre">Task</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.workflows.workflow.html#trinity.common.workflows.workflow.Workflow"><code class="docutils literal notranslate"><span class="pre">Workflow</span></code></a></li>
@@ -891,6 +1028,7 @@
 <li class="toctree-l3"><a class="reference internal" href="trinity.common.workflows.html#trinity.common.workflows.Workflow"><code class="docutils literal notranslate"><span class="pre">Workflow</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.workflows.html#trinity.common.workflows.Workflow.auxiliary_model_wrappers"><code class="docutils literal notranslate"><span class="pre">Workflow.auxiliary_model_wrappers</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.workflows.html#trinity.common.workflows.Workflow.auxiliary_models"><code class="docutils literal notranslate"><span class="pre">Workflow.auxiliary_models</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="trinity.common.workflows.html#trinity.common.workflows.Workflow.repeat_index"><code class="docutils literal notranslate"><span class="pre">Workflow.repeat_index</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.workflows.html#trinity.common.workflows.Workflow.__init__"><code class="docutils literal notranslate"><span class="pre">Workflow.__init__()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.workflows.html#trinity.common.workflows.Workflow.asynchronous"><code class="docutils literal notranslate"><span class="pre">Workflow.asynchronous</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="trinity.common.workflows.html#trinity.common.workflows.Workflow.can_repeat"><code class="docutils literal notranslate"><span class="pre">Workflow.can_repeat</span></code></a></li>
@@ -1131,6 +1269,7 @@
 <li class="toctree-l3"><a class="reference internal" href="trinity.common.config.html#trinity.common.config.TinkerConfig.train_attn"><code class="docutils literal notranslate"><span class="pre">TinkerConfig.train_attn</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.common.config.html#trinity.common.config.TinkerConfig.train_unembed"><code class="docutils literal notranslate"><span class="pre">TinkerConfig.train_unembed</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.common.config.html#trinity.common.config.TinkerConfig.base_url"><code class="docutils literal notranslate"><span class="pre">TinkerConfig.base_url</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trinity.common.config.html#trinity.common.config.TinkerConfig.server_loss_fn"><code class="docutils literal notranslate"><span class="pre">TinkerConfig.server_loss_fn</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.common.config.html#trinity.common.config.TinkerConfig.__init__"><code class="docutils literal notranslate"><span class="pre">TinkerConfig.__init__()</span></code></a></li>
 </ul>
 </li>
@@ -1299,6 +1438,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="trinity.common.config.html#trinity.common.config.ExplorerConfig"><code class="docutils literal notranslate"><span class="pre">ExplorerConfig</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="trinity.common.config.html#trinity.common.config.ExplorerConfig.name"><code class="docutils literal notranslate"><span class="pre">ExplorerConfig.name</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trinity.common.config.html#trinity.common.config.ExplorerConfig.mode"><code class="docutils literal notranslate"><span class="pre">ExplorerConfig.mode</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.common.config.html#trinity.common.config.ExplorerConfig.runner_per_model"><code class="docutils literal notranslate"><span class="pre">ExplorerConfig.runner_per_model</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.common.config.html#trinity.common.config.ExplorerConfig.runner_prepare_concurrency"><code class="docutils literal notranslate"><span class="pre">ExplorerConfig.runner_prepare_concurrency</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.common.config.html#trinity.common.config.ExplorerConfig.runner_prepare_max_retries"><code class="docutils literal notranslate"><span class="pre">ExplorerConfig.runner_prepare_max_retries</span></code></a></li>
@@ -1352,6 +1492,7 @@
 <li class="toctree-l3"><a class="reference internal" href="trinity.common.config.html#trinity.common.config.TrainerConfig.max_token_len_per_gpu"><code class="docutils literal notranslate"><span class="pre">TrainerConfig.max_token_len_per_gpu</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.common.config.html#trinity.common.config.TrainerConfig.ulysses_sequence_parallel_size"><code class="docutils literal notranslate"><span class="pre">TrainerConfig.ulysses_sequence_parallel_size</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.common.config.html#trinity.common.config.TrainerConfig.fix_actor_microbatch_loss_scale"><code class="docutils literal notranslate"><span class="pre">TrainerConfig.fix_actor_microbatch_loss_scale</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trinity.common.config.html#trinity.common.config.TrainerConfig.use_torch_compile"><code class="docutils literal notranslate"><span class="pre">TrainerConfig.use_torch_compile</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.common.config.html#trinity.common.config.TrainerConfig.param_offload"><code class="docutils literal notranslate"><span class="pre">TrainerConfig.param_offload</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.common.config.html#trinity.common.config.TrainerConfig.optimizer_offload"><code class="docutils literal notranslate"><span class="pre">TrainerConfig.optimizer_offload</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.common.config.html#trinity.common.config.TrainerConfig.grad_offload"><code class="docutils literal notranslate"><span class="pre">TrainerConfig.grad_offload</span></code></a></li>
@@ -1532,6 +1673,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="trinity.common.constants.html#trinity.common.constants.SyncMethod"><code class="docutils literal notranslate"><span class="pre">SyncMethod</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="trinity.common.constants.html#trinity.common.constants.SyncMethod.HCCL"><code class="docutils literal notranslate"><span class="pre">SyncMethod.HCCL</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.common.constants.html#trinity.common.constants.SyncMethod.NCCL"><code class="docutils literal notranslate"><span class="pre">SyncMethod.NCCL</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.common.constants.html#trinity.common.constants.SyncMethod.CHECKPOINT"><code class="docutils literal notranslate"><span class="pre">SyncMethod.CHECKPOINT</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="trinity.common.constants.html#trinity.common.constants.SyncMethod.MEMORY"><code class="docutils literal notranslate"><span class="pre">SyncMethod.MEMORY</span></code></a></li>
@@ -1568,6 +1710,10 @@
 <li class="toctree-l3"><a class="reference internal" href="trinity.common.constants.html#trinity.common.constants.SaveStrategy.UNRESTRICTED"><code class="docutils literal notranslate"><span class="pre">SaveStrategy.UNRESTRICTED</span></code></a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="trinity.common.dataclass_utils.html">trinity.common.dataclass_utils module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="trinity.common.dataclass_utils.html#trinity.common.dataclass_utils.build_dataclass_from_mapping"><code class="docutils literal notranslate"><span class="pre">build_dataclass_from_mapping()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="trinity.common.experience.html">trinity.common.experience module</a><ul>
@@ -1716,7 +1862,7 @@
     <i class="fa-solid fa-list"></i> Contents
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="visible nav section-nav flex-column">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#subpackages">Subpackages</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submodules">Submodules</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-trinity.common">Module contents</a></li>
@@ -1768,8 +1914,8 @@ By Trinity-RFT Team
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+  <script defer src="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
 
   <footer class="bd-footer">
   </footer>

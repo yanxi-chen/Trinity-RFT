@@ -70,7 +70,7 @@ File ".../flash_attn/flash_attn_interface.py", line 15, in ‹module>
 ImportError: ...
 ```
 
-**A:** `flash-attn` 模块未正确安装。请尝试运行 `pip install flash-attn==2.8.1` 或 `pip install flash-attn==2.8.1 -v --no-build-isolation` 进行修复。
+**A:** `flash-attn` 模块未正确安装。请尝试运行 `pip install "flash-attn>=2.8.3"` 或 `pip install "flash-attn>=2.8.3" -v --no-build-isolation` 进行修复。
 
 ---
 
@@ -144,6 +144,37 @@ trinity run --config grpo_gsm8k/gsm8k.yaml 2>&1 | tee debug.log
 
 详细说明见 {ref}`工作流开发指南 <Workflows>`。
 
+---
+
+**Q:** 如何查看训练过程中产生的 Experience 数据？
+
+**A:** 可以使用 `trinity view` 命令启动一个基于 Streamlit 的可视化界面，浏览探索阶段产生的 experience 数据，包括 prompt、response、reward、metrics 以及 token 级别（每个 token 的 log-prob）的详细信息。
+
+该功能要求 experience pipeline 实际写入 SQL 数据库。只需开启 `save_input`——当未设置 `input_save_path` 时，pipeline 会自动写入到 `<checkpoint_job_dir>/buffer/explorer_output.db`：
+
+```yaml
+data_processor:
+  experience_pipeline:
+    save_input: true
+    # input_save_path 可选，默认为
+    # <checkpoint_job_dir>/buffer/explorer_output.db
+```
+
+然后指向配置文件启动查看器（数据库 URL、表名、tokenizer 会自动推导）：
+
+```bash
+trinity view --config examples/grpo_gsm8k/gsm8k.yaml --port 8502
+```
+
+也可以直接指向数据库文件并手动指定各组件（experience pipeline 产生的表名为 `pipeline_input`）：
+
+```bash
+trinity view --url /path/to/debug_buffer.db --table pipeline_input --tokenizer /path/to/model --port 8502
+```
+
+注意：`--url` 既支持 DB URL（如 `sqlite:////abs/path.db`），也支持直接给出 `.db` 文件路径（相对或绝对均可），会自动转换为 sqlite URL。显式给出的 CLI 参数会覆盖从 `--config` 推导出的值。
+
+
 ## 第四部分：其他问题
 
 **Q:** `buffer.trainer_input.experience_buffer.path` 有什么作用？
@@ -187,7 +218,25 @@ for exp in exp_list:
 
 1. **推荐方式**：使用 `trinity convert` 命令将原始检查点转换为标准的 Hugging Face 格式。
    转换后，你就可以像加载普通 Hugging Face 模型一样直接使用它。
-   详细操作请参考教程：[可选：将检查点转换为 Hugging Face 格式](https://agentscope-ai.github.io/Trinity-RFT/zh/main/tutorial/example_reasoning_basic.html#hugging-face)
+
+   转换单个检查点（指向某个 `global_step_*` 目录或其子目录均可）：
+
+   ```bash
+   trinity convert -c /path/to/checkpoint_root/project/name/global_step_100
+   ```
+
+   批量转换指定 step 的检查点（支持逗号分隔多个 step）：
+
+   ```bash
+   trinity convert -c /path/to/checkpoint_root/project/name -s 100,200,300
+   ```
+
+   如果某些 step 的目录不存在或转换失败，命令会跳过并继续处理其余 step，最后输出成功/失败的汇总报告。
+
+   > **特殊情况**：如果 `global_step_*/actor/huggingface/` 目录下缺少 `config.json`（通常是因为训练时未完整保存配置），需要使用 `--base-model-dir` 指定原始基础模型的路径：
+   > ```bash
+   > trinity convert -c /path/to/checkpoint_root/project/name -b /path/to/your/base/model
+   > ```
 
 2. **直接加载（适用于 FSDP 训练的 actor 检查点）**：
    如果你希望不转换格式而直接加载，可以使用以下代码示例：
